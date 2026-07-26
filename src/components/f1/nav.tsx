@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { F1LogoIcon } from "@/components/f1/f1-logo";
 
 const links = [
   { to: "/season", label: "Season" },
@@ -16,9 +17,9 @@ export function TopNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-6 px-4 sm:px-8">
-        <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="grid h-8 w-8 place-items-center rounded-lg gradient-red">
-            <Zap className="h-4 w-4 text-white" strokeWidth={2.5} />
+        <Link to="/" className="flex items-center gap-2 shrink-0 group">
+          <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-primary via-red-600 to-red-800 shadow-lg shadow-primary/25 transition-transform duration-300 group-hover:scale-105">
+            <F1LogoIcon className="h-5 w-5 text-white" />
           </div>
           <span className="font-display text-lg font-bold uppercase tracking-widest">
             f1Bidda<span className="text-primary">.</span>
