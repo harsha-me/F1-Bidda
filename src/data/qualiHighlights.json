@@ -1,0 +1,37 @@
+{
+  "2024-1": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=s0K55qB_Gws",
+    "summary": "Max Verstappen secures the first pole position of the 2024 season with a brilliant final lap in Q3. Charles Leclerc starts alongside him on the front row, while George Russell finishes in P3 for Mercedes.",
+    "poleTime": "1:29.179",
+    "notableIncident": "Both Alpine cars fail to make it out of Q1, qualifying on the back row (P19 & P20).",
+    "surpriseResult": "Nico Hulkenberg puts the Haas into Q3, qualifying in P10."
+  },
+  "2024-8": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=37Zt2d50rA0",
+    "summary": "Charles Leclerc takes a sensational home pole position around the streets of Monte Carlo. Oscar Piastri secures P2 for McLaren, while championship leader Max Verstappen hits the wall at Sainte Devote on his final attempt, leaving him P6.",
+    "poleTime": "1:10.270",
+    "notableIncident": "Max Verstappen brushes the barrier at Turn 1 on his final Q3 run, ruining his lap.",
+    "surpriseResult": "Yuki Tsunoda reaches Q3 and qualifies P8 for RB."
+  },
+  "2024-12": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=Q-8V5cE14s4",
+    "summary": "A historic day at Silverstone as British drivers sweep the top three positions. George Russell claims pole position, followed closely by his teammate Lewis Hamilton, with Lando Norris securing P3.",
+    "poleTime": "1:25.819",
+    "notableIncident": "Sergio Perez spins off into the gravel at Copse in damp Q1 conditions, causing a red flag.",
+    "surpriseResult": "Nico Hulkenberg qualifies a spectacular P6 for Haas."
+  },
+  "2024-17": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=BqB312t5N2E",
+    "summary": "Charles Leclerc secures his fourth consecutive pole position in Baku with an unbeatable lap. Oscar Piastri qualifies P2, while Lando Norris suffers a shocking Q1 exit due to a yellow flag incident.",
+    "poleTime": "1:41.365",
+    "notableIncident": "Lando Norris is caught out by a late yellow flag in Q1, forcing him to abort his lap and qualify P17.",
+    "surpriseResult": "Franco Colapinto qualifies in P9 in only his second Formula 1 weekend."
+  },
+  "2024-24": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=e_t22F3zR5g",
+    "summary": "Lando Norris secures the final pole position of the 2024 season in Abu Dhabi. Oscar Piastri completes a McLaren front-row lockout, while championship runner-up Carlos Sainz qualifies P3.",
+    "poleTime": "1:22.595",
+    "notableIncident": "A close battle in Q3 between McLaren and Red Bull, with Verstappen qualifying P5.",
+    "surpriseResult": "Nico Hulkenberg finishes Q3 in P7, ending a strong qualifying season for Haas."
+  }
+}

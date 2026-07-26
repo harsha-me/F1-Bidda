@@ -1,0 +1,452 @@
+[
+  {
+    "id": "1976-japan",
+    "year": 1976,
+    "raceName": "Japanese Grand Prix",
+    "circuit": "Fuji Speedway",
+    "chaosRating": 10,
+    "summary": "Championship decider in a monsoon. Lauda pulled out on lap two saying 'my life is worth more than a title'. Hunt survived punctures and mid-race panic to secure the World Championship in the pit lane.",
+    "youtubeQuery": "1976 Japanese GP Hunt Lauda highlights"
+  },
+  {
+    "id": "1979-france",
+    "year": 1979,
+    "raceName": "French Grand Prix",
+    "circuit": "Dijon-Prenois",
+    "chaosRating": 8,
+    "summary": "Villeneuve vs Arnoux — the most famous wheel-banging duel in F1 history. Two cars, one line, laps of contact and slipstream madness for a podium place.",
+    "youtubeQuery": "1979 French GP Villeneuve Arnoux battle"
+  },
+  {
+    "id": "1986-australia",
+    "year": 1986,
+    "raceName": "Australian Grand Prix",
+    "circuit": "Adelaide",
+    "chaosRating": 9,
+    "summary": "Three drivers still in the title fight arrived in Adelaide. Mansell's rear tyre exploded down the main straight at 300 km/h and Prost stole the championship with an empty tank.",
+    "youtubeQuery": "1986 Australian GP Mansell tyre explosion"
+  },
+  {
+    "id": "1989-australia",
+    "year": 1989,
+    "raceName": "Australian Grand Prix",
+    "circuit": "Adelaide",
+    "chaosRating": 9,
+    "summary": "Torrential rain, standing water and constant crashes. Prost refused to start beyond the formation lap. Senna won a race almost everyone thought should never have been run.",
+    "youtubeQuery": "1989 Australian GP rain chaos"
+  },
+  {
+    "id": "1993-europe",
+    "year": 1993,
+    "raceName": "European Grand Prix",
+    "circuit": "Donington Park",
+    "chaosRating": 10,
+    "summary": "Senna's opening lap in the wet — passing four cars including Prost and Hill — is still called the greatest lap in F1. Constant tyre changes, dry lines vanishing, sublime car control.",
+    "youtubeQuery": "1993 European GP Donington Senna lap"
+  },
+  {
+    "id": "1994-monaco",
+    "year": 1994,
+    "raceName": "Monaco Grand Prix",
+    "circuit": "Circuit de Monaco",
+    "chaosRating": 8,
+    "summary": "The race after Imola and Senna's death. Wendlinger already in a coma, drivers in mourning, front two grid slots left empty in tribute. Schumacher won a hushed, uneasy Monaco.",
+    "youtubeQuery": "1994 Monaco GP tribute Senna"
+  },
+  {
+    "id": "1994-australia",
+    "year": 1994,
+    "raceName": "Australian Grand Prix",
+    "circuit": "Adelaide",
+    "chaosRating": 10,
+    "summary": "Title decider. Schumacher clipped a wall, Hill dived down the inside, and they collided. Schumacher's damaged car took Hill out and clinched his first World Championship in controversial fashion.",
+    "youtubeQuery": "1994 Australian GP Schumacher Hill collision"
+  },
+  {
+    "id": "1996-monaco",
+    "year": 1996,
+    "raceName": "Monaco Grand Prix",
+    "circuit": "Circuit de Monaco",
+    "chaosRating": 10,
+    "summary": "Only three cars finished. Rain, oil and crashes eliminated almost the entire field. Olivier Panis won from 14th on the grid — Ligier's last F1 victory.",
+    "youtubeQuery": "1996 Monaco GP Panis three finishers"
+  },
+  {
+    "id": "1998-belgium",
+    "year": 1998,
+    "raceName": "Belgian Grand Prix",
+    "circuit": "Spa-Francorchamps",
+    "chaosRating": 10,
+    "summary": "A 13-car pileup at La Source on lap one. Schumacher then rammed Coulthard while lapping him in fog and stormed to the pits accusing him of murder. Damon Hill won Jordan's first race.",
+    "youtubeQuery": "1998 Belgian GP pileup Schumacher Coulthard"
+  },
+  {
+    "id": "2000-belgium",
+    "year": 2000,
+    "raceName": "Belgian Grand Prix",
+    "circuit": "Spa-Francorchamps",
+    "chaosRating": 8,
+    "summary": "Hakkinen's double-pass on Schumacher and Zonta at 300 km/h through Les Combes — going either side of a backmarker in one move — remains one of the cleanest, boldest overtakes ever filmed.",
+    "youtubeQuery": "2000 Belgian GP Hakkinen pass Schumacher"
+  },
+  {
+    "id": "2001-europe",
+    "year": 2001,
+    "raceName": "European Grand Prix",
+    "circuit": "Nürburgring",
+    "chaosRating": 7,
+    "summary": "Rain came from nowhere on the last laps. Cars were spinning at every corner, Montoya beached, Coulthard slid off, and Michael Schumacher clung on to win in front of home fans.",
+    "youtubeQuery": "2001 European GP Nurburgring rain"
+  },
+  {
+    "id": "2003-brazil",
+    "year": 2003,
+    "raceName": "Brazilian Grand Prix",
+    "circuit": "Interlagos",
+    "chaosRating": 10,
+    "summary": "Biblical rain, a river across the track at turn 3, cars aquaplaning off in convoy. Race red-flagged after Alonso's massive crash into debris; Fisichella declared winner days later in a paperwork drama.",
+    "youtubeQuery": "2003 Brazilian GP Fisichella rain chaos"
+  },
+  {
+    "id": "2003-malaysia",
+    "year": 2003,
+    "raceName": "Malaysian Grand Prix",
+    "circuit": "Sepang",
+    "chaosRating": 6,
+    "summary": "Fernando Alonso, aged 21, became the youngest pole-sitter and race winner in F1 history at the time. Renault's turning point and a first sign of the era to come.",
+    "youtubeQuery": "2003 Malaysian GP Alonso first win"
+  },
+  {
+    "id": "2003-usa",
+    "year": 2003,
+    "raceName": "United States Grand Prix",
+    "circuit": "Indianapolis",
+    "chaosRating": 8,
+    "summary": "Rain turned the banked Indianapolis oval treacherous. Schumacher dropped to the back, then carved through the field in a wet-tyre masterclass to keep his title bid alive.",
+    "youtubeQuery": "2003 United States GP Indianapolis rain Schumacher"
+  },
+  {
+    "id": "2005-europe",
+    "year": 2005,
+    "raceName": "European Grand Prix",
+    "circuit": "Nürburgring",
+    "chaosRating": 9,
+    "summary": "Räikkönen dominated on flat-spotted tyres because rules forbade a change. The vibration finally ripped his suspension off on the last lap while leading — one of the cruellest endings in F1.",
+    "youtubeQuery": "2005 European GP Nurburgring Raikkonen suspension"
+  },
+  {
+    "id": "2005-usa",
+    "year": 2005,
+    "raceName": "United States Grand Prix",
+    "circuit": "Indianapolis",
+    "chaosRating": 10,
+    "summary": "Michelin runners refused to race after tyre failures on the banking. All 14 Michelin cars peeled into the pits after the formation lap, leaving six Bridgestone cars to run a farce of a Grand Prix.",
+    "youtubeQuery": "2005 United States GP Michelin walkout"
+  },
+  {
+    "id": "2005-japan",
+    "year": 2005,
+    "raceName": "Japanese Grand Prix",
+    "circuit": "Suzuka",
+    "chaosRating": 9,
+    "summary": "Rain in qualifying scrambled the grid. Räikkönen started 17th and passed Fisichella around the outside of 130R on the last lap to win — considered one of the greatest drives ever.",
+    "youtubeQuery": "2005 Japanese GP Raikkonen last lap Suzuka"
+  },
+  {
+    "id": "2007-europe",
+    "year": 2007,
+    "raceName": "European Grand Prix",
+    "circuit": "Nürburgring",
+    "chaosRating": 9,
+    "summary": "A wall of water hit on lap one. Six cars slid off at the same corner into a gravel pit like a slapstick reel. Race red-flagged, Alonso and Massa duelled in the closing wet laps.",
+    "youtubeQuery": "2007 European GP Nurburgring flooded"
+  },
+  {
+    "id": "2008-brazil",
+    "year": 2008,
+    "raceName": "Brazilian Grand Prix",
+    "circuit": "Interlagos",
+    "chaosRating": 10,
+    "summary": "Massa crossed the line world champion. For 38 seconds the Ferrari pit celebrated. Then Hamilton passed Glock in the final corner of the final lap in the wet to take the title by one point.",
+    "youtubeQuery": "2008 Brazilian GP Hamilton title last corner"
+  },
+  {
+    "id": "2008-europe",
+    "year": 2008,
+    "raceName": "European Grand Prix",
+    "circuit": "Valencia",
+    "chaosRating": 6,
+    "summary": "Massa won the inaugural Valencia street race but the day's talking point was a botched pit release that sent Massa into Sutil's path — a season-long trend of Ferrari pit chaos.",
+    "youtubeQuery": "2008 European GP Valencia Massa"
+  },
+  {
+    "id": "2009-malaysia",
+    "year": 2009,
+    "raceName": "Malaysian Grand Prix",
+    "circuit": "Sepang",
+    "chaosRating": 8,
+    "summary": "Race started late for TV, ended early for weather. A tropical storm turned the track into a lake, red-flagged before half distance. Button collected half points for one of his easiest wins.",
+    "youtubeQuery": "2009 Malaysian GP rain red flag"
+  },
+  {
+    "id": "2010-europe",
+    "year": 2010,
+    "raceName": "European Grand Prix",
+    "circuit": "Valencia",
+    "chaosRating": 9,
+    "summary": "Mark Webber launched off the back of Kovalainen at 300 km/h and somersaulted into the tyre wall. He climbed out unhurt in one of F1's most terrifying, survivable crashes.",
+    "youtubeQuery": "2010 European GP Valencia Webber flip"
+  },
+  {
+    "id": "2010-korea",
+    "year": 2010,
+    "raceName": "Korean Grand Prix",
+    "circuit": "Yeongam",
+    "chaosRating": 8,
+    "summary": "The inaugural Korean GP started under safety car in torrential rain on an unfinished circuit that was still literally wet paint. Vettel led until his engine blew and Alonso stole the win and title lead.",
+    "youtubeQuery": "2010 Korean GP inaugural rain"
+  },
+  {
+    "id": "2011-canada",
+    "year": 2011,
+    "raceName": "Canadian Grand Prix",
+    "circuit": "Circuit Gilles Villeneuve",
+    "chaosRating": 10,
+    "summary": "The longest race in F1 history — 4 hours 4 minutes with a two-hour red flag for rain. Jenson Button pitted six times, was last on lap 40, and passed Vettel on the final lap for the win.",
+    "youtubeQuery": "2011 Canadian GP Button longest race"
+  },
+  {
+    "id": "2011-monaco",
+    "year": 2011,
+    "raceName": "Monaco Grand Prix",
+    "circuit": "Circuit de Monaco",
+    "chaosRating": 7,
+    "summary": "Vettel was defending on ancient tyres from Alonso and Button when a huge crash between Petrov, Alguersuari and Hamilton red-flagged the race, saving Vettel a certain double loss.",
+    "youtubeQuery": "2011 Monaco GP red flag Vettel"
+  },
+  {
+    "id": "2012-europe",
+    "year": 2012,
+    "raceName": "European Grand Prix",
+    "circuit": "Valencia",
+    "chaosRating": 8,
+    "summary": "Alonso stormed from 11th to victory at home in front of a delirious Spanish crowd. Vettel's alternator failed while leading, Grosjean crashed while podium-bound — pure emotional overload.",
+    "youtubeQuery": "2012 European GP Valencia Alonso win"
+  },
+  {
+    "id": "2012-brazil",
+    "year": 2012,
+    "raceName": "Brazilian Grand Prix",
+    "circuit": "Interlagos",
+    "chaosRating": 9,
+    "summary": "Vettel spun on lap one and was last, facing off with Alonso for the title. Rain came, safety cars came, the radio broke. He fought back to sixth to win the championship by three points.",
+    "youtubeQuery": "2012 Brazilian GP Vettel spin title"
+  },
+  {
+    "id": "2013-malaysia",
+    "year": 2013,
+    "raceName": "Malaysian Grand Prix",
+    "circuit": "Sepang",
+    "chaosRating": 8,
+    "summary": "'Multi 21'. Vettel defied team orders and passed Webber for the win. Red Bull's internal cold war exploded on the podium and never really thawed.",
+    "youtubeQuery": "2013 Malaysian GP Multi 21 Vettel Webber"
+  },
+  {
+    "id": "2014-japan",
+    "year": 2014,
+    "raceName": "Japanese Grand Prix",
+    "circuit": "Suzuka",
+    "chaosRating": 10,
+    "summary": "Typhoon Phanfone raged. On lap 43 Jules Bianchi aquaplaned into a recovery crane at Dunlop. The sport changed forever: Virtual Safety Car, Halo, tighter marshalling. F1's darkest modern day.",
+    "youtubeQuery": "2014 Japanese GP Bianchi crash"
+  },
+  {
+    "id": "2015-britain",
+    "year": 2015,
+    "raceName": "British Grand Prix",
+    "circuit": "Silverstone",
+    "chaosRating": 7,
+    "summary": "Massa led early, then rain hit in the closing stint. Hamilton read the sky perfectly, pitted at the right lap and won at home while others slid off — a masterclass in timing.",
+    "youtubeQuery": "2015 British GP Silverstone rain Hamilton"
+  },
+  {
+    "id": "2015-austria",
+    "year": 2015,
+    "raceName": "Austrian Grand Prix",
+    "circuit": "Red Bull Ring",
+    "chaosRating": 6,
+    "summary": "Alonso and Räikkönen collided at the start, Alonso's McLaren pinned on top of Kimi's Ferrari in a shocking near-miss. Rosberg won under strategy pressure from Hamilton.",
+    "youtubeQuery": "2015 Austrian GP Alonso Raikkonen crash"
+  },
+  {
+    "id": "2016-spain",
+    "year": 2016,
+    "raceName": "Spanish Grand Prix",
+    "circuit": "Circuit de Barcelona-Catalunya",
+    "chaosRating": 8,
+    "summary": "Rosberg and Hamilton, the two title contenders, took each other out on lap one. Enter Max Verstappen, 18 years old, first Red Bull race — he won on debut. F1's youngest winner ever.",
+    "youtubeQuery": "2016 Spanish GP Verstappen first win"
+  },
+  {
+    "id": "2016-brazil",
+    "year": 2016,
+    "raceName": "Brazilian Grand Prix",
+    "circuit": "Interlagos",
+    "chaosRating": 10,
+    "summary": "Rain, red flags, and Verstappen went from 14th to 3rd in fifteen laps. A quadruple-wheel slide at 300 km/h that he casually caught was the moment he became a superstar.",
+    "youtubeQuery": "2016 Brazilian GP Verstappen rain drive"
+  },
+  {
+    "id": "2017-azerbaijan",
+    "year": 2017,
+    "raceName": "Azerbaijan Grand Prix",
+    "circuit": "Baku City Circuit",
+    "chaosRating": 9,
+    "summary": "Vettel deliberately drove into Hamilton behind the safety car. Multiple red flags, both Force Indias colliding twice, Ricciardo winning from tenth after starting the day behind three cars.",
+    "youtubeQuery": "2017 Azerbaijan GP Vettel Hamilton Baku"
+  },
+  {
+    "id": "2018-azerbaijan",
+    "year": 2018,
+    "raceName": "Azerbaijan Grand Prix",
+    "circuit": "Baku City Circuit",
+    "chaosRating": 9,
+    "summary": "Vettel locked up out of the lead. The Red Bulls took each other out. Bottas got a puncture from debris while leading. Hamilton inherited a win from nowhere. Baku doing Baku things.",
+    "youtubeQuery": "2018 Azerbaijan GP Baku chaos"
+  },
+  {
+    "id": "2018-germany",
+    "year": 2018,
+    "raceName": "German Grand Prix",
+    "circuit": "Hockenheim",
+    "chaosRating": 9,
+    "summary": "Vettel was cruising to victory at home in the dry. Rain hit. He crashed into a barrier at the Sachskurve. Hamilton, having started 14th, inherited the win. A title-defining moment.",
+    "youtubeQuery": "2018 German GP Vettel crash rain"
+  },
+  {
+    "id": "2019-germany",
+    "year": 2019,
+    "raceName": "German Grand Prix",
+    "circuit": "Hockenheim",
+    "chaosRating": 10,
+    "summary": "Chaos on wet-dry crossovers. Almost every top driver spun or crashed at Turn 16. Kvyat on the podium for Toro Rosso, Verstappen winning after his own spin. Nobody knew who was where.",
+    "youtubeQuery": "2019 German GP Hockenheim rain chaos"
+  },
+  {
+    "id": "2019-austria",
+    "year": 2019,
+    "raceName": "Austrian Grand Prix",
+    "circuit": "Red Bull Ring",
+    "chaosRating": 7,
+    "summary": "Verstappen bulldozed past Leclerc at Turn 3 with three laps to go. A three-hour stewards' hearing followed. The 'let them race' verdict shaped modern F1 racing rules.",
+    "youtubeQuery": "2019 Austrian GP Verstappen Leclerc pass"
+  },
+  {
+    "id": "2019-brazil",
+    "year": 2019,
+    "raceName": "Brazilian Grand Prix",
+    "circuit": "Interlagos",
+    "chaosRating": 9,
+    "summary": "Both Ferraris took each other out fighting for fourth. Two safety cars, Verstappen winning, Gasly holding off Hamilton for second in a Toro Rosso, Sainz on the podium after starting last.",
+    "youtubeQuery": "2019 Brazilian GP Ferrari collide Gasly"
+  },
+  {
+    "id": "2020-italy",
+    "year": 2020,
+    "raceName": "Italian Grand Prix",
+    "circuit": "Monza",
+    "chaosRating": 9,
+    "summary": "Hamilton got a penalty for pitting under a closed pit lane. Leclerc crashed heavily. In the reshuffle Pierre Gasly, dumped by Red Bull a year earlier, won his first Grand Prix. Fairytale.",
+    "youtubeQuery": "2020 Italian GP Monza Gasly win"
+  },
+  {
+    "id": "2020-turkey",
+    "year": 2020,
+    "raceName": "Turkish Grand Prix",
+    "circuit": "Istanbul Park",
+    "chaosRating": 9,
+    "summary": "A freshly-laid, slippery track and cold rain. Lance Stroll on pole, cars spinning constantly. Hamilton drove a wet-tyre stint of 50 laps to clinch his seventh world championship.",
+    "youtubeQuery": "2020 Turkish GP Istanbul Hamilton title"
+  },
+  {
+    "id": "2020-sakhir",
+    "year": 2020,
+    "raceName": "Sakhir Grand Prix",
+    "circuit": "Bahrain Outer Circuit",
+    "chaosRating": 10,
+    "summary": "Russell replaced Hamilton at Mercedes, dominated, then Mercedes fitted the wrong tyres in the pit stop. Perez went from last-lap spun to first-time winner in his final Racing Point race.",
+    "youtubeQuery": "2020 Sakhir GP Perez win Russell"
+  },
+  {
+    "id": "2021-imola",
+    "year": 2021,
+    "raceName": "Emilia Romagna Grand Prix",
+    "circuit": "Imola",
+    "chaosRating": 8,
+    "summary": "Wet start, Verstappen and Hamilton wheel-to-wheel through Tamburello, Russell crashing into Bottas at 320 km/h, red flag, Hamilton off through a gravel trap and back to second. Peak modern chaos.",
+    "youtubeQuery": "2021 Emilia Romagna GP Imola red flag"
+  },
+  {
+    "id": "2021-hungary",
+    "year": 2021,
+    "raceName": "Hungarian Grand Prix",
+    "circuit": "Hungaroring",
+    "chaosRating": 9,
+    "summary": "Rain-soaked start. Bottas rammed into the pack at Turn 1, taking out four cars. Everyone pitted for slicks except a bewildered Hamilton on his own. Esteban Ocon won his first race.",
+    "youtubeQuery": "2021 Hungarian GP Ocon win Bottas crash"
+  },
+  {
+    "id": "2021-belgium",
+    "year": 2021,
+    "raceName": "Belgian Grand Prix",
+    "circuit": "Spa-Francorchamps",
+    "chaosRating": 9,
+    "summary": "Torrential rain. Officials sent the cars out for three laps behind the safety car, then awarded half points and declared it a race. F1's shortest ever GP; fans booed for hours.",
+    "youtubeQuery": "2021 Belgian GP Spa half race"
+  },
+  {
+    "id": "2021-abudhabi",
+    "year": 2021,
+    "raceName": "Abu Dhabi Grand Prix",
+    "circuit": "Yas Marina",
+    "chaosRating": 10,
+    "summary": "Title decider. Hamilton dominant. A late safety car, a mis-applied lapped-cars rule, one shootout lap on fresh softs vs old hards. Verstappen passed Hamilton to become World Champion. Race director sacked.",
+    "youtubeQuery": "2021 Abu Dhabi GP Verstappen title"
+  },
+  {
+    "id": "2022-britain",
+    "year": 2022,
+    "raceName": "British Grand Prix",
+    "circuit": "Silverstone",
+    "chaosRating": 10,
+    "summary": "Zhou Guanyu inverted at 240 km/h at Abbey on lap one, sliding under the catch fencing. Halo saved his life. Race restarted with Sainz taking his first F1 win in a thriller.",
+    "youtubeQuery": "2022 British GP Zhou crash Sainz"
+  },
+  {
+    "id": "2022-monaco",
+    "year": 2022,
+    "raceName": "Monaco Grand Prix",
+    "circuit": "Circuit de Monaco",
+    "chaosRating": 7,
+    "summary": "Rain-delayed start. Ferrari managed to lose the race for their pole-sitter Leclerc twice in one stop by radioing him to box after he'd already passed the pit entry. Perez won.",
+    "youtubeQuery": "2022 Monaco GP Leclerc Ferrari strategy"
+  },
+  {
+    "id": "2023-australia",
+    "year": 2023,
+    "raceName": "Australian Grand Prix",
+    "circuit": "Albert Park",
+    "chaosRating": 9,
+    "summary": "Three red flags in one race. Cars flying off at every restart, Alonso and Sainz colliding, a bizarre grid reshuffle before a two-lap sprint to the flag. Verstappen won a farce.",
+    "youtubeQuery": "2023 Australian GP three red flags"
+  },
+  {
+    "id": "2023-netherlands",
+    "year": 2023,
+    "raceName": "Dutch Grand Prix",
+    "circuit": "Zandvoort",
+    "chaosRating": 8,
+    "summary": "Rain hit before the formation lap. Cars pitted for wets on the way to the grid. Multiple safety cars, a red flag, Perez almost winning until a late shower reset the race. Verstappen prevailed.",
+    "youtubeQuery": "2023 Dutch GP Zandvoort rain chaos"
+  }
+]

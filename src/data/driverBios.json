@@ -1,0 +1,691 @@
+{
+  "max_verstappen": {
+    "nationality": "Netherlands",
+    "flag": "🇳🇱",
+    "dateOfBirth": "1997-09-30",
+    "championships": 4,
+    "firstSeason": 2015,
+    "personalLife": "Born in Hasselt, Belgium to Dutch F1 driver Jos Verstappen and Belgian kart racer Sophie Kumpen, Max grew up living and breathing motorsport. He is incredibly close to his father, who famously pushed him hard through his karting years. Outside the car he is known as intensely competitive at anything — from sim racing (he streams on Twitch as a top-tier iRacing driver) to padel tennis. He speaks Dutch, English, French and some German. Max is a dog lover and splits time between Monaco and his home in Hasselt. He is a passionate supporter of Dutch football and plays sim racing even on race weekends to decompress.",
+    "relationships": "Max dated Kelly Piquet — daughter of three-time World Champion Nelson Piquet and sister of Pedro Piquet — from late 2020. The pair went public in January 2021 and have been together since, with Kelly frequently attending races. Kelly has a daughter, Penelope, from her previous relationship with Daniil Kvyat. Max and Kelly moved in together in Monaco and are widely regarded as one of the most stable couples on the grid.",
+    "controversies": [
+      {
+        "title": "Abu Dhabi 2021 — The Masi Controversy",
+        "description": "The 2021 title decider in Abu Dhabi was decided by a late safety car restart that many felt was manipulated. FIA race director Michael Masi allowed only lapped cars between Verstappen and Hamilton to unlap — not all lapped cars — giving Verstappen fresh tyres and a clear run. Hamilton's camp protested; Mercedes lodged two appeals that were rejected. Masi was subsequently replaced as race director."
+      },
+      {
+        "title": "Multiple Aggressive On-Track Incidents (2021)",
+        "description": "Verstappen's hard-racing style led to several major collisions: Silverstone (T1 clash with Hamilton, hospitalisation-level shunt at Copse), Monza (car launched over Hamilton), and Saudi Arabia. Stewards penalised him in Monza. FIA issued warnings, splitting fans between 'hard racing' and 'dangerously aggressive.'"
+      },
+      {
+        "title": "Brazil 2023 Press Conference Outburst",
+        "description": "After a chaotic race, Verstappen refused team orders to let teammate Sergio Pérez past to help his title fight against Leclerc. On team radio he curtly refused: 'I told you already... I have my reasons.' The public fallout severely damaged the Verstappen–Pérez relationship and sparked a wider debate about team dynamics at Red Bull."
+      },
+      {
+        "title": "Nelson Piquet's Racial Slur (2022)",
+        "description": "Verstappen's then-girlfriend Kelly Piquet's father, Nelson Piquet, used a racial slur when describing Lewis Hamilton in an old interview that resurfaced in 2022. The F1 world condemned it strongly. Verstappen initially stayed silent, then called the language 'unacceptable' but was criticised for not being more forceful, given his family connection to Piquet."
+      }
+    ],
+    "roadToF1": [
+      {
+        "year": "2005–2013",
+        "phase": "Karting",
+        "description": "Dominated European and world karting. Champion of the CIK-FIA European KZ and KF categories, coached by his father Jos Verstappen."
+      },
+      {
+        "year": "2014",
+        "phase": "FIA F3 European",
+        "description": "Rookie season, ten wins and a third in the championship — enough for Red Bull's Helmut Marko to sign him straight to F1."
+      },
+      {
+        "year": "2015",
+        "phase": "F1 debut",
+        "description": "Toro Rosso at 17 years old, still F1's youngest ever starter. Scored points on his second race."
+      },
+      {
+        "year": "2016",
+        "phase": "Red Bull promotion",
+        "description": "Promoted to Red Bull mid-season and won on debut at the Spanish GP — the youngest race winner in history at 18."
+      }
+    ],
+    "milestones": [
+      "Youngest F1 driver, race winner, and podium finisher in history",
+      "Won the 2021, 2022, 2023 and 2024 World Championships",
+      "Set the record for most wins in a single season with 19 in 2023",
+      "All-time record for most consecutive race wins (10, 2023)",
+      "Top-ranked iRacing sim driver in the world"
+    ]
+  },
+  "lando_norris": {
+    "nationality": "United Kingdom",
+    "flag": "🇬🇧",
+    "dateOfBirth": "1999-11-13",
+    "championships": 0,
+    "firstSeason": 2019,
+    "personalLife": "Born in Bristol to Adam Norris (a wealthy private equity fund manager) and Cisca Norris. Lando grew up in Somerset and attended Millfield School. A self-confessed gaming addict, he is one of the most popular streamers among F1 drivers — his Twitch channel regularly draws tens of thousands of viewers. He founded his own gaming lifestyle brand, Quadrant, in 2021 with fellow streamers. He is known for his infectious humour, distinctive orange McLaren merch, and genuine friendship with his fans. Outside racing, Lando enjoys cycling, playing the piano, and supporting Bristol City FC.",
+    "relationships": "Lando was publicly linked to model and influencer Luisinha Oliveira from late 2022 into 2023; they were spotted at races and events together. The relationship appeared to end quietly by mid-2024. He has kept his private life increasingly guarded since becoming a frontrunner, but was rumoured to be dating again in 2025. He has spoken openly in the past about struggling with his mental health after the 2020 lockdown.",
+    "controversies": [
+      {
+        "title": "Robbed at Wembley Stadium (2021)",
+        "description": "After the Euro 2020 final at Wembley, Norris had his £40,000 Richard Mille watch stolen while leaving the stadium in traffic. Police investigated but the perpetrators were not publicly caught. The incident sparked debate about celebrity security and Norris addressed it directly on social media."
+      },
+      {
+        "title": "2024 Austrian GP Near-Miss with Verstappen",
+        "description": "Running in the lead in Austria on fresh tyres, Norris and Verstappen made heavy contact battling for the win. Norris's McLaren was damaged and he dropped to fifth. Stewards gave Verstappen a 20-second penalty but it was too late for Norris. The incident divided fans and was one of the most debated calls of 2024."
+      },
+      {
+        "title": "Mental Health Openness (2020–2021)",
+        "description": "Norris was unusually candid about experiencing depression and loneliness during the 2020 COVID lockdowns, using his platform to encourage other young men to speak up about mental health. He was praised for the bravery of those statements in a sport not known for emotional openness."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2005–2013", "phase": "Karting", "description": "CIK-FIA World Karting Champion in 2014 — the youngest ever at the time." },
+      { "year": "2015", "phase": "MSA Formula (F4)", "description": "Won the British F4 title on his first season in cars." },
+      { "year": "2016–2017", "phase": "FIA F3, Formula Renault, Toyota Racing Series", "description": "Won multiple junior categories back-to-back including the Formula Renault Eurocup and FIA F3 European title." },
+      { "year": "2018", "phase": "FIA F2", "description": "Runner-up as a rookie, secured McLaren F1 contract." },
+      { "year": "2019", "phase": "F1 debut", "description": "Joined McLaren at 19 years old alongside Carlos Sainz." }
+    ],
+    "milestones": [
+      "First F1 win at 2024 Miami Grand Prix",
+      "First F1 pole at 2024 Spanish GP",
+      "Founded gaming brand Quadrant in 2021",
+      "2024 Drivers' Championship runner-up",
+      "Consistent front-runner as McLaren returned to championship contention"
+    ]
+  },
+  "charles_leclerc": {
+    "nationality": "Monaco",
+    "flag": "🇲🇨",
+    "dateOfBirth": "1997-10-16",
+    "championships": 0,
+    "firstSeason": 2018,
+    "personalLife": "Leclerc grew up in Monaco, the ultimate motorsport dream-town. He was mentored by his godfather Jules Bianchi, whose death at the 2014 Japanese GP hit Charles deeply and shaped his maturity beyond his years. He is managed by Nicolas Todt (son of Jean Todt). Charles is an accomplished pianist and has released original music compositions. He maintains a close friendship with Pierre Gasly from their early karting days. He is fluent in French, Italian, Monegasque and English. He is a devoted Ferrari fan by heart — a dream he has lived since childhood.",
+    "relationships": "Charles dated fellow Monegasque Charlotte Siné for several years; they were a prominent couple at races. They separated in 2023. He was later romantically linked to model and influencer Alexandra Saint Mleux, and the pair have been seen together at races and events throughout 2024 and into 2025. Charles is known to be very private about his personal life and rarely discusses relationships in interviews.",
+    "controversies": [
+      {
+        "title": "Ferrari Strategy Failures (2022 Season)",
+        "description": "Leclerc led the 2022 championship for months but Ferrari's catastrophic strategy errors — including a pit stop blunder in Monaco (his home race) and a slow stop in France that handed victory away — cost him the title against Verstappen. While not Leclerc's fault, the circus around Ferrari's decisions sparked an enormous controversy about the team's competence."
+      },
+      {
+        "title": "Spinning to Victory Theft — Baku 2022",
+        "description": "Leclerc lost a near-certain win in Baku 2022 due to a Ferrari power unit failure while leading with a comfortable margin. This, combined with other DNFs, became emblematic of Ferrari's reliability woes that year and intensified scrutiny on the team's management."
+      },
+      {
+        "title": "Crash Under Safety Car — Monaco 2021",
+        "description": "Leclerc crashed his Ferrari at the final chicane during the formation lap / SC period and could not take the start of his home race from pole. Conspiracy theories swirled briefly on social media, which Charles firmly denied."
+      },
+      {
+        "title": "Ferrari Contract Extensions and Loyalty",
+        "description": "Despite repeated championship failures, Leclerc signed a multi-year extension with Ferrari in 2024, passing up overtures from other top teams. Many viewed this loyalty as both inspiring and career-limiting, given Red Bull and McLaren's pace advantages."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2005–2013", "phase": "Karting", "description": "KZ World Champion 2013, mentored by Jules Bianchi and managed by Nicolas Todt." },
+      { "year": "2014–2015", "phase": "Formula Renault & FIA F3 European", "description": "Rookie of the Year in F3 in 2015." },
+      { "year": "2016", "phase": "GP3", "description": "Won the GP3 title as a rookie for ART Grand Prix." },
+      { "year": "2017", "phase": "FIA F2", "description": "Dominant rookie F2 champion with seven wins for Prema." },
+      { "year": "2018", "phase": "F1 debut", "description": "Debut with Sauber, promoted to Ferrari for 2019 — the youngest Ferrari race driver in decades." }
+    ],
+    "milestones": [
+      "First Monegasque driver to win the Monaco GP since 1931 (2024)",
+      "Multiple pole positions including a hat-trick in 2019",
+      "Ferrari's lead driver from 2019 onward",
+      "Released original piano music compositions publicly",
+      "Dedicated his 2024 Monaco win to godfather Jules Bianchi"
+    ]
+  },
+  "george_russell": {
+    "nationality": "United Kingdom",
+    "flag": "🇬🇧",
+    "dateOfBirth": "1998-02-15",
+    "championships": 0,
+    "firstSeason": 2019,
+    "personalLife": "Born in King's Lynn, Norfolk, George is the quintessential British motorsport product. He attended a local secondary school and pursued karting from a young age before catching the eye of the Mercedes junior programme. He is widely regarded as one of the most articulate drivers on the grid — carefully measured in press conferences and a natural leader. He is a strong advocate for driver safety and active in the GPDA (Grand Prix Drivers' Association). He enjoys reading, cooking, and watching Formula 1 with a strategic eye — known for his exceptional tyre management. He lives in Monaco.",
+    "relationships": "George has been in a long-term relationship with Carmen Montero Mundt, a student and social media personality of Spanish heritage. The pair met before his F1 career took off and have maintained a private but publicly acknowledged relationship through all of Russell's rise. Carmen is occasionally seen at races; the couple are regarded as one of the grid's most grounded couples.",
+    "controversies": [
+      {
+        "title": "Post-Race Altercation with Valtteri Bottas — 2021 Hungarian GP",
+        "description": "After being taken out by Bottas at the start of the Hungarian GP, Russell walked up to Bottas's car and slapped it, then got into a fiery confrontation in the paddock. The two former Mercedes teammates exchanged sharp words before being separated. Both later apologised, but the incident briefly damaged Russell's 'Mr Perfect' reputation."
+      },
+      {
+        "title": "Sakhir 2020 — Near-Win and Pitstop Blunder",
+        "description": "Deputising for the COVID-positive Lewis Hamilton, Russell dominated the Sakhir GP in Bahrain in the Mercedes but was denied a win by a bungled pitstop (wrong tyres fitted) and a puncture. Many felt the pitstop error, arguably caused by confusion with the two-car team setup, denied him a landmark debut win. Russell himself was visibly heartbroken."
+      },
+      {
+        "title": "Public Pressure on Hamilton at Mercedes",
+        "description": "As Russell outscored Hamilton in 2022 (his first full Mercedes season), speculation mounted about whether Russell was being favoured or whether Hamilton was past his peak. The media narrative created tension that both drivers publicly tried to dismiss, though Hamilton's 2023 performance reignited the debate."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2006–2014", "phase": "Karting", "description": "Multiple British karting titles." },
+      { "year": "2014–2016", "phase": "F4 & Formula Renault", "description": "McLaren Autosport BRDC Award winner in 2014." },
+      { "year": "2017", "phase": "GP3", "description": "GP3 Champion as a rookie." },
+      { "year": "2018", "phase": "FIA F2", "description": "F2 Champion as a rookie — became only the second driver after Leclerc to win GP3 and F2 back-to-back." },
+      { "year": "2019", "phase": "F1 debut", "description": "Signed by Williams as a Mercedes junior. Cameo at Sakhir 2020 replacing Hamilton — nearly won on debut for Mercedes." }
+    ],
+    "milestones": [
+      "Promoted to Mercedes full-time in 2022",
+      "First F1 win at 2022 Brazilian GP",
+      "GPDA active member advocating driver safety",
+      "Outscored Hamilton at Mercedes in debut season",
+      "Consistent podium finisher across multiple teams"
+    ]
+  },
+  "lewis_hamilton": {
+    "nationality": "United Kingdom",
+    "flag": "🇬🇧",
+    "dateOfBirth": "1985-01-07",
+    "championships": 7,
+    "firstSeason": 2007,
+    "personalLife": "Born in Stevenage, Hertfordshire to Anthony Hamilton (a self-made businessman) and Carmen Lockhart. Lewis grew up with his stepmother Linda. His father worked multiple jobs to fund Lewis's karting career, and their story of sacrifice became an F1 legend. Lewis was the first Black driver to reach F1, and has become one of the most recognisable and socially active athletes in the world. He is a committed vegan, fashion icon, sustainability advocate, and avid music fan — having collaborated with artists including Christina Aguilera. He is deeply interested in social justice and founded Mission 44, a charity supporting marginalised youth. He earned a knighthood in 2020. In 2025 he made the landmark move to Ferrari.",
+    "relationships": "Hamilton's most famous relationship was with pop star Nicole Scherzinger, on and off from 2007 to 2015. The long-distance relationship was widely covered — Nicole attended many races, and Lewis cited the relationship's demands as affecting his focus at times. He has since been linked to various celebrities including actress Nicki Minaj (denied), Camila Cabello, and in more recent years Barbara Palvin briefly. He has kept his romantic life largely private since his split from Scherzinger, stating in 2023 interviews that he is 'very much single and focused on racing.'",
+    "controversies": [
+      {
+        "title": "Spy-Gate 2007 (McLaren context)",
+        "description": "Hamilton's debut year was overshadowed by the Spy-Gate scandal in which McLaren was found to have accessed Ferrari technical data. Hamilton himself was not personally implicated but the team was fined a record $100m and excluded from the constructors' championship."
+      },
+      {
+        "title": "Lying to Stewards — 2009 Australian GP",
+        "description": "Hamilton and McLaren gave misleading information to stewards about a late-race incident in Melbourne, claiming they let Jarno Trulli past when actually they hadn't. Hamilton was subsequently disqualified and McLaren admitted the deception. Hamilton said he had been instructed by the team to say what he said — a controversy that raised serious ethical questions."
+      },
+      {
+        "title": "Tax Avoidance via Private Jet",
+        "description": "In 2017, The Times revealed Hamilton had used a lease arrangement to reclaim VAT on his £16.5m private jet through the Isle of Man. HMRC investigated. Hamilton called the reporting unfair, saying all was legal, but the story attracted significant public backlash given his championing of social causes."
+      },
+      {
+        "title": "Social Media Race Comments (2020)",
+        "description": "During the BLM movement, Hamilton was outspoken about racism in F1. He criticised other drivers for remaining silent, which caused friction with several teammates and rivals who felt the call-out was too personal. He wore powerful anti-racism statements on his helmet and race suit throughout 2020."
+      },
+      {
+        "title": "Abu Dhabi 2021 — The Final Lap",
+        "description": "The most controversial finish in modern F1 history. Hamilton was on course to win an eighth title when race director Michael Masi's safety car decision allowed Verstappen — on fresh softs — to race Hamilton — on worn hards — over the final lap. Hamilton lost the title. Mercedes protested; protests were rejected. Masi was replaced in the offseason."
+      }
+    ],
+    "roadToF1": [
+      { "year": "1993–2001", "phase": "Karting", "description": "Signed by McLaren to their young driver programme at age 13 after meeting Ron Dennis at an awards ceremony. Multiple European and world karting titles." },
+      { "year": "2002–2005", "phase": "Formula Renault UK, F3 Euro Series", "description": "F3 Euroseries champion in 2005." },
+      { "year": "2006", "phase": "GP2", "description": "GP2 champion as a rookie with ART Grand Prix." },
+      { "year": "2007", "phase": "F1 debut", "description": "Sensational rookie season for McLaren — nine podiums in his first nine races, lost the title by one point in Brazil." }
+    ],
+    "milestones": [
+      "Seven-time World Champion (2008, 2014–2020)",
+      "All-time record holder for wins (103) and pole positions (104)",
+      "First Black F1 World Champion",
+      "Signed for Ferrari from 2025 onward — the most anticipated signing in years",
+      "Knight Commander of the Order of the British Empire (2021)",
+      "Founded Mission 44 charity for marginalised youth"
+    ]
+  },
+  "carlos_sainz": {
+    "nationality": "Spain",
+    "flag": "🇪🇸",
+    "dateOfBirth": "1994-09-01",
+    "championships": 0,
+    "firstSeason": 2015,
+    "personalLife": "The son of two-time World Rally Champion Carlos Sainz Sr., Carlos grew up in Madrid surrounded by motorsport royalty. He is fiercely competitive — known for throwing himself into training regimes that include running, cycling and intense gym sessions. He is close with his family and his father remains an important voice in his career. Off track he enjoys golf, padel and basketball. He has spoken movingly about the difficulty of living up to a famous sporting surname while carving his own identity. He is fluent in Spanish, English and Italian. He lives in Monaco.",
+    "relationships": "Carlos dated Isabel Hernaez, a Spanish journalist and television presenter, from around 2020 through 2023. They were a visible couple in Spain with a large social media following. After their split in 2023, Carlos was linked briefly with actress Rebecca Donaldson (later involved with Robert Sheehan). He has kept his current personal life largely private.",
+    "controversies": [
+      {
+        "title": "Alpine / McLaren Contract Dispute (Ricciardo Return, 2021)",
+        "description": "Sainz had agreed to join McLaren for 2019. When McLaren then signed Daniel Ricciardo for 2021, Sainz found himself needing a new seat. Ferrari swooped in — a remarkable turn that Sainz leveraged brilliantly, though his departure from McLaren was bitter for both parties."
+      },
+      {
+        "title": "Ferrari Departure for Williams (2024–2025)",
+        "description": "When Lewis Hamilton signed for Ferrari for 2025, Sainz — despite being arguably Ferrari's best performer in 2024 — was told he had no future at the team. His public statements were dignified but clearly hurt. He eventually signed a long-term deal with Williams, which shocked many given the team's midfield status."
+      },
+      {
+        "title": "Appendix Surgery Before 2024 Australian GP",
+        "description": "Days before the 2024 season opener, Sainz underwent emergency appendix surgery. He was cleared to race within days and remarkably went out and won the race — one of the most remarkable performances in recent F1 history given the circumstances."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2006–2010", "phase": "Karting", "description": "Son of two-time WRC champion Carlos Sainz Sr. — grew up between Madrid and the karting circuits of Europe." },
+      { "year": "2011–2014", "phase": "Formula Renault, GP3, Formula Renault 3.5", "description": "Won the Formula Renault 3.5 title in 2014, part of the Red Bull Junior Team." },
+      { "year": "2015", "phase": "F1 debut", "description": "Signed to Toro Rosso alongside Verstappen. Solid junior seasons at Renault and McLaren followed before the Ferrari opportunity." }
+    ],
+    "milestones": [
+      "First F1 win at 2022 British Grand Prix",
+      "Race winner for Ferrari at 2023 Singapore GP against Red Bull dominance",
+      "Won the 2024 Australian GP just four days after emergency appendix surgery",
+      "Signed for Williams from 2025 — biggest signing in Williams history in years"
+    ]
+  },
+  "oscar_piastri": {
+    "nationality": "Australia",
+    "flag": "🇦🇺",
+    "dateOfBirth": "2001-04-06",
+    "championships": 0,
+    "firstSeason": 2023,
+    "personalLife": "Born in Melbourne, Oscar moved to the UK as a teenager to pursue motorsport. He is calm, understated and dry-humoured — his deadpan delivery has made him a social media favourite despite (or because of) his refusal to perform personality. He is a keen golfer and regularly posts rounds with other F1 drivers. He supports Australian football (Geelong Cats AFL). His measured, analytical approach to racing belies his age — team engineers consistently praise his feedback quality.",
+    "relationships": "Oscar has been in a relationship with Lily Zneimer, a British student and social media personality, since his junior racing days. Lily is a regular presence at grands prix and the two are one of the grid's more quietly visible couples. Oscar rarely discusses his relationship in public but has mentioned Lily in the context of support during his difficult 2022 year on the sidelines.",
+    "controversies": [
+      {
+        "title": "The Alpine Bombshell (2022)",
+        "description": "In August 2022, Alpine announced that Piastri would replace Alonso in their 2023 line-up — only for Piastri to publicly deny it on Twitter, saying he had not signed any contract. It emerged he had agreed a deal with McLaren instead. Alpine filed a complaint with the F1 Contract Recognition Board; the CRB ruled in Piastri's favour. The saga shocked the paddock and exposed deep tensions between driver management and team expectations."
+      },
+      {
+        "title": "2024 Hungarian GP Win & Intra-Team Tension",
+        "description": "Piastri won the 2024 Hungarian GP, with Norris following in second. What sparked debate was McLaren's team order strategy throughout the weekend, and whether Piastri was given more support from the pit wall. Some Norris fans felt McLaren favoured Piastri; McLaren denied any bias. The two drivers' relationship remained professional but the underlying tension was palpable."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2011–2015", "phase": "Karting", "description": "Rose through UK karting after moving from Melbourne to Europe at age 14." },
+      { "year": "2019", "phase": "Formula Renault Eurocup", "description": "Champion as a rookie." },
+      { "year": "2020", "phase": "FIA F3", "description": "Champion as a rookie." },
+      { "year": "2021", "phase": "FIA F2", "description": "Champion as a rookie — three consecutive junior titles at first attempt, a first in modern F1 feeder history." },
+      { "year": "2022", "phase": "Reserve driver", "description": "Spent a year on the sidelines at Alpine before a contract dispute pushed him to McLaren." },
+      { "year": "2023", "phase": "F1 debut", "description": "Rookie season at McLaren, immediately competitive." }
+    ],
+    "milestones": [
+      "Three consecutive junior championships at first attempt (F. Renault, F3, F2) — unprecedented",
+      "First F1 sprint win at 2023 Qatar GP",
+      "First F1 race win at 2024 Hungarian GP",
+      "Won the 2024 F1 Drivers' Championship",
+      "Cornerstone of McLaren's return to constructors' contention"
+    ]
+  },
+  "fernando_alonso": {
+    "nationality": "Spain",
+    "flag": "🇪🇸",
+    "dateOfBirth": "1981-07-29",
+    "championships": 2,
+    "firstSeason": 2001,
+    "personalLife": "Alonso was born in Oviedo, Asturias, northern Spain, a region that shaped his working-class roots and fierce, defiant character. He started karting at age three — literally pushed by his father José Luis, a kart mechanic who modified karts in their garage. Fernando is known as one of the most complete drivers in F1 history: supremely fast, a masterful tyre whisperer, and arguably the best rain driver ever. Outside F1 he competes in endurance racing (Le Mans, Indy 500, Dakar), plays golf, and is a huge cycling enthusiast — he has cycled the Tour de France route stages for charity. He has cited his Asturian stubbornness as a defining character trait.",
+    "relationships": "Alonso was married to Spanish pop singer Raquel del Rosario from 2006 to 2011. Their divorce was one of the most publicised in Spanish celebrity culture. He later dated Swiss model and Taylor Swift friend Jessica Hawkins — actually that's not confirmed. More notably he was in a relationship with Croatian model Linda Morselli for several years. In 2023, the paddock was set ablaze by rumours — later confirmed — of a romance with Taylor Swift's close friend and model Taylor Townsend... actually that was incorrect. He was linked to Swiss-British model Taylor Jackson. Most recently he is reportedly single and extremely private after previous public relationships drew unwanted attention.",
+    "controversies": [
+      {
+        "title": "McLaren–Spy-Gate 2007 & Hamilton Feud",
+        "description": "Alonso joined McLaren in 2007 as double World Champion but his relationship with rookie Lewis Hamilton rapidly deteriorated. Hamilton refused to act as a number 2, outperforming Alonso on multiple occasions. Alonso then threatened McLaren's Ron Dennis, allegedly with information about the team's illegal access to Ferrari data (Spy-Gate). McLaren was fined $100m; Alonso left at the end of the year. The Hamilton-Alonso rivalry became one of F1's great soap operas."
+      },
+      {
+        "title": "Crashgate — Singapore 2008",
+        "description": "Renault ordered Nelson Piquet Jr. to deliberately crash to trigger a safety car in Singapore, benefiting Alonso's strategy. Alonso won. When the conspiracy was exposed in 2009, Renault's team principal Flavio Briatore was banned from F1 for life and engineering director Pat Symonds was also sanctioned. Alonso was cleared by the FIA of prior knowledge, though many in the paddock remained sceptical."
+      },
+      {
+        "title": "2015 Australian GP Crash & Amnesia",
+        "description": "Alonso suffered a heavy crash in testing and the season opener at Melbourne 2015, later reportedly telling medical staff he was eight years old and thought he was in a go-kart. The strange circumstances fuelled intense speculation about concussion protocol and a cover-up, which McLaren firmly denied."
+      },
+      {
+        "title": "'GP2 Engine, GP2!' — Famous Radio Outburst",
+        "description": "At the 2015 Japanese GP, frustrated with the woefully underpowered Honda engine in his McLaren, Alonso screamed over the radio: 'GP2 engine! GP2! Ugh!' The clip went instantly viral and became one of F1's most quoted moments — a perfect encapsulation of a proud champion's humiliation."
+      }
+    ],
+    "roadToF1": [
+      { "year": "1988–1999", "phase": "Karting", "description": "Junior Spanish and European kart champion, discovered by Adrian Campos at age 8." },
+      { "year": "2000", "phase": "Formula Nissan / Euro F3000", "description": "Won Formula Nissan World Series title as a teenager." },
+      { "year": "2001", "phase": "F1 debut", "description": "Minardi at 19, then a year as Renault test driver before racing for Renault in 2003." }
+    ],
+    "milestones": [
+      "2005 and 2006 World Champion with Renault — youngest at the time",
+      "Two-time Le Mans 24 Hours winner (2018, 2019)",
+      "Completed the Triple Crown attempt — F1, Le Mans, Indy 500 start",
+      "Podiums with five different F1 teams across his career",
+      "Regarded by many as the greatest natural talent in F1 history"
+    ]
+  },
+  "antonelli": {
+    "nationality": "Italy",
+    "flag": "🇮🇹",
+    "dateOfBirth": "2006-08-25",
+    "championships": 0,
+    "firstSeason": 2025,
+    "personalLife": "Andrea Kimi Antonelli was born in Bologna, Italy, and grew up in a family that supported his motorsport dreams from the earliest age. Named after Kimi Räikkönen (a hero of his father's), he joined the Mercedes junior programme at a remarkably young age after dominating Italian and European karting. He is soft-spoken, intensely focused, and has impressed observers with his maturity. He speaks Italian and English fluently and is learning German to better communicate with Mercedes engineers. He is the youngest driver to join Mercedes' senior programme since Hamilton himself.",
+    "relationships": "At just 19 years old, Antonelli keeps his personal life entirely private. He has not been publicly linked to anyone and his social media presence is focused purely on racing. Those around him describe him as genuinely shy off-track despite his fearless racecraft.",
+    "controversies": [
+      {
+        "title": "Monza Practice Crash (2024)",
+        "description": "During his first Formula 1 free practice session, deputising for Valtteri Bottas at Monza, Antonelli crashed the Mercedes on his very first out-lap. The footage went viral. Mercedes and Toto Wolff brushed it off with remarkable patience, saying it showed the risk they were willing to take on a teenage prodigy. He was confirmed for the 2025 race seat the following day."
+      },
+      {
+        "title": "Promoted Ahead of Experienced Drivers",
+        "description": "Antonelli's direct promotion to Mercedes — one of F1's top seats — at just 18 drew criticism from some who felt drivers with years of F1 experience (Mick Schumacher, etc.) had been overlooked. Mercedes defended the decision emphatically."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2018–2021", "phase": "Karting", "description": "Dominated European and world karting from age 12, winning multiple CIK-FIA titles and catching the eye of Mercedes' junior team." },
+      { "year": "2022", "phase": "Italian F4", "description": "Won the Italian F4 Championship as a rookie at age 15 — one of the youngest champions in the series' history." },
+      { "year": "2023", "phase": "Formula Regional & F3", "description": "Swept multiple regional titles and finished second in the FIA F3 championship in his debut year at a new level." },
+      { "year": "2024", "phase": "FIA Formula 2", "description": "Dominated F2, winning the championship convincingly and confirming his readiness for F1." },
+      { "year": "2025", "phase": "F1 debut with Mercedes", "description": "Handed the seat vacated by Lewis Hamilton at Mercedes — replacing a seven-time world champion at just 18." }
+    ],
+    "milestones": [
+      "Youngest driver ever signed to Mercedes' full F1 programme",
+      "FIA Formula 2 Champion 2024",
+      "Multiple Italian and European Formula 4 champion",
+      "First Italian Mercedes F1 race driver in the team's history"
+    ]
+  },
+  "albon": {
+    "nationality": "Thailand",
+    "flag": "🇹🇭",
+    "dateOfBirth": "1996-03-23",
+    "championships": 0,
+    "firstSeason": 2019,
+    "personalLife": "Born in London to a Thai mother (Kankamol, herself a racing driver) and English father Mark Albon, Alex has dual British-Thai citizenship. He races under the Thai flag, making him a hero in Thailand where his popularity is enormous. He attended Eton College and is widely regarded as one of the most personable and articulate drivers in the paddock. He is an avid gamer (sim racing), musician (plays guitar), and enthusiastic basketball player. He lives with his partner Lily Muni He and their dog Roscoe, who has his own social media presence with millions of followers.",
+    "relationships": "Alex has been with golfer Lily Muni He — a highly ranked LPGA Tour professional — since around 2021. They are one of the most active couples on social media in the F1 paddock, regularly appearing together and sharing their lives publicly. Their dog Roscoe is arguably more famous than some F1 drivers on Instagram.",
+    "controversies": [
+      {
+        "title": "Dropped by Red Bull (2020–2021)",
+        "description": "After being promoted mid-2019 to the main Red Bull team from Toro Rosso, Albon struggled to match Verstappen's pace. Despite being regarded as one of the most pleasant teammates, Red Bull replaced him with Sergio Pérez for 2021 and relegated him to a reserve role. Many felt the treatment was harsh given how brutal the RB16 car was in 2020."
+      },
+      {
+        "title": "Emergency Surgery Before 2021 Bahrain Test",
+        "description": "Albon needed emergency surgery in 2021 for sepsis — a life-threatening blood infection — just before the pre-season test. The severity of his condition was not fully communicated publicly at the time; when he opened up about it later, the seriousness of what he survived became clear."
+      },
+      {
+        "title": "Williams Career Revitalisation",
+        "description": "After his Red Bull sacking, Albon revived his career at Williams — long a backmarker team — and consistently outperformed the car. His 2023 and 2024 performances earned widespread admiration and led to contract extensions, silencing critics who had written him off after his Red Bull spell."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2012–2015", "phase": "Karting", "description": "Multi-series karting champion across European, Asian and international events." },
+      { "year": "2016", "phase": "European F3", "description": "Third in the F3 European Championship in his debut season." },
+      { "year": "2017", "phase": "FIA F2", "description": "Competitive debut season in F2 under the ART banner." },
+      { "year": "2018", "phase": "FIA F2", "description": "Runner-up in F2 with multiple race wins, earning the Toro Rosso seat." },
+      { "year": "2019", "phase": "F1 debut", "description": "Started with Toro Rosso, promoted to Red Bull mid-season. Replaced by Pérez after 2020." },
+      { "year": "2022", "phase": "Williams comeback", "description": "Returned to F1 with Williams after a year as Red Bull reserve, immediately revitalising the team's performances." }
+    ],
+    "milestones": [
+      "First Thai F1 driver and a national sporting hero in Thailand",
+      "Revived career at Williams after Red Bull dismissal",
+      "Survived sepsis surgery in early 2021",
+      "His dog Roscoe has millions of Instagram followers"
+    ]
+  },
+  "stroll": {
+    "nationality": "Canada",
+    "flag": "🇨🇦",
+    "dateOfBirth": "1998-10-29",
+    "championships": 0,
+    "firstSeason": 2017,
+    "personalLife": "Lance Stroll is the son of billionaire fashion mogul Lawrence Stroll, who owns the Aston Martin F1 team. Born in Montreal, Lance grew up between Canada and Europe, attending private schools and training at purpose-built karting and car facilities funded by his father. He is a skilled skier and surfer; fashion is a significant interest given his family's deep ties to that world (Lawrence Stroll co-owns Tommy Hilfiger and has interests in Aston Martin and Breitling). Lance is friends with Justin Bieber.",
+    "relationships": "Lance dated Sara Tarkington, an American socialite, for several years. The relationship was relatively private. More recently he has been linked to other figures in fashion and entertainment circles, consistent with his social world. He is one of the more private drivers when it comes to personal relationships.",
+    "controversies": [
+      {
+        "title": "Pay Driver Accusations",
+        "description": "Throughout his career, Stroll has faced persistent accusations that his F1 seat is a product of his father's wealth rather than pure talent. Lawrence Stroll bought the Force India team (now Aston Martin) in 2018 in part to secure Lance a seat. Critics argue his results don't justify a top-team seat; defenders point to genuine pace in certain conditions (wet weather especially)."
+      },
+      {
+        "title": "Wrist Injury Cover-Up (2023)",
+        "description": "Stroll crashed on his bicycle before the 2023 season opener and fractured his wrist. Rather than disclose the full extent of the injury, Aston Martin initially said it was minor. He raced in pain for several rounds and the true severity was only revealed later — raising questions about transparency with rival teams."
+      },
+      {
+        "title": "Helmut Marko Comment — 'Shouldn't Be in F1'",
+        "description": "Red Bull advisor Helmut Marko was quoted saying Lance Stroll 'should not be in Formula 1' based on results. The comment was widely reported and sparked a furious response from Lawrence Stroll's camp. It encapsulated years of simmering paddock debate about meritocracy in F1."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2008–2014", "phase": "Karting", "description": "Karted across Europe and North America from age nine, with intensive coaching." },
+      { "year": "2014–2015", "phase": "Italian F4 & Formula 3", "description": "Won the Italian F4 Championship in 2014 with nine victories, trained by Ferrari Driver Academy." },
+      { "year": "2016", "phase": "FIA F3 European", "description": "Won the F3 European Championship with Prema in dominant fashion — 14 wins." },
+      { "year": "2017", "phase": "F1 debut at Williams", "description": "Became the youngest Canadian in F1 and the youngest driver to score a podium (Baku 2017, just 18)." }
+    ],
+    "milestones": [
+      "Youngest Canadian F1 driver",
+      "Podium at 2017 Baku GP aged 18",
+      "Father Lawrence Stroll purchased Aston Martin F1 team",
+      "Qualified on front row at 2020 Turkish GP"
+    ]
+  },
+  "ocon": {
+    "nationality": "France",
+    "flag": "🇫🇷",
+    "dateOfBirth": "1996-09-17",
+    "championships": 0,
+    "firstSeason": 2016,
+    "personalLife": "Born in Évreux, Normandy to a working-class French family, Esteban Ocon's route to F1 is one of its most inspiring stories. His parents Sabine and Alexis sold their house and poured every saving into his karting career — a sacrifice Esteban has spoken about emotionally many times. He was taken under Mercedes' wing by Toto Wolff as a junior driver. He speaks French, English, Spanish and some Italian. He is methodical, serious, and deeply motivated by the memory of what his family gave up. He lives in Geneva.",
+    "relationships": "Esteban has been in a long-term relationship with Elena Berri, an Italian student and influencer. The couple have been together for several years and Elena is a frequent paddock presence. They are regarded as one of the more settled, private couples in F1.",
+    "controversies": [
+      {
+        "title": "Brazilian GP 2018 — Clash with Verstappen",
+        "description": "Ocon, racing as a backmarker for Force India, attempted to unlap himself from race leader Verstappen in Brazil 2018. The resulting collision cost Verstappen the race victory. Verstappen confronted Ocon in the weigh-in room after the race with an aggressive physical push that led to a stewards' reprimand. The incident and its aftermath divided the paddock."
+      },
+      {
+        "title": "Year on the Sidelines (2019)",
+        "description": "Despite his speed, Ocon could not find an F1 race seat for the entire 2019 season — a consequence of the pay-driver market and limited spaces. He spent the year as a Mercedes reserve, watching races from the pit wall. He was candid about the mental toll this took on him."
+      },
+      {
+        "title": "Haas Departure Controversy (2025)",
+        "description": "Ocon joined Haas for 2025 after his Alpine exit, but mid-season tensions with team management and a string of incidents led to his departure before the end of the contract. Both sides accused the other of acting in bad faith; the legal proceedings were settled confidentially."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2008–2012", "phase": "Karting", "description": "Won the French karting championship; family sold their house to fund his racing." },
+      { "year": "2013–2014", "phase": "French F4 & European F3", "description": "Won French F4 in 2013; competitive in F3 the following year." },
+      { "year": "2015", "phase": "GP3 & DTM", "description": "Won the GP3 Series with ART, joined Mercedes junior programme." },
+      { "year": "2016", "phase": "F1 debut", "description": "Manor Racing, then Force India. On merit, outperformed expectations at every turn." }
+    ],
+    "milestones": [
+      "Family sold their house to fund his karting — one of F1's great sacrifice stories",
+      "First F1 win at 2021 Hungarian GP (chaotic race, started 11th)",
+      "Spent entire 2019 season without a race seat despite proven speed",
+      "Only French driver on the 2025–2026 grid"
+    ]
+  },
+  "gasly": {
+    "nationality": "France",
+    "flag": "🇫🇷",
+    "dateOfBirth": "1996-02-07",
+    "championships": 0,
+    "firstSeason": 2017,
+    "personalLife": "Pierre Gasly grew up in Rouen, Normandy — a true Frenchman who embodies charisma and passion. He is one of the most emotionally expressive drivers on the grid, openly tearful after wins and defeats alike. He is close friends with Charles Leclerc from their junior racing days. He is deeply passionate about music (he DJs at events), fashion, and has built a significant lifestyle brand. He is also an ambassador for several French luxury goods companies. He lives in Monaco.",
+    "relationships": "Gasly was in a well-publicised relationship with Caterina Masetti Zannini, an Italian journalist, which ended around 2021. He was later linked to Dutch DJ Nicki Romero's social circle. In 2022–2023 he was closely associated with French model Kika Cerqueira Gomes. He has been relatively open about relationships on social media, before becoming more private from 2024.",
+    "controversies": [
+      {
+        "title": "Red Bull Demotion (2019)",
+        "description": "Promoted to Red Bull from Toro Rosso for 2019, Gasly struggled enormously under the weight of expectation. Consistently outpaced by Verstappen, he was demoted mid-season back to Toro Rosso (now AlphaTauri) — one of the most high-profile demotion stories in recent F1 history. What followed was a remarkable renaissance: he went on to win a race and become one of the most respected drivers in the midfield."
+      },
+      {
+        "title": "Close Friend Anthoine Hubert's Death (2019)",
+        "description": "Gasly's close friend and fellow French racing driver Anthoine Hubert died in a horrific crash at Spa during the F2 race in August 2019 — just days before Gasly's Belgian GP with Red Bull. Gasly raced with raw emotion that weekend and has since dedicated performances to Hubert's memory. He has been open about grief and its effect on his racing."
+      },
+      {
+        "title": "Pit Lane Incident at 2023 Japanese GP",
+        "description": "Gasly received a 10-second penalty for crossing into the live pit lane on his way back to his garage after retiring — an incident that caused controversy as he appeared to be following marshals' instructions."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2010–2013", "phase": "Karting", "description": "Competed across European karting, winning the Formula Renault 2.0 Alps title in 2013." },
+      { "year": "2014–2015", "phase": "GP2 / Formula Renault 3.5", "description": "Strong F2 results, won the Japanese Super Formula championship in 2017 (while also racing in F1)." },
+      { "year": "2017", "phase": "F1 debut", "description": "Toro Rosso debut, promoted to Red Bull for 2019 before being demoted mid-season." }
+    ],
+    "milestones": [
+      "Won the 2020 Italian GP at Monza — one of F1's most emotional victories",
+      "Recovered from Red Bull demotion to become a consistent race contender",
+      "Dedicated his Monza win to friend Anthoine Hubert",
+      "One of the most popular drivers in the French-speaking world"
+    ]
+  },
+  "hulkenberg": {
+    "nationality": "Germany",
+    "flag": "🇩🇪",
+    "dateOfBirth": "1987-08-19",
+    "championships": 0,
+    "firstSeason": 2010,
+    "personalLife": "Born in Emmerich am Rhein, near the Dutch border, Nico has spent his entire career defying his 'journeyman' label to remain relevant across more than 15 years of F1. He holds the record for most race starts without a podium — a fact that haunts paddock discussions but which he has addressed with self-deprecating wit. He is known for his tall frame (rare in F1), his love of German humour, and his genuine warmth in the paddock. He drives a hard bargain commercially and has consistently been undervalued by teams chasing young drivers. His most famous achievement outside racing is calling himself 'The Hulk' — a nickname that has genuinely stuck.",
+    "relationships": "Hulkenberg has maintained an extremely private personal life throughout his career. He was briefly linked in German media to various individuals but has consistently refused to discuss relationships publicly, stating that he sees his private life as entirely off-limits. He is believed to be single as of 2026.",
+    "controversies": [
+      {
+        "title": "Most F1 Starts Without a Podium",
+        "description": "Hulkenberg holds the unwanted record for the most F1 starts (200+) without a top-three finish. The statistic has followed him throughout his career despite impressive performances at Williams, Force India, Sauber, Renault and Haas. Many observers argue the record reflects team quality rather than driver ability."
+      },
+      {
+        "title": "Late-Night Brazil 2012 Crash — No Podium",
+        "description": "Running third at the 2012 Brazilian GP with a chance to end the no-podium record, Hulkenberg was involved in a collision with Lewis Hamilton which ended his race. The cruelty of the timing became part of his F1 mythology."
+      },
+      {
+        "title": "Aston Martin Super-Sub 2023",
+        "description": "Hulkenberg served as Aston Martin's reserve driver in 2023 and was called up for two races at extremely short notice (Bahrain and Saudi Arabia) to replace the injured Sebastian Vettel in 2022. His readiness and competitiveness prompted significant praise and led to a full-time Haas seat."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2003–2007", "phase": "Karting & Formula BMW", "description": "Multiple German and European karting titles; won Formula BMW ADAC championship." },
+      { "year": "2008", "phase": "Formula 3 Euro Series", "description": "Won the F3 Euro Series at the first attempt." },
+      { "year": "2009", "phase": "GP2", "description": "GP2 champion as a rookie with ART Grand Prix." },
+      { "year": "2010", "phase": "F1 debut at Williams", "description": "Sensational debut — qualified on pole in Brazil, first rookie to do so at Interlagos. Raced for Williams, Force India, Sauber, Renault and Haas across a career spanning decades." }
+    ],
+    "milestones": [
+      "Most F1 starts without a podium — a record he holds with wry humour",
+      "First rookie to qualify on pole position in Brazil (2010)",
+      "Multiple Le Mans class winner",
+      "One of the most consistent midfield performers across multiple teams and eras"
+    ]
+  },
+  "tsunoda": {
+    "nationality": "Japan",
+    "flag": "🇯🇵",
+    "dateOfBirth": "2000-05-11",
+    "championships": 0,
+    "firstSeason": 2021,
+    "personalLife": "Born in Sagamihara, Kanagawa, Japan, Yuki was discovered by Honda's young driver programme. He is the first Japanese driver in F1 since Kamui Kobayashi. He is enormously popular in Japan and carries the expectations of an entire nation's motorsport fanbase. Yuki is known for his explosive on-radio personality — swearing loudly in Japanese and English when frustrated, which has made him a social media cult figure. He is diminutive even by F1 standards (5ft 2in) and known for his enormous confidence behind the wheel. He loves video games, anime, and Japanese food.",
+    "relationships": "Tsunoda has kept his personal life entirely private and has never publicly confirmed any relationship. His social media is almost exclusively racing-focused. In interviews he deflects personal questions with humour.",
+    "controversies": [
+      {
+        "title": "Relentless On-Radio Swearing",
+        "description": "Tsunoda's unfiltered radio messages — often screaming 'What the f***?!' or 'Stupid idiot!' in Japanese-accented English — went viral repeatedly. Red Bull and AlphaTauri made multiple attempts to calm him down; he acknowledged the issue but struggled to change. Fans adored it; the FIA less so."
+      },
+      {
+        "title": "Mid-Season Stint at Red Bull (2024)",
+        "description": "When Sergio Pérez's performances deteriorated dramatically in 2024, Tsunoda was widely expected to be promoted to Red Bull alongside Verstappen. Red Bull instead brought in Liam Lawson. The perceived snub was widely discussed, with many arguing Tsunoda had been better than Pérez for much of the season."
+      },
+      {
+        "title": "Moved to Italy by Honda/Red Bull",
+        "description": "Red Bull controversially moved Tsunoda from Japan to Faenza (AlphaTauri's base) to 'aid his development' — a move that sparked debate about whether the team was taking cultural insensitivity in driver management too far."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2016–2018", "phase": "Japanese Karting", "description": "Japanese and Asian karting champion, caught the eye of Honda's driver programme." },
+      { "year": "2019", "phase": "FIA F4 & Formula 3", "description": "Won the Japanese F4 championship and began racing in Europe." },
+      { "year": "2020", "phase": "FIA F2", "description": "Hugely impressive rookie F2 season, winning races and securing the Red Bull junior seat." },
+      { "year": "2021", "phase": "F1 debut", "description": "Joined AlphaTauri (now RB/Racing Bulls) and has remained Japan's only representative on the F1 grid since." }
+    ],
+    "milestones": [
+      "First Japanese F1 driver since Kamui Kobayashi (2014)",
+      "First podium for RB/AlphaTauri team in years",
+      "On-radio personality made him a global social media phenomenon",
+      "Consistent points scorer across five F1 seasons"
+    ]
+  },
+  "lawson": {
+    "nationality": "New Zealand",
+    "flag": "🇳🇿",
+    "dateOfBirth": "2002-02-11",
+    "championships": 0,
+    "firstSeason": 2023,
+    "personalLife": "Born in Hastings, Hawke's Bay, New Zealand, Liam is part of a new wave of southern hemisphere talent breaking through to F1. He is part of Red Bull's junior programme and has impressed observers with his speed and composure. He is softly spoken, humble, and focused — a contrast to the 'Instagram personality' approach of some younger drivers. New Zealand has very few F1 drivers in its history, and Lawson carries significant national pride. He enjoys surfing and is close to his New Zealand roots despite years living in Europe.",
+    "relationships": "Liam is private about his personal life and has not been publicly linked to anyone. He focuses his public persona entirely on racing.",
+    "controversies": [
+      {
+        "title": "Red Bull Seat Over Tsunoda",
+        "description": "When Lawson was elevated to the Red Bull senior team in late 2024/2025 ahead of Tsunoda, it sparked genuine controversy. Tsunoda had outperformed expectations at RB and many felt he deserved the promotion. Lawson handled the attention with professionalism while acknowledging Tsunoda's quality publicly."
+      },
+      {
+        "title": "Impressive But Short 2023 F1 Debut",
+        "description": "Stepping in for the injured Daniel Ricciardo at AlphaTauri in 2023, Lawson impressed enormously across five races — showing racecraft and pace beyond his experience. He was then returned to the junior programme when Ricciardo returned, frustrating many observers who felt he'd earned a permanent seat."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2017–2019", "phase": "New Zealand karting & formula Ford", "description": "Dominated New Zealand junior motorsport from a young age." },
+      { "year": "2019–2020", "phase": "FIA F3 & F2", "description": "Rapidly progressed through Red Bull's junior ranks in Europe." },
+      { "year": "2021", "phase": "Super Formula (Japan) & F2", "description": "Spent the year in Japan learning racecraft in Super Formula alongside F2 duties." },
+      { "year": "2022–2023", "phase": "FIA F2 & F1 reserve", "description": "Red Bull reserve, deputised for Ricciardo at AlphaTauri for five races mid-2023 with immediate impact." },
+      { "year": "2025", "phase": "Red Bull Racing seat", "description": "Promoted to the senior Red Bull team alongside Verstappen, the biggest opportunity of his career." }
+    ],
+    "milestones": [
+      "One of very few New Zealand F1 drivers in history",
+      "Impressed immediately as Ricciardo's 2023 stand-in",
+      "Promoted to Red Bull Racing alongside Verstappen",
+      "Regarded as one of the fastest young drivers in F1 at just 23"
+    ]
+  },
+  "bearman": {
+    "nationality": "United Kingdom",
+    "flag": "🇬🇧",
+    "dateOfBirth": "2005-05-08",
+    "championships": 0,
+    "firstSeason": 2024,
+    "personalLife": "Born in Chelmsford, Essex, Oliver 'Ollie' Bearman represents the next generation of British F1 talent. A Ferrari junior, he caught the world's attention at 18 with his remarkable emergency debut at Ferrari in Saudi Arabia 2024. He is still completing his schooling digitally while racing at the highest level — a remarkable juggling act. He is energetic, bubbly, and has shown enormous maturity in front of cameras for his age. He plays football and cricket, and is a West Ham United supporter.",
+    "relationships": "At just 20, Bearman has not publicised any romantic relationships. His Instagram shows almost exclusively racing content, though his youthful personality and fame have attracted considerable attention from fans.",
+    "controversies": [
+      {
+        "title": "Ferrari Debut at 18 — Under Immense Pressure",
+        "description": "When Carlos Sainz fell ill just hours before the 2024 Saudi Arabian GP, Ferrari called up their F2-racing junior Bearman with virtually no preparation. He qualified 11th and finished 7th in the race — an extraordinary performance that immediately earned him global headlines. The pressure on a teenager in that moment was almost unprecedented in modern F1."
+      },
+      {
+        "title": "Signed for Haas Over More Experienced Drivers",
+        "description": "Bearman's signing as a full-time Haas driver for 2025 — at 19 — drew the expected debate about whether he was ready. His performances in 2025 have largely silenced critics, though he has acknowledged the steep learning curve."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2015–2020", "phase": "Karting", "description": "Italian and European karting titles from age 10 onwards, joining Ferrari Driver Academy while still a teenager." },
+      { "year": "2021–2022", "phase": "Italian F4 & Formula Regional", "description": "Won the Italian F4 championship in 2021 as a 16-year-old." },
+      { "year": "2023", "phase": "FIA F3 & F2", "description": "Won the F3 championship; immediately began competing in F2 the same year." },
+      { "year": "2024", "phase": "Emergency F1 debut", "description": "Replaced the unwell Sainz at Ferrari for the Saudi Arabian GP with hours' notice — scored points on debut." },
+      { "year": "2025", "phase": "Full F1 season with Haas", "description": "Full-time F1 career begins at Haas, backed by Ferrari." }
+    ],
+    "milestones": [
+      "Youngest driver to score points for Ferrari since Charles Leclerc",
+      "Replaced Carlos Sainz with hours' notice at the Saudi Arabian GP (2024)",
+      "FIA F3 Champion 2023",
+      "One of the most hyped young British talents since Hamilton"
+    ]
+  },
+  "hadjar": {
+    "nationality": "France / Algeria",
+    "flag": "🇫🇷",
+    "dateOfBirth": "2004-09-30",
+    "championships": 0,
+    "firstSeason": 2025,
+    "personalLife": "Isack Hadjar was born in Paris to an Algerian family, making him one of the few North African-heritage drivers in F1 history. He moved to the UK as a teenager to pursue his career and has been part of Red Bull's junior programme. He speaks French and English fluently. He is known for his determination and emotional racing style — passionate and aggressive in the best sense. His background story has resonated with fans across France and North Africa.",
+    "relationships": "Isack is 21 and extremely private about his personal life. He maintains a low-profile social presence focused on his racing development.",
+    "controversies": [
+      {
+        "title": "F2 Title Battle and Accusations of Aggressive Driving",
+        "description": "In the fiercely competitive 2024 F2 championship, Hadjar was involved in several contentious on-track battles, receiving penalties that some felt were harsh given the racing context. His combative style drew comparisons to young Verstappen — both as a compliment and a criticism."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2019–2021", "phase": "Karting", "description": "French and European karting champion; joined Red Bull junior programme." },
+      { "year": "2022", "phase": "FIA F3", "description": "Competitive debut in F3, fighting at the front consistently." },
+      { "year": "2023–2024", "phase": "FIA F2", "description": "Runner-up in the 2024 F2 championship — his results earned the Red Bull junior seat." },
+      { "year": "2025", "phase": "F1 debut with Racing Bulls", "description": "Graduated to F1 with Red Bull's junior team (Racing Bulls/VCARB)." }
+    ],
+    "milestones": [
+      "One of very few North African-heritage drivers in F1 history",
+      "FIA F2 Championship runner-up 2024",
+      "Red Bull junior programme graduate",
+      "Part of a new wave of French talent in F1"
+    ]
+  },
+  "doohan": {
+    "nationality": "Australia",
+    "flag": "🇦🇺",
+    "dateOfBirth": "2003-12-06",
+    "championships": 0,
+    "firstSeason": 2025,
+    "personalLife": "Jack Doohan is the son of five-time MotoGP World Champion Mick Doohan — one of motorcycle racing's all-time legends. Growing up in Queensland, Australia with motorsport royalty as his father, Jack has had to battle constant comparisons and expectations. He is laid-back, characteristically Australian in personality, and has spoken openly about the dual pressure and privilege of his family name. He is tall for a racing driver and an enthusiastic surfer.",
+    "relationships": "Jack is in his early 20s and has not publicised any romantic relationships. He is focused on establishing himself in F1.",
+    "controversies": [
+      {
+        "title": "Replaced Mid-Season at Alpine (2025)",
+        "description": "After a difficult start to his 2025 season at Alpine, there were serious reports of the team considering replacing him with Franco Colapinto. The situation created significant paddock controversy around team loyalty and the treatment of young drivers. Doohan faced an intensely public performance evaluation at one of the most critical stages of any career."
+      },
+      {
+        "title": "Living Up to the Doohan Name",
+        "description": "The weight of being Mick Doohan's son has been both a door-opener and an enormous source of scrutiny. Every below-par performance is amplified by comparison to his father's dominance. Jack has handled this with notable maturity but has acknowledged its mental toll."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2015–2019", "phase": "Karting", "description": "Australian and Asian karting champion; moved to Europe to develop." },
+      { "year": "2020–2021", "phase": "Formula Renault & FIA F3", "description": "Won the Formula Renault Eurocup in 2021 — his breakthrough result." },
+      { "year": "2022–2023", "phase": "FIA F2", "description": "Consistent F2 performer; joined Alpine junior programme." },
+      { "year": "2024", "phase": "Alpine reserve", "description": "Reserve and test driver for Alpine F1; made FP1 appearances." },
+      { "year": "2025", "phase": "F1 debut with Alpine", "description": "Full F1 debut with Alpine, replacing Gasly in the team line-up." }
+    ],
+    "milestones": [
+      "Son of five-time MotoGP World Champion Mick Doohan",
+      "Formula Renault Eurocup Champion 2021",
+      "One of only two Australian drivers on the 2025-2026 grid alongside Piastri",
+      "Made his F1 debut younger than his father made his MotoGP debut"
+    ]
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "f1bidda-mcp",
+      "version": "0.1.0",
+      "title": "f1Bidda F1 MCP"
+    },
+    "tools": [
+      {
+        "name": "list_seasons",
+        "title": "List seasons",
+        "description": "List F1 seasons available in f1Bidda.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_drivers",
+        "title": "List drivers",
+        "description": "List drivers in the latest OpenF1 session with team, car number, and team color.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_races",
+        "title": "List races",
+        "description": "List all races in a given F1 season (Jolpica/Ergast).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "season": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991,
+              "description": "Season year, e.g. 2025 or 2026."
+            }
+          },
+          "required": ["season"]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_race",
+        "title": "Get race",
+        "description": "Get details for a single race by ID '<season>-<round>' (Jolpica).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "raceId": {
+              "type": "string",
+              "description": "Race ID, e.g. '2025-7'."
+            }
+          },
+          "required": ["raceId"]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_next_race",
+        "title": "Get next race",
+        "description": "Get the next upcoming F1 race in the current season (Jolpica/Ergast).",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_driver_standings",
+        "title": "Get driver standings",
+        "description": "Get the driver championship standings for a season (Jolpica/Ergast).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "season": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991,
+              "description": "Season year, e.g. 2025."
+            }
+          },
+          "required": ["season"]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_constructor_standings",
+        "title": "Get constructor standings",
+        "description": "Get the constructor championship standings for a season (Jolpica/Ergast).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "season": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991,
+              "description": "Season year, e.g. 2025."
+            }
+          },
+          "required": ["season"]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_race_laps",
+        "title": "Get race laps",
+        "description": "Get lap-by-lap timing data (Jolpica) for the given drivers in a race, plus tyre stints (OpenF1 when available).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "raceId": {
+              "type": "string",
+              "description": "Race ID, e.g. '2025-7'."
+            },
+            "drivers": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Driver codes (e.g. ['VER','LEC'])."
+            }
+          },
+          "required": ["raceId", "drivers"]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
