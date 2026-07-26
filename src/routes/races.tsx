@@ -14,6 +14,7 @@ type CrazyRace = {
   chaosRating: number;
   summary: string;
   youtubeQuery: string;
+  youtubeUrl?: string;
 };
 
 const ALL_RACES = racesData as CrazyRace[];
@@ -234,13 +235,18 @@ function ChaosBadge({ rating }: { rating: number }) {
   );
 }
 
+function getVideoId(url: string): string | null {
+  const m = url.match(/youtu\.be\/([^?&]+)/) ?? url.match(/[?&]v=([^&]+)/);
+  return m ? m[1] : null;
+}
+
 function RaceModal({ race, onClose }: { race: CrazyRace; onClose: () => void }) {
-  const embedSrc = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(
-    race.youtubeQuery,
-  )}`;
-  const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-    race.youtubeQuery,
-  )}`;
+  const videoId = race.youtubeUrl ? getVideoId(race.youtubeUrl) : null;
+  const embedSrc = videoId
+    ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`
+    : `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(race.youtubeQuery)}`;
+  const openUrl = race.youtubeUrl ??
+    `https://www.youtube.com/results?search_query=${encodeURIComponent(race.youtubeQuery)}`;
   return (
     <div
       role="dialog"
@@ -287,7 +293,7 @@ function RaceModal({ race, onClose }: { race: CrazyRace; onClose: () => void }) 
               ← Back to list
             </button>
             <a
-              href={searchUrl}
+              href={openUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-xs font-display uppercase tracking-widest text-white hover:bg-primary/90"

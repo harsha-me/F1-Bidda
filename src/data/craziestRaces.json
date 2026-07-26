@@ -6,7 +6,8 @@
     "circuit": "Fuji Speedway",
     "chaosRating": 10,
     "summary": "Championship decider in a monsoon. Lauda pulled out on lap two saying 'my life is worth more than a title'. Hunt survived punctures and mid-race panic to secure the World Championship in the pit lane.",
-    "youtubeQuery": "1976 Japanese GP Hunt Lauda highlights"
+    "youtubeQuery": "1976 Japanese GP Hunt Lauda highlights",
+    "youtubeUrl": "https://youtu.be/JGCePdF7xeY"
   },
   {
     "id": "1979-france",
@@ -42,7 +43,8 @@
     "circuit": "Donington Park",
     "chaosRating": 10,
     "summary": "Senna's opening lap in the wet — passing four cars including Prost and Hill — is still called the greatest lap in F1. Constant tyre changes, dry lines vanishing, sublime car control.",
-    "youtubeQuery": "1993 European GP Donington Senna lap"
+    "youtubeQuery": "1993 European GP Donington Senna lap",
+    "youtubeUrl": "https://youtu.be/pktF3wJKfxo"
   },
   {
     "id": "1994-monaco",
@@ -60,7 +62,8 @@
     "circuit": "Adelaide",
     "chaosRating": 10,
     "summary": "Title decider. Schumacher clipped a wall, Hill dived down the inside, and they collided. Schumacher's damaged car took Hill out and clinched his first World Championship in controversial fashion.",
-    "youtubeQuery": "1994 Australian GP Schumacher Hill collision"
+    "youtubeQuery": "1994 Australian GP Schumacher Hill collision",
+    "youtubeUrl": "https://youtu.be/91JoW4mSiZo"
   },
   {
     "id": "1996-monaco",
@@ -69,7 +72,8 @@
     "circuit": "Circuit de Monaco",
     "chaosRating": 10,
     "summary": "Only three cars finished. Rain, oil and crashes eliminated almost the entire field. Olivier Panis won from 14th on the grid — Ligier's last F1 victory.",
-    "youtubeQuery": "1996 Monaco GP Panis three finishers"
+    "youtubeQuery": "1996 Monaco GP Panis three finishers",
+    "youtubeUrl": "https://youtu.be/eEs7jS5bsAc"
   },
   {
     "id": "1998-belgium",
@@ -78,7 +82,8 @@
     "circuit": "Spa-Francorchamps",
     "chaosRating": 10,
     "summary": "A 13-car pileup at La Source on lap one. Schumacher then rammed Coulthard while lapping him in fog and stormed to the pits accusing him of murder. Damon Hill won Jordan's first race.",
-    "youtubeQuery": "1998 Belgian GP pileup Schumacher Coulthard"
+    "youtubeQuery": "1998 Belgian GP pileup Schumacher Coulthard",
+    "youtubeUrl": "https://youtu.be/R22nxVYLaBQ"
   },
   {
     "id": "2000-belgium",
@@ -105,7 +110,8 @@
     "circuit": "Interlagos",
     "chaosRating": 10,
     "summary": "Biblical rain, a river across the track at turn 3, cars aquaplaning off in convoy. Race red-flagged after Alonso's massive crash into debris; Fisichella declared winner days later in a paperwork drama.",
-    "youtubeQuery": "2003 Brazilian GP Fisichella rain chaos"
+    "youtubeQuery": "2003 Brazilian GP Fisichella rain chaos",
+    "youtubeUrl": "https://youtu.be/2tRJh8aEdWQ"
   },
   {
     "id": "2003-malaysia",
@@ -150,7 +156,8 @@
     "circuit": "Suzuka",
     "chaosRating": 9,
     "summary": "Rain in qualifying scrambled the grid. Räikkönen started 17th and passed Fisichella around the outside of 130R on the last lap to win — considered one of the greatest drives ever.",
-    "youtubeQuery": "2005 Japanese GP Raikkonen last lap Suzuka"
+    "youtubeQuery": "2005 Japanese GP Raikkonen last lap Suzuka",
+    "youtubeUrl": "https://youtu.be/xPbOZe8Hn2s"
   },
   {
     "id": "2007-europe",
@@ -168,7 +175,8 @@
     "circuit": "Interlagos",
     "chaosRating": 10,
     "summary": "Massa crossed the line world champion. For 38 seconds the Ferrari pit celebrated. Then Hamilton passed Glock in the final corner of the final lap in the wet to take the title by one point.",
-    "youtubeQuery": "2008 Brazilian GP Hamilton title last corner"
+    "youtubeQuery": "2008 Brazilian GP Hamilton title last corner",
+    "youtubeUrl": "https://youtu.be/3pKsxtzfVbQ"
   },
   {
     "id": "2008-europe",
@@ -213,7 +221,8 @@
     "circuit": "Circuit Gilles Villeneuve",
     "chaosRating": 10,
     "summary": "The longest race in F1 history — 4 hours 4 minutes with a two-hour red flag for rain. Jenson Button pitted six times, was last on lap 40, and passed Vettel on the final lap for the win.",
-    "youtubeQuery": "2011 Canadian GP Button longest race"
+    "youtubeQuery": "2011 Canadian GP Button longest race",
+    "youtubeUrl": "https://youtu.be/31qQsC4Q-E0"
   },
   {
     "id": "2011-monaco",
@@ -258,7 +267,8 @@
     "circuit": "Suzuka",
     "chaosRating": 10,
     "summary": "Typhoon Phanfone raged. On lap 43 Jules Bianchi aquaplaned into a recovery crane at Dunlop. The sport changed forever: Virtual Safety Car, Halo, tighter marshalling. F1's darkest modern day.",
-    "youtubeQuery": "2014 Japanese GP Bianchi crash"
+    "youtubeQuery": "2014 Japanese GP Bianchi crash",
+    "youtubeUrl": "https://youtu.be/o8D6y7BXucM"
   },
   {
     "id": "2015-britain",
@@ -294,7 +304,8 @@
     "circuit": "Interlagos",
     "chaosRating": 10,
     "summary": "Rain, red flags, and Verstappen went from 14th to 3rd in fifteen laps. A quadruple-wheel slide at 300 km/h that he casually caught was the moment he became a superstar.",
-    "youtubeQuery": "2016 Brazilian GP Verstappen rain drive"
+    "youtubeQuery": "2016 Brazilian GP Verstappen rain drive",
+    "youtubeUrl": "https://youtu.be/q8Ky8pNK4MA"
   },
   {
     "id": "2017-azerbaijan",
