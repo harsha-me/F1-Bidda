@@ -16,6 +16,7 @@ import {
   seasonRacesQuery,
 } from "@/lib/f1-queries";
 import { SEASONS } from "@/lib/f1-data";
+import { getCircuitImageUrl } from "@/lib/f1-assets";
 
 export const Route = createFileRoute("/season")({
   head: () => ({
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/season")({
       { property: "og:title", content: "Season Overview · f1Bidda" },
       {
         property: "og:description",
-        content: "F1 calendar, driver and constructor standings.",
+        content: "Schedule, driver standings and constructor standings.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -41,7 +42,7 @@ export const Route = createFileRoute("/season")({
 type SortKey = "position" | "points" | "wins";
 
 function SeasonPage() {
-  const [season, setSeason] = useState(SEASONS[0]);
+  const [season, setSeason] = useState<number>(SEASONS[0]);
   const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({
     key: "position",
     dir: 1,
@@ -52,65 +53,78 @@ function SeasonPage() {
   const consQ = useQuery(constructorStandingsQuery(season));
 
   const races = racesQ.data ?? [];
-  const winnerByRace = useMemo(() => {
-    // The season list doesn't include winners until we fetch results; we skip
-    // that here to keep the calendar snappy.
-    return new Map<string, string>();
-  }, []);
+  const rawStandings = driversQ.data ?? [];
+  const constructors = consQ.data ?? [];
 
   const standings = useMemo(() => {
-    const rows = driversQ.data ?? [];
-    return [...rows].sort((a, b) => {
+    return [...rawStandings].sort((a, b) => {
       const av = a[sort.key];
       const bv = b[sort.key];
       return (av > bv ? 1 : av < bv ? -1 : 0) * sort.dir;
     });
-  }, [driversQ.data, sort]);
-
-  const constructors = consQ.data ?? [];
+  }, [rawStandings, sort]);
 
   const toggleSort = (key: SortKey) =>
     setSort((s) => (s.key === key ? { key, dir: (s.dir * -1) as 1 | -1 } : { key, dir: 1 }));
 
   return (
-    <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8 sm:py-16">
-      <SectionHeader
-        eyebrow="Season Overview"
-        title="Calendar & Standings"
-        right={
-          <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-            <span className="label-eyebrow">Season</span>
-            <select
-              value={season}
-              onChange={(e) => setSeason(Number(e.target.value))}
-              className="bg-transparent font-display text-lg font-bold outline-none"
-            >
-              {SEASONS.map((s) => (
-                <option key={s} value={s} className="bg-background">
-                  {s}
-                </option>
-              ))}
-            </select>
-          </div>
-        }
-      />
+    <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
+      {/* SEASON SELECTOR & HEADER */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeader eyebrow="Overview" title={`${season} Season`} />
 
-      {/* RACE CALENDAR */}
+        <div className="flex items-center gap-2">
+          <label htmlFor="season-select" className="text-xs font-display uppercase tracking-widest text-muted-foreground">
+            Season
+          </label>
+          <select
+            id="season-select"
+            value={season}
+            onChange={(e) => setSeason(Number(e.target.value))}
+            className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-num text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+          >
+            {SEASONS.map((s) => (
+              <option key={s} value={s} className="bg-background">
+                {s}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* RACES CAROUSEL / GRID */}
+      <div className="mt-8">
+        <Eyebrow>Race Schedule ({races.length} Rounds)</Eyebrow>
+      </div>
+
       {racesQ.isLoading ? (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <Skeleton key={i} className="h-40 w-full" />
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <Skeleton key={i} className="h-36 w-full" />
           ))}
         </div>
       ) : racesQ.isError ? (
-        <ErrorNote message="Couldn't load the race calendar." onRetry={() => racesQ.refetch()} />
+        <div className="mt-4">
+          <ErrorNote
+            message="Couldn't load schedule."
+            onRetry={() => racesQ.refetch()}
+          />
+        </div>
       ) : (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {races.map((r) => {
-            const winnerCode = winnerByRace.get(r.id);
+            const circuitImg = getCircuitImageUrl(r.circuitId);
+
             return (
               <Link key={r.id} to="/race/$raceId" params={{ raceId: r.id }} className="group">
-                <GlassCard hover className="flex h-full flex-col gap-4 p-4">
+                <GlassCard hover className="relative flex h-full flex-col justify-between overflow-hidden p-4">
+                  {circuitImg && (
+                    <img
+                      src={circuitImg}
+                      alt={`${r.circuit} map`}
+                      className="pointer-events-none absolute -right-3 -bottom-3 h-24 w-24 object-contain opacity-20 filter invert brightness-200 transition-opacity group-hover:opacity-40"
+                    />
+                  )}
                   <div className="flex items-start justify-between">
                     <div className="min-w-0">
                       <div className="text-2xl">{r.flag}</div>
@@ -128,24 +142,19 @@ function SeasonPage() {
                       {r.completed ? "Done" : "Upcoming"}
                     </span>
                   </div>
-                  <div>
+                  <div className="my-2">
                     <div className="font-display text-lg font-bold uppercase leading-tight">
                       {r.name}
                     </div>
                     <div className="mt-1 text-xs text-muted-foreground">{r.circuit}</div>
                   </div>
-                  <div className="mt-auto flex items-end justify-between">
+                  <div className="mt-auto flex items-end justify-between pt-2">
                     <div className="text-xs text-muted-foreground font-num">
                       {new Date(r.date).toLocaleDateString(undefined, {
                         month: "short",
                         day: "numeric",
                       })}
                     </div>
-                    {winnerCode && (
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-display text-sm font-bold">{winnerCode}</span>
-                      </div>
-                    )}
                   </div>
                 </GlassCard>
               </Link>

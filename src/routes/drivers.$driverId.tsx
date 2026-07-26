@@ -8,6 +8,8 @@ import { driverStandingsQuery, sessionDriversQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON } from "@/lib/f1-data";
 import driverBios from "@/data/driverBios.json";
 
+import { getHDDriverPhoto } from "@/lib/f1-assets";
+
 type Controversy = { title: string; description: string };
 
 type Bio = {
@@ -117,6 +119,10 @@ function DriverDetail() {
 
   const teamColor = row.driver.teamColor;
 
+  const [imgError, setImgError] = useState(false);
+  const hdPhoto = getHDDriverPhoto(row?.driver.driverId || driverId || row?.driver.code, headshotUrl);
+  const displayPhoto = !imgError && hdPhoto ? hdPhoto : undefined;
+
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
       {/* Back link */}
@@ -147,10 +153,11 @@ function DriverDetail() {
               background: `linear-gradient(160deg, ${teamColor}44, rgba(10,10,11,0.95))`,
             }}
           >
-            {headshotUrl ? (
+            {displayPhoto ? (
               <img
-                src={headshotUrl}
+                src={displayPhoto}
                 alt={row.driver.name}
+                onError={() => setImgError(true)}
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
             ) : (

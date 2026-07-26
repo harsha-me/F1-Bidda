@@ -6,6 +6,8 @@ import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { driverStandingsQuery, sessionDriversQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON, type Driver } from "@/lib/f1-data";
 
+import { getHDDriverPhoto } from "@/lib/f1-assets";
+
 export const Route = createFileRoute("/drivers")({
   head: () => ({
     meta: [
@@ -74,7 +76,7 @@ function DriversPage() {
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {drivers.map((d) => (
-            <DriverCard key={d.code} driver={d} photo={headshotByCode.get(d.code)} />
+            <DriverCard key={d.code} driver={d} photo={getHDDriverPhoto(d.driverId || d.code, headshotByCode.get(d.code))} />
           ))}
         </div>
       )}
@@ -84,6 +86,9 @@ function DriversPage() {
 
 function DriverCard({ driver, photo }: { driver: Driver; photo?: string }) {
   const id = driver.driverId ?? driver.code.toLowerCase();
+  const [imgError, setImgError] = useState(false);
+  const displayPhoto = !imgError ? photo : undefined;
+
   return (
     <Link
       to="/drivers/$driverId"
@@ -96,12 +101,13 @@ function DriverCard({ driver, photo }: { driver: Driver; photo?: string }) {
           background: `linear-gradient(160deg, ${driver.teamColor}55, rgba(10,10,11,0.9))`,
         }}
       >
-        {photo ? (
+        {displayPhoto ? (
           <img
-            src={photo}
+            src={displayPhoto}
             alt={driver.name}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover object-top"
+            onError={() => setImgError(true)}
+            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
           <div className="absolute inset-0 grid place-items-center">
