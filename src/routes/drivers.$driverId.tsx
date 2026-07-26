@@ -63,7 +63,13 @@ function DriverDetail() {
   }, [of1Q.data, row]);
   const headshotUrl = (of1 as unknown as { headshot_url?: string } | null)?.headshot_url;
 
-  const bio = BIOS[driverId] ?? null;
+  const bio = (() => {
+    if (BIOS[driverId]) return BIOS[driverId];
+    // Ergast returns short IDs like "hamilton" — try matching the last segment
+    // of compound keys like "lewis_hamilton"
+    const entry = Object.entries(BIOS).find(([k]) => k.split("_").pop() === driverId);
+    return entry?.[1] ?? null;
+  })();
   const isLoading = standingsQ.isLoading;
 
   if (isLoading) {

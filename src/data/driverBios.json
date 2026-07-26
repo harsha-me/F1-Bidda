@@ -687,5 +687,187 @@
       "One of only two Australian drivers on the 2025-2026 grid alongside Piastri",
       "Made his F1 debut younger than his father made his MotoGP debut"
     ]
+  },
+  "bottas": {
+    "nationality": "Finland",
+    "flag": "🇫🇮",
+    "dateOfBirth": "1989-08-28",
+    "championships": 0,
+    "firstSeason": 2013,
+    "personalLife": "Valtteri Bottas was born in Nastola, a small town in southern Finland. Quiet, reserved, and devastatingly fast in a straight line, he has grown throughout his career into one of the most self-aware drivers on the grid. After years of presenting an almost robotic public image, Bottas underwent a remarkable personal transformation from 2020 onward — growing his hair, embracing cycling culture, and becoming a fan favourite for his refreshingly unfiltered social media presence. He is an avid cyclist and has completed numerous charity rides. He lives between Finland and Switzerland. He is fluent in Finnish and English.",
+    "relationships": "Bottas was married to Finnish swimmer Emilia Pikkarainen from 2016 to 2019. Their divorce, announced mid-season, was handled with remarkable public dignity by both parties. He later entered a relationship with Australian cyclist Tiffany Cromwell, whom he met through his growing passion for the sport. The couple announced their engagement in 2022 and welcomed a daughter, Sylvie, in 2023. Bottas and Cromwell are one of the most active athlete couples on social media.",
+    "controversies": [
+      {
+        "title": "Number Two at Mercedes — The Eternal Debate",
+        "description": "Despite winning 10 grand prix races and being a consistent front-runner, Bottas faced persistent criticism for being 'wingman' to Lewis Hamilton at Mercedes. Team orders were applied against him multiple times — including famously at the 2018 Russian GP where he was asked to let Hamilton past while leading. He always complied, but the accumulation of these decisions fuelled a long-running debate about driver equality at top teams."
+      },
+      {
+        "title": "2021 Hungarian GP Start Incident",
+        "description": "Bottas was released into the pit lane at the 2021 Hungarian GP start and ploughed into the side of Lando Norris's McLaren, which set off a chain of collisions that eliminated multiple cars. It was arguably the most significant incident of his career from a controversy standpoint, though deemed a racing incident by stewards."
+      },
+      {
+        "title": "Replaced by Russell at Mercedes (2022)",
+        "description": "After five seasons as Hamilton's teammate — during which he took 10 wins, 67 podiums and three second places in the championship — Bottas was replaced by George Russell for 2022. The decision stung, but Bottas pivoted with grace, joining Alfa Romeo/Sauber as a team leader. His public response was one of the most dignified seen in F1."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2005–2008", "phase": "Karting", "description": "Nordic and European karting championships, supported by Finnish motorsport funding." },
+      { "year": "2009–2011", "phase": "Formula Renault & GP3", "description": "Won the GP3 Series in 2011, catching the eye of the Williams F1 team." },
+      { "year": "2012", "phase": "Williams test driver", "description": "Spent a year as Williams reserve before earning a race seat." },
+      { "year": "2013", "phase": "F1 debut at Williams", "description": "Scored points in his rookie season, quickly establishing himself as a solid midfield performer." },
+      { "year": "2017", "phase": "Mercedes signing", "description": "Replaced Nico Rosberg as Hamilton's partner — one of the biggest moves in the sport." }
+    ],
+    "milestones": [
+      "10 Formula 1 race victories",
+      "67 career podiums",
+      "Fastest lap record holder (multiple seasons)",
+      "Three-time runner-up in the Drivers' Championship",
+      "Became Alfa Romeo/Sauber team leader from 2022"
+    ]
+  },
+  "perez": {
+    "nationality": "Mexico",
+    "flag": "🇲🇽",
+    "dateOfBirth": "1990-01-26",
+    "championships": 0,
+    "firstSeason": 2011,
+    "personalLife": "Sergio 'Checo' Pérez was born in Guadalajara, Jalisco, and is the son of former racing driver Antonio Pérez Garibay. Raised in one of Mexico's great motorsport cities, he grew up inspired by his father's racing career and moved to Europe as a teenager to pursue his dream. Pérez has become a national hero in Mexico — a crowd of over 400,000 at the Mexican Grand Prix cheers for him each year, and he is one of the most commercially valuable drivers in the sport. He is deeply family-oriented, extremely charitable through the Checo Pérez Foundation, and has funded racing programmes for young Mexicans. He speaks Spanish and English. He is a devoted Catholic.",
+    "relationships": "Checo married his long-time partner Carola Martínez in 2018. The couple have three children and are one of the most settled family units in the F1 paddock. Carola is occasionally present at races and the family — including their children — are frequently seen at the Mexican GP. He has consistently cited Carola as his anchor through the turbulent periods of his career.",
+    "controversies": [
+      {
+        "title": "Sacked by McLaren (2013)",
+        "description": "After just one season at McLaren — in which he showed genuine pace and scored podiums — Pérez was controversially dropped in favour of Kevin Magnussen, making way for Jenson Button's extension. The decision shocked the paddock; many felt Pérez had done enough to retain the seat. He later called it one of the most painful moments of his career."
+      },
+      {
+        "title": "Brazil 2023 Team Order Refusal by Verstappen",
+        "description": "At the 2023 Brazilian GP, Pérez needed points to keep his championship runner-up battle against Leclerc alive. Verstappen, who had already won the title, refused team orders to let Checo past, cryptically saying he had 'his reasons.' The incident severely damaged the perception of harmony at Red Bull and was widely seen as a personal rebuke of Pérez by his teammate."
+      },
+      {
+        "title": "Las Vegas 2023 Crash Investigation",
+        "description": "A drain cover came loose and struck the underside of Pérez's car during the Las Vegas GP Friday night practice, causing significant damage and a lengthy red flag. The incident led to a costly repair bill and a delayed session, and sparked intense scrutiny of the circuit's preparation for F1's glamorous new street race."
+      },
+      {
+        "title": "Form Collapse and Red Bull Exit (2024)",
+        "description": "After his stellar 2023 (second in the championship), Pérez's form in 2024 deteriorated dramatically. He was comprehensively outpaced by Verstappen in the second half of the season, sparking intense speculation about his future. Red Bull kept him amid reports of searching for alternatives, and he was eventually released at the end of the year."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2004–2006", "phase": "Karting", "description": "Mexican karting champion, moved to Europe supported by his family and the Mexican national federation." },
+      { "year": "2007–2008", "phase": "Formula BMW & British F3", "description": "Won the Formula BMW Americas title; raced in European F3 and showed immediate promise." },
+      { "year": "2009", "phase": "GP2 Series", "description": "Competitive GP2 debut; funded in part through Carlos Slim's backing." },
+      { "year": "2010", "phase": "GP2 runner-up", "description": "Runner-up in GP2 — enough to earn the Sauber F1 contract for 2011." },
+      { "year": "2011", "phase": "F1 debut at Sauber", "description": "Immediately competitive in the midfield, earning a reputation as a tyre management genius." }
+    ],
+    "milestones": [
+      "Multiple Formula 1 race victories including iconic wins at Baku and Singapore",
+      "2023 Drivers' Championship runner-up — best result for a Mexican driver",
+      "Saved Red Bull's 2021 championship with his Baku and Abu Dhabi performances",
+      "National hero in Mexico with 400,000+ fans at the Mexican GP",
+      "Founded Checo Pérez Foundation supporting disadvantaged Mexican children"
+    ]
+  },
+  "colapinto": {
+    "nationality": "Argentina",
+    "flag": "🇦🇷",
+    "dateOfBirth": "2003-05-27",
+    "championships": 0,
+    "firstSeason": 2024,
+    "personalLife": "Franco Colapinto was born in Pilar, Buenos Aires Province, Argentina, into a family that was not especially immersed in motorsport but recognised his talent early. He moved to Europe as a teenager to chase his F1 dream, living the nomadic life of a junior racing driver across Spain, the UK and Monaco. He became Argentina's first F1 driver in 23 years when he debuted for Williams in 2024, triggering an outpouring of national pride. Colapinto is gregarious, expressive, and genuinely funny — his paddock banter and social media clips quickly made him a fan favourite. He is passionate about Argentine football and is a declared Boca Juniors supporter.",
+    "relationships": "Franco is in his early 20s and has not publicised any long-term relationship. He has been linked to various social media personalities in the Argentine and European scenes but keeps his personal life separate from his public motorsport profile.",
+    "controversies": [
+      {
+        "title": "Two Crashes in Three Races on F1 Debut",
+        "description": "Colapinto's debut season at Williams in 2024 was marked by raw speed but also costly errors. He crashed at Las Vegas and then again in Qatar in successive weekends, putting significant strain on the Williams engineering resources and prompting serious questions about whether his seat could be held for 2025."
+      },
+      {
+        "title": "Alpine Seat Rumours and Doohan Displacement",
+        "description": "In 2025, reports emerged that Alpine were considering replacing the struggling Jack Doohan with Colapinto mid-season. The saga played out publicly for weeks — with Doohan under intense scrutiny — before Colapinto ultimately took the seat. The manner of Doohan's displacement drew criticism about how the team communicated with their driver."
+      },
+      {
+        "title": "Argentina's First F1 Driver in 23 Years — Weight of a Nation",
+        "description": "Colapinto's sudden F1 debut at Williams sparked a national frenzy in Argentina. The pressure of carrying an entire nation's F1 dreams was not a controversy but a double-edged privilege; he handled the scrutiny with remarkable composure for a 21-year-old."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2016–2019", "phase": "Karting", "description": "Argentine and South American karting champion; moved to Europe to join competitive European series." },
+      { "year": "2020–2021", "phase": "Formula 4", "description": "Won the Spanish F4 championship convincingly, attracting attention from major teams." },
+      { "year": "2022", "phase": "Formula Regional", "description": "Competitive season in Formula Regional Europe, joined Williams Academy." },
+      { "year": "2023", "phase": "FIA Formula 3", "description": "Strong F3 campaign; won multiple races and demonstrated clear F1-level potential." },
+      { "year": "2024", "phase": "FIA Formula 2 & F1 debut", "description": "Racing in F2 while being called up mid-season to Williams for his surprise F1 debut, replacing Logan Sargeant." }
+    ],
+    "milestones": [
+      "Argentina's first F1 driver since Gastón Mazzacane in 2001",
+      "Scored points on his second ever F1 start — Williams's first points in months",
+      "Became an overnight national hero in Argentina on his F1 announcement",
+      "Joined Alpine for 2025, cementing his F1 career"
+    ]
+  },
+  "bortoleto": {
+    "nationality": "Brazil",
+    "flag": "🇧🇷",
+    "dateOfBirth": "2004-10-14",
+    "championships": 0,
+    "firstSeason": 2025,
+    "personalLife": "Gabriel Bortoleto was born in São Paulo, Brazil, into a family with motorsport ties — his father Márcio Bortoleto was involved in the karting scene. Gabriel moved to Europe as a teenager and steadily climbed through the junior ranks under the guidance of Fernando Alonso's management team (A14 Management). He is quiet, deeply professional, and technically meticulous — engineers in junior series describe him as one of the most analytical young drivers they have worked with. He speaks Portuguese and Spanish natively, and is fluent in English and developing Italian. He is Brazil's first full-time F1 race driver in over a decade.",
+    "relationships": "Gabriel, aged 20 on his F1 debut, is intensely focused on his career and has kept his personal life entirely private. He is not publicly linked to anyone.",
+    "controversies": [
+      {
+        "title": "Managed by Alonso — Conflict of Interest Questions",
+        "description": "Bortoleto is managed by A14 Management — Fernando Alonso's company. When Bortoleto signed for Sauber/Audi for 2025, questions arose about whether Alonso's management connection gave him an advantage in the Sauber selection process and whether it created a conflict of interest given Alonso competes in the same championship."
+      },
+      {
+        "title": "F2 Champion to Backmarker Team",
+        "description": "Despite winning the F2 title in dominant fashion in 2024, Bortoleto's only available F1 seat was with Sauber — at the time the slowest team on the grid in its pre-Audi transition phase. Many questioned whether such a talented driver should have waited for a more competitive opportunity."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2017–2020", "phase": "Karting", "description": "Brazilian and South American karting champion, moved to Europe at 15 to develop his career." },
+      { "year": "2021", "phase": "Italian Formula 4", "description": "Won Italian F4 in his first season in cars — a stunning debut." },
+      { "year": "2022", "phase": "Formula Regional", "description": "Won the Formula Regional Asian and European championships back-to-back." },
+      { "year": "2023", "phase": "FIA Formula 3", "description": "FIA F3 Champion at first attempt, joining the long list of McLaren junior programme successes." },
+      { "year": "2024", "phase": "FIA Formula 2", "description": "Dominant F2 Champion — five wins and consistent podiums across the season secured his F1 seat." },
+      { "year": "2025", "phase": "F1 debut at Sauber/Kick", "description": "Brazil's first full-season F1 driver in over a decade, partnered with Nico Hülkenberg at the transitioning Sauber outfit." }
+    ],
+    "milestones": [
+      "FIA Formula 2 Champion 2024",
+      "FIA Formula 3 Champion 2023 — junior champion two years running",
+      "Brazil's first full-time F1 race driver since Felipe Massa",
+      "Managed by Fernando Alonso's A14 Management",
+      "Youngest driver on the 2025 Sauber/Kick roster"
+    ]
+  },
+  "lindblad": {
+    "nationality": "United Kingdom",
+    "flag": "🇬🇧",
+    "dateOfBirth": "2007-05-14",
+    "championships": 0,
+    "firstSeason": 2026,
+    "personalLife": "Arvid Lindblad was born in England to a British-Swedish family and holds dual citizenship, though he races under the British flag. He is one of the youngest drivers to have reached the F1 grid in the sport's history, being part of the Red Bull junior programme from a very early age. Soft-spoken and highly composed for his age, Arvid has been described by those who have coached him as unusually mature in his approach to car setup and race strategy. He relocated to Europe in his early teens to focus full-time on his motorsport career. His youth makes him one of the most fascinating prospects in the paddock.",
+    "relationships": "Arvid is 18 years old on his F1 debut and has not publicised any relationships. He is entirely focused on his racing career.",
+    "controversies": [
+      {
+        "title": "Promoted to F1 at 18 — Skipping Experience?",
+        "description": "Lindblad's rapid elevation through the Red Bull junior programme and into the F1 seat drew some criticism from those who felt a driver of his age needed more time in the junior categories. Red Bull's Helmut Marko defended the decision robustly, citing Lindblad's data-backed readiness and the precedent set by Verstappen's own early promotion."
+      },
+      {
+        "title": "British or Swedish? — Nationality Debate",
+        "description": "Lindblad's dual British-Swedish heritage means he is claimed by fans and media of both nationalities. He races under the British flag, but Swedish motorsport outlets frequently cover him as one of their own. The question of his sporting nationality has been a minor but persistent topic in F1 media coverage."
+      }
+    ],
+    "roadToF1": [
+      { "year": "2019–2021", "phase": "Karting", "description": "British, European and world karting champion — joined Red Bull junior programme at age 14." },
+      { "year": "2022", "phase": "Formula 4", "description": "Won the British F4 championship in dominant fashion at age 15." },
+      { "year": "2023", "phase": "FIA Formula 3", "description": "Extremely competitive F3 debut season; multiple race wins established him as Red Bull's top junior." },
+      { "year": "2024", "phase": "FIA Formula 2", "description": "Strong F2 campaign demonstrating race-winning ability and tyre management maturity beyond his years." },
+      { "year": "2025", "phase": "F2 / Reserve duties", "description": "Continued F2 development while serving as a reserve/test driver for the Red Bull programme." },
+      { "year": "2026", "phase": "F1 debut with Racing Bulls", "description": "Promoted to a full race seat with Red Bull's junior team, Racing Bulls, becoming one of F1's youngest starters." }
+    ],
+    "milestones": [
+      "One of the youngest drivers to reach Formula 1 in the sport's history",
+      "British F4 Champion 2022 at age 15",
+      "Red Bull junior programme's standout prospect from 2021 onward",
+      "Dual British-Swedish heritage — claimed by fans of both nations"
+    ]
   }
 }
+
