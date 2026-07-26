@@ -1,0 +1,410 @@
+[
+  {
+    "id": "spa",
+    "name": "Circuit de Spa-Francorchamps",
+    "location": "Stavelot, Belgium",
+    "country": "Belgium",
+    "flag": "🇧🇪",
+    "lengthKm": 7.004,
+    "turns": 19,
+    "lapRecord": "1:46.286 (Valtteri Bottas, 2018)",
+    "firstGrandPrix": 1950,
+    "fastCorners": [
+      "Eau Rouge & Raidillon (Turns 3–5) — Full throttle uphill compression into blind crest at 300+ km/h",
+      "Blanchimont (Turn 17) — Sweeping flat-out left-hander at 320 km/h under maximum aerodynamic load",
+      "Pouhon (Turn 10–11) — Double-apex downhill left-hander taken at 290 km/h pulling 5G"
+    ],
+    "whySpecial": "The cathedral of Formula 1 racing. Set in the Ardennes forest, Spa features massive elevation changes (102 meters), unpredictable microclimates (where it can rain on one side of the track while dry on the other), and the longest lap distance on the calendar. Passing through Eau Rouge and up the Kemmel Straight provides the ultimate test of driver bravery and low-downforce setup efficiency."
+  },
+  {
+    "id": "monaco",
+    "name": "Circuit de Monaco",
+    "location": "Monte Carlo, Monaco",
+    "country": "Monaco",
+    "flag": "🇲🇨",
+    "lengthKm": 3.337,
+    "turns": 19,
+    "lapRecord": "1:12.909 (Lewis Hamilton, 2021)",
+    "firstGrandPrix": 1950,
+    "fastCorners": [
+      "Swimming Pool Chicane (Turns 13–14) — Ultra-fast right-left flick over kerbs at 220 km/h past barriers",
+      "Massenet & Casino Square (Turns 2–3) — High-speed blind crest leading into the bumps past the Casino",
+      "Tunnel & Nouvelle Chicane (Turn 9–10) — Dark-to-light transition at 290 km/h braking downhill"
+    ],
+    "whySpecial": "Formula 1's crown jewel. Driving an F1 car through Monaco's razor-thin armco barriers has been described by Nelson Piquet as 'cycling around your living room.' Overtaking is almost impossible, making Saturday's qualifying session the most intense 60 minutes in global motorsport. Millimetre precision is required for 78 laps."
+  },
+  {
+    "id": "silverstone",
+    "name": "Silverstone Circuit",
+    "location": "Silverstone, United Kingdom",
+    "country": "United Kingdom",
+    "flag": "🇬🇧",
+    "lengthKm": 5.891,
+    "turns": 18,
+    "lapRecord": "1:27.097 (Max Verstappen, 2020)",
+    "firstGrandPrix": 1950,
+    "fastCorners": [
+      "Maggotts & Becketts (Turns 10–13) — High-speed snake section change of direction at 290 km/h pulling 5G",
+      "Copse (Turn 9) — Flat-out entry right-hander at 290 km/h with zero margin for error",
+      "Stowe (Turn 15) — Fast right-hand entry off Hangar Straight braking under heavy load"
+    ],
+    "whySpecial": "The birthplace of Formula 1. Built on a WWII airfield, Silverstone is a high-downforce temple where aerodynamic load and driver precision meet. The Maggotts-Becketts-Chapel complex tests a car's direction change at high speed like no other section on Earth, generating extreme lateral G-forces that punish front-left tyres."
+  },
+  {
+    "id": "monza",
+    "name": "Autodromo Nazionale Monza",
+    "location": "Monza, Italy",
+    "country": "Italy",
+    "flag": "🇮🇹",
+    "lengthKm": 5.793,
+    "turns": 11,
+    "lapRecord": "1:21.046 (Rubens Barrichello, 2004)",
+    "firstGrandPrix": 1950,
+    "fastCorners": [
+      "Parabolica / Curva Alboreto (Turn 11) — Sweeping right-hander onto main straight taken at 260 km/h",
+      "Variante Ascari (Turns 8–10) — Fast left-right-left chicane complex taken at 240 km/h",
+      "Curva Grande (Turn 3) — Long flat-out right-hand curve onto the Rettifilo straight"
+    ],
+    "whySpecial": "The Temple of Speed. Monza features the highest average lap speed on the F1 calendar (over 260 km/h) and top speeds touching 355 km/h. Teams run ultra-skinny low-downforce rear wings, making the cars skittish under braking into heavy chicanes. The passion of the Italian Tifosi flooding the main straight post-race creates one of sport's most legendary atmospheres."
+  },
+  {
+    "id": "suzuka",
+    "name": "Suzuka International Racing Course",
+    "location": "Suzuka, Japan",
+    "country": "Japan",
+    "flag": "🇯🇵",
+    "lengthKm": 5.807,
+    "turns": 18,
+    "lapRecord": "1:30.983 (Lewis Hamilton, 2019)",
+    "firstGrandPrix": 1987,
+    "fastCorners": [
+      "130R (Turn 15) — Legendary flat-out left-hand sweeper entered at 310 km/h",
+      "S-Curves (Turns 3–6) — Flowing rhythmic figure-eight rhythm section requiring perfect car balance",
+      "Degner 1 & 2 (Turns 8–9) — Commit-or-crash fast right-hander into gravel trap"
+    ],
+    "whySpecial": "The ultimate driver's circuit and F1's only figure-of-eight layout. Designed as a Honda test track in 1962, Suzuka rewards smooth flow and technical precision. The S-Curves in Sector 1 require a car with surgical front-end response. It has crowned 12 World Champions and remains the favourite track of almost every driver on the grid."
+  },
+  {
+    "id": "interlagos",
+    "name": "Autódromo José Carlos Pace",
+    "location": "São Paulo, Brazil",
+    "country": "Brazil",
+    "flag": "🇧🇷",
+    "lengthKm": 4.309,
+    "turns": 15,
+    "lapRecord": "1:10.540 (Valtteri Bottas, 2018)",
+    "firstGrandPrix": 1973,
+    "fastCorners": [
+      "Senna S (Turns 1–2) — Downhill left-right camber drop into the heart of the amphitheatre",
+      "Arquibancadas (Turn 15) — Uphill left-hand sweeper launching onto the main straight at full throttle",
+      "Curvão (Turn 3) — Long sweeping left onto the Back Straight"
+    ],
+    "whySpecial": "An anti-clockwise cauldron of drama. Interlagos' bowl-like topography means fans look down on the entire circuit, creating an electric football-stadium atmosphere. Sudden tropical downpours, high altitude (750m above sea level affecting turbocharging and cooling), and multiple overtaking opportunities have generated some of F1's most iconic championship deciders."
+  },
+  {
+    "id": "americas",
+    "name": "Circuit of The Americas",
+    "location": "Austin, Texas, USA",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lengthKm": 5.513,
+    "turns": 20,
+    "lapRecord": "1:36.169 (Charles Leclerc, 2019)",
+    "firstGrandPrix": 2012,
+    "fastCorners": [
+      "Turn 1 Steep Climb — 41-meter elevation rise into a blind left hair-pin",
+      "Turns 3–6 S-Curves — High-speed homage to Silverstone's Maggotts & Becketts",
+      "Turns 16–18 Quad-Apex — Multi-apex long right-hander mirroring Istanbul's Turn 8"
+    ],
+    "whySpecial": "A modern masterpiece borrowing the greatest elements of world-class tracks. Designed by Hermann Tilke with input from Tavo Hellmund, COTA features a dramatic 11-story climb into Turn 1 that invites dramatic three-wide overtaking at the start. Bumpy tarmac and intense Texas heat make tyre management a critical strategy factor."
+  },
+  {
+    "id": "baku",
+    "name": "Baku City Circuit",
+    "location": "Baku, Azerbaijan",
+    "country": "Azerbaijan",
+    "flag": "🇦🇿",
+    "lengthKm": 6.003,
+    "turns": 20,
+    "lapRecord": "1:43.009 (Charles Leclerc, 2019)",
+    "firstGrandPrix": 2016,
+    "fastCorners": [
+      "Main Straight (2.2 km) — Longest flat-out section in F1 hitting 360 km/h with slipstream DRS trains",
+      "Castle Section (Turns 8–12) — Narrowest track section in F1 (just 7.6 meters wide) around medieval walls",
+      "Turn 15 Downhill Entry — Fast approach into off-camber wall collision trap"
+    ],
+    "whySpecial": "The circuit of extremes: blending the fastest straight in F1 with the tightest castle passage. Baku consistently produces chaotic races due to extreme speed deltas, slipstreaming battles into Turn 1, and unforgiving concrete walls that punish the slightest lapse in concentration."
+  },
+  {
+    "id": "catalunya",
+    "name": "Circuit de Barcelona-Catalunya",
+    "location": "Montmeló, Spain",
+    "country": "Spain",
+    "flag": "🇪🇸",
+    "lengthKm": 4.657,
+    "turns": 14,
+    "lapRecord": "1:16.330 (Max Verstappen, 2023)",
+    "firstGrandPrix": 1991,
+    "fastCorners": [
+      "Turn 3 (Curva Renault) — Long uphill right-hand sweeper overloading the front-left tyre",
+      "Turn 9 (Campsa) — Blind uphill right-hander taken at 240 km/h into back straight",
+      "Turn 1 & 2 (Elf) — Heavy braking downhill chicane overtaking zone"
+    ],
+    "whySpecial": "The traditional benchmark for F1 car evaluation. Because it contains a mix of high, medium and low-speed corners, a car that is fast around Catalunya will be competitive anywhere in the world. High tyre degradation on the front-left and changing wind direction make setup fine-tuning paramount."
+  },
+  {
+    "id": "hungaroring",
+    "name": "Hungaroring",
+    "location": "Mogyoród, Hungary",
+    "country": "Hungary",
+    "flag": "🇭🇺",
+    "lengthKm": 4.381,
+    "turns": 14,
+    "lapRecord": "1:16.627 (Lewis Hamilton, 2020)",
+    "firstGrandPrix": 1986,
+    "fastCorners": [
+      "Turn 4 (Mansell Corner) — Blind fast uphill left-hander taken on instinct",
+      "Turn 11 — Fast sweeping right-hander leading onto the lower sector",
+      "Turn 1 — Heavy braking zone off main straight, main overtaking spot"
+    ],
+    "whySpecial": "Monaco without the walls. Hungaroring is a tight, twisting, non-stop karting-style circuit where drivers barely catch their breath. With high temperatures, dusty off-line surface, and short straights, track position and pit strategy undercuts are critical to victory."
+  },
+  {
+    "id": "imola",
+    "name": "Autodromo Enzo e Dino Ferrari",
+    "location": "Imola, Italy",
+    "country": "Italy",
+    "flag": "🇮🇹",
+    "lengthKm": 4.909,
+    "turns": 19,
+    "lapRecord": "1:15.484 (Lewis Hamilton, 2020)",
+    "firstGrandPrix": 1980,
+    "fastCorners": [
+      "Piratella (Turn 9) — Downhill fast left-hander taken on the limit of adhesion",
+      "Acque Minerali (Turns 11–13) — Downhill dip into immediate uphill right-hand compression",
+      "Tamburello (Turns 2–4) — Fast chicane complex rebuilt after the tragic 1994 weekend"
+    ],
+    "whySpecial": "Steeped in history, nostalgia and emotion. Imola is an old-school natural-terrain circuit flowing along the Santerno river. Narrow tarmac, aggressive sausage kerbs, and grass/gravel runoff zones mean drivers must attack kerbs with total commitment to set competitive lap times."
+  },
+  {
+    "id": "jeddah",
+    "name": "Jeddah Corniche Circuit",
+    "location": "Jeddah, Saudi Arabia",
+    "country": "Saudi Arabia",
+    "flag": "🇸🇦",
+    "lengthKm": 6.174,
+    "turns": 27,
+    "lapRecord": "1:30.734 (Lewis Hamilton, 2021)",
+    "firstGrandPrix": 2021,
+    "fastCorners": [
+      "Turns 22–24 High-Speed Sweep — Blind S-bends taken flat-out at 310 km/h between concrete barriers",
+      "Turn 13 Banked Hairpin — 12-degree banked horseshoe curve",
+      "Turn 27 — Heavy braking left-hand hairpin into main straight"
+    ],
+    "whySpecial": "The world's fastest street circuit. Boasting an average speed of over 250 km/h and 27 turns, Jeddah is an adrenaline-fueled tunnel of concrete walls along the Red Sea. High speeds, blind corners, and close proximity to barriers demand sensory perfection at night under floodlights."
+  },
+  {
+    "id": "marina_bay",
+    "name": "Marina Bay Street Circuit",
+    "location": "Singapore",
+    "country": "Singapore",
+    "flag": "🇸🇬",
+    "lengthKm": 4.940,
+    "turns": 19,
+    "lapRecord": "1:35.867 (Lewis Hamilton, 2023)",
+    "firstGrandPrix": 2008,
+    "fastCorners": [
+      "Turns 1–3 Complex — Heavy braking into left-right flick off main straight",
+      "Turn 5 — Fast right-hand launch onto the long Raffles Boulevard straight",
+      "Turn 14 — Heavy braking right-hander under the city streetlights"
+    ],
+    "whySpecial": "The toughest physical test in Formula 1. Raced at night under 1,600 custom floodlights, ambient temperatures exceed 32°C with humidity over 80%. Drivers lose up to 3 kg of body fluid over the grueling two-hour race distance, battling bumps, 19 turns, and constant Safety Car restarts."
+  },
+  {
+    "id": "miami",
+    "name": "Miami International Autodrome",
+    "location": "Miami Gardens, Florida, USA",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lengthKm": 5.412,
+    "turns": 19,
+    "lapRecord": "1:29.708 (Max Verstappen, 2023)",
+    "firstGrandPrix": 2022,
+    "fastCorners": [
+      "Turns 4–7 Sweepers — High-speed flowing curves around the Hard Rock Stadium",
+      "Turn 17 Hairpin — Heavy braking zone ending a 1.28 km back straight at 340 km/h",
+      "Turn 14–15 Uphill Chicane — Tight elevation shift under the turnpike overpass"
+    ],
+    "whySpecial": "Glamour meets high-speed racing around the Hard Rock Stadium. Featuring a blend of sweeping high-speed sections and a tight, technical slow chicane under the turnpike bridge, Miami tests both aerodynamic efficiency and low-speed traction under scorching Florida sun."
+  },
+  {
+    "id": "red_bull_ring",
+    "name": "Red Bull Ring",
+    "location": "Spielberg, Austria",
+    "country": "Austria",
+    "flag": "🇦🇹",
+    "lengthKm": 4.318,
+    "turns": 10,
+    "lapRecord": "1:05.619 (Carlos Sainz, 2020)",
+    "firstGrandPrix": 1970,
+    "fastCorners": [
+      "Turn 9 & 10 (Rindt & Jochen Rindt) — Fast downhill right-hand double launcher onto main straight",
+      "Turn 6 & 7 — Fast sweeping downhill left-handers testing lateral grip",
+      "Turn 3 (Remus) — Heavy uphill braking hairpin and top overtaking hotspot"
+    ],
+    "whySpecial": "Short, punchy, and relentless. Nestled in the Styrian mountains, the Red Bull Ring has only 10 turns and a lap time under 65 seconds. Three consecutive DRS zones encourage constant wheel-to-wheel battles, while track limits at Turns 9 and 10 regularly create qualifying drama."
+  },
+  {
+    "id": "zandvoort",
+    "name": "Circuit Zandvoort",
+    "location": "Zandvoort, Netherlands",
+    "country": "Netherlands",
+    "flag": "🇳🇱",
+    "lengthKm": 4.259,
+    "turns": 14,
+    "lapRecord": "1:11.097 (Lewis Hamilton, 2021)",
+    "firstGrandPrix": 1952,
+    "fastCorners": [
+      "Arie Luyendykbocht (Turn 14) — 18-degree steep banked final turn opening DRS early",
+      "Hugenholtzbocht (Turn 3) — 19-degree steeply banked bowl corner allowing multiple racing lines",
+      "Scheivlak (Turn 7) — High-speed blind downhill right-hander over sand dunes"
+    ],
+    "whySpecial": "Old-school rollercoaster amid coastal sand dunes. Modernized for F1's return with spectacular banked turns (steeper than Indianapolis), Zandvoort demands ultimate confidence. The sea breeze constantly blows sand onto the track, altering grip levels corner by corner."
+  },
+  {
+    "id": "yas_marina",
+    "name": "Yas Marina Circuit",
+    "location": "Abu Dhabi, UAE",
+    "country": "UAE",
+    "flag": "🇦🇪",
+    "lengthKm": 5.281,
+    "turns": 16,
+    "lapRecord": "1:26.103 (Max Verstappen, 2021)",
+    "firstGrandPrix": 2009,
+    "fastCorners": [
+      "Turn 2–4 Sweeper — Fast opening right-left S-curve complex",
+      "Turn 5 Banked Hairpin — Reconfigured fast entry hairpin into the main straight",
+      "Turn 9 Long Banked Sweeper — Fast sweeping left replacing old chicanes"
+    ],
+    "whySpecial": "The sunset spectacle and traditional season finale. Built on Yas Island, the race begins in twilight daylight and finishes under starry night skies. The 2021 circuit layout revisions created a much faster, flowing track that dramatically enhanced overtaking opportunities."
+  },
+  {
+    "id": "shanghai",
+    "name": "Shanghai International Circuit",
+    "location": "Jiading, Shanghai, China",
+    "country": "China",
+    "flag": "🇨🇳",
+    "lengthKm": 5.451,
+    "turns": 16,
+    "lapRecord": "1:32.238 (Michael Schumacher, 2004)",
+    "firstGrandPrix": 2004,
+    "fastCorners": [
+      "Turn 1–4 (The Snail) — 270-degree tightening right-hand spiral into immediate left turn",
+      "Turn 7 & 8 — High-speed direction change at 260 km/h loading the front tyres",
+      "Turn 13 Banked Sweeper — Sweeping right-hander opening onto the 1.2 km back straight"
+    ],
+    "whySpecial": "Inspired by the Chinese character 'Shang' (上). Shanghai features one of the most technical sector ones in motorsport — the 270-degree Turn 1 spiral that destroys front-left tyres — alongside a massive 1.2 km back straight where top speeds top 340 km/h."
+  },
+  {
+    "id": "vegas",
+    "name": "Las Vegas Strip Circuit",
+    "location": "Las Vegas, Nevada, USA",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "lengthKm": 6.201,
+    "turns": 17,
+    "lapRecord": "1:35.490 (Oscar Piastri, 2023)",
+    "firstGrandPrix": 2023,
+    "fastCorners": [
+      "Las Vegas Boulevard (The Strip) — 1.9 km flat-out blast past Bellagio and Caesars Palace at 350+ km/h",
+      "Turn 1–2 Complex — Hairpin start off main paddock straight",
+      "Turn 14 — Heavy braking left-hander after the massive Strip straight"
+    ],
+    "whySpecial": "Speeds of up to 350 km/h tearing down the iconic Las Vegas Boulevard at midnight. Freezing desert temperatures at night make tyre warm-up the single biggest challenge, leading to wild low-grip slide battles past neon casinos."
+  },
+  {
+    "id": "villeneuve",
+    "name": "Circuit Gilles Villeneuve",
+    "location": "Montreal, Canada",
+    "country": "Canada",
+    "flag": "🇨🇦",
+    "lengthKm": 4.361,
+    "turns": 14,
+    "lapRecord": "1:13.078 (Valtteri Bottas, 2019)",
+    "firstGrandPrix": 1978,
+    "fastCorners": [
+      "Wall of Champions (Turn 13–14) — Final chicane exiting right against an unforgiving concrete wall",
+      "L'Epingle (Turn 10) — Heavy braking hairpin after the high-speed back straight",
+      "Turns 3–4 & 8–9 — Quick stop-and-go chicanes punishing brake balance"
+    ],
+    "whySpecial": "Located on Notre Dame Island in the St. Lawrence River. Known as the ultimate stop-and-go circuit, Montreal demands heavy braking and aggressive kerb riding. The famous 'Wall of Champions' at the final chicane has claimed World Champions Damon Hill, Michael Schumacher, Jacques Villeneuve, and Sebastian Vettel."
+  },
+  {
+    "id": "albert_park",
+    "name": "Albert Park Circuit",
+    "location": "Melbourne, Australia",
+    "country": "Australia",
+    "flag": "🇦🇺",
+    "lengthKm": 5.278,
+    "turns": 14,
+    "lapRecord": "1:19.813 (Charles Leclerc, 2024)",
+    "firstGrandPrix": 1996,
+    "fastCorners": [
+      "Turns 9–10 Chicane — High-speed 250+ km/h left-right flick through lake parkland",
+      "Turn 1 & 2 (Jones) — Fast entry chicane into the opening lap squeeze",
+      "Turn 6 & 7 — High-speed sweepers broadened in recent circuit upgrades"
+    ],
+    "whySpecial": "Set around a picturesque lake in Melbourne, Albert Park is a hybrid street circuit with high-speed flowing bends. The recent 2021 redesign removed the old Turn 9-10 chicane to create a sweeping flat-out section, dramatically lowering lap times and boosting overtaking."
+  },
+  {
+    "id": "bahrain",
+    "name": "Bahrain International Circuit",
+    "location": "Sakhir, Bahrain",
+    "country": "Bahrain",
+    "flag": "🇧🇭",
+    "lengthKm": 5.412,
+    "turns": 15,
+    "lapRecord": "1:31.447 (Pedro de la Rosa, 2005)",
+    "firstGrandPrix": 2004,
+    "fastCorners": [
+      "Turn 9 & 10 — Downhill downhill-locking downhill left-hand entry where front-left locks under load",
+      "Turn 5–7 — High-speed S-curves through the desert dust",
+      "Turn 1 (Michael Schumacher) — Heavy braking overtaking spot off 330 km/h main straight"
+    ],
+    "whySpecial": "The traditional opening night race in the Sakhir desert. Extreme tyre degradation caused by abrasive granite-aggregate asphalt makes Bahrain a multi-stop strategic chess game. Cool desert night temperatures shift car balance drastically from afternoon practice to night qualifying."
+  },
+  {
+    "id": "losail",
+    "name": "Lusail International Circuit",
+    "location": "Lusail, Qatar",
+    "country": "Qatar",
+    "flag": "🇶🇦",
+    "lengthKm": 5.419,
+    "turns": 16,
+    "lapRecord": "1:24.319 (Max Verstappen, 2023)",
+    "firstGrandPrix": 2021,
+    "fastCorners": [
+      "Turns 12–14 Quad-Right — High-speed medium-to-fast sweeping right-hand curves",
+      "Turn 15 — Fast left-hander leading back onto the 1.06 km main straight",
+      "Turn 4 & 5 — High-speed flowing medium corners"
+    ],
+    "whySpecial": "Originally built for MotoGP, Lusail features high medium-and-fast speed corners with almost no slow chicanes. The high cornering speeds under night lights subject drivers to intense physical G-force stress and severe tyre wear over stint durations."
+  },
+  {
+    "id": "rodriguez",
+    "name": "Autódromo Hermanos Rodríguez",
+    "location": "Mexico City, Mexico",
+    "country": "Mexico",
+    "flag": "🇲🇽",
+    "lengthKm": 4.304,
+    "turns": 17,
+    "lapRecord": "1:17.774 (Valtteri Bottas, 2021)",
+    "firstGrandPrix": 1962,
+    "fastCorners": [
+      "Foro Sol Baseball Stadium (Turns 12–15) — Slow technical section inside a 30,000 seat baseball arena",
+      "Peraltada Entrance (Turn 16–17) — Final right-hand sweep into main straight",
+      "Main Straight (1.3 km) — Top speeds touching 355 km/h due to thin air"
+    ],
+    "whySpecial": "Sitting 2,285 meters above sea level, the air is 20% less dense than at sea level. Less air means reduced aerodynamic downforce (cars run Monaco wings but get Monza downforce levels), reduced engine cooling efficiency, and massive top speeds down the 1.3 km main straight."
+  }
+]

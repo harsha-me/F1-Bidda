@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Eyebrow, SectionHeader } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";

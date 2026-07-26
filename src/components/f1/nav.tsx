@@ -5,6 +5,7 @@ import { Menu, X, Zap } from "lucide-react";
 const links = [
   { to: "/season", label: "Season" },
   { to: "/races", label: "Races" },
+  { to: "/circuits", label: "Circuits" },
   { to: "/drivers", label: "Drivers" },
   { to: "/compare", label: "Compare" },
   { to: "/strategy", label: "Strategy" },

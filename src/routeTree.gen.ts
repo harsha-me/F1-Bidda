@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CircuitsRouteImport } from './routes/circuits'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as DriversRouteImport } from './routes/drivers'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -25,6 +26,11 @@ import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CircuitsRoute = CircuitsRouteImport.update({
+  id: '/circuits',
+  path: '/circuits',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompareRoute = CompareRouteImport.update({
@@ -88,6 +94,7 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/circuits': typeof CircuitsRoute
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
   '/mcp': typeof McpRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/circuits': typeof CircuitsRoute
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
   '/mcp': typeof McpRoute
@@ -117,6 +125,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/circuits': typeof CircuitsRoute
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
   '/mcp': typeof McpRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/circuits'
     | '/compare'
     | '/drivers'
     | '/mcp'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/circuits'
     | '/compare'
     | '/drivers'
     | '/mcp'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/circuits'
     | '/compare'
     | '/drivers'
     | '/mcp'
@@ -176,6 +188,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CircuitsRoute: typeof CircuitsRoute
   CompareRoute: typeof CompareRoute
   DriversRoute: typeof DriversRouteWithChildren
   McpRoute: typeof McpRoute
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/circuits': {
+      id: '/circuits'
+      path: '/circuits'
+      fullPath: '/circuits'
+      preLoaderRoute: typeof CircuitsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/compare': {
@@ -290,6 +310,7 @@ const DriversRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CircuitsRoute: CircuitsRoute,
   CompareRoute: CompareRoute,
   DriversRoute: DriversRouteWithChildren,
   McpRoute: McpRoute,
