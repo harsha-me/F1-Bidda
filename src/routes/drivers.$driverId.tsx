@@ -2,12 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, AlertTriangle, Heart, Trophy, MapPin, Calendar, Flag, User } from "lucide-react";
-import { Eyebrow, GlassCard, StatCard } from "@/components/f1/primitives";
+import { EyebrowRed, GlassCard, StatCard } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { driverStandingsQuery, sessionDriversQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON } from "@/lib/f1-data";
 import driverBios from "@/data/driverBios.json";
-
 import { getHDDriverPhoto } from "@/lib/f1-assets";
 
 type Controversy = { title: string; description: string };
@@ -50,6 +49,7 @@ function DriverDetail() {
   const standingsQ = useQuery(driverStandingsQuery(CURRENT_SEASON));
   const of1Q = useQuery(sessionDriversQuery("latest"));
   const [tab, setTab] = useState<Tab>("Overview");
+  const [imgError, setImgError] = useState(false);
 
   const row = useMemo(
     () =>
@@ -67,18 +67,15 @@ function DriverDetail() {
 
   const bio = (() => {
     if (BIOS[driverId]) return BIOS[driverId];
-    // Ergast returns short IDs like "hamilton" — try matching the last segment
-    // of compound keys like "lewis_hamilton"
     const entry = Object.entries(BIOS).find(([k]) => k.split("_").pop() === driverId);
     return entry?.[1] ?? null;
   })();
-  const isLoading = standingsQ.isLoading;
 
-  if (isLoading) {
+  if (standingsQ.isLoading) {
     return (
       <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
         <Skeleton className="mb-6 h-8 w-32" />
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[360px_1fr]">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[360px_1fr]">
           <Skeleton className="aspect-[3/4]" />
           <div className="space-y-4">
             <Skeleton className="h-10 w-2/3" />
@@ -101,56 +98,56 @@ function DriverDetail() {
   if (!row) {
     return (
       <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
-        <Link
-          to="/drivers"
-          className="mb-6 inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-display uppercase tracking-widest hover:bg-white/10"
+        <BackLink />
+        <div
+          className="py-16 text-center"
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 7%)",
+            borderRadius: "0.75rem",
+          }}
         >
-          <ArrowLeft className="h-3 w-3" /> Back to drivers
-        </Link>
-        <GlassCard className="p-10 text-center">
-          <p className="text-2xl font-display font-bold uppercase text-muted-foreground">Driver not found</p>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="font-display text-2xl font-black uppercase" style={{ color: "oklch(0.55 0.012 255)" }}>
+            Driver not found
+          </p>
+          <p className="mt-2 text-sm" style={{ color: "oklch(0.52 0.010 255)" }}>
             No data for <span className="font-num text-foreground">"{driverId}"</span> in the {CURRENT_SEASON} standings.
           </p>
-        </GlassCard>
+        </div>
       </div>
     );
   }
 
   const teamColor = row.driver.teamColor;
-
-  const [imgError, setImgError] = useState(false);
-  const hdPhoto = getHDDriverPhoto(row?.driver.driverId || driverId || row?.driver.code, headshotUrl);
+  const hdPhoto = getHDDriverPhoto(row.driver.driverId || driverId || row.driver.code, headshotUrl);
   const displayPhoto = !imgError && hdPhoto ? hdPhoto : undefined;
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
-      {/* Back link */}
-      <Link
-        to="/drivers"
-        className="mb-6 inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-display uppercase tracking-widest hover:bg-white/10 transition-colors"
+      <BackLink />
+
+      {/* ─── HERO ─────────────────────────────────────── */}
+      <div
+        className="relative mb-8 overflow-hidden"
+        style={{
+          background: "oklch(0.145 0.005 255)",
+          border: "1px solid oklch(1 0 0 / 8%)",
+          borderRadius: "0.75rem",
+          borderTop: `3px solid ${teamColor}`,
+        }}
       >
-        <ArrowLeft className="h-3 w-3" /> Back to drivers
-      </Link>
-
-      {/* ─── HERO ─── */}
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 mb-8">
-        {/* background gradient */}
+        {/* Subtle gradient wash */}
         <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            background: `radial-gradient(ellipse at 60% 0%, ${teamColor}, transparent 70%)`,
-          }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: `radial-gradient(ellipse 60% 80% at 30% 0%, ${teamColor}18, transparent 70%)` }}
         />
-        {/* team color top strip */}
-        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: teamColor }} />
 
-        <div className="relative grid grid-cols-1 gap-0 lg:grid-cols-[340px_1fr]">
+        <div className="relative grid grid-cols-1 lg:grid-cols-[320px_1fr]">
           {/* Photo */}
           <div
-            className="relative min-h-[360px] lg:min-h-[460px] overflow-hidden"
+            className="relative min-h-[320px] lg:min-h-[420px] overflow-hidden"
             style={{
-              background: `linear-gradient(160deg, ${teamColor}44, rgba(10,10,11,0.95))`,
+              background: `linear-gradient(160deg, ${teamColor}35 0%, oklch(0.10 0.004 255) 70%)`,
             }}
           >
             {displayPhoto ? (
@@ -162,15 +159,24 @@ function DriverDetail() {
               />
             ) : (
               <div className="absolute inset-0 grid place-items-center">
-                <span className="font-display text-9xl font-black text-white/20 select-none">
+                <span
+                  className="font-display font-black select-none"
+                  style={{ fontSize: "8rem", color: "oklch(1 0 0 / 0.15)", lineHeight: 1 }}
+                >
                   {row.driver.code}
                 </span>
               </div>
             )}
-            {/* Car number badge */}
+
+            {/* Car number */}
             <div
-              className="absolute bottom-4 right-4 rounded-xl px-3 py-1.5 font-num text-2xl font-black backdrop-blur-md"
-              style={{ backgroundColor: `${teamColor}CC`, color: "#fff" }}
+              className="absolute bottom-4 right-4 font-num text-2xl font-black px-3 py-1.5"
+              style={{
+                backgroundColor: `${teamColor}cc`,
+                color: "white",
+                borderRadius: "0.375rem",
+                backdropFilter: "blur(8px)",
+              }}
             >
               #{row.driver.number}
             </div>
@@ -179,13 +185,16 @@ function DriverDetail() {
           {/* Info panel */}
           <div className="flex flex-col justify-between p-6 sm:p-10">
             <div>
-              <Eyebrow>{row.driver.team}</Eyebrow>
-              <h1 className="mt-2 font-display text-4xl font-bold uppercase leading-none tracking-tight sm:text-6xl">
+              <EyebrowRed>{row.driver.team}</EyebrowRed>
+              <h1
+                className="mt-2 font-display font-black uppercase leading-none"
+                style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}
+              >
                 {row.driver.name}
               </h1>
 
               {/* Meta row */}
-              <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
+              <div className="mt-4 flex flex-wrap gap-4 text-sm" style={{ color: "oklch(0.56 0.012 255)" }}>
                 {bio?.flag && bio?.nationality && (
                   <span className="inline-flex items-center gap-1.5">
                     <Flag className="h-3.5 w-3.5" />
@@ -207,7 +216,7 @@ function DriverDetail() {
                 )}
               </div>
 
-              {/* Stats */}
+              {/* Stats grid */}
               <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 <StatCard label="Championships" value={bio?.championships ?? "—"} accent="red" />
                 <StatCard label="Season Wins" value={row.wins} accent="amber" />
@@ -216,83 +225,138 @@ function DriverDetail() {
               </div>
             </div>
 
-            {/* Championship position badge */}
-            <div className="mt-6 flex items-center gap-3">
-              <div
-                className="rounded-lg px-4 py-2 text-sm font-display font-bold uppercase tracking-wider"
-                style={{ backgroundColor: `${teamColor}33`, border: `1px solid ${teamColor}66`, color: teamColor }}
+            {/* Championship badge */}
+            <div className="mt-6">
+              <span
+                className="inline-flex items-center font-display text-sm font-bold uppercase px-4 py-2"
+                style={{
+                  backgroundColor: `${teamColor}22`,
+                  border: `1px solid ${teamColor}55`,
+                  color: teamColor,
+                  borderRadius: "0.375rem",
+                  letterSpacing: "0.06em",
+                }}
               >
                 P{row.position} Championship
-              </div>
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ─── TABS ─── */}
-      <div className="flex flex-wrap gap-1 border-b border-white/5 mb-8">
+      {/* ─── TABS ──────────────────────────────────────── */}
+      <div
+        className="flex flex-wrap mb-8"
+        style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}
+      >
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`relative px-5 py-3 font-display text-sm font-semibold uppercase tracking-widest transition ${
-              tab === t ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-            }`}
+            className="relative px-5 py-3 font-display text-sm font-bold uppercase transition-colors"
+            style={{
+              color: tab === t ? "oklch(0.94 0.003 255)" : "oklch(0.50 0.010 255)",
+              letterSpacing: "0.06em",
+            }}
           >
             {t}
-            {tab === t && <span className="absolute inset-x-2 bottom-0 h-0.5" style={{ backgroundColor: teamColor }} />}
+            {tab === t && (
+              <span
+                className="absolute bottom-0 inset-x-0 h-0.5"
+                style={{ backgroundColor: teamColor }}
+              />
+            )}
           </button>
         ))}
       </div>
 
-      {/* ─── TAB: OVERVIEW ─── */}
+      {/* ─── TAB: OVERVIEW ─────────────────────────────── */}
       {tab === "Overview" && (
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 animate-fade-in">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {/* Personal Life */}
-          <GlassCard className="p-6">
+          <div
+            style={{
+              background: "oklch(0.155 0.006 255)",
+              border: "1px solid oklch(1 0 0 / 7%)",
+              borderRadius: "0.75rem",
+              padding: "1.5rem",
+            }}
+          >
             <div className="mb-4 flex items-center gap-2">
               <User className="h-4 w-4" style={{ color: teamColor }} />
-              <Eyebrow>Personal Life</Eyebrow>
+              <EyebrowRed>Personal Life</EyebrowRed>
             </div>
-            <h2 className="mb-3 font-display text-xl font-bold uppercase tracking-wide">About {row.driver.name.split(" ")[0]}</h2>
+            <h2 className="mb-3 font-display text-xl font-black uppercase">
+              About {row.driver.name.split(" ")[0]}
+            </h2>
             {bio?.personalLife ? (
-              <p className="text-sm leading-relaxed text-muted-foreground">{bio.personalLife}</p>
+              <p className="text-sm leading-relaxed" style={{ color: "oklch(0.58 0.012 255)" }}>
+                {bio.personalLife}
+              </p>
             ) : (
-              <p className="text-sm text-muted-foreground italic">Personal biography not yet available.</p>
+              <p className="text-sm italic" style={{ color: "oklch(0.52 0.010 255)" }}>
+                Personal biography not yet available.
+              </p>
             )}
-          </GlassCard>
+          </div>
 
           {/* Relationships */}
-          <GlassCard className="p-6">
+          <div
+            style={{
+              background: "oklch(0.155 0.006 255)",
+              border: "1px solid oklch(1 0 0 / 7%)",
+              borderRadius: "0.75rem",
+              padding: "1.5rem",
+            }}
+          >
             <div className="mb-4 flex items-center gap-2">
               <Heart className="h-4 w-4 text-rose-400" />
-              <Eyebrow>Relationships & Personal</Eyebrow>
+              <EyebrowRed>Relationships & Personal</EyebrowRed>
             </div>
-            <h2 className="mb-3 font-display text-xl font-bold uppercase tracking-wide">Dating History</h2>
+            <h2 className="mb-3 font-display text-xl font-black uppercase">Dating History</h2>
             {bio?.relationships ? (
-              <p className="text-sm leading-relaxed text-muted-foreground">{bio.relationships}</p>
+              <p className="text-sm leading-relaxed" style={{ color: "oklch(0.58 0.012 255)" }}>
+                {bio.relationships}
+              </p>
             ) : (
-              <p className="text-sm text-muted-foreground italic">No public relationship information available.</p>
+              <p className="text-sm italic" style={{ color: "oklch(0.52 0.010 255)" }}>
+                No public relationship information available.
+              </p>
             )}
-          </GlassCard>
+          </div>
 
-          {/* Career Milestones */}
-          <GlassCard className="p-6 lg:col-span-2">
+          {/* Milestones */}
+          <div
+            className="lg:col-span-2"
+            style={{
+              background: "oklch(0.155 0.006 255)",
+              border: "1px solid oklch(1 0 0 / 7%)",
+              borderRadius: "0.75rem",
+              padding: "1.5rem",
+            }}
+          >
             <div className="mb-4 flex items-center gap-2">
               <Trophy className="h-4 w-4 text-amber-400" />
-              <Eyebrow>Career Milestones</Eyebrow>
+              <EyebrowRed>Career Milestones</EyebrowRed>
             </div>
-            <h2 className="mb-4 font-display text-xl font-bold uppercase tracking-wide">Highlights</h2>
+            <h2 className="mb-5 font-display text-xl font-black uppercase">Highlights</h2>
             {bio?.milestones?.length ? (
               <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {bio.milestones.map((m, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-4 text-sm text-muted-foreground transition hover:border-white/10 hover:bg-white/[0.04]"
+                    className="flex items-start gap-3 text-sm transition-colors"
+                    style={{
+                      padding: "0.875rem 1rem",
+                      background: "oklch(0.135 0.005 255)",
+                      border: "1px solid oklch(1 0 0 / 6%)",
+                      borderRadius: "0.5rem",
+                      color: "oklch(0.65 0.010 255)",
+                    }}
                   >
                     <span
-                      className="mt-0.5 h-5 w-5 shrink-0 rounded-full text-center text-xs font-bold leading-5 text-black"
-                      style={{ backgroundColor: teamColor }}
+                      className="mt-0.5 h-5 w-5 shrink-0 grid place-items-center text-center text-xs font-bold leading-none text-black font-display"
+                      style={{ backgroundColor: teamColor, borderRadius: "0.25rem" }}
                     >
                       {i + 1}
                     </span>
@@ -301,56 +365,69 @@ function DriverDetail() {
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground italic">Milestones coming soon.</p>
+              <p className="text-sm italic" style={{ color: "oklch(0.52 0.010 255)" }}>Milestones coming soon.</p>
             )}
-          </GlassCard>
+          </div>
         </div>
       )}
 
-      {/* ─── TAB: ROAD TO F1 ─── */}
+      {/* ─── TAB: ROAD TO F1 ───────────────────────────── */}
       {tab === "Road to F1" && (
-        <div className="animate-fade-in">
-          <GlassCard className="p-6 sm:p-10">
-            <Eyebrow>Career Journey</Eyebrow>
-            <h2 className="mt-1 mb-8 font-display text-2xl font-bold uppercase tracking-wide">
-              From karting to the grid
-            </h2>
-            {bio?.roadToF1?.length ? (
-              <ol className="relative space-y-0 border-l-2 border-white/10 pl-8">
-                {bio.roadToF1.map((step, i) => (
-                  <li key={i} className="relative pb-10 last:pb-0">
-                    {/* Timeline dot */}
-                    <span
-                      className="absolute -left-[37px] top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background text-[9px] font-black"
-                      style={{ backgroundColor: teamColor }}
-                    >
-                      {i + 1}
-                    </span>
-                    <div className="font-num text-xs uppercase tracking-widest mb-1" style={{ color: teamColor }}>
-                      {step.year}
-                    </div>
-                    <div className="font-display text-lg font-bold uppercase mb-2">{step.phase}</div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <p className="text-sm text-muted-foreground italic">
-                Road to F1 data not yet available for this driver.
-              </p>
-            )}
-          </GlassCard>
+        <div
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 7%)",
+            borderRadius: "0.75rem",
+            padding: "1.5rem 2rem",
+          }}
+        >
+          <EyebrowRed className="mb-1">Career Journey</EyebrowRed>
+          <h2 className="mb-8 font-display text-2xl font-black uppercase">
+            From karting to the grid
+          </h2>
+          {bio?.roadToF1?.length ? (
+            <ol
+              className="relative space-y-0 pl-8"
+              style={{ borderLeft: `2px solid ${teamColor}30` }}
+            >
+              {bio.roadToF1.map((step, i) => (
+                <li key={i} className="relative pb-10 last:pb-0">
+                  {/* Timeline dot */}
+                  <span
+                    className="absolute -left-[37px] top-1 flex h-5 w-5 items-center justify-center font-num text-[9px] font-black text-black"
+                    style={{ backgroundColor: teamColor, borderRadius: "50%", border: "2px solid oklch(0.145 0.005 255)" }}
+                  >
+                    {i + 1}
+                  </span>
+                  <div
+                    className="font-num text-xs font-bold uppercase mb-1"
+                    style={{ color: teamColor, letterSpacing: "0.08em" }}
+                  >
+                    {step.year}
+                  </div>
+                  <div className="font-display text-lg font-black uppercase mb-2">{step.phase}</div>
+                  <p className="text-sm leading-relaxed" style={{ color: "oklch(0.58 0.012 255)" }}>
+                    {step.description}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="text-sm italic" style={{ color: "oklch(0.52 0.010 255)" }}>
+              Road to F1 data not yet available for this driver.
+            </p>
+          )}
         </div>
       )}
 
-      {/* ─── TAB: CONTROVERSIES ─── */}
+      {/* ─── TAB: CONTROVERSIES ────────────────────────── */}
       {tab === "Controversies" && (
-        <div className="animate-fade-in space-y-4">
+        <div className="space-y-4">
           <div className="flex items-center gap-3 mb-6">
             <AlertTriangle className="h-5 w-5 text-amber-400" />
             <div>
-              <Eyebrow>On & Off Track</Eyebrow>
-              <h2 className="font-display text-2xl font-bold uppercase tracking-wide">
+              <EyebrowRed>On & Off Track</EyebrowRed>
+              <h2 className="font-display text-2xl font-black uppercase">
                 Controversies & Incidents
               </h2>
             </div>
@@ -360,29 +437,68 @@ function DriverDetail() {
             bio.controversies.map((c, i) => (
               <div
                 key={i}
-                className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 transition hover:border-amber-500/40 hover:bg-amber-500/10"
+                className="flex items-start gap-4 transition-colors"
+                style={{
+                  padding: "1.25rem",
+                  background: "oklch(0.16 0.010 75 / 0.12)",
+                  border: "1px solid oklch(0.80 0.18 75 / 0.20)",
+                  borderLeft: "3px solid oklch(0.80 0.18 75 / 0.60)",
+                  borderRadius: "0.5rem",
+                }}
               >
-                <div className="flex items-start gap-3">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
-                  <div>
-                    <h3 className="font-display text-base font-bold uppercase tracking-wide mb-2 text-amber-200">
-                      {c.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>
-                  </div>
+                <AlertTriangle
+                  className="mt-0.5 h-4 w-4 shrink-0"
+                  style={{ color: "oklch(0.80 0.18 75)" }}
+                />
+                <div>
+                  <h3
+                    className="font-display font-black uppercase text-base mb-2"
+                    style={{ color: "oklch(0.90 0.10 75)" }}
+                  >
+                    {c.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "oklch(0.65 0.010 255)" }}>
+                    {c.description}
+                  </p>
                 </div>
               </div>
             ))
           ) : (
-            <GlassCard className="p-8 text-center">
-              <p className="text-sm text-muted-foreground italic">
+            <div
+              className="py-14 text-center"
+              style={{
+                background: "oklch(0.155 0.006 255)",
+                border: "1px solid oklch(1 0 0 / 7%)",
+                borderRadius: "0.75rem",
+              }}
+            >
+              <p className="text-sm italic" style={{ color: "oklch(0.52 0.010 255)" }}>
                 No notable controversies on record — a clean sheet!
               </p>
-            </GlassCard>
+            </div>
           )}
         </div>
       )}
     </div>
+  );
+}
+
+function BackLink() {
+  return (
+    <Link
+      to="/drivers"
+      className="mb-6 inline-flex items-center gap-2 font-display text-xs font-bold uppercase transition-colors hover:text-foreground"
+      style={{
+        background: "oklch(1 0 0 / 5%)",
+        border: "1px solid oklch(1 0 0 / 9%)",
+        padding: "0.4rem 0.875rem",
+        borderRadius: "0.375rem",
+        color: "oklch(0.52 0.010 255)",
+        letterSpacing: "0.08em",
+      }}
+    >
+      <ArrowLeft className="h-3 w-3" /> Back to drivers
+    </Link>
   );
 }
 

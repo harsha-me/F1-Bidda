@@ -1,11 +1,10 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Eyebrow, SectionHeader } from "@/components/f1/primitives";
+import { EyebrowRed, SectionHeader } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { driverStandingsQuery, sessionDriversQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON, type Driver } from "@/lib/f1-data";
-
 import { getHDDriverPhoto } from "@/lib/f1-assets";
 
 export const Route = createFileRoute("/drivers")({
@@ -29,18 +28,10 @@ export const Route = createFileRoute("/drivers")({
   component: DriversLayout,
 });
 
-// Layout wrapper: shows the grid on /drivers exactly,
-// renders child route (detail page) on /drivers/$driverId
 function DriversLayout() {
   const matches = useRouterState({ select: (s) => s.matches });
-  // If the last match is /drivers (no child), show the grid
   const isIndex = matches[matches.length - 1]?.routeId === "/drivers";
-
-  if (isIndex) {
-    return <DriversPage />;
-  }
-
-  // Render child route (driver detail page)
+  if (isIndex) return <DriversPage />;
   return <Outlet />;
 }
 
@@ -58,6 +49,16 @@ function DriversPage() {
     return m;
   }, [of1Q.data]);
 
+  // Group drivers by team
+  const byTeam = useMemo(() => {
+    const map = new Map<string, { color: string; drivers: Driver[] }>();
+    drivers.forEach((d) => {
+      if (!map.has(d.team)) map.set(d.team, { color: d.teamColor, drivers: [] });
+      map.get(d.team)!.drivers.push(d);
+    });
+    return [...map.entries()];
+  }, [drivers]);
+
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
       <SectionHeader eyebrow="Grid" title={`${CURRENT_SEASON} Drivers`} />
@@ -65,7 +66,7 @@ function DriversPage() {
       {standingsQ.isLoading ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
-            <Skeleton key={i} className="h-56 w-full" />
+            <Skeleton key={i} className="h-64 w-full" />
           ))}
         </div>
       ) : standingsQ.isError ? (
@@ -74,9 +75,36 @@ function DriversPage() {
           onRetry={() => standingsQ.refetch()}
         />
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {drivers.map((d) => (
-            <DriverCard key={d.code} driver={d} photo={getHDDriverPhoto(d.driverId || d.code, headshotByCode.get(d.code))} />
+        <div className="space-y-10">
+          {byTeam.map(([teamName, { color, drivers: teamDrivers }]) => (
+            <div key={teamName}>
+              {/* Team header */}
+              <div
+                className="mb-4 flex items-center gap-3 pb-3"
+                style={{ borderBottom: `2px solid ${color}20` }}
+              >
+                <div
+                  className="h-4 w-1 rounded-full shrink-0"
+                  style={{ background: color }}
+                />
+                <span
+                  className="font-display font-bold uppercase text-sm"
+                  style={{ color, letterSpacing: "0.06em" }}
+                >
+                  {teamName}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                {teamDrivers.map((d) => (
+                  <DriverCard
+                    key={d.code}
+                    driver={d}
+                    photo={getHDDriverPhoto(d.driverId || d.code, headshotByCode.get(d.code))}
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       )}
@@ -93,12 +121,20 @@ function DriverCard({ driver, photo }: { driver: Driver; photo?: string }) {
     <Link
       to="/drivers/$driverId"
       params={{ driverId: id }}
-      className="glass-card glass-card-hover group flex flex-col gap-3 p-4"
+      className="group relative flex flex-col overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
+      style={{
+        background: "oklch(0.155 0.006 255)",
+        border: "1px solid oklch(1 0 0 / 7%)",
+        borderRadius: "0.5rem",
+        borderLeft: `3px solid ${driver.teamColor}`,
+      }}
     >
+      {/* Photo area */}
       <div
-        className="relative aspect-square w-full overflow-hidden rounded-xl"
+        className="relative overflow-hidden"
         style={{
-          background: `linear-gradient(160deg, ${driver.teamColor}55, rgba(10,10,11,0.9))`,
+          aspectRatio: "4/5",
+          background: `linear-gradient(160deg, ${driver.teamColor}40 0%, oklch(0.12 0.004 255) 70%)`,
         }}
       >
         {displayPhoto ? (
@@ -111,21 +147,48 @@ function DriverCard({ driver, photo }: { driver: Driver; photo?: string }) {
           />
         ) : (
           <div className="absolute inset-0 grid place-items-center">
-            <span className="font-display text-5xl font-black text-white/70">{driver.code}</span>
+            <span
+              className="font-display font-black"
+              style={{ fontSize: "3.5rem", color: "oklch(1 0 0 / 0.5)", lineHeight: 1 }}
+            >
+              {driver.code}
+            </span>
           </div>
         )}
-        <div className="absolute bottom-2 right-2 rounded-md bg-background/70 px-2 py-0.5 font-num text-xs font-bold text-white backdrop-blur-md">
+
+        {/* Number badge */}
+        <div
+          className="absolute top-2.5 right-2.5 font-num text-xs font-bold px-2 py-0.5"
+          style={{
+            background: "oklch(0.12 0.004 255 / 0.85)",
+            border: "1px solid oklch(1 0 0 / 12%)",
+            borderRadius: "0.25rem",
+            backdropFilter: "blur(8px)",
+          }}
+        >
           #{driver.number}
         </div>
-        <div
-          className="absolute bottom-0 left-0 right-0 h-1"
-          style={{ background: driver.teamColor }}
-        />
       </div>
-      <div>
-        <Eyebrow>{driver.team}</Eyebrow>
-        <div className="mt-1 font-display text-lg font-bold uppercase leading-tight tracking-wide">
+
+      {/* Info strip */}
+      <div className="px-4 py-3">
+        <div
+          className="label-eyebrow-red text-[9px]"
+          style={{ color: driver.teamColor }}
+        >
+          {driver.team}
+        </div>
+        <div
+          className="mt-1 font-display font-bold uppercase leading-tight"
+          style={{ fontSize: "0.95rem", letterSpacing: "0.03em" }}
+        >
           {driver.name}
+        </div>
+        <div
+          className="mt-2 font-display text-[10px] font-bold uppercase opacity-0 transition-opacity group-hover:opacity-100"
+          style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.08em" }}
+        >
+          View Profile →
         </div>
       </div>
     </Link>

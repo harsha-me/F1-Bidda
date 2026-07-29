@@ -15,56 +15,122 @@ const links = [
 export function TopNav() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-background/70 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-6 px-4 sm:px-8">
-        <Link to="/" className="flex items-center gap-2 shrink-0 group">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-primary via-red-600 to-red-800 shadow-lg shadow-primary/25 transition-transform duration-300 group-hover:scale-105">
-            <F1LogoIcon className="h-5 w-5 text-white" />
+    <header
+      className="sticky top-0 z-50"
+      style={{
+        background: "oklch(0.12 0.004 255 / 0.92)",
+        borderBottom: "1px solid oklch(1 0 0 / 6%)",
+        backdropFilter: "blur(24px) saturate(140%)",
+        boxShadow: "0 1px 0 0 oklch(0 0 0 / 40%)",
+      }}
+    >
+      <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-8 px-4 sm:px-8">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+          <div
+            className="grid h-8 w-8 place-items-center transition-transform duration-200 group-hover:scale-105"
+            style={{
+              background: "linear-gradient(135deg, oklch(0.60 0.245 27), oklch(0.48 0.22 18))",
+              clipPath: "polygon(0 0, 100% 0, 100% 75%, 88% 100%, 0 100%)",
+            }}
+          >
+            <F1LogoIcon className="h-4 w-4 text-white" />
           </div>
-          <span className="font-display text-lg font-bold uppercase tracking-widest">
-            f1Bidda<span className="text-primary">.</span>
+          <span
+            className="font-display text-base font-black uppercase"
+            style={{ letterSpacing: "0.1em" }}
+          >
+            f1<span style={{ color: "oklch(0.60 0.245 27)" }}>Bidda</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        {/* Desktop nav */}
+        <nav className="hidden items-center md:flex" style={{ gap: "2px" }}>
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              activeProps={{ className: "text-foreground bg-white/5" }}
-              inactiveProps={{ className: "text-muted-foreground hover:text-foreground" }}
-              className="rounded-lg px-3 py-1.5 text-sm font-medium uppercase tracking-wide font-display transition-colors"
+              activeProps={{
+                style: {
+                  color: "oklch(0.94 0.003 255)",
+                  background: "oklch(1 0 0 / 5%)",
+                  boxShadow: "inset 0 -2px 0 0 oklch(0.60 0.245 27)",
+                },
+              }}
+              inactiveProps={{
+                style: { color: "oklch(0.55 0.012 255)" },
+              }}
+              className="relative rounded-sm px-3 py-2 font-display text-sm font-semibold uppercase transition-all hover:text-foreground hover:bg-white/5"
+              style={{ letterSpacing: "0.08em" }}
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
+        {/* Right side */}
         <div className="ml-auto hidden items-center gap-3 md:flex">
-          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-            <span className="font-num text-xs text-muted-foreground">SEASON 2026</span>
+          <div
+            className="flex items-center gap-2 px-3 py-1"
+            style={{
+              background: "oklch(0.60 0.245 27 / 0.1)",
+              border: "1px solid oklch(0.60 0.245 27 / 0.25)",
+              borderRadius: "0.25rem",
+            }}
+          >
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{
+                background: "oklch(0.60 0.245 27)",
+                boxShadow: "0 0 6px oklch(0.60 0.245 27)",
+                animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              }}
+            />
+            <span
+              className="font-num text-[11px] font-medium"
+              style={{ color: "oklch(0.60 0.245 27)" }}
+            >
+              LIVE · S2026
+            </span>
           </div>
         </div>
 
+        {/* Mobile hamburger */}
         <button
           onClick={() => setOpen((o) => !o)}
-          className="ml-auto md:hidden rounded-lg p-2 text-foreground hover:bg-white/5"
+          className="ml-auto md:hidden rounded p-1.5 text-foreground hover:bg-white/5"
           aria-label="Menu"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
+      {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden border-t border-white/5 bg-background/95 backdrop-blur-xl px-4 py-4">
-          <nav className="flex flex-col gap-1">
+        <div
+          className="md:hidden px-4 py-3"
+          style={{
+            borderTop: "1px solid oklch(1 0 0 / 6%)",
+            background: "oklch(0.12 0.004 255 / 0.98)",
+          }}
+        >
+          <nav className="flex flex-col">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2 text-sm font-medium uppercase tracking-wide font-display text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                activeProps={{
+                  style: {
+                    color: "oklch(0.94 0.003 255)",
+                    borderLeftColor: "oklch(0.60 0.245 27)",
+                  },
+                }}
+                inactiveProps={{
+                  style: { color: "oklch(0.55 0.012 255)" },
+                }}
+                className="border-l-2 border-transparent py-2.5 pl-4 font-display text-sm font-semibold uppercase transition-colors hover:text-foreground"
+                style={{ letterSpacing: "0.08em" }}
               >
                 {l.label}
               </Link>

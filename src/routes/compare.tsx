@@ -16,7 +16,7 @@ import {
   CartesianGrid,
   ReferenceLine,
 } from "recharts";
-import { DriverChip, Eyebrow, GlassCard, SectionHeader } from "@/components/f1/primitives";
+import { EyebrowRed, GlassCard, SectionHeader } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { driverStandingsQuery, raceLapsQuery, seasonRacesQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON, driverByCodeFrom, type Driver } from "@/lib/f1-data";
@@ -94,7 +94,6 @@ function ComparePage() {
     [b]: sB[k as keyof typeof sB],
   }));
 
-  // Real lap-time delta from Jolpica laps on last completed race
   const deltaData = useMemo(() => {
     const laps = lapsQ.data ?? [];
     const byLapA = new Map<number, number>();
@@ -114,7 +113,7 @@ function ComparePage() {
 
   if (standingsQ.isLoading) {
     return (
-      <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8 sm:py-16 space-y-6">
+      <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8 sm:py-16 space-y-5">
         <Skeleton className="h-12 w-64" />
         <div className="grid gap-4 sm:grid-cols-2">
           <Skeleton className="h-24 w-full" />
@@ -142,149 +141,191 @@ function ComparePage() {
     <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8 sm:py-16">
       <SectionHeader eyebrow="Compare" title="Head to Head" />
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <DriverSelector value={a} onChange={setA} label="Driver A" drivers={drivers} />
-        <DriverSelector value={b} onChange={setB} label="Driver B" drivers={drivers} />
+      {/* Driver selectors — overlapping panel style */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <DriverSelector value={a} onChange={setA} label="Driver A" drivers={drivers} accentColor={dA.teamColor} />
+        <DriverSelector value={b} onChange={setB} label="Driver B" drivers={drivers} accentColor={dB.teamColor} />
       </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-        <GlassCard>
-          <SectionHeader title="Season Radar" />
-          <ResponsiveContainer width="100%" height={380}>
+      {/* Charts row */}
+      <div className="mt-6 grid gap-5 lg:grid-cols-[1.2fr_1fr]">
+        {/* Radar chart */}
+        <div
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 7%)",
+            borderRadius: "0.75rem",
+            padding: "1.25rem",
+          }}
+        >
+          <EyebrowRed className="mb-1.5">Season {CURRENT_SEASON}</EyebrowRed>
+          <h3 className="mb-1 font-display font-black uppercase text-xl">Season Radar</h3>
+          <p className="mb-4 text-xs" style={{ color: "oklch(0.52 0.010 255)" }}>
+            Normalised to the leader in each category.
+          </p>
+          <ResponsiveContainer width="100%" height={360}>
             <RadarChart data={radarData}>
-              <PolarGrid stroke="rgba(255,255,255,0.08)" />
+              <PolarGrid stroke="oklch(1 0 0 / 7%)" />
               <PolarAngleAxis
                 dataKey="metric"
-                tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 11 }}
+                tick={{ fill: "oklch(0.65 0.010 255)", fontSize: 11 }}
               />
               <PolarRadiusAxis
                 domain={[0, 100]}
-                tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 10 }}
-                stroke="rgba(255,255,255,0.05)"
+                tick={{ fill: "oklch(1 0 0 / 25%)", fontSize: 10 }}
+                stroke="oklch(1 0 0 / 5%)"
               />
-              <Radar dataKey={a} stroke={dA.teamColor} fill={dA.teamColor} fillOpacity={0.25} />
-              <Radar dataKey={b} stroke={dB.teamColor} fill={dB.teamColor} fillOpacity={0.25} />
+              <Radar dataKey={a} stroke={dA.teamColor} fill={dA.teamColor} fillOpacity={0.2} />
+              <Radar dataKey={b} stroke={dB.teamColor} fill={dB.teamColor} fillOpacity={0.2} />
               <Tooltip contentStyle={darkTooltip} />
             </RadarChart>
           </ResponsiveContainer>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Normalised to the leader in each category for {CURRENT_SEASON}.
-          </p>
-        </GlassCard>
+        </div>
 
-        <GlassCard className="p-0">
-          <div className="border-b border-white/5 p-5">
-            <Eyebrow>Season {CURRENT_SEASON}</Eyebrow>
-            <h3 className="mt-1 font-display text-2xl font-bold uppercase">Side by Side</h3>
+        {/* Side-by-side table with progress bars */}
+        <div
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 7%)",
+            borderRadius: "0.75rem",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            className="px-5 py-4"
+            style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}
+          >
+            <EyebrowRed>Season {CURRENT_SEASON}</EyebrowRed>
+            <h3 className="mt-1 font-display font-black uppercase text-xl">Side by Side</h3>
           </div>
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-white/5 text-xs uppercase tracking-widest text-muted-foreground">
-                <th className="px-4 py-3 text-left">Metric</th>
-                <th className="px-4 py-3 text-right" style={{ color: dA.teamColor }}>
-                  {dA.code}
-                </th>
-                <th className="px-4 py-3 text-right" style={{ color: dB.teamColor }}>
-                  {dB.code}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <StatRow
-                label="Position"
-                a={rowA?.position ?? "—"}
-                b={rowB?.position ?? "—"}
-                lowerBetter
-              />
-              <StatRow label="Points" a={rowA?.points ?? 0} b={rowB?.points ?? 0} />
-              <StatRow label="Wins" a={rowA?.wins ?? 0} b={rowB?.wins ?? 0} />
-            </tbody>
-          </table>
-        </GlassCard>
+
+          {/* Driver label row */}
+          <div
+            className="grid grid-cols-[1fr_auto_auto] items-center gap-2 px-5 py-3 text-xs font-display font-bold uppercase"
+            style={{
+              borderBottom: "1px solid oklch(1 0 0 / 6%)",
+              letterSpacing: "0.08em",
+              color: "oklch(0.50 0.010 255)",
+            }}
+          >
+            <span>Metric</span>
+            <span style={{ color: dA.teamColor }}>{dA.code}</span>
+            <span style={{ color: dB.teamColor }}>{dB.code}</span>
+          </div>
+
+          {/* Stat rows with progress bars */}
+          {[
+            { label: "Position", a: rowA?.position ?? "—", b: rowB?.position ?? "—", lowerBetter: true, max: posN },
+            { label: "Points", a: rowA?.points ?? 0, b: rowB?.points ?? 0, lowerBetter: false, max: maxPoints },
+            { label: "Wins", a: rowA?.wins ?? 0, b: rowB?.wins ?? 0, lowerBetter: false, max: maxWins },
+          ].map((row) => {
+            const na = typeof row.a === "number" ? row.a : Number(row.a);
+            const nb = typeof row.b === "number" ? row.b : Number(row.b);
+            const pctA = isNaN(na) ? 0 : row.lowerBetter ? ((row.max - na + 1) / row.max) * 100 : (na / row.max) * 100;
+            const pctB = isNaN(nb) ? 0 : row.lowerBetter ? ((row.max - nb + 1) / row.max) * 100 : (nb / row.max) * 100;
+            const aBetter = !isNaN(na) && !isNaN(nb) && (row.lowerBetter ? na <= nb : na >= nb);
+            const bBetter = !isNaN(na) && !isNaN(nb) && (row.lowerBetter ? nb <= na : nb >= na);
+
+            return (
+              <div
+                key={row.label}
+                className="px-5 py-4"
+                style={{ borderBottom: "1px solid oklch(1 0 0 / 5%)" }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs" style={{ color: "oklch(0.55 0.012 255)" }}>{row.label}</span>
+                  <div className="flex gap-4">
+                    <span
+                      className="font-num text-sm font-bold"
+                      style={{ color: aBetter ? "oklch(0.94 0.003 255)" : "oklch(0.50 0.010 255)" }}
+                    >
+                      {row.a}
+                    </span>
+                    <span
+                      className="font-num text-sm font-bold"
+                      style={{ color: bBetter ? "oklch(0.94 0.003 255)" : "oklch(0.50 0.010 255)" }}
+                    >
+                      {row.b}
+                    </span>
+                  </div>
+                </div>
+                {/* Progress bars */}
+                <div className="space-y-1">
+                  <div className="flex h-1.5 overflow-hidden rounded-full" style={{ background: "oklch(1 0 0 / 5%)" }}>
+                    <div
+                      className="rounded-full transition-all duration-500"
+                      style={{ width: `${Math.max(2, pctA)}%`, background: dA.teamColor, opacity: aBetter ? 1 : 0.5 }}
+                    />
+                  </div>
+                  <div className="flex h-1.5 overflow-hidden rounded-full" style={{ background: "oklch(1 0 0 / 5%)" }}>
+                    <div
+                      className="rounded-full transition-all duration-500"
+                      style={{ width: `${Math.max(2, pctB)}%`, background: dB.teamColor, opacity: bBetter ? 1 : 0.5 }}
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      <GlassCard className="mt-6">
-        <SectionHeader
-          title={`Lap Time Delta${lastCompletedRace ? ` · ${lastCompletedRace.name}` : ""}`}
-        />
-        <p className="mb-3 text-xs text-muted-foreground">
+      {/* Lap-time delta chart */}
+      <div
+        className="mt-5"
+        style={{
+          background: "oklch(0.155 0.006 255)",
+          border: "1px solid oklch(1 0 0 / 7%)",
+          borderRadius: "0.75rem",
+          padding: "1.25rem",
+        }}
+      >
+        <EyebrowRed className="mb-1">
+          {lastCompletedRace ? lastCompletedRace.name : "Lap Delta"}
+        </EyebrowRed>
+        <h3 className="font-display font-black uppercase text-xl">Lap Time Delta</h3>
+        <p className="mt-1 mb-4 text-xs" style={{ color: "oklch(0.52 0.010 255)" }}>
           Cumulative gap on the last completed race. Positive = {dB.code} slower cumulative time
           (i.e. {dA.code} ahead).
         </p>
+
         {!lastCompletedRace ? (
-          <p className="text-sm text-muted-foreground">No completed race yet this season.</p>
+          <p className="text-sm" style={{ color: "oklch(0.52 0.010 255)" }}>No completed race yet this season.</p>
         ) : lapsQ.isLoading ? (
           <Skeleton className="h-[280px] w-full" />
         ) : lapsQ.isError ? (
           <ErrorNote message="Lap data unavailable." onRetry={() => lapsQ.refetch()} />
         ) : deltaData.length === 0 ? (
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm" style={{ color: "oklch(0.52 0.010 255)" }}>
             No overlapping laps between these two drivers in that race.
           </p>
         ) : (
           <ResponsiveContainer width="100%" height={280}>
             <AreaChart data={deltaData}>
               <defs>
-                <linearGradient id="pos" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor={dA.teamColor} stopOpacity={0.6} />
+                <linearGradient id="deltaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={dA.teamColor} stopOpacity={0.5} />
                   <stop offset="100%" stopColor={dA.teamColor} stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.06)" />
-              <XAxis dataKey="lap" stroke="rgba(255,255,255,0.4)" fontSize={11} />
-              <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-              <ReferenceLine y={0} stroke="rgba(255,255,255,0.2)" />
+              <CartesianGrid strokeDasharray="2 4" stroke="oklch(1 0 0 / 5%)" />
+              <XAxis dataKey="lap" stroke="oklch(1 0 0 / 30%)" fontSize={11} />
+              <YAxis stroke="oklch(1 0 0 / 30%)" fontSize={11} />
+              <ReferenceLine y={0} stroke="oklch(1 0 0 / 20%)" />
               <Tooltip contentStyle={darkTooltip} formatter={(v: number) => `${v.toFixed(2)}s`} />
               <Area
                 type="monotone"
                 dataKey="delta"
                 stroke={dA.teamColor}
-                fill="url(#pos)"
+                fill="url(#deltaGrad)"
+                strokeWidth={2}
                 isAnimationActive
               />
             </AreaChart>
           </ResponsiveContainer>
         )}
-      </GlassCard>
+      </div>
     </main>
-  );
-}
-
-function StatRow({
-  label,
-  a,
-  b,
-  lowerBetter,
-}: {
-  label: string;
-  a: number | string;
-  b: number | string;
-  lowerBetter?: boolean;
-}) {
-  const na = typeof a === "number" ? a : Number(a);
-  const nb = typeof b === "number" ? b : Number(b);
-  const hasA = !isNaN(na);
-  const hasB = !isNaN(nb);
-  const aBetter = hasA && (!hasB || (lowerBetter ? na <= nb : na >= nb));
-  const bBetter = hasB && (!hasA || (lowerBetter ? nb <= na : nb >= na));
-  return (
-    <tr className="border-b border-white/5 last:border-0">
-      <td className="px-4 py-3 text-muted-foreground">{label}</td>
-      <td
-        className={`px-4 py-3 text-right font-num ${
-          aBetter ? "text-foreground" : "text-muted-foreground"
-        }`}
-      >
-        {a}
-      </td>
-      <td
-        className={`px-4 py-3 text-right font-num ${
-          bBetter ? "text-foreground" : "text-muted-foreground"
-        }`}
-      >
-        {b}
-      </td>
-    </tr>
   );
 }
 
@@ -293,27 +334,53 @@ function DriverSelector({
   onChange,
   label,
   drivers,
+  accentColor,
 }: {
   value: string;
   onChange: (v: string) => void;
   label: string;
   drivers: Driver[];
+  accentColor: string;
 }) {
   const d = driverByCodeFrom(drivers, value);
   return (
-    <GlassCard className="flex items-center gap-4">
+    <div
+      className="relative flex items-center gap-4 overflow-hidden"
+      style={{
+        background: "oklch(0.155 0.006 255)",
+        border: "1px solid oklch(1 0 0 / 7%)",
+        borderTop: `3px solid ${accentColor}`,
+        borderRadius: "0.5rem",
+        padding: "1rem",
+      }}
+    >
+      {/* Large code watermark */}
       <div
-        className="grid h-14 w-14 shrink-0 place-items-center rounded-xl font-display text-lg font-bold text-black"
-        style={{ backgroundColor: d.teamColor }}
+        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-display font-black select-none"
+        style={{ fontSize: "4.5rem", lineHeight: 1, color: accentColor, opacity: 0.08 }}
       >
         {d.code}
       </div>
-      <div className="min-w-0 flex-1">
-        <Eyebrow>{label}</Eyebrow>
+
+      {/* Color swatch */}
+      <div
+        className="grid h-14 w-14 shrink-0 place-items-center font-display text-lg font-black text-black"
+        style={{
+          backgroundColor: accentColor,
+          borderRadius: "0.375rem",
+          clipPath: "polygon(0 0, 100% 0, 100% 80%, 88% 100%, 0 100%)",
+        }}
+      >
+        {d.code}
+      </div>
+
+      <div className="relative min-w-0 flex-1">
+        <EyebrowRed>{label}</EyebrowRed>
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="mt-1 w-full bg-transparent font-display text-xl font-bold uppercase outline-none"
+          className="mt-0.5 w-full bg-transparent font-display text-xl font-black uppercase outline-none"
+          style={{ letterSpacing: "0.03em" }}
         >
           {drivers.map((dr) => (
             <option key={dr.code} value={dr.code} className="bg-background">
@@ -321,17 +388,19 @@ function DriverSelector({
             </option>
           ))}
         </select>
-        <div className="text-xs text-muted-foreground">{d.team}</div>
+        <div className="mt-0.5 text-xs" style={{ color: "oklch(0.52 0.010 255)" }}>
+          {d.team}
+        </div>
       </div>
-    </GlassCard>
+    </div>
   );
 }
 
 const darkTooltip = {
-  backgroundColor: "rgba(20,20,24,0.95)",
-  border: "1px solid rgba(255,255,255,0.1)",
-  borderRadius: 12,
-  color: "#F5F5F7",
+  backgroundColor: "oklch(0.135 0.005 255)",
+  border: "1px solid oklch(1 0 0 / 10%)",
+  borderRadius: 6,
+  color: "oklch(0.94 0.003 255)",
   fontSize: 12,
   backdropFilter: "blur(12px)",
 } as const;

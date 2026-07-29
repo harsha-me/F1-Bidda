@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import {
   DriverChip,
-  Eyebrow,
+  EyebrowRed,
   GlassCard,
   SectionHeader,
   StatCard,
@@ -85,7 +85,6 @@ function StrategyPage() {
   const lapsQ = useQuery({ ...raceLapsQuery(raceId), enabled: !!raceId });
   const pitQ = useQuery({ ...pitStopsQuery(raceId), enabled: !!raceId });
 
-  // Derive base lap time (median for chosen driver) to anchor degradation curves in reality
   const baseLap = useMemo(() => {
     const laps = (lapsQ.data ?? []).filter(
       (l) => l.driver === driverCode && l.lapTime > 0 && !l.pit,
@@ -104,7 +103,6 @@ function StrategyPage() {
     [baseLap],
   );
 
-  // Actual pit lap: first pitstop for the chosen driver in this race
   const actualPit = useMemo(() => {
     const stops = (pitQ.data ?? []).filter((s) => s.driverCode === driverCode);
     return stops.length ? stops[0].lap : null;
@@ -112,11 +110,8 @@ function StrategyPage() {
 
   const [pitLap, setPitLap] = useState<number>(20);
   useEffect(() => {
-    if (actualPit !== null) {
-      setPitLap(actualPit);
-    } else {
-      setPitLap(20);
-    }
+    if (actualPit !== null) setPitLap(actualPit);
+    else setPitLap(20);
   }, [actualPit]);
 
   const maxLaps = Math.max(45, race?.laps ?? 45);
@@ -126,24 +121,33 @@ function StrategyPage() {
 
   const positionGain = actualPit ? (pitLap < actualPit ? +2 : pitLap > actualPit ? -1 : 0) : 0;
   const timeGain = actualPit ? ((actualPit - pitLap) * 0.35).toFixed(2) : "0.00";
-
   const d = drivers.length ? driverByCodeFrom(drivers, driverCode) : null;
-
   const bootLoading = racesQ.isLoading || standingsQ.isLoading;
 
   return (
     <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8 sm:py-16">
-      <SectionHeader
-        eyebrow="Simulator"
-        title="Strategy What-If"
-        right={
-          <div className="flex flex-wrap gap-2">
-            <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-              <div className="label-eyebrow">Race</div>
+      {/* Header + controls row */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeader eyebrow="Simulator" title="Strategy What-If" />
+
+        {/* Selectors */}
+        {!bootLoading && (
+          <div className="mb-7 flex flex-wrap gap-2">
+            {/* Race selector */}
+            <div
+              className="px-3 py-2"
+              style={{
+                background: "oklch(0.155 0.006 255)",
+                border: "1px solid oklch(1 0 0 / 8%)",
+                borderRadius: "0.375rem",
+              }}
+            >
+              <div className="label-eyebrow mb-1">Race</div>
               <select
                 value={raceId}
                 onChange={(e) => setRaceId(e.target.value)}
-                className="bg-transparent font-display font-bold uppercase outline-none"
+                className="bg-transparent font-display text-sm font-bold uppercase outline-none"
+                style={{ letterSpacing: "0.05em" }}
               >
                 {completedRaces.map((r) => (
                   <option key={r.id} value={r.id} className="bg-background">
@@ -152,12 +156,22 @@ function StrategyPage() {
                 ))}
               </select>
             </div>
-            <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-              <div className="label-eyebrow">Driver</div>
+
+            {/* Driver selector */}
+            <div
+              className="px-3 py-2"
+              style={{
+                background: "oklch(0.155 0.006 255)",
+                border: "1px solid oklch(1 0 0 / 8%)",
+                borderRadius: "0.375rem",
+              }}
+            >
+              <div className="label-eyebrow mb-1">Driver</div>
               <select
                 value={driverCode}
                 onChange={(e) => setDriverCode(e.target.value)}
-                className="bg-transparent font-display font-bold uppercase outline-none"
+                className="bg-transparent font-display text-sm font-bold uppercase outline-none"
+                style={{ letterSpacing: "0.05em" }}
               >
                 {drivers.map((dr) => (
                   <option key={dr.code} value={dr.code} className="bg-background">
@@ -167,8 +181,8 @@ function StrategyPage() {
               </select>
             </div>
           </div>
-        }
-      />
+        )}
+      </div>
 
       {bootLoading ? (
         <div className="space-y-4">
@@ -185,12 +199,9 @@ function StrategyPage() {
         />
       ) : (
         <>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              label="Actual Pit Lap"
-              value={actualPit ?? "—"}
-              suffix={`/ ${race?.laps ?? "?"}`}
-            />
+          {/* Stat cards row */}
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <StatCard label="Actual Pit Lap" value={actualPit ?? "—"} suffix={`/ ${race?.laps ?? "?"}`} />
             <StatCard label="Simulated Pit" value={pitLap} accent="teal" />
             <StatCard
               label="Position Δ"
@@ -205,71 +216,106 @@ function StrategyPage() {
             />
           </div>
 
-          <GlassCard className="mt-6 p-6">
-            <div className="mb-4 flex items-end justify-between gap-4">
+          {/* Pit lap slider card */}
+          <div
+            className="mt-5"
+            style={{
+              background: "oklch(0.155 0.006 255)",
+              border: "1px solid oklch(1 0 0 / 8%)",
+              borderRadius: "0.5rem",
+              padding: "1.25rem",
+            }}
+          >
+            <div className="mb-5 flex items-end justify-between gap-4">
               <div>
-                <Eyebrow>Simulated pit lap</Eyebrow>
-                <div className="mt-1 flex items-baseline gap-2">
-                  <span className="stat-value">L{pitLap}</span>
-                  <span className="text-sm text-muted-foreground">
+                <EyebrowRed>Simulated pit lap</EyebrowRed>
+                <div className="mt-1.5 flex items-baseline gap-2">
+                  <span className="stat-value" style={{ fontSize: "2rem" }}>
+                    L{pitLap}
+                  </span>
+                  <span className="text-sm" style={{ color: "oklch(0.55 0.012 255)" }}>
                     {actualPit ? `(actual: L${actualPit})` : "(no pit data)"}
                   </span>
                 </div>
               </div>
               {d && <DriverChip driver={d} />}
             </div>
-            <input
-              type="range"
-              min={5}
-              max={maxLaps}
-              value={pitLap}
-              onChange={(e) => setPitLap(Number(e.target.value))}
-              className="w-full accent-primary"
-            />
-            <div className="mt-2 flex justify-between text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-              <span>Lap 5</span>
-              <span>Undercut Window</span>
-              <span>Overcut Window</span>
-              <span>Lap {maxLaps}</span>
-            </div>
-          </GlassCard>
 
-          <GlassCard className="mt-6">
-            <SectionHeader
-              title="Tire Degradation Curve"
-              right={
-                <div className="flex gap-3 text-xs">
-                  {(["SOFT", "MEDIUM", "HARD"] as const).map((c) => (
-                    <div key={c} className="flex items-center gap-1.5">
-                      <span
-                        className="h-2 w-4 rounded"
-                        style={{ backgroundColor: COMPOUND_COLOR[c] }}
-                      />
+            {/* Styled range */}
+            <div
+              className="relative py-1"
+              style={{
+                background: "oklch(0.135 0.005 255)",
+                borderRadius: "0.375rem",
+                padding: "1rem",
+              }}
+            >
+              <input
+                type="range"
+                min={5}
+                max={maxLaps}
+                value={pitLap}
+                onChange={(e) => setPitLap(Number(e.target.value))}
+                className="w-full"
+              />
+              <div className="mt-2 flex justify-between font-display text-[10px] font-bold uppercase" style={{ color: "oklch(0.48 0.008 255)", letterSpacing: "0.08em" }}>
+                <span>Lap 5</span>
+                <span>Undercut Window</span>
+                <span>Overcut Window</span>
+                <span>Lap {maxLaps}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Degradation chart */}
+          <div
+            className="mt-5"
+            style={{
+              background: "oklch(0.155 0.006 255)",
+              border: "1px solid oklch(1 0 0 / 8%)",
+              borderRadius: "0.5rem",
+              padding: "1.25rem",
+            }}
+          >
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <EyebrowRed className="mb-2">Tire Degradation Curve</EyebrowRed>
+                <h3 className="font-display font-black uppercase text-xl">Compound Performance</h3>
+              </div>
+              <div className="flex gap-4 text-xs">
+                {(["SOFT", "MEDIUM", "HARD"] as const).map((c) => (
+                  <div key={c} className="flex items-center gap-1.5">
+                    <span
+                      className="h-2 w-5 rounded-sm"
+                      style={{ backgroundColor: COMPOUND_COLOR[c] }}
+                    />
+                    <span className="font-display font-semibold uppercase" style={{ letterSpacing: "0.05em", color: "oklch(0.65 0.010 255)" }}>
                       {c}
-                    </div>
-                  ))}
-                </div>
-              }
-            />
-            <ResponsiveContainer width="100%" height={380}>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <ResponsiveContainer width="100%" height={360}>
               <LineChart>
-                <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.06)" />
+                <CartesianGrid strokeDasharray="2 4" stroke="oklch(1 0 0 / 5%)" />
                 <XAxis
                   type="number"
                   dataKey="age"
-                  stroke="rgba(255,255,255,0.4)"
+                  stroke="oklch(1 0 0 / 30%)"
                   fontSize={11}
                   label={{
                     value: "Tire Age (laps)",
                     position: "insideBottom",
                     offset: -5,
-                    fill: "rgba(255,255,255,0.4)",
+                    fill: "oklch(1 0 0 / 35%)",
                     fontSize: 11,
                   }}
                   domain={[0, 45]}
                 />
                 <YAxis
-                  stroke="rgba(255,255,255,0.4)"
+                  stroke="oklch(1 0 0 / 30%)"
                   fontSize={11}
                   domain={["auto", "auto"]}
                   tickFormatter={(v) => v.toFixed(1)}
@@ -282,7 +328,7 @@ function StrategyPage() {
                     type="monotone"
                     dataKey="time"
                     stroke={COMPOUND_COLOR[c]}
-                    strokeWidth={2}
+                    strokeWidth={2.5}
                     dot={false}
                     name={c}
                     isAnimationActive
@@ -295,17 +341,17 @@ function StrategyPage() {
                     y={compoundCurves[c].data[compoundCurves[c].cliff].time}
                     r={6}
                     fill={COMPOUND_COLOR[c]}
-                    stroke="#0A0A0B"
+                    stroke="oklch(0.12 0.004 255)"
                     strokeWidth={2}
                   />
                 ))}
               </LineChart>
             </ResponsiveContainer>
-            <p className="mt-4 text-xs text-muted-foreground">
+            <p className="mt-3 text-xs" style={{ color: "oklch(0.52 0.010 255)" }}>
               Curves are anchored to the driver's real median lap time ({baseLap.toFixed(3)}s) from
               Jolpica for this race. Cliff points are model estimates.
             </p>
-          </GlassCard>
+          </div>
         </>
       )}
     </main>
@@ -313,10 +359,10 @@ function StrategyPage() {
 }
 
 const darkTooltip = {
-  backgroundColor: "rgba(20,20,24,0.95)",
-  border: "1px solid rgba(255,255,255,0.1)",
-  borderRadius: 12,
-  color: "#F5F5F7",
+  backgroundColor: "oklch(0.135 0.005 255)",
+  border: "1px solid oklch(1 0 0 / 10%)",
+  borderRadius: 6,
+  color: "oklch(0.94 0.003 255)",
   fontSize: 12,
   backdropFilter: "blur(12px)",
 } as const;

@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, X, ExternalLink } from "lucide-react";
-import { Eyebrow, GlassCard, SectionHeader } from "@/components/f1/primitives";
+import { EyebrowRed, SectionHeader } from "@/components/f1/primitives";
 import { Skeleton } from "@/components/f1/skeleton";
 import racesData from "@/data/craziestRaces.json";
 
@@ -20,7 +20,6 @@ type CrazyRace = {
 const ALL_RACES = racesData as CrazyRace[];
 
 async function loadRaces(): Promise<CrazyRace[]> {
-  // Simulated async load to reuse the app's skeleton pattern.
   await new Promise((r) => setTimeout(r, 250));
   return ALL_RACES;
 }
@@ -90,21 +89,11 @@ function RacesPage() {
 
   const openRace = openId ? (ALL_RACES.find((r) => r.id === openId) ?? null) : null;
 
-  useEffect(() => {
-    if (!openRace) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenId(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [openRace]);
-
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
       <SectionHeader eyebrow="Chaos Archive" title="Top 50 Craziest Races" />
-      <p className="-mt-4 mb-2 max-w-2xl text-sm text-muted-foreground">
-        Rain masterclasses, red-flag pileups, last-corner championship swings — the races that made
-        Formula 1.
+      <p className="-mt-4 mb-6 max-w-xl text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
+        Rain masterclasses, red-flag pileups, last-corner championship swings — the races that made Formula 1.
       </p>
 
       <FilterBar
@@ -117,20 +106,23 @@ function RacesPage() {
       />
 
       {racesQ.isLoading ? (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-64 w-full" />
+            <Skeleton key={i} className="h-72 w-full" />
           ))}
         </div>
       ) : (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((r) => (
             <RaceCard key={r.id} race={r} onOpen={() => setOpenId(r.id)} />
           ))}
           {visible.length === 0 && (
-            <GlassCard className="col-span-full text-center text-sm text-muted-foreground">
+            <div
+              className="col-span-full py-12 text-center text-sm"
+              style={{ color: "oklch(0.52 0.010 255)" }}
+            >
               No races match those filters.
-            </GlassCard>
+            </div>
           )}
         </div>
       )}
@@ -150,41 +142,78 @@ function FilterBar(props: {
 }) {
   const decades: Decade[] = ["all", "1970s", "1980s", "1990s", "2000s", "2010s", "2020s"];
   return (
-    <div className="mt-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-      <div className="relative flex-1 max-w-md">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+    <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      {/* Search */}
+      <div className="relative w-full max-w-sm">
+        <Search
+          className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
+          style={{ color: "oklch(0.50 0.010 255)" }}
+        />
         <input
           value={props.query}
           onChange={(e) => props.setQuery(e.target.value)}
-          placeholder="Search by circuit or driver..."
-          className="w-full rounded-lg border border-white/10 bg-white/5 px-9 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+          placeholder="Search by race or circuit..."
+          className="w-full py-2 pl-9 pr-8 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 8%)",
+            borderRadius: "0.375rem",
+          }}
         />
+        {props.query && (
+          <button
+            onClick={() => props.setQuery("")}
+            className="absolute right-3 top-1/2 -translate-y-1/2"
+            style={{ color: "oklch(0.50 0.010 255)" }}
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        )}
       </div>
+
+      {/* Decade + sort */}
       <div className="flex flex-wrap items-center gap-2">
-        <div className="flex flex-wrap gap-1 rounded-lg border border-white/10 bg-white/5 p-1">
+        {/* Decade tabs */}
+        <div
+          className="flex flex-wrap gap-0.5 p-0.5"
+          style={{
+            background: "oklch(0.14 0.005 255)",
+            border: "1px solid oklch(1 0 0 / 8%)",
+            borderRadius: "0.375rem",
+          }}
+        >
           {decades.map((d) => (
             <button
               key={d}
               onClick={() => props.setDecade(d)}
-              className={
-                "rounded-md px-3 py-1 text-xs font-display uppercase tracking-widest transition-colors " +
-                (props.decade === d
-                  ? "bg-primary text-white"
-                  : "text-muted-foreground hover:text-foreground")
-              }
+              className="px-3 py-1 font-display text-xs font-bold uppercase transition-colors"
+              style={{
+                background: props.decade === d ? "oklch(0.60 0.245 27)" : "transparent",
+                color: props.decade === d ? "white" : "oklch(0.52 0.010 255)",
+                borderRadius: "0.25rem",
+                letterSpacing: "0.06em",
+              }}
             >
               {d === "all" ? "All" : d}
             </button>
           ))}
         </div>
+
+        {/* Sort */}
         <select
           value={props.sort}
           onChange={(e) => props.setSort(e.target.value as SortKey)}
-          className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs font-display uppercase tracking-widest text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+          className="py-1.5 px-3 text-xs font-display font-bold uppercase text-foreground focus:outline-none"
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 8%)",
+            borderRadius: "0.375rem",
+            letterSpacing: "0.06em",
+          }}
         >
-          <option value="chaos">Sort: Chaos</option>
-          <option value="year_desc">Sort: Year ↓</option>
-          <option value="year_asc">Sort: Year ↑</option>
+          <option value="chaos">Sort: Chaos ↓</option>
+          <option value="year_desc">Sort: Newest</option>
+          <option value="year_asc">Sort: Oldest</option>
         </select>
       </div>
     </div>
@@ -195,31 +224,63 @@ function RaceCard({ race, onOpen }: { race: CrazyRace; onOpen: () => void }) {
   return (
     <button
       onClick={onOpen}
-      className="glass-card glass-card-hover group flex flex-col overflow-hidden p-0 text-left"
+      className="group relative flex flex-col overflow-hidden text-left transition-all duration-200 hover:-translate-y-0.5"
+      style={{
+        background: "oklch(0.155 0.006 255)",
+        border: "1px solid oklch(1 0 0 / 7%)",
+        borderRadius: "0.5rem",
+      }}
     >
+      {/* Hero area — year watermark + race name */}
       <div
-        className="relative aspect-video w-full overflow-hidden"
+        className="relative flex flex-col justify-between overflow-hidden p-5"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(225,6,0,0.35), rgba(10,10,11,0.9)), radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%)",
+          minHeight: "9rem",
+          background: `linear-gradient(140deg, oklch(0.10 0.004 255) 0%, oklch(0.18 0.006 255) 100%)`,
+          borderBottom: "1px solid oklch(1 0 0 / 6%)",
         }}
       >
-        <div className="absolute inset-0 flex flex-col justify-between p-4">
-          <div className="flex items-center justify-between">
-            <span className="font-num text-4xl font-black tracking-tight text-white/90">
-              {race.year}
-            </span>
-            <ChaosBadge rating={race.chaosRating} />
-          </div>
-          <div className="font-display text-2xl font-bold uppercase leading-tight tracking-wide text-white">
-            {race.raceName}
-          </div>
+        {/* Giant year watermark */}
+        <div
+          className="pointer-events-none absolute -right-3 -bottom-5 font-display font-black select-none leading-none"
+          style={{
+            fontSize: "7rem",
+            color: "oklch(1 0 0 / 0.05)",
+          }}
+        >
+          {race.year}
+        </div>
+
+        {/* Chaos badge — diagonal tag style */}
+        <div className="flex items-start justify-between gap-2">
+          <span
+            className="font-num text-3xl font-black leading-none"
+            style={{ color: "oklch(0.94 0.003 255)" }}
+          >
+            {race.year}
+          </span>
+          <ChaosBar rating={race.chaosRating} />
+        </div>
+
+        {/* Race name */}
+        <div
+          className="relative mt-4 font-display font-black uppercase leading-tight"
+          style={{ fontSize: "1.25rem" }}
+        >
+          {race.raceName}
         </div>
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <Eyebrow>{race.circuit}</Eyebrow>
-        <p className="line-clamp-3 text-sm text-muted-foreground">{race.summary}</p>
-        <div className="mt-auto pt-2 text-xs font-display uppercase tracking-widest text-primary opacity-0 transition-opacity group-hover:opacity-100">
+
+      {/* Body */}
+      <div className="flex flex-1 flex-col gap-3 p-4">
+        <EyebrowRed>{race.circuit}</EyebrowRed>
+        <p className="line-clamp-3 text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
+          {race.summary}
+        </p>
+        <div
+          className="mt-auto pt-1 font-display text-xs font-bold uppercase opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.08em" }}
+        >
           Watch highlights →
         </div>
       </div>
@@ -227,11 +288,29 @@ function RaceCard({ race, onOpen }: { race: CrazyRace; onOpen: () => void }) {
   );
 }
 
-function ChaosBadge({ rating }: { rating: number }) {
+function ChaosBar({ rating }: { rating: number }) {
+  const filled = rating;
+  const segments = 10;
   return (
-    <span className="rounded-full border border-primary/40 bg-primary/15 px-2 py-0.5 font-num text-xs font-semibold text-primary">
-      CHAOS {rating}/10
-    </span>
+    <div className="flex flex-col items-end gap-1">
+      <div
+        className="font-num text-xs font-bold"
+        style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.06em" }}
+      >
+        CHAOS {rating}/10
+      </div>
+      <div className="flex gap-0.5">
+        {Array.from({ length: segments }).map((_, i) => (
+          <div
+            key={i}
+            className="h-1 w-2.5 rounded-sm"
+            style={{
+              background: i < filled ? "oklch(0.60 0.245 27)" : "oklch(1 0 0 / 0.08)",
+            }}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -245,26 +324,43 @@ function RaceModal({ race, onClose }: { race: CrazyRace; onClose: () => void }) 
   const embedSrc = videoId
     ? `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`
     : `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(race.youtubeQuery)}`;
-  const openUrl = race.youtubeUrl ??
+  const openUrl =
+    race.youtubeUrl ??
     `https://www.youtube.com/results?search_query=${encodeURIComponent(race.youtubeQuery)}`;
+
   return (
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{ background: "oklch(0.08 0.003 255 / 0.88)", backdropFilter: "blur(16px)" }}
       onClick={onClose}
     >
       <div
-        className="glass-card relative w-full max-w-3xl overflow-hidden p-0"
+        className="relative w-full max-w-3xl overflow-hidden"
+        style={{
+          background: "oklch(0.155 0.006 255)",
+          border: "1px solid oklch(1 0 0 / 10%)",
+          borderRadius: "0.75rem",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Top red bar */}
+        <div
+          className="h-[3px]"
+          style={{ background: "linear-gradient(90deg, oklch(0.60 0.245 27), transparent)" }}
+        />
+
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 z-10 rounded-full border border-white/10 bg-background/80 p-1.5 text-foreground hover:bg-white/10"
+          className="absolute right-3 top-5 z-10 rounded p-1.5 transition-colors hover:bg-white/10"
+          style={{ border: "1px solid oklch(1 0 0 / 10%)" }}
           aria-label="Close"
         >
           <X className="h-4 w-4" />
         </button>
+
+        {/* Video embed */}
         <div className="aspect-video w-full bg-black">
           <iframe
             src={embedSrc}
@@ -274,29 +370,49 @@ function RaceModal({ race, onClose }: { race: CrazyRace; onClose: () => void }) 
             className="h-full w-full border-0"
           />
         </div>
+
+        {/* Info */}
         <div className="p-6">
-          <Eyebrow>
-            {race.circuit} · {race.year}
-          </Eyebrow>
-          <div className="mt-1 flex flex-wrap items-center gap-3">
-            <h3 className="font-display text-2xl font-bold uppercase tracking-wide">
-              {race.raceName}
-            </h3>
-            <ChaosBadge rating={race.chaosRating} />
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <EyebrowRed>
+                {race.circuit} · {race.year}
+              </EyebrowRed>
+              <h3
+                className="mt-1.5 font-display font-black uppercase"
+                style={{ fontSize: "1.5rem", lineHeight: 1.1 }}
+              >
+                {race.raceName}
+              </h3>
+            </div>
+            <ChaosBar rating={race.chaosRating} />
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{race.summary}</p>
+          <p className="mt-3 text-sm leading-relaxed" style={{ color: "oklch(0.58 0.012 255)" }}>
+            {race.summary}
+          </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <button
               onClick={onClose}
-              className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-display uppercase tracking-widest hover:bg-white/10"
+              className="font-display text-xs font-bold uppercase px-4 py-2 transition-colors hover:bg-white/10"
+              style={{
+                background: "oklch(1 0 0 / 6%)",
+                border: "1px solid oklch(1 0 0 / 10%)",
+                borderRadius: "0.375rem",
+                letterSpacing: "0.08em",
+              }}
             >
-              ← Back to list
+              ← Back
             </button>
             <a
               href={openUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-xs font-display uppercase tracking-widest text-white hover:bg-primary/90"
+              className="inline-flex items-center gap-1.5 font-display text-xs font-bold uppercase px-4 py-2 text-white transition-all hover:brightness-110"
+              style={{
+                background: "oklch(0.60 0.245 27)",
+                borderRadius: "0.375rem",
+                letterSpacing: "0.08em",
+              }}
             >
               Open on YouTube <ExternalLink className="h-3 w-3" />
             </a>

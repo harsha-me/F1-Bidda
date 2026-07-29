@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, ArrowUpDown } from "lucide-react";
 import {
   DriverChip,
-  Eyebrow,
+  EyebrowRed,
   DeltaChip,
   GlassCard,
   SectionHeader,
@@ -69,19 +69,25 @@ function SeasonPage() {
 
   return (
     <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
-      {/* SEASON SELECTOR & HEADER */}
+      {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <SectionHeader eyebrow="Overview" title={`${season} Season`} />
 
-        <div className="flex items-center gap-2">
-          <label htmlFor="season-select" className="text-xs font-display uppercase tracking-widest text-muted-foreground">
-            Season
-          </label>
+        <div
+          className="mb-7 flex items-center gap-3 px-3 py-2"
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 8%)",
+            borderRadius: "0.375rem",
+          }}
+        >
+          <span className="label-eyebrow">Season</span>
           <select
             id="season-select"
             value={season}
             onChange={(e) => setSeason(Number(e.target.value))}
-            className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-num text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+            className="bg-transparent font-display font-bold uppercase outline-none text-sm"
+            style={{ letterSpacing: "0.06em" }}
           >
             {SEASONS.map((s) => (
               <option key={s} value={s} className="bg-background">
@@ -92,104 +98,140 @@ function SeasonPage() {
         </div>
       </div>
 
-      {/* RACES CAROUSEL / GRID */}
-      <div className="mt-8">
-        <Eyebrow>Race Schedule ({races.length} Rounds)</Eyebrow>
+      {/* Race schedule */}
+      <div className="mb-3">
+        <EyebrowRed>Race Schedule ({races.length} Rounds)</EyebrowRed>
       </div>
 
       {racesQ.isLoading ? (
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
-            <Skeleton key={i} className="h-36 w-full" />
+            <Skeleton key={i} className="h-32 w-full" />
           ))}
         </div>
       ) : racesQ.isError ? (
-        <div className="mt-4">
-          <ErrorNote
-            message="Couldn't load schedule."
-            onRetry={() => racesQ.refetch()}
-          />
-        </div>
+        <ErrorNote
+          message="Couldn't load schedule."
+          onRetry={() => racesQ.refetch()}
+        />
       ) : (
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {races.map((r) => {
             const circuitImg = getCircuitImageUrl(r.circuitId);
-
             return (
               <Link key={r.id} to="/race/$raceId" params={{ raceId: r.id }} className="group">
-                <GlassCard hover className="relative flex h-full flex-col justify-between overflow-hidden p-4">
+                <div
+                  className="relative flex h-full flex-col justify-between overflow-hidden transition-all duration-150 hover:-translate-y-0.5"
+                  style={{
+                    background: "oklch(0.155 0.006 255)",
+                    border: "1px solid oklch(1 0 0 / 7%)",
+                    borderRadius: "0.5rem",
+                    padding: "0.875rem 1rem",
+                    borderTop: r.completed
+                      ? "2px solid oklch(1 0 0 / 10%)"
+                      : "2px solid oklch(0.60 0.245 27)",
+                  }}
+                >
                   {circuitImg && (
                     <img
                       src={circuitImg}
-                      alt={`${r.circuit} map`}
-                      className="pointer-events-none absolute -right-3 -bottom-3 h-24 w-24 object-contain opacity-20 filter invert brightness-200 transition-opacity group-hover:opacity-40"
+                      alt=""
+                      aria-hidden
+                      className="pointer-events-none absolute -right-2 bottom-0 h-20 w-20 object-contain transition-opacity group-hover:opacity-40"
+                      style={{ filter: "invert(1) brightness(3)", opacity: 0.15 }}
                     />
                   )}
-                  <div className="flex items-start justify-between">
-                    <div className="min-w-0">
-                      <div className="text-2xl">{r.flag}</div>
-                      <div className="mt-1 font-display text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+
+                  <div className="relative flex items-start justify-between gap-2">
+                    <div>
+                      <div className="text-xl leading-none">{r.flag}</div>
+                      <div
+                        className="mt-1.5 font-num text-xs font-bold"
+                        style={{ color: "oklch(0.50 0.010 255)" }}
+                      >
                         R{String(r.round).padStart(2, "0")}
                       </div>
                     </div>
                     <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest ${
-                        r.completed
-                          ? "bg-white/5 text-muted-foreground"
-                          : "bg-primary/15 text-primary"
-                      }`}
+                      className="shrink-0 px-2 py-0.5 font-display text-[10px] font-bold uppercase"
+                      style={{
+                        background: r.completed ? "oklch(1 0 0 / 4%)" : "oklch(0.60 0.245 27 / 0.12)",
+                        color: r.completed ? "oklch(0.50 0.010 255)" : "oklch(0.60 0.245 27)",
+                        borderRadius: "0.2rem",
+                        letterSpacing: "0.06em",
+                      }}
                     >
-                      {r.completed ? "Done" : "Upcoming"}
+                      {r.completed ? "FIN" : "NEXT"}
                     </span>
                   </div>
-                  <div className="my-2">
-                    <div className="font-display text-lg font-bold uppercase leading-tight">
+
+                  <div className="relative mt-2">
+                    <div
+                      className="font-display font-bold uppercase leading-tight"
+                      style={{ fontSize: "0.95rem" }}
+                    >
                       {r.name}
                     </div>
-                    <div className="mt-1 text-xs text-muted-foreground">{r.circuit}</div>
-                  </div>
-                  <div className="mt-auto flex items-end justify-between pt-2">
-                    <div className="text-xs text-muted-foreground font-num">
+                    <div className="mt-0.5 text-xs" style={{ color: "oklch(0.50 0.010 255)" }}>
+                      {r.circuit}
+                    </div>
+                    <div className="mt-2 font-num text-xs" style={{ color: "oklch(0.48 0.008 255)" }}>
                       {new Date(r.date).toLocaleDateString(undefined, {
                         month: "short",
                         day: "numeric",
                       })}
                     </div>
                   </div>
-                </GlassCard>
+                </div>
               </Link>
             );
           })}
         </div>
       )}
 
-      {/* STANDINGS */}
-      <div className="mt-16 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <GlassCard className="p-0">
-          <div className="flex items-center justify-between border-b border-white/5 p-5">
+      {/* Standings tables */}
+      <div className="mt-14 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+        {/* Driver standings */}
+        <div
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 7%)",
+            borderRadius: "0.75rem",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            className="flex items-center justify-between px-5 py-4"
+            style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}
+          >
             <div>
-              <Eyebrow>Drivers</Eyebrow>
-              <h3 className="mt-1 font-display text-2xl font-bold uppercase">Driver Standings</h3>
+              <EyebrowRed>Drivers</EyebrowRed>
+              <h3 className="mt-1.5 font-display font-black uppercase text-xl">Driver Standings</h3>
             </div>
           </div>
-          <div className="overflow-x-auto">
-            {driversQ.isLoading ? (
-              <div className="space-y-2 p-4">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <Skeleton key={i} className="h-10 w-full" />
-                ))}
-              </div>
-            ) : driversQ.isError ? (
-              <div className="p-4">
-                <ErrorNote
-                  message="Driver standings unavailable."
-                  onRetry={() => driversQ.refetch()}
-                />
-              </div>
-            ) : (
+
+          {driversQ.isLoading ? (
+            <div className="space-y-2 p-4">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <Skeleton key={i} className="h-10 w-full" />
+              ))}
+            </div>
+          ) : driversQ.isError ? (
+            <div className="p-4">
+              <ErrorNote message="Driver standings unavailable." onRetry={() => driversQ.refetch()} />
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="border-b border-white/5 text-left text-xs uppercase tracking-widest text-muted-foreground">
+                  <tr
+                    className="text-left text-[10px] uppercase"
+                    style={{
+                      borderBottom: "1px solid oklch(1 0 0 / 6%)",
+                      color: "oklch(0.50 0.010 255)",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
                     <SortHead onClick={() => toggleSort("position")}>Pos</SortHead>
                     <th className="px-4 py-3 font-semibold">Driver</th>
                     <SortHead onClick={() => toggleSort("points")} align="right">
@@ -202,55 +244,77 @@ function SeasonPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {standings.map((row) => (
+                  {standings.map((row, idx) => (
                     <tr
                       key={row.driver.code}
-                      className="border-b border-white/5 last:border-0 hover:bg-white/[0.02]"
+                      className="last:border-0"
+                      style={{
+                        borderBottom: "1px solid oklch(1 0 0 / 5%)",
+                        background: idx % 2 === 0 ? "transparent" : "oklch(1 0 0 / 1.5%)",
+                      }}
                     >
-                      <td className="px-4 py-3 font-display text-lg font-bold">{row.position}</td>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-2.5 font-display font-bold text-base" style={{ color: "oklch(0.55 0.012 255)" }}>
+                        {row.position}
+                      </td>
+                      <td className="px-4 py-2.5">
                         <DriverChip driver={row.driver} />
                       </td>
-                      <td className="px-4 py-3 text-right font-num text-base">{row.points}</td>
-                      <td className="px-4 py-3 text-right font-num text-muted-foreground">
+                      <td className="px-4 py-2.5 text-right font-num font-semibold">{row.points}</td>
+                      <td className="px-4 py-2.5 text-right font-num" style={{ color: "oklch(0.55 0.012 255)" }}>
                         {row.wins}
                       </td>
-                      <td className="px-4 py-3 text-right">
+                      <td className="px-4 py-2.5 text-right">
                         <DeltaChip delta={row.delta} />
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            )}
-          </div>
-        </GlassCard>
+            </div>
+          )}
+        </div>
 
-        <GlassCard className="p-0">
-          <div className="flex items-center justify-between border-b border-white/5 p-5">
+        {/* Constructor standings */}
+        <div
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 7%)",
+            borderRadius: "0.75rem",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            className="flex items-center justify-between px-5 py-4"
+            style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}
+          >
             <div>
-              <Eyebrow>Constructors</Eyebrow>
-              <h3 className="mt-1 font-display text-2xl font-bold uppercase">Teams</h3>
+              <EyebrowRed>Constructors</EyebrowRed>
+              <h3 className="mt-1.5 font-display font-black uppercase text-xl">Teams</h3>
             </div>
           </div>
-          <div className="overflow-x-auto">
-            {consQ.isLoading ? (
-              <div className="space-y-2 p-4">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <Skeleton key={i} className="h-10 w-full" />
-                ))}
-              </div>
-            ) : consQ.isError ? (
-              <div className="p-4">
-                <ErrorNote
-                  message="Constructor standings unavailable."
-                  onRetry={() => consQ.refetch()}
-                />
-              </div>
-            ) : (
+
+          {consQ.isLoading ? (
+            <div className="space-y-2 p-4">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <Skeleton key={i} className="h-10 w-full" />
+              ))}
+            </div>
+          ) : consQ.isError ? (
+            <div className="p-4">
+              <ErrorNote message="Constructor standings unavailable." onRetry={() => consQ.refetch()} />
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="border-b border-white/5 text-left text-xs uppercase tracking-widest text-muted-foreground">
+                  <tr
+                    className="text-left text-[10px] uppercase"
+                    style={{
+                      borderBottom: "1px solid oklch(1 0 0 / 6%)",
+                      color: "oklch(0.50 0.010 255)",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
                     <th className="px-4 py-3 font-semibold">Pos</th>
                     <th className="px-4 py-3 font-semibold">Team</th>
                     <th className="px-4 py-3 text-right font-semibold">Pts</th>
@@ -258,38 +322,51 @@ function SeasonPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {constructors.map((c) => (
+                  {constructors.map((c, idx) => (
                     <tr
                       key={c.team}
-                      className="border-b border-white/5 last:border-0 hover:bg-white/[0.02]"
+                      className="last:border-0"
+                      style={{
+                        borderBottom: "1px solid oklch(1 0 0 / 5%)",
+                        background: idx % 2 === 0 ? "transparent" : "oklch(1 0 0 / 1.5%)",
+                      }}
                     >
-                      <td className="px-4 py-3 font-display text-lg font-bold">{c.position}</td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-2">
+                      <td className="px-4 py-2.5 font-display font-bold text-base" style={{ color: "oklch(0.55 0.012 255)" }}>
+                        {c.position}
+                      </td>
+                      <td className="px-4 py-2.5">
+                        <div className="flex items-center gap-2.5">
                           <span
-                            className="h-6 w-1.5 rounded-full"
+                            className="h-5 w-1 shrink-0 rounded-sm"
                             style={{ backgroundColor: c.color }}
                           />
                           <span className="font-medium">{c.team}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-right font-num">{c.points}</td>
-                      <td className="px-4 py-3 text-right">
+                      <td className="px-4 py-2.5 text-right font-num font-semibold">{c.points}</td>
+                      <td className="px-4 py-2.5 text-right">
                         <DeltaChip delta={c.delta} />
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            )}
-          </div>
-        </GlassCard>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="mt-12 flex justify-center">
+      <div className="mt-10 flex justify-center">
         <Link
           to="/compare"
-          className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-5 py-3 font-display text-sm font-semibold uppercase tracking-widest hover:bg-white/10"
+          className="inline-flex items-center gap-2 font-display text-sm font-bold uppercase transition-opacity hover:opacity-80"
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 10%)",
+            padding: "0.75rem 1.5rem",
+            borderRadius: "0.375rem",
+            letterSpacing: "0.08em",
+          }}
         >
           Compare Drivers <ArrowRight className="h-4 w-4" />
         </Link>
@@ -311,9 +388,9 @@ function SortHead({
     <th className={`px-4 py-3 ${align === "right" ? "text-right" : ""}`}>
       <button
         onClick={onClick}
-        className="inline-flex items-center gap-1 font-semibold uppercase tracking-widest hover:text-foreground"
+        className="inline-flex items-center gap-1 font-semibold uppercase tracking-widest transition-colors hover:text-foreground"
       >
-        {children} <ArrowUpDown className="h-3 w-3" />
+        {children} <ArrowUpDown className="h-2.5 w-2.5 opacity-60" />
       </button>
     </th>
   );
