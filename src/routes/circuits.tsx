@@ -158,72 +158,62 @@ function CircuitsPage() {
 }
 
 function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => void }) {
-  const mapSvg = getCircuitImageUrl(circuit.id);
+  const photoUrl = getCircuitImageUrl(circuit.id);
 
   return (
     <button
       onClick={onOpen}
-      className="group relative flex flex-col overflow-hidden text-left transition-all duration-200 hover:-translate-y-0.5"
+      className="group relative flex flex-col overflow-hidden text-left transition-all duration-200 hover:-translate-y-1"
       style={{
         background: "oklch(0.155 0.006 255)",
-        border: "1px solid oklch(1 0 0 / 7%)",
+        border: "1px solid oklch(1 0 0 / 8%)",
         borderRadius: "0.5rem",
         cursor: "pointer",
       }}
     >
       {/* Left accent stripe */}
       <div
-        className="absolute left-0 top-0 bottom-0 w-[3px]"
+        className="absolute left-0 top-0 bottom-0 w-[3px] z-10"
         style={{ background: "oklch(0.60 0.245 27)" }}
       />
 
-      {/* Track layout image */}
-      {mapSvg && (
-        <div className="absolute right-0 top-0 bottom-0 w-40 overflow-hidden pointer-events-none">
-          <img
-            src={mapSvg}
-            alt=""
-            aria-hidden
-            className="absolute right-0 top-1/2 -translate-y-1/2 h-32 w-32 object-contain transition-all duration-500 group-hover:scale-110 group-hover:opacity-25"
-            style={{
-              filter: "invert(1) brightness(3)",
-              opacity: 0.12,
-            }}
-          />
-        </div>
-      )}
+      {/* Top Banner Image with Gradient */}
+      <div className="relative h-44 w-full overflow-hidden bg-black/50">
+        <img
+          src={photoUrl}
+          alt={circuit.name}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.155_0.006_255)] via-[oklch(0.155_0.006_255)/40] to-transparent" />
 
-      <div className="relative flex flex-1 flex-col gap-3 p-5 pl-7">
-        {/* Header */}
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="text-xl leading-none">{circuit.flag}</span>
-            <div>
-              <EyebrowRed>{circuit.country}</EyebrowRed>
-            </div>
+        {/* Top Badges Overlaid */}
+        <div className="absolute top-3 left-4 right-3 flex items-center justify-between z-10">
+          <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-black/70 backdrop-blur-md border border-white/10">
+            <span className="text-base leading-none">{circuit.flag}</span>
+            <span className="font-display text-xs font-bold uppercase text-white tracking-wider">
+              {circuit.country}
+            </span>
           </div>
+
           <span
-            className="shrink-0 font-num text-[10px] font-bold px-2 py-0.5 rounded"
-            style={{
-              background: "oklch(1 0 0 / 5%)",
-              border: "1px solid oklch(1 0 0 / 8%)",
-              color: "oklch(0.55 0.012 255)",
-              letterSpacing: "0.06em",
-            }}
+            className="font-num text-[11px] font-bold px-2.5 py-1 rounded bg-black/80 backdrop-blur-md border border-white/10"
+            style={{ color: "oklch(0.60 0.245 27)" }}
           >
-            {circuit.turns}T
+            {circuit.turns} TURNS
           </span>
         </div>
+      </div>
 
+      <div className="relative flex flex-1 flex-col gap-3 p-5 pt-2">
         {/* Circuit name */}
         <div>
           <h3
-            className="font-display font-bold uppercase leading-tight transition-colors group-hover:text-primary"
-            style={{ fontSize: "1.1rem", letterSpacing: "0.03em" }}
+            className="font-display font-black uppercase leading-tight transition-colors group-hover:text-primary"
+            style={{ fontSize: "1.15rem", letterSpacing: "0.03em" }}
           >
             {circuit.name}
           </h3>
-          <div className="mt-1 flex items-center gap-1.5 text-xs" style={{ color: "oklch(0.52 0.010 255)" }}>
+          <div className="mt-1 flex items-center gap-1.5 text-xs" style={{ color: "oklch(0.55 0.010 255)" }}>
             <MapPin className="h-3 w-3 shrink-0" />
             <span>{circuit.location}</span>
           </div>
@@ -231,10 +221,10 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
 
         {/* Specs */}
         <div
-          className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs font-num py-3"
+          className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs font-num py-2.5"
           style={{
-            borderTop: "1px solid oklch(1 0 0 / 5%)",
-            borderBottom: "1px solid oklch(1 0 0 / 5%)",
+            borderTop: "1px solid oklch(1 0 0 / 6%)",
+            borderBottom: "1px solid oklch(1 0 0 / 6%)",
           }}
         >
           <div>
@@ -261,7 +251,7 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
           </div>
           <ul className="mt-1.5 space-y-0.5">
             {circuit.fastCorners.slice(0, 2).map((corner, i) => (
-              <li key={i} className="flex items-start gap-1.5 text-xs" style={{ color: "oklch(0.56 0.012 255)" }}>
+              <li key={i} className="flex items-start gap-1.5 text-xs" style={{ color: "oklch(0.58 0.012 255)" }}>
                 <span
                   className="mt-1.5 h-1 w-1 shrink-0 rounded-full"
                   style={{ background: "oklch(0.60 0.245 27)" }}
@@ -298,7 +288,7 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
 }
 
 function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () => void }) {
-  const mapSvg = getCircuitImageUrl(circuit.id);
+  const photoUrl = getCircuitImageUrl(circuit.id);
 
   return (
     <div
@@ -323,52 +313,43 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
           style={{ background: "linear-gradient(90deg, oklch(0.60 0.245 27), oklch(0.60 0.245 27 / 0))" }}
         />
 
-        <div className="p-6 sm:p-8">
+        {/* Hero Circuit Photo Header */}
+        <div className="relative h-56 w-full overflow-hidden">
+          <img
+            src={photoUrl}
+            alt={circuit.name}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.155_0.006_255)] via-[oklch(0.155_0.006_255)/60] to-transparent" />
+
           <button
             onClick={onClose}
-            className="absolute right-4 top-6 rounded p-1.5 transition-colors hover:bg-white/10"
-            style={{ border: "1px solid oklch(1 0 0 / 10%)" }}
+            className="absolute right-4 top-4 rounded p-1.5 z-20 transition-colors bg-black/60 text-white border border-white/20 hover:bg-black/80"
             aria-label="Close"
           >
             <X className="h-4 w-4" />
           </button>
 
-          {/* Header */}
-          <div className="flex items-center gap-4">
-            <span className="text-5xl leading-none">{circuit.flag}</span>
-            <div>
-              <EyebrowRed>{circuit.country} · Since {circuit.firstGrandPrix}</EyebrowRed>
-              <h2
-                className="mt-1.5 font-display font-black uppercase"
-                style={{ fontSize: "clamp(1.5rem, 4vw, 2.25rem)", lineHeight: 1.05 }}
-              >
-                {circuit.name}
-              </h2>
-              <div className="mt-1 flex items-center gap-1.5 text-xs" style={{ color: "oklch(0.52 0.010 255)" }}>
-                <MapPin className="h-3 w-3" /> {circuit.location}
+          <div className="absolute bottom-4 left-6 right-6 z-10">
+            <div className="flex items-center gap-3">
+              <span className="text-4xl leading-none">{circuit.flag}</span>
+              <div>
+                <EyebrowRed>{circuit.country} · Debut {circuit.firstGrandPrix}</EyebrowRed>
+                <h2
+                  className="mt-1 font-display font-black uppercase text-white"
+                  style={{ fontSize: "clamp(1.5rem, 4vw, 2.25rem)", lineHeight: 1.05 }}
+                >
+                  {circuit.name}
+                </h2>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-white/80">
+                  <MapPin className="h-3 w-3" /> {circuit.location}
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Circuit diagram */}
-          {mapSvg && (
-            <div
-              className="my-6 flex h-52 items-center justify-center overflow-hidden p-4"
-              style={{
-                background: "oklch(0.12 0.004 255)",
-                border: "1px solid oklch(1 0 0 / 8%)",
-                borderRadius: "0.5rem",
-              }}
-            >
-              <img
-                src={mapSvg}
-                alt={`${circuit.name} layout`}
-                className="h-full max-h-44 w-full object-contain"
-                style={{ filter: "invert(1) brightness(3) drop-shadow(0 0 16px rgba(255,255,255,0.2))" }}
-              />
-            </div>
-          )}
-
+        <div className="p-6 sm:p-8 pt-4">
           {/* Quick stats */}
           <div className="grid grid-cols-3 gap-3">
             {[

@@ -70,36 +70,36 @@ export function getHDDriverPhoto(driverIdOrCode?: string, fallbackUrl?: string):
   return fallbackUrl || "";
 }
 
-// Circuit SVG Layout maps (High clarity vector outlines)
-export const CIRCUIT_MAP_SVGS: Record<string, string> = {
-  "albert_park": "https://upload.wikimedia.org/wikipedia/commons/6/68/Albert_Park_Circuit_2021.svg",
-  "americas": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Circuit_of_the_Americas_%28COTA%29.svg",
-  "bahrain": "https://upload.wikimedia.org/wikipedia/commons/2/29/Bahrain_International_Circuit--Grand_Prix_Layout.svg",
-  "baku": "https://upload.wikimedia.org/wikipedia/commons/5/52/Baku_City_Circuit_2016.svg",
-  "catalunya": "https://upload.wikimedia.org/wikipedia/commons/2/20/Circuit_de_Catalunya_2021.svg",
-  "hungaroring": "https://upload.wikimedia.org/wikipedia/commons/9/91/Hungaroring.svg",
-  "imola": "https://upload.wikimedia.org/wikipedia/commons/6/60/Autodromo_Enzo_e_Dino_Ferrari_2020.svg",
-  "interlagos": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace_%28layout_2014-present%29.svg",
-  "jeddah": "https://upload.wikimedia.org/wikipedia/commons/1/19/Jeddah_Street_Circuit.svg",
-  "losail": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Losail_International_Circuit.svg",
-  "marina_bay": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Marina_Bay_Street_Circuit_2023.svg",
-  "miami": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Miami_International_Autodrome_layout_2022.svg",
-  "monaco": "https://upload.wikimedia.org/wikipedia/commons/3/36/Circuit_Monaco.svg",
-  "monza": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Autodromo_Nazionale_Monza_pg.svg",
-  "red_bull_ring": "https://upload.wikimedia.org/wikipedia/commons/8/87/Red_Bull_Ring.svg",
-  "rodriguez": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez_2015.svg",
-  "shanghai": "https://upload.wikimedia.org/wikipedia/commons/1/14/Shanghai_International_Racing_Circuit_track_map.svg",
-  "silverstone": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Silverstone_Circuit_2011.svg",
-  "spa": "https://upload.wikimedia.org/wikipedia/commons/5/54/Spa-Francorchamps_of_Belgium.svg",
-  "suzuka": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Suzuka_circuit_map_%282005%29.svg",
-  "vegas": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Las_Vegas_Strip_Circuit.svg",
-  "villeneuve": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Circuit_Gilles_Villeneuve.svg",
-  "yas_marina": "https://upload.wikimedia.org/wikipedia/commons/8/89/Yas_Marina_Circuit_2021.svg",
-  "zandvoort": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Circuit_Zandvoort_2020.svg",
+// High-resolution HD photography for F1 Circuits
+export const CIRCUIT_PHOTOS: Record<string, string> = {
+  spa: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1200&auto=format&fit=crop",
+  monaco: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1200&auto=format&fit=crop",
+  silverstone: "https://images.unsplash.com/photo-1541447271487-09612b3f49f7?q=80&w=1200&auto=format&fit=crop",
+  monza: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop",
+  suzuka: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop",
+  interlagos: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?q=80&w=1200&auto=format&fit=crop",
+  americas: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop",
+  baku: "https://images.unsplash.com/photo-1508974239320-0a029497e820?q=80&w=1200&auto=format&fit=crop",
+  catalunya: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1200&auto=format&fit=crop",
+  hungaroring: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop",
+  imola: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?q=80&w=1200&auto=format&fit=crop",
+  jeddah: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+  marina_bay: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+  miami: "https://images.unsplash.com/photo-1535498730771-e735b998cd64?q=80&w=1200&auto=format&fit=crop",
+  red_bull_ring: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+  zandvoort: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
+  yas_marina: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200&auto=format&fit=crop",
+  shanghai: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=1200&auto=format&fit=crop",
+  vegas: "https://images.unsplash.com/photo-1605833559746-6d16002d8478?q=80&w=1200&auto=format&fit=crop",
+  villeneuve: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=1200&auto=format&fit=crop",
+  albert_park: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+  bahrain: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+  losail: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200&auto=format&fit=crop",
+  rodriguez: "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?q=80&w=1200&auto=format&fit=crop",
 };
 
 export function getCircuitImageUrl(circuitId?: string): string {
-  if (!circuitId) return "";
+  if (!circuitId) return "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1200&auto=format&fit=crop";
   const key = circuitId.toLowerCase().replace(/-/g, "_");
-  return CIRCUIT_MAP_SVGS[key] || "";
+  return CIRCUIT_PHOTOS[key] || "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1200&auto=format&fit=crop";
 }
