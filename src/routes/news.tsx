@@ -1,6 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
-import { Search, X, MessageSquareQuote, Volume2, Radio, Sparkles, Filter, ChevronRight, Tag, ShieldAlert } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import {
+  Search,
+  X,
+  MessageSquareQuote,
+  Volume2,
+  Radio,
+  Sparkles,
+  Filter,
+  ChevronRight,
+  Tag,
+  RefreshCw,
+  ExternalLink,
+  CheckCircle2,
+} from "lucide-react";
 import { EyebrowRed, SectionHeader } from "@/components/f1/primitives";
 import { ErrorNote } from "@/components/f1/skeleton";
 import f1NewsData from "@/data/f1NewsData.json";
@@ -24,9 +38,11 @@ export type NewsItem = {
   tags: string[];
   sentiment?: string;
   featured?: boolean;
+  externalUrl?: string;
+  imageUrl?: string;
 };
 
-const ALL_NEWS = f1NewsData as NewsItem[];
+const STATIC_NEWS = f1NewsData as NewsItem[];
 
 const CATEGORIES = [
   "All",
@@ -37,19 +53,111 @@ const CATEGORIES = [
   "Stewards & Regulations",
 ] as const;
 
+// Live RSS Fetcher — Updates daily automatically
+async function fetchLiveF1News(): Promise<NewsItem[]> {
+  try {
+    const res = await fetch(
+      "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.skysports.com%2Frss%2F12433"
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (data.status !== "ok" || !Array.isArray(data.items)) return [];
+
+    return data.items.map((item: any, idx: number) => {
+      const title = item.title || "F1 News Update";
+      const pubDate = item.pubDate ? item.pubDate.split(" ")[0] : new Date().toISOString().split("T")[0];
+      const desc = (item.description || item.content || "").replace(/<[^>]*>?/gm, "").trim();
+      const link = item.link || "#";
+      const image = item.enclosure?.link || item.thumbnail || "";
+
+      let speaker = "F1 Media Wire";
+      let speakerCode = "";
+      let speakerTeam = "Formula 1";
+      let teamColor = "oklch(0.60 0.245 27)";
+
+      if (/norris/i.test(title + desc)) {
+        speaker = "Lando Norris";
+        speakerCode = "norris";
+        speakerTeam = "McLaren";
+        teamColor = "#FF8000";
+      } else if (/verstappen/i.test(title + desc)) {
+        speaker = "Max Verstappen";
+        speakerCode = "verstappen";
+        speakerTeam = "Red Bull";
+        teamColor = "#3671C6";
+      } else if (/hamilton/i.test(title + desc)) {
+        speaker = "Lewis Hamilton";
+        speakerCode = "hamilton";
+        speakerTeam = "Ferrari";
+        teamColor = "#E80020";
+      } else if (/russell/i.test(title + desc)) {
+        speaker = "George Russell";
+        speakerCode = "russell";
+        speakerTeam = "Mercedes";
+        teamColor = "#27F4D2";
+      } else if (/leclerc/i.test(title + desc)) {
+        speaker = "Charles Leclerc";
+        speakerCode = "leclerc";
+        speakerTeam = "Ferrari";
+        teamColor = "#E80020";
+      } else if (/piastri/i.test(title + desc)) {
+        speaker = "Oscar Piastri";
+        speakerCode = "piastri";
+        speakerTeam = "McLaren";
+        teamColor = "#FF8000";
+      } else if (/alonso/i.test(title + desc)) {
+        speaker = "Fernando Alonso";
+        speakerCode = "alonso";
+        speakerTeam = "Aston Martin";
+        teamColor = "#229971";
+      } else if (/antonelli/i.test(title + desc)) {
+        speaker = "Kimi Antonelli";
+        speakerCode = "antonelli";
+        speakerTeam = "Mercedes";
+        teamColor = "#27F4D2";
+      }
+
+      return {
+        id: `rss-${idx}-${item.guid || idx}`,
+        title: title,
+        subtitle: desc.slice(0, 160) + (desc.length > 160 ? "..." : ""),
+        category: "Paddock News",
+        date: pubDate,
+        speaker: speaker,
+        speakerCode: speakerCode,
+        speakerRole: `${speakerTeam} Daily Press Wire`,
+        speakerTeam: speakerTeam,
+        teamColor: teamColor,
+        quote: desc.length > 20 ? desc.slice(0, 220) + "..." : title,
+        quoteContext: `Sky Sports F1 Live Wire · ${pubDate}`,
+        summary: desc,
+        fullArticle: desc,
+        tags: ["Live News", "Daily Update", speakerTeam],
+        sentiment: "Breaking",
+        featured: idx === 0,
+        externalUrl: link,
+        imageUrl: image,
+      };
+    });
+  } catch (err) {
+    console.error("Live RSS fetch failed, falling back to static quotes", err);
+    return [];
+  }
+}
+
 export const Route = createFileRoute("/news")({
   head: () => ({
     meta: [
-      { title: "F1 News Highlights & Driver Quotes · f1Bidda" },
+      { title: "F1 News Highlights & Live Driver Quotes · f1Bidda" },
       {
         name: "description",
         content:
-          "Latest Formula 1 news highlights, post-race driver quotes, radio transcripts, team principal statements and paddock intel.",
+          "Live auto-updating Formula 1 news highlights, daily driver quotes, radio transcripts, and team principal statements.",
       },
-      { property: "og:title", content: "F1 News Highlights & Driver Quotes · f1Bidda" },
+      { property: "og:title", content: "F1 News Highlights & Live Driver Quotes · f1Bidda" },
       {
         property: "og:description",
-        content: "What they spoke in the paddock: radio transcripts, press conference quotes and race highlights.",
+        content: "What they spoke in the paddock: radio transcripts, press conference quotes and daily F1 news.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -64,12 +172,30 @@ function NewsPage() {
   const [selectedNewsId, setSelectedNewsId] = useState<string | null>(null);
   const [isPlayingAudio, setIsPlayingAudio] = useState<string | null>(null);
 
+  // TanStack Query with automatic 15-minute stale-time (auto updates daily)
+  const { data: liveNews = [], isLoading, isFetching, refetch } = useQuery({
+    queryKey: ["live-f1-news"],
+    queryFn: fetchLiveF1News,
+    staleTime: 15 * 60_000,
+  });
+
+  // Combine live news with curated paddock quotes
+  const allNewsItems = useMemo(() => {
+    if (liveNews.length > 0) {
+      // Merge live daily news at top, followed by curated quote highlights
+      const liveIds = new Set(liveNews.map((n) => n.id));
+      const filteredCurated = STATIC_NEWS.filter((n) => !liveIds.has(n.id));
+      return [...liveNews, ...filteredCurated];
+    }
+    return STATIC_NEWS;
+  }, [liveNews]);
+
   const featuredNews = useMemo(() => {
-    return ALL_NEWS.find((n) => n.featured) || ALL_NEWS[0];
-  }, []);
+    return allNewsItems.find((n) => n.featured) || allNewsItems[0];
+  }, [allNewsItems]);
 
   const filteredNews = useMemo(() => {
-    let result = ALL_NEWS;
+    let result = allNewsItems;
 
     if (selectedCategory !== "All") {
       result = result.filter((n) => n.category === selectedCategory);
@@ -89,10 +215,10 @@ function NewsPage() {
     }
 
     return result;
-  }, [query, selectedCategory]);
+  }, [allNewsItems, query, selectedCategory]);
 
   const activeModalNews = selectedNewsId
-    ? ALL_NEWS.find((n) => n.id === selectedNewsId) ?? null
+    ? allNewsItems.find((n) => n.id === selectedNewsId) ?? null
     : null;
 
   useEffect(() => {
@@ -117,28 +243,39 @@ function NewsPage() {
     <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
       <SectionHeader
         eyebrow="Paddock Intel & Driver Transcripts"
-        title="F1 News & Quotes"
+        title="F1 News & Driver Quotes"
       />
 
-      {/* Intro header note */}
+      {/* Intro header note & Live Sync Indicator */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-2xl text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
-          Direct statements, post-race press conference highlights, team radio transcripts, and paddock reactions
-          from Formula 1 drivers and team principals.
+          Live daily news wire, post-race press conference highlights, team radio transcripts, and official
+          statements from Formula 1 drivers and team principals.
         </p>
 
-        {/* Live Radio Badge */}
-        <div
-          className="flex items-center gap-2 self-start px-3 py-1.5 shrink-0 rounded"
-          style={{
-            background: "oklch(0.60 0.245 27 / 0.12)",
-            border: "1px solid oklch(0.60 0.245 27 / 0.3)",
-          }}
-        >
-          <Radio className="h-4 w-4 animate-pulse" style={{ color: "oklch(0.60 0.245 27)" }} />
-          <span className="font-num text-xs font-bold uppercase tracking-wider text-foreground">
-            Live Radio &amp; Press Wire
-          </span>
+        {/* Live Auto-Update Badge */}
+        <div className="flex items-center gap-2 self-start shrink-0">
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded"
+            style={{
+              background: "oklch(0.60 0.245 27 / 0.12)",
+              border: "1px solid oklch(0.60 0.245 27 / 0.3)",
+            }}
+          >
+            <Radio className="h-4 w-4 animate-pulse" style={{ color: "oklch(0.60 0.245 27)" }} />
+            <span className="font-num text-xs font-bold uppercase tracking-wider text-foreground">
+              {liveNews.length > 0 ? "LIVE RSS · AUTO-UPDATED DAILY" : "PADDOCK QUOTES WIRE"}
+            </span>
+          </div>
+
+          <button
+            onClick={() => refetch()}
+            disabled={isFetching}
+            className="p-1.5 rounded transition-colors hover:bg-white/10 text-muted-foreground hover:text-foreground"
+            title="Refresh news feed"
+          >
+            <RefreshCw className={`h-4 w-4 ${isFetching ? "animate-spin text-primary" : ""}`} />
+          </button>
         </div>
       </div>
 
@@ -174,7 +311,7 @@ function NewsPage() {
                       border: "1px solid oklch(0.60 0.245 27 / 0.4)",
                     }}
                   >
-                    <Sparkles className="h-3 w-3" /> Featured Statement
+                    <Sparkles className="h-3 w-3" /> Top Headline
                   </span>
                   <span
                     className="text-xs font-display uppercase font-semibold px-2.5 py-1 rounded"
@@ -224,7 +361,14 @@ function NewsPage() {
                 {/* Speaker profile column */}
                 <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center text-center lg:text-right border-t lg:border-t-0 lg:border-l pt-6 lg:pt-0 lg:pl-6 border-white/5">
                   <div className="relative mb-3">
-                    {featuredNews.speakerCode && getHDDriverPhoto(featuredNews.speakerCode) ? (
+                    {featuredNews.imageUrl ? (
+                      <img
+                        src={featuredNews.imageUrl}
+                        alt=""
+                        className="h-28 w-44 object-cover rounded-md border"
+                        style={{ borderColor: featuredNews.teamColor || "oklch(0.60 0.245 27)" }}
+                      />
+                    ) : featuredNews.speakerCode && getHDDriverPhoto(featuredNews.speakerCode) ? (
                       <img
                         src={getHDDriverPhoto(featuredNews.speakerCode)}
                         alt={featuredNews.speaker}
@@ -261,7 +405,7 @@ function NewsPage() {
                       letterSpacing: "0.08em",
                     }}
                   >
-                    Full Transcript &amp; Analysis <ChevronRight className="h-3.5 w-3.5" />
+                    Full Statement &amp; Article <ChevronRight className="h-3.5 w-3.5" />
                   </button>
                 </div>
               </div>
@@ -383,6 +527,17 @@ function NewsCard({
         className="absolute left-0 top-0 bottom-0 w-[3px]"
         style={{ background: news.teamColor || "oklch(0.60 0.245 27)" }}
       />
+
+      {news.imageUrl && (
+        <div className="h-40 w-full overflow-hidden bg-black/40 relative">
+          <img
+            src={news.imageUrl}
+            alt=""
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+        </div>
+      )}
 
       <div className="p-5 pl-6 flex flex-1 flex-col justify-between space-y-4">
         {/* Card Header */}
@@ -637,6 +792,23 @@ function NewsModal({ news, onClose }: { news: NewsItem; onClose: () => void }) {
               <p key={idx}>{para}</p>
             ))}
           </div>
+
+          {/* External Article Link */}
+          {news.externalUrl && news.externalUrl !== "#" && (
+            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+              <span className="text-xs text-muted-foreground flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Sourced from Sky Sports F1
+              </span>
+              <a
+                href={news.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-display font-bold uppercase text-primary hover:underline"
+              >
+                Read Source Article <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          )}
 
           {/* Tags */}
           <div className="mt-6 pt-4 border-t border-white/5 flex flex-wrap items-center gap-2">
