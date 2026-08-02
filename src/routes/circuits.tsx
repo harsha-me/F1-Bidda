@@ -6,6 +6,15 @@ import { ErrorNote } from "@/components/f1/skeleton";
 import circuitsData from "@/data/circuitsData.json";
 import { getCircuitImageUrl } from "@/lib/f1-assets";
 
+type CornerDetail = {
+  name: string;
+  turns: string;
+  speed: string;
+  gForce: string;
+  gear: string;
+  whyFamous: string;
+};
+
 type CircuitInfo = {
   id: string;
   name: string;
@@ -17,6 +26,7 @@ type CircuitInfo = {
   lapRecord: string;
   firstGrandPrix: number;
   fastCorners: string[];
+  cornerDetails?: CornerDetail[];
   whySpecial: string;
 };
 
@@ -56,6 +66,12 @@ function CircuitsPage() {
         c.location.toLowerCase().includes(q) ||
         c.country.toLowerCase().includes(q) ||
         c.fastCorners.some((fc) => fc.toLowerCase().includes(q)) ||
+        c.cornerDetails?.some(
+          (cd) =>
+            cd.name.toLowerCase().includes(q) ||
+            cd.whyFamous.toLowerCase().includes(q) ||
+            cd.turns.toLowerCase().includes(q)
+        ) ||
         c.whySpecial.toLowerCase().includes(q)
     );
   }, [query]);
@@ -83,7 +99,7 @@ function CircuitsPage() {
       {/* Description + search row */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-xl text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
-          Track layouts, iconic high-speed corners, elevation changes and tactical profiles
+          Track layouts, iconic high-speed corners, telemetry metrics, elevation changes and tactical profiles
           for every venue on the global calendar.
         </p>
 
@@ -155,13 +171,13 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
         cursor: "pointer",
       }}
     >
-      {/* Left accent stripe (country color — using red as default) */}
+      {/* Left accent stripe */}
       <div
         className="absolute left-0 top-0 bottom-0 w-[3px]"
         style={{ background: "oklch(0.60 0.245 27)" }}
       />
 
-      {/* Track layout image — right side offset */}
+      {/* Track layout image */}
       {mapSvg && (
         <div className="absolute right-0 top-0 bottom-0 w-40 overflow-hidden pointer-events-none">
           <img
@@ -256,7 +272,7 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
           </ul>
         </div>
 
-        {/* Why special — blockquote style */}
+        {/* Why special */}
         <blockquote
           className="text-xs italic leading-relaxed line-clamp-2"
           style={{
@@ -337,7 +353,7 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
           {/* Circuit diagram */}
           {mapSvg && (
             <div
-              className="my-6 flex h-52 items-center justify-center overflow-hidden"
+              className="my-6 flex h-52 items-center justify-center overflow-hidden p-4"
               style={{
                 background: "oklch(0.12 0.004 255)",
                 border: "1px solid oklch(1 0 0 / 8%)",
@@ -375,40 +391,113 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
             ))}
           </div>
 
-          {/* Fast corners */}
-          <div className="mt-6">
-            <h4
-              className="flex items-center gap-2 font-display text-sm font-bold uppercase"
-              style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.06em" }}
-            >
-              <Zap className="h-4 w-4" /> Fast & Legendary Corners
-            </h4>
-            <ul className="mt-3 space-y-2">
-              {circuit.fastCorners.map((corner, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 text-sm"
-                  style={{
-                    padding: "0.625rem 0.875rem",
-                    background: "oklch(0.13 0.005 255)",
-                    border: "1px solid oklch(1 0 0 / 6%)",
-                    borderRadius: "0.375rem",
-                  }}
-                >
-                  <span
-                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded font-num text-xs font-bold"
+          {/* Fast corners & Telemetry Breakdown */}
+          {circuit.cornerDetails && circuit.cornerDetails.length > 0 ? (
+            <div className="mt-6">
+              <h4
+                className="flex items-center gap-2 font-display text-sm font-bold uppercase"
+                style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.06em" }}
+              >
+                <Zap className="h-4 w-4" /> Key Corner Breakdown &amp; Telemetry
+              </h4>
+              <div className="mt-3 space-y-3">
+                {circuit.cornerDetails.map((cd, i) => (
+                  <div
+                    key={i}
+                    className="p-4"
                     style={{
-                      background: "oklch(0.60 0.245 27 / 0.18)",
-                      color: "oklch(0.60 0.245 27)",
+                      background: "oklch(0.135 0.005 255)",
+                      border: "1px solid oklch(1 0 0 / 7%)",
+                      borderRadius: "0.5rem",
                     }}
                   >
-                    {i + 1}
-                  </span>
-                  <span>{corner}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="font-num text-xs font-bold px-2 py-0.5 rounded"
+                          style={{
+                            background: "oklch(0.60 0.245 27 / 0.18)",
+                            color: "oklch(0.60 0.245 27)",
+                            border: "1px solid oklch(0.60 0.245 27 / 0.3)",
+                          }}
+                        >
+                          {cd.turns}
+                        </span>
+                        <h5 className="font-display font-bold text-sm text-foreground uppercase tracking-wide">
+                          {cd.name}
+                        </h5>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-1.5 font-num text-[11px]">
+                        {cd.speed && (
+                          <span
+                            className="px-2 py-0.5 rounded font-semibold"
+                            style={{ background: "oklch(1 0 0 / 6%)", color: "oklch(0.85 0.15 85)" }}
+                          >
+                            ⚡ {cd.speed}
+                          </span>
+                        )}
+                        {cd.gForce && (
+                          <span
+                            className="px-2 py-0.5 rounded font-semibold"
+                            style={{ background: "oklch(1 0 0 / 6%)", color: "oklch(0.75 0.15 140)" }}
+                          >
+                            🎯 {cd.gForce}
+                          </span>
+                        )}
+                        {cd.gear && (
+                          <span
+                            className="px-2 py-0.5 rounded font-semibold"
+                            style={{ background: "oklch(1 0 0 / 6%)", color: "oklch(0.70 0.01 255)" }}
+                          >
+                            ⚙️ {cd.gear}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <p className="text-xs leading-relaxed" style={{ color: "oklch(0.65 0.01 255)" }}>
+                      {cd.whyFamous}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="mt-6">
+              <h4
+                className="flex items-center gap-2 font-display text-sm font-bold uppercase"
+                style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.06em" }}
+              >
+                <Zap className="h-4 w-4" /> Fast &amp; Legendary Corners
+              </h4>
+              <ul className="mt-3 space-y-2">
+                {circuit.fastCorners.map((corner, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-sm"
+                    style={{
+                      padding: "0.625rem 0.875rem",
+                      background: "oklch(0.13 0.005 255)",
+                      border: "1px solid oklch(1 0 0 / 6%)",
+                      borderRadius: "0.375rem",
+                    }}
+                  >
+                    <span
+                      className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded font-num text-xs font-bold"
+                      style={{
+                        background: "oklch(0.60 0.245 27 / 0.18)",
+                        color: "oklch(0.60 0.245 27)",
+                      }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span>{corner}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Why special */}
           <blockquote
@@ -448,3 +537,4 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
     </div>
   );
 }
+
