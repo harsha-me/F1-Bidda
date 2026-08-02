@@ -14,6 +14,7 @@ import { Route as CircuitsRouteImport } from './routes/circuits'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as DriversRouteImport } from './routes/drivers'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as RacesRouteImport } from './routes/races'
 import { Route as SeasonRouteImport } from './routes/season'
 import { Route as StrategyRouteImport } from './routes/strategy'
@@ -46,6 +47,11 @@ const DriversRoute = DriversRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RacesRoute = RacesRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
   '/mcp': typeof McpRoute
+  '/news': typeof NewsRoute
   '/races': typeof RacesRoute
   '/season': typeof SeasonRoute
   '/strategy': typeof StrategyRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
   '/mcp': typeof McpRoute
+  '/news': typeof NewsRoute
   '/races': typeof RacesRoute
   '/season': typeof SeasonRoute
   '/strategy': typeof StrategyRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
   '/mcp': typeof McpRoute
+  '/news': typeof NewsRoute
   '/races': typeof RacesRoute
   '/season': typeof SeasonRoute
   '/strategy': typeof StrategyRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/compare'
     | '/drivers'
     | '/mcp'
+    | '/news'
     | '/races'
     | '/season'
     | '/strategy'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/compare'
     | '/drivers'
     | '/mcp'
+    | '/news'
     | '/races'
     | '/season'
     | '/strategy'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/compare'
     | '/drivers'
     | '/mcp'
+    | '/news'
     | '/races'
     | '/season'
     | '/strategy'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   CompareRoute: typeof CompareRoute
   DriversRoute: typeof DriversRouteWithChildren
   McpRoute: typeof McpRoute
+  NewsRoute: typeof NewsRoute
   RacesRoute: typeof RacesRoute
   SeasonRoute: typeof SeasonRoute
   StrategyRoute: typeof StrategyRoute
@@ -236,6 +249,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/races': {
@@ -314,6 +334,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompareRoute: CompareRoute,
   DriversRoute: DriversRouteWithChildren,
   McpRoute: McpRoute,
+  NewsRoute: NewsRoute,
   RacesRoute: RacesRoute,
   SeasonRoute: SeasonRoute,
   StrategyRoute: StrategyRoute,
