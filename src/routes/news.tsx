@@ -4,160 +4,244 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Search,
   X,
-  MessageSquareQuote,
-  Volume2,
-  Radio,
-  Sparkles,
   Filter,
   ChevronRight,
   Tag,
   RefreshCw,
   ExternalLink,
-  CheckCircle2,
+  Radio,
+  Rss,
+  AlertCircle,
+  Newspaper,
+  Zap,
+  Settings,
+  Users,
+  Shield,
+  Mic2,
 } from "lucide-react";
-import { EyebrowRed, SectionHeader } from "@/components/f1/primitives";
-import { ErrorNote } from "@/components/f1/skeleton";
-import f1NewsData from "@/data/f1NewsData.json";
-import { getHDDriverPhoto } from "@/lib/f1-assets";
+import { SectionHeader } from "@/components/f1/primitives";
+import { ErrorNote, Skeleton } from "@/components/f1/skeleton";
 
-export type NewsItem = {
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+export type NewsCategory =
+  | "All"
+  | "Driver Quotes"
+  | "Team Radio & Press"
+  | "Technical Upgrades"
+  | "Paddock News"
+  | "Stewards & Regulations";
+
+export type RealNewsItem = {
   id: string;
   title: string;
-  subtitle: string;
-  category: "Driver Quotes" | "Team Radio & Press" | "Technical Upgrades" | "Paddock News" | "Stewards & Regulations";
-  date: string;
-  speaker: string;
-  speakerCode?: string;
-  speakerRole: string;
-  speakerTeam: string;
-  teamColor?: string;
-  quote: string;
-  quoteContext: string;
-  summary: string;
-  fullArticle: string;
-  tags: string[];
-  sentiment?: string;
-  featured?: boolean;
-  externalUrl?: string;
+  excerpt: string;       // 2-3 sentence plain-text excerpt, no invented quotes
+  category: Exclude<NewsCategory, "All">;
+  date: string;          // "YYYY-MM-DD"
+  sourceName: string;    // e.g. "Autosport"
+  sourceUrl: string;     // outlet homepage
+  articleUrl: string;    // direct link to article
   imageUrl?: string;
+  tags: string[];
+  teamColor?: string;    // accent color if a team is identified
+  featured?: boolean;
 };
 
-const STATIC_NEWS = f1NewsData as NewsItem[];
+// ---------------------------------------------------------------------------
+// Category / team keyword mapping (NO fabricated content — purely from title/excerpt)
+// ---------------------------------------------------------------------------
 
-const CATEGORIES = [
-  "All",
-  "Driver Quotes",
-  "Team Radio & Press",
-  "Technical Upgrades",
-  "Paddock News",
-  "Stewards & Regulations",
-] as const;
+const CATEGORY_KEYWORDS: Record<Exclude<NewsCategory, "All">, RegExp> = {
+  "Driver Quotes": /\b(says|reveals|admits|explains|responds|interview|statement|quote|speaks|reacts|confident|believes|thinks|feels|claims|insists|denies|confirms)\b/i,
+  "Team Radio & Press": /\b(radio|press conference|debrief|team principal|paddock|briefing|media|journalist|post-race|pre-race|toto|horner|vasseur|vowles|stella|szafnauer)\b/i,
+  "Technical Upgrades": /\b(upgrade|update|aero|floor|wing|technical|development|package|cfd|wind tunnel|suspension|diffuser|sidepod|overhaul|spec|b-spec|new part)\b/i,
+  "Stewards & Regulations": /\b(penalty|steward|investigation|regulation|fia|rule|protest|decision|reprimand|grid drop|drive-through|safety car|vsc|disqualif|appeal|review)\b/i,
+  "Paddock News": /./, // catch-all — always matches
+};
 
-// Live RSS Fetcher — Updates daily automatically
-async function fetchLiveF1News(): Promise<NewsItem[]> {
-  try {
-    const res = await fetch(
-      "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.skysports.com%2Frss%2F12433"
-    );
-    if (!res.ok) return [];
-    const data = await res.json();
-    if (data.status !== "ok" || !Array.isArray(data.items)) return [];
+const TEAM_PATTERNS: Array<{ re: RegExp; color: string; team: string }> = [
+  { re: /\b(norris|piastri|mclaren)\b/i, color: "#FF8000", team: "McLaren" },
+  { re: /\b(verstappen|lawson|lindblad|red bull)\b/i, color: "#3671C6", team: "Red Bull" },
+  { re: /\b(leclerc|hamilton|ferrari|maranello)\b/i, color: "#E80020", team: "Ferrari" },
+  { re: /\b(russell|antonelli|mercedes|brackley)\b/i, color: "#27F4D2", team: "Mercedes" },
+  { re: /\b(alonso|stroll|aston martin)\b/i, color: "#229971", team: "Aston Martin" },
+  { re: /\b(albon|sainz|williams)\b/i, color: "#64C4FF", team: "Williams" },
+  { re: /\b(hulkenberg|bortoleto|sauber|kick)\b/i, color: "#00E701", team: "Sauber" },
+  { re: /\b(gasly|doohan|alpine)\b/i, color: "#FF69B4", team: "Alpine" },
+  { re: /\b(tsunoda|hadjar|racing bulls|vcarb)\b/i, color: "#6692FF", team: "Racing Bulls" },
+  { re: /\b(bearman|ocon|haas)\b/i, color: "#B6BABD", team: "Haas" },
+];
 
-    return data.items.map((item: any, idx: number) => {
-      const title = item.title || "F1 News Update";
-      const pubDate = item.pubDate ? item.pubDate.split(" ")[0] : new Date().toISOString().split("T")[0];
-      const desc = (item.description || item.content || "").replace(/<[^>]*>?/gm, "").trim();
-      const link = item.link || "#";
-      const image = item.enclosure?.link || item.thumbnail || "";
-
-      let speaker = "F1 Media Wire";
-      let speakerCode = "";
-      let speakerTeam = "Formula 1";
-      let teamColor = "oklch(0.60 0.245 27)";
-
-      if (/norris/i.test(title + desc)) {
-        speaker = "Lando Norris";
-        speakerCode = "norris";
-        speakerTeam = "McLaren";
-        teamColor = "#FF8000";
-      } else if (/verstappen/i.test(title + desc)) {
-        speaker = "Max Verstappen";
-        speakerCode = "verstappen";
-        speakerTeam = "Red Bull";
-        teamColor = "#3671C6";
-      } else if (/hamilton/i.test(title + desc)) {
-        speaker = "Lewis Hamilton";
-        speakerCode = "hamilton";
-        speakerTeam = "Ferrari";
-        teamColor = "#E80020";
-      } else if (/russell/i.test(title + desc)) {
-        speaker = "George Russell";
-        speakerCode = "russell";
-        speakerTeam = "Mercedes";
-        teamColor = "#27F4D2";
-      } else if (/leclerc/i.test(title + desc)) {
-        speaker = "Charles Leclerc";
-        speakerCode = "leclerc";
-        speakerTeam = "Ferrari";
-        teamColor = "#E80020";
-      } else if (/piastri/i.test(title + desc)) {
-        speaker = "Oscar Piastri";
-        speakerCode = "piastri";
-        speakerTeam = "McLaren";
-        teamColor = "#FF8000";
-      } else if (/alonso/i.test(title + desc)) {
-        speaker = "Fernando Alonso";
-        speakerCode = "alonso";
-        speakerTeam = "Aston Martin";
-        teamColor = "#229971";
-      } else if (/antonelli/i.test(title + desc)) {
-        speaker = "Kimi Antonelli";
-        speakerCode = "antonelli";
-        speakerTeam = "Mercedes";
-        teamColor = "#27F4D2";
-      }
-
-      return {
-        id: `rss-${idx}-${item.guid || idx}`,
-        title: title,
-        subtitle: desc.slice(0, 160) + (desc.length > 160 ? "..." : ""),
-        category: "Paddock News",
-        date: pubDate,
-        speaker: speaker,
-        speakerCode: speakerCode,
-        speakerRole: `${speakerTeam} Daily Press Wire`,
-        speakerTeam: speakerTeam,
-        teamColor: teamColor,
-        quote: desc.length > 20 ? desc.slice(0, 220) + "..." : title,
-        quoteContext: `Sky Sports F1 Live Wire · ${pubDate}`,
-        summary: desc,
-        fullArticle: desc,
-        tags: ["Live News", "Daily Update", speakerTeam],
-        sentiment: "Breaking",
-        featured: idx === 0,
-        externalUrl: link,
-        imageUrl: image,
-      };
-    });
-  } catch (err) {
-    console.error("Live RSS fetch failed, falling back to static quotes", err);
-    return [];
+function detectTeamColor(text: string): { color: string; team: string } | null {
+  for (const { re, color, team } of TEAM_PATTERNS) {
+    if (re.test(text)) return { color, team };
   }
+  return null;
 }
+
+function classifyCategory(text: string): Exclude<NewsCategory, "All"> {
+  const order: Array<Exclude<NewsCategory, "All">> = [
+    "Stewards & Regulations",
+    "Technical Upgrades",
+    "Team Radio & Press",
+    "Driver Quotes",
+    "Paddock News",
+  ];
+  for (const cat of order) {
+    if (CATEGORY_KEYWORDS[cat].test(text)) return cat;
+  }
+  return "Paddock News";
+}
+
+function cleanHtml(html: string): string {
+  return html.replace(/<[^>]*>?/gm, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#\d+;/g, "").trim();
+}
+
+function truncateExcerpt(text: string, maxLen = 280): string {
+  const clean = cleanHtml(text);
+  if (clean.length <= maxLen) return clean;
+  const cut = clean.lastIndexOf(" ", maxLen);
+  return clean.slice(0, cut > 0 ? cut : maxLen) + "…";
+}
+
+// ---------------------------------------------------------------------------
+// RSS Sources
+// ---------------------------------------------------------------------------
+
+type RssSource = {
+  name: string;
+  url: string;       // homepage
+  feedUrl: string;   // RSS feed URL (will be proxied via rss2json)
+  color: string;     // brand accent
+};
+
+const RSS_SOURCES: RssSource[] = [
+  {
+    name: "Autosport",
+    url: "https://www.autosport.com",
+    feedUrl: "https://www.autosport.com/rss/f1/news/",
+    color: "#e63229",
+  },
+  {
+    name: "Motorsport.com",
+    url: "https://www.motorsport.com",
+    feedUrl: "https://www.motorsport.com/rss/f1/news/",
+    color: "#e40808",
+  },
+  {
+    name: "Sky Sports F1",
+    url: "https://www.skysports.com/f1",
+    feedUrl: "https://www.skysports.com/rss/12433",
+    color: "#0072CE",
+  },
+  {
+    name: "BBC Sport F1",
+    url: "https://www.bbc.com/sport/formula1",
+    feedUrl: "https://feeds.bbci.co.uk/sport/formula1/rss.xml",
+    color: "#cc0000",
+  },
+];
+
+const RSS2JSON_BASE = "https://api.rss2json.com/v1/api.json?rss_url=";
+
+async function fetchRssSource(source: RssSource): Promise<RealNewsItem[]> {
+  const url = `${RSS2JSON_BASE}${encodeURIComponent(source.feedUrl)}`;
+  const res = await fetch(url, { signal: AbortSignal.timeout(10_000) });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  if (data.status !== "ok" || !Array.isArray(data.items)) throw new Error("Bad feed response");
+
+  return data.items.map((item: Record<string, unknown>, idx: number) => {
+    const title = String(item.title || "F1 News");
+    const rawDesc = String(item.description || item.content || item.summary || "");
+    const excerpt = truncateExcerpt(rawDesc);
+    const articleUrl = String(item.link || item.guid || "#");
+    const pubDate = (() => {
+      const raw = String(item.pubDate || "");
+      if (!raw) return new Date().toISOString().split("T")[0];
+      const d = new Date(raw);
+      return isNaN(d.getTime()) ? new Date().toISOString().split("T")[0] : d.toISOString().split("T")[0];
+    })();
+    const imageUrl: string | undefined =
+      (item.enclosure as Record<string, unknown> | undefined)?.link as string | undefined ||
+      item.thumbnail as string | undefined ||
+      item.image as string | undefined ||
+      undefined;
+
+    const combined = `${title} ${excerpt}`;
+    const category = classifyCategory(combined);
+    const team = detectTeamColor(combined);
+
+    const tags: string[] = [];
+    if (team) tags.push(team.team);
+    tags.push(source.name);
+    // Add up to 2 keyword tags from title
+    const words = title.split(/\s+/).filter(w => w.length > 5).slice(0, 2);
+    tags.push(...words);
+
+    return {
+      id: `${source.name.toLowerCase().replace(/\W/g, "-")}-${idx}-${String(item.guid || idx).slice(-8)}`,
+      title,
+      excerpt: excerpt || title,
+      category,
+      date: pubDate,
+      sourceName: source.name,
+      sourceUrl: source.url,
+      articleUrl,
+      imageUrl: imageUrl && imageUrl.startsWith("http") ? imageUrl : undefined,
+      tags: [...new Set(tags)],
+      teamColor: team?.color,
+      featured: idx === 0,
+    } satisfies RealNewsItem;
+  });
+}
+
+export async function fetchAllF1News(): Promise<RealNewsItem[]> {
+  const results = await Promise.allSettled(RSS_SOURCES.map(fetchRssSource));
+
+  const seen = new Set<string>();
+  const all: RealNewsItem[] = [];
+
+  for (const result of results) {
+    if (result.status !== "fulfilled") continue;
+    for (const item of result.value) {
+      // Deduplicate by normalised title (first 60 chars lowercase)
+      const key = item.title.toLowerCase().replace(/\W/g, " ").slice(0, 60).trim();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      all.push(item);
+    }
+  }
+
+  // Sort newest first
+  all.sort((a, b) => (a.date < b.date ? 1 : -1));
+
+  // Mark first as featured
+  if (all.length > 0) all[0].featured = true;
+
+  return all;
+}
+
+// ---------------------------------------------------------------------------
+// Route
+// ---------------------------------------------------------------------------
 
 export const Route = createFileRoute("/news")({
   head: () => ({
     meta: [
-      { title: "F1 News Highlights & Live Driver Quotes · f1Bidda" },
+      { title: "F1 News Feed · f1Bidda" },
       {
         name: "description",
         content:
-          "Live auto-updating Formula 1 news highlights, daily driver quotes, radio transcripts, and team principal statements.",
+          "Real-time Formula 1 news aggregated from Autosport, Motorsport.com, Sky Sports F1 and BBC Sport.",
       },
-      { property: "og:title", content: "F1 News Highlights & Live Driver Quotes · f1Bidda" },
+      { property: "og:title", content: "F1 News Feed · f1Bidda" },
       {
         property: "og:description",
-        content: "What they spoke in the paddock: radio transcripts, press conference quotes and daily F1 news.",
+        content:
+          "Current Formula 1 headlines sourced directly from leading motorsport outlets.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -166,95 +250,112 @@ export const Route = createFileRoute("/news")({
   component: NewsPage,
 });
 
+// ---------------------------------------------------------------------------
+// Category tab config
+// ---------------------------------------------------------------------------
+
+const CATEGORIES: NewsCategory[] = [
+  "All",
+  "Driver Quotes",
+  "Team Radio & Press",
+  "Technical Upgrades",
+  "Paddock News",
+  "Stewards & Regulations",
+];
+
+const CATEGORY_ICONS: Record<NewsCategory, React.ElementType> = {
+  All: Newspaper,
+  "Driver Quotes": Mic2,
+  "Team Radio & Press": Radio,
+  "Technical Upgrades": Settings,
+  "Paddock News": Users,
+  "Stewards & Regulations": Shield,
+};
+
+// ---------------------------------------------------------------------------
+// NewsPage
+// ---------------------------------------------------------------------------
+
 function NewsPage() {
   const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [selectedNewsId, setSelectedNewsId] = useState<string | null>(null);
-  const [isPlayingAudio, setIsPlayingAudio] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<NewsCategory>("All");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  // TanStack Query with automatic 15-minute stale-time (auto updates daily)
-  const { data: liveNews = [], isLoading, isFetching, refetch } = useQuery({
-    queryKey: ["live-f1-news"],
-    queryFn: fetchLiveF1News,
+  const {
+    data: newsItems = [],
+    isLoading,
+    isError,
+    isFetching,
+    refetch,
+  } = useQuery({
+    queryKey: ["real-f1-news"],
+    queryFn: fetchAllF1News,
     staleTime: 15 * 60_000,
+    retry: 2,
   });
 
-  // Combine live news with curated paddock quotes
-  const allNewsItems = useMemo(() => {
-    if (liveNews.length > 0) {
-      // Merge live daily news at top, followed by curated quote highlights
-      const liveIds = new Set(liveNews.map((n) => n.id));
-      const filteredCurated = STATIC_NEWS.filter((n) => !liveIds.has(n.id));
-      return [...liveNews, ...filteredCurated];
-    }
-    return STATIC_NEWS;
-  }, [liveNews]);
-
-  const featuredNews = useMemo(() => {
-    return allNewsItems.find((n) => n.featured) || allNewsItems[0];
-  }, [allNewsItems]);
-
   const filteredNews = useMemo(() => {
-    let result = allNewsItems;
-
+    let result = newsItems;
     if (selectedCategory !== "All") {
       result = result.filter((n) => n.category === selectedCategory);
     }
-
     if (query.trim()) {
       const q = query.toLowerCase();
       result = result.filter(
         (n) =>
           n.title.toLowerCase().includes(q) ||
-          n.speaker.toLowerCase().includes(q) ||
-          n.speakerTeam.toLowerCase().includes(q) ||
-          n.quote.toLowerCase().includes(q) ||
-          n.summary.toLowerCase().includes(q) ||
+          n.excerpt.toLowerCase().includes(q) ||
+          n.sourceName.toLowerCase().includes(q) ||
           n.tags.some((t) => t.toLowerCase().includes(q))
       );
     }
-
     return result;
-  }, [allNewsItems, query, selectedCategory]);
+  }, [newsItems, query, selectedCategory]);
 
-  const activeModalNews = selectedNewsId
-    ? allNewsItems.find((n) => n.id === selectedNewsId) ?? null
-    : null;
+  const featuredNews = useMemo(
+    () => (selectedCategory === "All" && !query ? newsItems.find((n) => n.featured) ?? newsItems[0] : null),
+    [newsItems, selectedCategory, query]
+  );
+
+  const activeModal = selectedId ? newsItems.find((n) => n.id === selectedId) ?? null : null;
 
   useEffect(() => {
-    if (!activeModalNews) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedNewsId(null);
+    if (!activeModal) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedId(null);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [activeModalNews]);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [activeModal]);
 
-  const toggleAudioSimulation = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (isPlayingAudio === id) {
-      setIsPlayingAudio(null);
-    } else {
-      setIsPlayingAudio(id);
-    }
-  };
+  // Unique outlets that actually returned articles
+  const activeOutlets = [...new Set(newsItems.map((n) => n.sourceName))];
 
   return (
     <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
       <SectionHeader
-        eyebrow="Paddock Intel & Driver Transcripts"
-        title="F1 News & Driver Quotes"
+        eyebrow="Live News Aggregator"
+        title="F1 News Feed"
+        right={
+          <button
+            onClick={() => refetch()}
+            disabled={isFetching}
+            className="p-2 rounded transition-colors hover:bg-white/10 text-muted-foreground hover:text-foreground"
+            title="Refresh news feed"
+          >
+            <RefreshCw className={`h-4 w-4 ${isFetching ? "animate-spin text-primary" : ""}`} />
+          </button>
+        }
       />
 
-      {/* Intro header note & Live Sync Indicator */}
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      {/* Sub-header: description + live badge */}
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-2xl text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
-          Live daily news wire, post-race press conference highlights, team radio transcripts, and official
-          statements from Formula 1 drivers and team principals.
+          Real-time Formula 1 headlines aggregated from leading motorsport outlets. All articles link
+          directly to their original source — no invented content.
         </p>
 
-        {/* Live Auto-Update Badge */}
-        <div className="flex items-center gap-2 self-start shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <div
             className="flex items-center gap-2 px-3 py-1.5 rounded"
             style={{
@@ -262,25 +363,53 @@ function NewsPage() {
               border: "1px solid oklch(0.60 0.245 27 / 0.3)",
             }}
           >
-            <Radio className="h-4 w-4 animate-pulse" style={{ color: "oklch(0.60 0.245 27)" }} />
+            <Rss className="h-3.5 w-3.5 animate-pulse" style={{ color: "oklch(0.60 0.245 27)" }} />
             <span className="font-num text-xs font-bold uppercase tracking-wider text-foreground">
-              {liveNews.length > 0 ? "LIVE RSS · AUTO-UPDATED DAILY" : "PADDOCK QUOTES WIRE"}
+              {isFetching ? "Fetching…" : newsItems.length > 0 ? `${newsItems.length} Articles · LIVE` : "RSS FEED"}
             </span>
           </div>
-
-          <button
-            onClick={() => refetch()}
-            disabled={isFetching}
-            className="p-1.5 rounded transition-colors hover:bg-white/10 text-muted-foreground hover:text-foreground"
-            title="Refresh news feed"
-          >
-            <RefreshCw className={`h-4 w-4 ${isFetching ? "animate-spin text-primary" : ""}`} />
-          </button>
         </div>
       </div>
 
-      {/* Featured Breaking News Hero Card */}
-      {featuredNews && !query && selectedCategory === "All" && (
+      {/* Sources attribution */}
+      {activeOutlets.length > 0 && (
+        <div
+          className="mb-6 flex flex-wrap items-center gap-2 px-3 py-2 rounded text-xs"
+          style={{
+            background: "oklch(0.155 0.006 255)",
+            border: "1px solid oklch(1 0 0 / 7%)",
+            color: "oklch(0.55 0.01 255)",
+          }}
+        >
+          <span className="font-display font-bold uppercase tracking-wide" style={{ color: "oklch(0.60 0.245 27)" }}>
+            Sources:
+          </span>
+          {activeOutlets.map((name) => {
+            const src = RSS_SOURCES.find((s) => s.name === name);
+            return (
+              <a
+                key={name}
+                href={src?.url ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
+              >
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${src?.url ?? ""}&sz=16`}
+                  alt=""
+                  className="h-3.5 w-3.5 rounded-sm"
+                  loading="lazy"
+                />
+                {name}
+              </a>
+            );
+          })}
+          <span className="ml-auto text-[10px] font-num opacity-60">Third-party aggregated content · Updated every 15 min</span>
+        </div>
+      )}
+
+      {/* Featured hero */}
+      {featuredNews && !isLoading && (
         <div className="mb-10">
           <div
             className="group relative overflow-hidden transition-all duration-300 hover:border-red-500/30"
@@ -291,7 +420,6 @@ function NewsPage() {
               boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
             }}
           >
-            {/* Top accent gradient bar */}
             <div
               className="h-1 w-full"
               style={{
@@ -300,8 +428,7 @@ function NewsPage() {
             />
 
             <div className="p-6 sm:p-8">
-              {/* Header tags */}
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
                 <div className="flex items-center gap-2">
                   <span
                     className="flex items-center gap-1.5 text-[11px] font-bold font-display uppercase tracking-wider px-2.5 py-1 rounded"
@@ -311,143 +438,92 @@ function NewsPage() {
                       border: "1px solid oklch(0.60 0.245 27 / 0.4)",
                     }}
                   >
-                    <Sparkles className="h-3 w-3" /> Top Headline
+                    <Zap className="h-3 w-3" /> Top Story
                   </span>
-                  <span
-                    className="text-xs font-display uppercase font-semibold px-2.5 py-1 rounded"
-                    style={{ background: "oklch(1 0 0 / 6%)", color: "oklch(0.65 0.01 255)" }}
-                  >
-                    {featuredNews.category}
-                  </span>
+                  <CategoryBadge category={featuredNews.category} />
                 </div>
-                <span className="font-num text-xs text-muted-foreground">{featuredNews.date}</span>
+                <div className="flex items-center gap-3">
+                  <SourceBadge item={featuredNews} />
+                  <span className="font-num text-xs text-muted-foreground">{featuredNews.date}</span>
+                </div>
               </div>
 
-              {/* Grid content */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 <div className="lg:col-span-8 space-y-4">
                   <h2 className="font-display font-black text-xl sm:text-2xl lg:text-3xl uppercase leading-tight text-foreground">
                     {featuredNews.title}
                   </h2>
-
-                  {/* Quote block */}
-                  <div
-                    className="relative p-4 sm:p-5 rounded-lg border my-2"
-                    style={{
-                      background: "oklch(0.10 0.003 255 / 0.6)",
-                      borderColor: "oklch(1 0 0 / 8%)",
-                    }}
-                  >
-                    <MessageSquareQuote
-                      className="absolute right-3 top-3 h-8 w-8 opacity-10 pointer-events-none"
-                      style={{ color: featuredNews.teamColor || "oklch(0.60 0.245 27)" }}
-                    />
-                    <p className="text-sm sm:text-base italic font-medium leading-relaxed text-foreground/90">
-                      &ldquo;{featuredNews.quote}&rdquo;
-                    </p>
-                    <div className="mt-3 flex items-center justify-between text-xs font-num" style={{ color: "oklch(0.55 0.01 255)" }}>
-                      <span>📍 {featuredNews.quoteContext}</span>
-                      {featuredNews.sentiment && (
-                        <span className="font-semibold text-primary">Tone: {featuredNews.sentiment}</span>
-                      )}
-                    </div>
-                  </div>
-
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "oklch(0.60 0.01 255)" }}>
-                    {featuredNews.subtitle}
+                  <p className="text-sm sm:text-base leading-relaxed" style={{ color: "oklch(0.72 0.008 255)" }}>
+                    {featuredNews.excerpt}
                   </p>
-                </div>
-
-                {/* Speaker profile column */}
-                <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center text-center lg:text-right border-t lg:border-t-0 lg:border-l pt-6 lg:pt-0 lg:pl-6 border-white/5">
-                  <div className="relative mb-3">
-                    {featuredNews.imageUrl ? (
-                      <img
-                        src={featuredNews.imageUrl}
-                        alt=""
-                        className="h-28 w-44 object-cover rounded-md border"
-                        style={{ borderColor: featuredNews.teamColor || "oklch(0.60 0.245 27)" }}
-                      />
-                    ) : featuredNews.speakerCode && getHDDriverPhoto(featuredNews.speakerCode) ? (
-                      <img
-                        src={getHDDriverPhoto(featuredNews.speakerCode)}
-                        alt={featuredNews.speaker}
-                        className="h-24 w-24 object-contain rounded-full border-2 p-1"
-                        style={{
-                          borderColor: featuredNews.teamColor || "oklch(0.60 0.245 27)",
-                          background: "oklch(0.12 0.004 255)",
-                        }}
-                      />
-                    ) : (
-                      <div
-                        className="h-20 w-20 rounded-full flex items-center justify-center font-display font-bold text-xl uppercase border-2"
-                        style={{
-                          borderColor: featuredNews.teamColor || "oklch(0.60 0.245 27)",
-                          background: "oklch(0.20 0.01 255)",
-                        }}
-                      >
-                        {featuredNews.speaker.substring(0, 2)}
-                      </div>
-                    )}
-                  </div>
-
-                  <h3 className="font-display font-bold text-base uppercase text-foreground">
-                    {featuredNews.speaker}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">{featuredNews.speakerRole}</p>
-
-                  <button
-                    onClick={() => setSelectedNewsId(featuredNews.id)}
-                    className="mt-4 inline-flex items-center gap-2 font-display text-xs font-bold uppercase px-4 py-2.5 rounded transition-all hover:brightness-125"
+                  <a
+                    href={featuredNews.articleUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-display text-xs font-bold uppercase px-4 py-2.5 rounded transition-all hover:brightness-125"
                     style={{
                       background: "oklch(0.60 0.245 27)",
                       color: "#ffffff",
                       letterSpacing: "0.08em",
                     }}
                   >
-                    Full Statement &amp; Article <ChevronRight className="h-3.5 w-3.5" />
-                  </button>
+                    Read Full Article <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 </div>
+
+                {featuredNews.imageUrl && (
+                  <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l pt-5 lg:pt-0 lg:pl-6 border-white/5">
+                    <img
+                      src={featuredNews.imageUrl}
+                      alt=""
+                      className="w-full h-48 object-cover rounded-lg"
+                      style={{ border: `1px solid ${featuredNews.teamColor || "oklch(1 0 0 / 10%)"}` }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Filter and Search Bar */}
+      {/* Filters + Search */}
       <div className="mb-8 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          {/* Category Tabs */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
-            <span className="text-xs font-display font-bold uppercase mr-1 flex items-center gap-1 text-muted-foreground">
+            <span className="text-xs font-display font-bold uppercase mr-1 flex items-center gap-1 text-muted-foreground shrink-0">
               <Filter className="h-3.5 w-3.5" /> Filter:
             </span>
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`shrink-0 rounded px-3 py-1.5 font-display text-xs font-bold uppercase transition-all ${
-                  selectedCategory === cat
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground"
-                }`}
-                style={{ letterSpacing: "0.05em" }}
-              >
-                {cat}
-              </button>
-            ))}
+            {CATEGORIES.map((cat) => {
+              const Icon = CATEGORY_ICONS[cat];
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`shrink-0 rounded px-3 py-1.5 font-display text-xs font-bold uppercase transition-all flex items-center gap-1.5 ${
+                    selectedCategory === cat
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground"
+                  }`}
+                  style={{ letterSpacing: "0.05em" }}
+                >
+                  <Icon className="h-3 w-3" />
+                  {cat}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Search Box */}
           <div className="relative w-full max-w-xs shrink-0">
             <Search
               className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
               style={{ color: "oklch(0.50 0.010 255)" }}
             />
             <input
+              id="news-search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search driver, quote, topic…"
+              placeholder="Search headline, team, source…"
               className="w-full py-2 pl-9 pr-8 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               style={{
                 background: "oklch(0.155 0.006 255)",
@@ -469,51 +545,144 @@ function NewsPage() {
 
         {query && (
           <div className="text-xs text-muted-foreground">
-            Found {filteredNews.length} news entry matching &ldquo;{query}&rdquo;
+            {filteredNews.length} result{filteredNews.length !== 1 ? "s" : ""} for &ldquo;{query}&rdquo;
           </div>
         )}
       </div>
 
-      {/* News Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredNews.map((news) => (
-          <NewsCard
-            key={news.id}
-            news={news}
-            isPlaying={isPlayingAudio === news.id}
-            onToggleAudio={(e) => toggleAudioSimulation(news.id, e)}
-            onOpen={() => setSelectedNewsId(news.id)}
-          />
-        ))}
-      </div>
-
-      {filteredNews.length === 0 && (
-        <ErrorNote message={`No news or driver quotes found matching "${query}".`} />
+      {/* Loading skeleton */}
+      {isLoading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 9 }).map((_, i) => (
+            <div
+              key={i}
+              className="overflow-hidden"
+              style={{
+                background: "oklch(0.155 0.006 255)",
+                border: "1px solid oklch(1 0 0 / 7%)",
+                borderRadius: "0.5rem",
+              }}
+            >
+              <Skeleton className="h-40 w-full" />
+              <div className="p-5 space-y-3">
+                <Skeleton className="h-3 w-24" />
+                <Skeleton className="h-5 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+                <Skeleton className="h-4 w-4/6" />
+                <Skeleton className="h-3 w-32 mt-2" />
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
-      {/* News Detail Modal */}
-      {activeModalNews && (
-        <NewsModal news={activeModalNews} onClose={() => setSelectedNewsId(null)} />
+      {/* Error state */}
+      {isError && !isLoading && (
+        <div className="max-w-lg mx-auto mt-8">
+          <ErrorNote
+            message="Unable to load the news feed. All RSS sources failed to respond. Check your connection and try again — no placeholder content will be shown."
+            onRetry={() => refetch()}
+          />
+          <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+            <AlertCircle className="h-3.5 w-3.5" />
+            Sources attempted: {RSS_SOURCES.map((s) => s.name).join(", ")}
+          </div>
+        </div>
+      )}
+
+      {/* News grid */}
+      {!isLoading && !isError && (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredNews.map((news) => (
+              <NewsCard key={news.id} news={news} onOpen={() => setSelectedId(news.id)} />
+            ))}
+          </div>
+
+          {filteredNews.length === 0 && newsItems.length > 0 && (
+            <div className="max-w-md mx-auto mt-8">
+              <ErrorNote
+                message={
+                  query
+                    ? `No articles found matching "${query}".`
+                    : `No articles in the "${selectedCategory}" category yet. Try refreshing or selecting a different filter.`
+                }
+              />
+            </div>
+          )}
+
+          {newsItems.length === 0 && !isError && (
+            <div className="max-w-md mx-auto mt-8">
+              <ErrorNote
+                message="The feed returned no articles. Try refreshing."
+                onRetry={() => refetch()}
+              />
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Modal */}
+      {activeModal && (
+        <NewsModal news={activeModal} onClose={() => setSelectedId(null)} />
       )}
     </main>
   );
 }
 
-function NewsCard({
-  news,
-  isPlaying,
-  onToggleAudio,
-  onOpen,
-}: {
-  news: NewsItem;
-  isPlaying: boolean;
-  onToggleAudio: (e: React.MouseEvent) => void;
-  onOpen: () => void;
-}) {
-  const driverPhoto = news.speakerCode ? getHDDriverPhoto(news.speakerCode) : "";
+// ---------------------------------------------------------------------------
+// Helpers: CategoryBadge, SourceBadge
+// ---------------------------------------------------------------------------
 
+function CategoryBadge({ category }: { category: Exclude<NewsCategory, "All"> }) {
   return (
-    <div
+    <span
+      className="text-[10px] font-display font-bold uppercase px-2.5 py-1 rounded"
+      style={{
+        background: "oklch(1 0 0 / 5%)",
+        border: "1px solid oklch(1 0 0 / 8%)",
+        color: "oklch(0.60 0.245 27)",
+      }}
+    >
+      {category}
+    </span>
+  );
+}
+
+function SourceBadge({ item }: { item: RealNewsItem }) {
+  const src = RSS_SOURCES.find((s) => s.name === item.sourceName);
+  return (
+    <a
+      href={src?.url ?? "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => e.stopPropagation()}
+      className="inline-flex items-center gap-1.5 text-[10px] font-num font-semibold uppercase tracking-wide px-2 py-0.5 rounded transition-colors hover:bg-white/10"
+      style={{
+        background: "oklch(1 0 0 / 4%)",
+        border: "1px solid oklch(1 0 0 / 7%)",
+        color: "oklch(0.60 0.01 255)",
+      }}
+      title={`View on ${item.sourceName}`}
+    >
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${src?.url ?? ""}&sz=16`}
+        alt=""
+        className="h-3 w-3 rounded-sm"
+        loading="lazy"
+      />
+      {item.sourceName}
+    </a>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// NewsCard
+// ---------------------------------------------------------------------------
+
+function NewsCard({ news, onOpen }: { news: RealNewsItem; onOpen: () => void }) {
+  return (
+    <article
       onClick={onOpen}
       className="group relative flex flex-col overflow-hidden text-left transition-all duration-200 hover:-translate-y-1 cursor-pointer"
       style={{
@@ -522,129 +691,58 @@ function NewsCard({
         borderRadius: "0.5rem",
       }}
     >
-      {/* Left accent team color stripe */}
+      {/* Left team-color accent stripe */}
       <div
         className="absolute left-0 top-0 bottom-0 w-[3px]"
         style={{ background: news.teamColor || "oklch(0.60 0.245 27)" }}
       />
 
+      {/* Article image */}
       {news.imageUrl && (
-        <div className="h-40 w-full overflow-hidden bg-black/40 relative">
+        <div className="h-40 w-full overflow-hidden bg-black/40 relative shrink-0">
           <img
             src={news.imageUrl}
             alt=""
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          {/* Source badge overlaid on image */}
+          <div className="absolute bottom-2 right-2">
+            <SourceBadge item={news} />
+          </div>
         </div>
       )}
 
       <div className="p-5 pl-6 flex flex-1 flex-col justify-between space-y-4">
-        {/* Card Header */}
         <div>
+          {/* Category + date row */}
           <div className="flex items-center justify-between gap-2 mb-3">
-            <span
-              className="text-[10px] font-display font-bold uppercase px-2 py-0.5 rounded"
-              style={{
-                background: "oklch(1 0 0 / 5%)",
-                border: "1px solid oklch(1 0 0 / 8%)",
-                color: "oklch(0.60 0.245 27)",
-              }}
-            >
-              {news.category}
-            </span>
-            <span className="font-num text-[11px]" style={{ color: "oklch(0.50 0.01 255)" }}>
-              {news.date}
-            </span>
-          </div>
-
-          {/* Speaker info */}
-          <div className="flex items-center gap-3 mb-3">
-            {driverPhoto ? (
-              <img
-                src={driverPhoto}
-                alt=""
-                aria-hidden
-                className="h-10 w-10 object-contain rounded-full border"
-                style={{
-                  borderColor: news.teamColor || "oklch(0.60 0.245 27)",
-                  background: "oklch(0.12 0.004 255)",
-                }}
-              />
-            ) : (
-              <div
-                className="h-10 w-10 rounded-full flex items-center justify-center font-display font-bold text-xs uppercase"
-                style={{
-                  background: "oklch(0.20 0.01 255)",
-                  color: news.teamColor || "#ffffff",
-                }}
-              >
-                {news.speaker.substring(0, 2)}
-              </div>
-            )}
-            <div>
-              <h4 className="font-display font-bold text-sm text-foreground uppercase leading-tight">
-                {news.speaker}
-              </h4>
-              <p className="text-[11px] line-clamp-1" style={{ color: "oklch(0.52 0.01 255)" }}>
-                {news.speakerRole}
-              </p>
+            <CategoryBadge category={news.category} />
+            <div className="flex items-center gap-2">
+              {!news.imageUrl && <SourceBadge item={news} />}
+              <span className="font-num text-[11px]" style={{ color: "oklch(0.50 0.01 255)" }}>
+                {news.date}
+              </span>
             </div>
           </div>
 
-          {/* Article Title */}
+          {/* Headline */}
           <h3 className="font-display font-bold text-base text-foreground group-hover:text-primary transition-colors leading-snug mb-3">
             {news.title}
           </h3>
 
-          {/* Quote Speech Bubble */}
-          <div
-            className="p-3 rounded text-xs italic leading-relaxed border relative"
-            style={{
-              background: "oklch(0.125 0.004 255)",
-              borderColor: "oklch(1 0 0 / 5%)",
-              color: "oklch(0.80 0.005 255)",
-            }}
+          {/* Excerpt — plain text, no fabricated quotes */}
+          <p
+            className="text-xs leading-relaxed line-clamp-4"
+            style={{ color: "oklch(0.68 0.008 255)" }}
           >
-            &ldquo;{news.quote}&rdquo;
-          </div>
+            {news.excerpt}
+          </p>
         </div>
 
-        {/* Audio simulator bar & tags */}
+        {/* Footer */}
         <div className="space-y-3 pt-2">
-          {/* Simulated Audio Bar */}
-          <div
-            onClick={onToggleAudio}
-            className="flex items-center justify-between px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10"
-            style={{
-              background: "oklch(0.12 0.004 255)",
-              border: "1px solid oklch(1 0 0 / 6%)",
-            }}
-          >
-            <div className="flex items-center gap-2">
-              <Volume2
-                className={`h-3.5 w-3.5 ${isPlaying ? "text-primary animate-pulse" : "text-muted-foreground"}`}
-              />
-              <span className="font-num text-[11px] uppercase tracking-wide">
-                {isPlaying ? "Playing Radio Clip..." : "Radio Audio Clip"}
-              </span>
-            </div>
-
-            {/* Soundwave bars */}
-            <div className="flex items-center gap-0.5">
-              {[40, 70, 30, 90, 50, 80, 40].map((h, idx) => (
-                <span
-                  key={idx}
-                  className="w-0.5 bg-primary rounded-full transition-all duration-300"
-                  style={{
-                    height: isPlaying ? `${Math.floor(Math.random() * 12) + 4}px` : `${h * 0.12}px`,
-                    opacity: isPlaying ? 1 : 0.4,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-
           {/* Tags */}
           <div className="flex flex-wrap items-center gap-1.5">
             {news.tags.slice(0, 3).map((tag) => (
@@ -661,25 +759,32 @@ function NewsCard({
             ))}
           </div>
 
-          {/* Card footer */}
-          <div className="flex items-center justify-between pt-2 border-t border-white/5 text-xs font-display font-bold uppercase text-primary">
-            <span>Read Full Statement →</span>
-            <span className="font-num text-[10px] font-normal text-muted-foreground">{news.quoteContext.split("·")[0]}</span>
+          {/* CTA */}
+          <div
+            className="flex items-center justify-between pt-2 border-t border-white/5 text-xs font-display font-bold uppercase"
+            style={{ color: "oklch(0.60 0.245 27)" }}
+          >
+            <span className="flex items-center gap-1">
+              <ChevronRight className="h-3.5 w-3.5" /> Read Full Article
+            </span>
+            <ExternalLink className="h-3 w-3 opacity-50" />
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
-function NewsModal({ news, onClose }: { news: NewsItem; onClose: () => void }) {
-  const driverPhoto = news.speakerCode ? getHDDriverPhoto(news.speakerCode) : "";
-  const [isPlaying, setIsPlaying] = useState(false);
+// ---------------------------------------------------------------------------
+// NewsModal
+// ---------------------------------------------------------------------------
 
+function NewsModal({ news, onClose }: { news: RealNewsItem; onClose: () => void }) {
   return (
     <div
       role="dialog"
       aria-modal="true"
+      aria-label={news.title}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       style={{ background: "oklch(0.08 0.003 255 / 0.88)", backdropFilter: "blur(16px)" }}
       onClick={onClose}
@@ -704,114 +809,71 @@ function NewsModal({ news, onClose }: { news: NewsItem; onClose: () => void }) {
             onClick={onClose}
             className="absolute right-4 top-6 rounded p-1.5 transition-colors hover:bg-white/10"
             style={{ border: "1px solid oklch(1 0 0 / 10%)" }}
-            aria-label="Close"
+            aria-label="Close article preview"
           >
             <X className="h-4 w-4" />
           </button>
 
-          {/* Modal Header */}
-          <div className="flex items-start gap-4 mb-5">
-            {driverPhoto ? (
+          {/* Article image */}
+          {news.imageUrl && (
+            <div className="mb-6 overflow-hidden rounded-lg">
               <img
-                src={driverPhoto}
+                src={news.imageUrl}
                 alt=""
-                className="h-16 w-16 object-contain rounded-full border-2 shrink-0"
-                style={{
-                  borderColor: news.teamColor || "oklch(0.60 0.245 27)",
-                  background: "oklch(0.12 0.004 255)",
-                }}
+                className="w-full h-52 object-cover"
               />
-            ) : (
-              <div
-                className="h-16 w-16 rounded-full flex items-center justify-center font-display font-bold text-xl uppercase border-2 shrink-0"
-                style={{
-                  borderColor: news.teamColor || "oklch(0.60 0.245 27)",
-                  background: "oklch(0.20 0.01 255)",
-                }}
-              >
-                {news.speaker.substring(0, 2)}
-              </div>
-            )}
-
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <EyebrowRed>{news.speakerTeam}</EyebrowRed>
-                <span className="text-xs text-muted-foreground">· {news.date}</span>
-              </div>
-              <h2 className="font-display font-black text-xl sm:text-2xl uppercase leading-tight text-foreground">
-                {news.title}
-              </h2>
-              <p className="text-xs text-muted-foreground mt-1">{news.speaker} — {news.speakerRole}</p>
-            </div>
-          </div>
-
-          {/* Quote Callout Box */}
-          <div
-            className="p-5 rounded-lg border my-6 relative overflow-hidden"
-            style={{
-              background: "oklch(0.125 0.004 255)",
-              borderColor: news.teamColor || "oklch(0.60 0.245 27 / 0.4)",
-            }}
-          >
-            <MessageSquareQuote
-              className="absolute right-4 top-4 h-12 w-12 opacity-10 pointer-events-none text-primary"
-            />
-            <div className="text-xs font-display uppercase tracking-wider font-bold text-primary mb-2 flex items-center gap-1.5">
-              <Radio className="h-3.5 w-3.5" /> What They Spoke
-            </div>
-            <p className="text-base sm:text-lg italic font-medium leading-relaxed text-foreground">
-              &ldquo;{news.quote}&rdquo;
-            </p>
-
-            <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between text-xs font-num text-muted-foreground gap-2">
-              <span>📍 {news.quoteContext}</span>
-
-              {/* Audio Playback Controls */}
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center gap-2 px-3 py-1 rounded transition-colors"
-                style={{
-                  background: isPlaying ? "oklch(0.60 0.245 27)" : "oklch(1 0 0 / 6%)",
-                  color: isPlaying ? "#ffffff" : "oklch(0.90 0.005 255)",
-                }}
-              >
-                <Volume2 className={`h-3.5 w-3.5 ${isPlaying ? "animate-bounce" : ""}`} />
-                <span className="font-bold uppercase text-[10px]">
-                  {isPlaying ? "Pause Audio" : "Listen to Radio Clip"}
-                </span>
-              </button>
-            </div>
-          </div>
-
-          {/* Full Article Text */}
-          <div className="space-y-4 text-sm leading-relaxed text-foreground/90">
-            <h4 className="font-display font-bold uppercase text-xs tracking-wider text-muted-foreground">
-              Paddock Breakdown &amp; Context
-            </h4>
-            {news.fullArticle.split("\n\n").map((para, idx) => (
-              <p key={idx}>{para}</p>
-            ))}
-          </div>
-
-          {/* External Article Link */}
-          {news.externalUrl && news.externalUrl !== "#" && (
-            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-              <span className="text-xs text-muted-foreground flex items-center gap-1">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Sourced from Sky Sports F1
-              </span>
-              <a
-                href={news.externalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-display font-bold uppercase text-primary hover:underline"
-              >
-                Read Source Article <ExternalLink className="h-3.5 w-3.5" />
-              </a>
             </div>
           )}
 
+          {/* Header */}
+          <div className="mb-5">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <CategoryBadge category={news.category} />
+              <SourceBadge item={news} />
+              <span className="text-xs text-muted-foreground font-num">· {news.date}</span>
+            </div>
+
+            <h2 className="font-display font-black text-xl sm:text-2xl uppercase leading-tight text-foreground">
+              {news.title}
+            </h2>
+          </div>
+
+          {/* Excerpt */}
+          <div
+            className="p-5 rounded-lg border my-6"
+            style={{
+              background: "oklch(0.125 0.004 255)",
+              borderColor: news.teamColor ? `${news.teamColor}40` : "oklch(1 0 0 / 8%)",
+            }}
+          >
+            <div className="text-xs font-display uppercase tracking-wider font-bold text-primary mb-3 flex items-center gap-1.5">
+              <Newspaper className="h-3.5 w-3.5" /> Article Summary
+            </div>
+            <p className="text-sm leading-relaxed" style={{ color: "oklch(0.82 0.005 255)" }}>
+              {news.excerpt}
+            </p>
+            <p className="mt-3 text-xs text-muted-foreground italic">
+              This is an automatically generated excerpt. Read the full article for complete coverage.
+            </p>
+          </div>
+
+          {/* External link — primary CTA */}
+          <a
+            href={news.articleUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center gap-2 font-display text-sm font-bold uppercase px-6 py-3 rounded transition-all hover:brightness-125 mb-6"
+            style={{
+              background: "oklch(0.60 0.245 27)",
+              color: "#ffffff",
+              letterSpacing: "0.08em",
+            }}
+          >
+            Read Full Article on {news.sourceName} <ExternalLink className="h-4 w-4" />
+          </a>
+
           {/* Tags */}
-          <div className="mt-6 pt-4 border-t border-white/5 flex flex-wrap items-center gap-2">
+          <div className="pt-4 border-t border-white/5 flex flex-wrap items-center gap-2">
             <span className="text-xs font-display font-bold uppercase text-muted-foreground flex items-center gap-1">
               <Tag className="h-3.5 w-3.5" /> Tags:
             </span>
@@ -830,8 +892,24 @@ function NewsModal({ news, onClose }: { news: NewsItem; onClose: () => void }) {
             ))}
           </div>
 
-          {/* Close Button */}
-          <div className="mt-8 flex justify-end">
+          {/* Attribution notice */}
+          <div
+            className="mt-5 flex items-start gap-2 p-3 rounded text-xs"
+            style={{
+              background: "oklch(1 0 0 / 3%)",
+              border: "1px solid oklch(1 0 0 / 6%)",
+              color: "oklch(0.50 0.01 255)",
+            }}
+          >
+            <Rss className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+            <span>
+              Content sourced from <strong style={{ color: "oklch(0.65 0.01 255)" }}>{news.sourceName}</strong>. This app aggregates
+              third-party RSS feeds and does not produce original reporting. All rights belong to the
+              respective publishers.
+            </span>
+          </div>
+
+          <div className="mt-6 flex justify-end">
             <button
               onClick={onClose}
               className="font-display text-xs font-bold uppercase px-5 py-2.5 rounded transition-colors hover:bg-white/10"
@@ -840,7 +918,7 @@ function NewsModal({ news, onClose }: { news: NewsItem; onClose: () => void }) {
                 border: "1px solid oklch(1 0 0 / 10%)",
               }}
             >
-              Close Statement
+              Close
             </button>
           </div>
         </div>
