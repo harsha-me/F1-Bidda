@@ -8,11 +8,13 @@ const links = [
   { to: "/races", label: "Races" },
   { to: "/circuits", label: "Circuits" },
   { to: "/drivers", label: "Drivers" },
+  { to: "/teams", label: "Teams" },
   { to: "/news", label: "News" },
   { to: "/compare", label: "Compare" },
   { to: "/f1memes", label: "Memes" },
   { to: "/strategy", label: "Strategy" },
 ] as const;
+
 
 export function TopNav() {
   const [open, setOpen] = useState(false);

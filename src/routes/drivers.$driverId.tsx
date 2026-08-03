@@ -225,8 +225,8 @@ function DriverDetail() {
               </div>
             </div>
 
-            {/* Championship badge */}
-            <div className="mt-6">
+            {/* Championship badge + View Team link */}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
               <span
                 className="inline-flex items-center font-display text-sm font-bold uppercase px-4 py-2"
                 style={{
@@ -239,7 +239,24 @@ function DriverDetail() {
               >
                 P{row.position} Championship
               </span>
+              {row.driver.constructorId && (
+                <Link
+                  to="/teams/$teamId"
+                  params={{ teamId: row.driver.constructorId }}
+                  className="inline-flex items-center gap-1.5 font-display text-sm font-bold uppercase px-4 py-2 transition-all hover:brightness-110"
+                  style={{
+                    background: `${teamColor}15`,
+                    border: `1px solid ${teamColor}40`,
+                    color: teamColor,
+                    borderRadius: "0.375rem",
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  {row.driver.team} →
+                </Link>
+              )}
             </div>
+
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ import {
   fetchSessionDrivers,
   fetchStints,
   fetchTelemetry,
+  fetchConstructorPointsProgression,
 } from "./f1-data";
 
 const STATIC_STALE = 60 * 60_000;
@@ -57,6 +58,14 @@ export const seasonDriversQuery = (season: number) =>
     queryKey: ["season-drivers", season],
     queryFn: () => fetchSeasonDrivers(season),
     staleTime: MED_STALE,
+  });
+
+export const teamPointsProgressionQuery = (season: number, constructorId: string) =>
+  queryOptions({
+    queryKey: ["constructor-points-progression", season, constructorId],
+    queryFn: () => fetchConstructorPointsProgression(season, constructorId),
+    staleTime: MED_STALE,
+    enabled: !!constructorId,
   });
 
 export const raceQuery = (raceId: string) =>

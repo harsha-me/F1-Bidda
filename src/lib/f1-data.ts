@@ -95,10 +95,18 @@ export interface StandingRow {
 export interface ConstructorRow {
   position: number;
   team: string;
+  constructorId: string;
   color: string;
   points: number;
   wins: number;
   delta: number;
+}
+
+export interface ConstructorRacePoints {
+  round: number;
+  raceName: string;
+  points: number;      // points earned this round
+  cumulative: number;  // running total
 }
 
 export interface ResultRow {
@@ -218,11 +226,42 @@ export async function fetchConstructorStandings(season: number): Promise<Constru
   return list.map((row: any, i: number) => ({
     position: Number(row.position ?? i + 1),
     team: row?.Constructor?.name ?? "",
+    constructorId: row?.Constructor?.constructorId ?? "",
     color: teamColor(row?.Constructor?.constructorId),
     points: Number(row.points ?? 0),
     wins: Number(row.wins ?? 0),
     delta: 0,
   }));
+}
+
+/**
+ * Returns cumulative constructor championship points after each completed race.
+ * Fetches all race results for the constructor and sums points from both drivers per round.
+ */
+export async function fetchConstructorPointsProgression(
+  season: number,
+  constructorId: string,
+): Promise<ConstructorRacePoints[]> {
+  if (!constructorId) return [];
+  const data = await cachedFetch<any>(
+    `${JOLP}/${season}/constructors/${constructorId}/results.json?limit=200`,
+    TTL_MED,
+  );
+  const races: any[] = data?.MRData?.RaceTable?.Races ?? [];
+  let cumulative = 0;
+  return races.map((race) => {
+    const roundPts = (race.Results ?? []).reduce(
+      (s: number, r: any) => s + Number(r.points ?? 0),
+      0,
+    );
+    cumulative += roundPts;
+    return {
+      round: Number(race.round),
+      raceName: String(race.raceName ?? "").replace(/\s*Grand Prix$/i, " GP").trim(),
+      points: roundPts,
+      cumulative,
+    };
+  });
 }
 
 // Derive driver list for a season from standings (no separate roster endpoint needed).

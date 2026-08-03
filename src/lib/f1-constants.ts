@@ -20,6 +20,34 @@ export const TEAM_COLORS: Record<string, string> = {
 
 export const TEAM_COLOR_FALLBACK = "#8A8A8A";
 
+// Maps the human-readable team name returned by Jolpica → constructorId key
+// used in TEAM_COLORS and teamHistory.json. Update when teams rename.
+export const TEAM_NAME_TO_CONSTRUCTOR_ID: Record<string, string> = {
+  McLaren: "mclaren",
+  Ferrari: "ferrari",
+  "Red Bull": "red_bull",
+  "Red Bull Racing": "red_bull",
+  Mercedes: "mercedes",
+  "Aston Martin": "aston_martin",
+  Alpine: "alpine",
+  Williams: "williams",
+  // Racing Bulls (formerly AlphaTauri/Toro Rosso)
+  "Racing Bulls": "rb",
+  RB: "rb",
+  Haas: "haas",
+  "Haas F1 Team": "haas",
+  Sauber: "sauber",
+  "Kick Sauber": "sauber",
+  Cadillac: "cadillac",
+  "Cadillac F1": "cadillac",
+};
+
+export function teamNameToConstructorId(teamName: string): string {
+  return TEAM_NAME_TO_CONSTRUCTOR_ID[teamName] ?? teamName.toLowerCase().replace(/\s+/g, "_");
+}
+
+
+
 export function teamColor(constructorId?: string | null): string {
   if (!constructorId) return TEAM_COLOR_FALLBACK;
   return TEAM_COLORS[constructorId] ?? TEAM_COLOR_FALLBACK;

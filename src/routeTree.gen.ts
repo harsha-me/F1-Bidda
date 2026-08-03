@@ -19,10 +19,12 @@ import { Route as NewsRouteImport } from './routes/news'
 import { Route as RacesRouteImport } from './routes/races'
 import { Route as SeasonRouteImport } from './routes/season'
 import { Route as StrategyRouteImport } from './routes/strategy'
+import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as DriversDriverIdRouteImport } from './routes/drivers.$driverId'
 import { Route as RaceRaceIdRouteImport } from './routes/race.$raceId'
+import { Route as TeamsTeamIdRouteImport } from './routes/teams.$teamId'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const IndexRoute = IndexRouteImport.update({
@@ -75,6 +77,11 @@ const StrategyRoute = StrategyRouteImport.update({
   path: '/strategy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamsRoute = TeamsRouteImport.update({
+  id: '/teams',
+  path: '/teams',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93ListToolsRoute =
   Char91DotmcpChar93ListToolsRouteImport.update({
     id: '/.mcp/list-tools',
@@ -97,6 +104,11 @@ const RaceRaceIdRoute = RaceRaceIdRouteImport.update({
   path: '/race/$raceId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamsTeamIdRoute = TeamsTeamIdRouteImport.update({
+  id: '/$teamId',
+  path: '/$teamId',
+  getParentRoute: () => TeamsRoute,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -115,10 +127,12 @@ export interface FileRoutesByFullPath {
   '/races': typeof RacesRoute
   '/season': typeof SeasonRoute
   '/strategy': typeof StrategyRoute
+  '/teams': typeof TeamsRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/drivers/$driverId': typeof DriversDriverIdRoute
   '/race/$raceId': typeof RaceRaceIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
@@ -132,10 +146,12 @@ export interface FileRoutesByTo {
   '/races': typeof RacesRoute
   '/season': typeof SeasonRoute
   '/strategy': typeof StrategyRoute
+  '/teams': typeof TeamsRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/drivers/$driverId': typeof DriversDriverIdRoute
   '/race/$raceId': typeof RaceRaceIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
@@ -150,10 +166,12 @@ export interface FileRoutesById {
   '/races': typeof RacesRoute
   '/season': typeof SeasonRoute
   '/strategy': typeof StrategyRoute
+  '/teams': typeof TeamsRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/drivers/$driverId': typeof DriversDriverIdRoute
   '/race/$raceId': typeof RaceRaceIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
@@ -169,10 +187,12 @@ export interface FileRouteTypes {
     | '/races'
     | '/season'
     | '/strategy'
+    | '/teams'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/drivers/$driverId'
     | '/race/$raceId'
+    | '/teams/$teamId'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -186,10 +206,12 @@ export interface FileRouteTypes {
     | '/races'
     | '/season'
     | '/strategy'
+    | '/teams'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/drivers/$driverId'
     | '/race/$raceId'
+    | '/teams/$teamId'
     | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
@@ -203,10 +225,12 @@ export interface FileRouteTypes {
     | '/races'
     | '/season'
     | '/strategy'
+    | '/teams'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/drivers/$driverId'
     | '/race/$raceId'
+    | '/teams/$teamId'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
@@ -221,6 +245,7 @@ export interface RootRouteChildren {
   RacesRoute: typeof RacesRoute
   SeasonRoute: typeof SeasonRoute
   StrategyRoute: typeof StrategyRoute
+  TeamsRoute: typeof TeamsRouteWithChildren
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   RaceRaceIdRoute: typeof RaceRaceIdRoute
@@ -299,6 +324,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StrategyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teams': {
+      id: '/teams'
+      path: '/teams'
+      fullPath: '/teams'
+      preLoaderRoute: typeof TeamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/list-tools': {
       id: '/.mcp/list-tools'
       path: '/.mcp/list-tools'
@@ -327,6 +359,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RaceRaceIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teams/$teamId': {
+      id: '/teams/$teamId'
+      path: '/$teamId'
+      fullPath: '/teams/$teamId'
+      preLoaderRoute: typeof TeamsTeamIdRouteImport
+      parentRoute: typeof TeamsRoute
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -348,6 +387,16 @@ const DriversRouteChildren: DriversRouteChildren = {
 const DriversRouteWithChildren =
   DriversRoute._addFileChildren(DriversRouteChildren)
 
+interface TeamsRouteChildren {
+  TeamsTeamIdRoute: typeof TeamsTeamIdRoute
+}
+
+const TeamsRouteChildren: TeamsRouteChildren = {
+  TeamsTeamIdRoute: TeamsTeamIdRoute,
+}
+
+const TeamsRouteWithChildren = TeamsRoute._addFileChildren(TeamsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CircuitsRoute: CircuitsRoute,
@@ -359,6 +408,7 @@ const rootRouteChildren: RootRouteChildren = {
   RacesRoute: RacesRoute,
   SeasonRoute: SeasonRoute,
   StrategyRoute: StrategyRoute,
+  TeamsRoute: TeamsRouteWithChildren,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
