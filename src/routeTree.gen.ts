@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CircuitsRouteImport } from './routes/circuits'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as DriversRouteImport } from './routes/drivers'
+import { Route as F1memesRouteImport } from './routes/f1memes'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as RacesRouteImport } from './routes/races'
@@ -42,6 +43,11 @@ const CompareRoute = CompareRouteImport.update({
 const DriversRoute = DriversRouteImport.update({
   id: '/drivers',
   path: '/drivers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const F1memesRoute = F1memesRouteImport.update({
+  id: '/f1memes',
+  path: '/f1memes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/circuits': typeof CircuitsRoute
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
+  '/f1memes': typeof F1memesRoute
   '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/races': typeof RacesRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/circuits': typeof CircuitsRoute
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
+  '/f1memes': typeof F1memesRoute
   '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/races': typeof RacesRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/circuits': typeof CircuitsRoute
   '/compare': typeof CompareRoute
   '/drivers': typeof DriversRouteWithChildren
+  '/f1memes': typeof F1memesRoute
   '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/races': typeof RacesRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/circuits'
     | '/compare'
     | '/drivers'
+    | '/f1memes'
     | '/mcp'
     | '/news'
     | '/races'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/circuits'
     | '/compare'
     | '/drivers'
+    | '/f1memes'
     | '/mcp'
     | '/news'
     | '/races'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/circuits'
     | '/compare'
     | '/drivers'
+    | '/f1memes'
     | '/mcp'
     | '/news'
     | '/races'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   CircuitsRoute: typeof CircuitsRoute
   CompareRoute: typeof CompareRoute
   DriversRoute: typeof DriversRouteWithChildren
+  F1memesRoute: typeof F1memesRoute
   McpRoute: typeof McpRoute
   NewsRoute: typeof NewsRoute
   RacesRoute: typeof RacesRoute
@@ -242,6 +255,13 @@ declare module '@tanstack/react-router' {
       path: '/drivers'
       fullPath: '/drivers'
       preLoaderRoute: typeof DriversRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/f1memes': {
+      id: '/f1memes'
+      path: '/f1memes'
+      fullPath: '/f1memes'
+      preLoaderRoute: typeof F1memesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -333,6 +353,7 @@ const rootRouteChildren: RootRouteChildren = {
   CircuitsRoute: CircuitsRoute,
   CompareRoute: CompareRoute,
   DriversRoute: DriversRouteWithChildren,
+  F1memesRoute: F1memesRoute,
   McpRoute: McpRoute,
   NewsRoute: NewsRoute,
   RacesRoute: RacesRoute,
