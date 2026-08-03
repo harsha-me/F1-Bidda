@@ -10,6 +10,7 @@ const links = [
   { to: "/drivers", label: "Drivers" },
   { to: "/news", label: "News" },
   { to: "/compare", label: "Compare" },
+  { to: "/f1memes", label: "Memes" },
   { to: "/strategy", label: "Strategy" },
 ] as const;
 
