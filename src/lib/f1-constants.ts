@@ -38,8 +38,11 @@ export const TEAM_NAME_TO_CONSTRUCTOR_ID: Record<string, string> = {
   "Haas F1 Team": "haas",
   Sauber: "sauber",
   "Kick Sauber": "sauber",
+  Audi: "audi",
+  "Audi F1 Team": "audi",
   Cadillac: "cadillac",
   "Cadillac F1": "cadillac",
+  "Cadillac F1 Team": "cadillac",
 };
 
 export function teamNameToConstructorId(teamName: string): string {

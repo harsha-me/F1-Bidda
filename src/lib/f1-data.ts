@@ -19,12 +19,18 @@ async function cachedFetch<T>(url: string, ttlMs: number): Promise<T> {
   const pending = INFLIGHT.get(url);
   if (pending) return pending as Promise<T>;
   const p = (async () => {
-    const res = await fetch(url, { headers: { accept: "application/json" } });
-    if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${url}`);
-    const data = (await res.json()) as T;
-    CACHE.set(url, { ts: Date.now(), ttl: ttlMs, value: data });
-    INFLIGHT.delete(url);
-    return data;
+    try {
+      const res = await fetch(url, {
+        headers: { accept: "application/json" },
+        signal: AbortSignal.timeout(12_000),
+      });
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${url}`);
+      const data = (await res.json()) as T;
+      CACHE.set(url, { ts: Date.now(), ttl: ttlMs, value: data });
+      return data;
+    } finally {
+      INFLIGHT.delete(url);
+    }
   })();
   INFLIGHT.set(url, p);
   return p;
@@ -243,25 +249,30 @@ export async function fetchConstructorPointsProgression(
   constructorId: string,
 ): Promise<ConstructorRacePoints[]> {
   if (!constructorId) return [];
-  const data = await cachedFetch<any>(
-    `${JOLP}/${season}/constructors/${constructorId}/results.json?limit=200`,
-    TTL_MED,
-  );
-  const races: any[] = data?.MRData?.RaceTable?.Races ?? [];
-  let cumulative = 0;
-  return races.map((race) => {
-    const roundPts = (race.Results ?? []).reduce(
-      (s: number, r: any) => s + Number(r.points ?? 0),
-      0,
+  try {
+    const data = await cachedFetch<any>(
+      `${JOLP}/${season}/constructors/${constructorId}/results.json?limit=200`,
+      TTL_MED,
     );
-    cumulative += roundPts;
-    return {
-      round: Number(race.round),
-      raceName: String(race.raceName ?? "").replace(/\s*Grand Prix$/i, " GP").trim(),
-      points: roundPts,
-      cumulative,
-    };
-  });
+    const races: any[] = data?.MRData?.RaceTable?.Races ?? [];
+    let cumulative = 0;
+    return races.map((race) => {
+      const roundPts = (race.Results ?? []).reduce(
+        (s: number, r: any) => s + Number(r.points ?? 0),
+        0,
+      );
+      cumulative += roundPts;
+      return {
+        round: Number(race.round),
+        raceName: String(race.raceName ?? "").replace(/\s*Grand Prix$/i, " GP").trim(),
+        points: roundPts,
+        cumulative,
+      };
+    });
+  } catch (error) {
+    console.warn(`Failed to fetch points progression for ${constructorId}:`, error);
+    return [];
+  }
 }
 
 // Derive driver list for a season from standings (no separate roster endpoint needed).

@@ -129,6 +129,19 @@
     "flag": "🇨🇭",
     "about": "The Hinwil-based team, originally founded by Peter Sauber in 1993, is undergoing a major transformation as it prepares to become the Audi works team. With Mattia Binotto overseeing the transition, the Swiss outfit combines decades of F1 heritage with the backing of a major automotive manufacturer."
   },
+  "audi": {
+    "constructorId": "audi",
+    "fullName": "Audi Revolut F1 Team",
+    "shortName": "Audi",
+    "base": "Hinwil, Switzerland / Neuburg, Germany",
+    "teamPrincipal": "Mattia Binotto",
+    "powerUnit": "Audi",
+    "firstSeason": 2026,
+    "championships": [],
+    "nationality": "German",
+    "flag": "🇩🇪",
+    "about": "Audi enters Formula 1 as a full works team in 2026 after taking full ownership of Sauber. Operating out of Hinwil for chassis development and Neuburg for power units, Audi brings Germany's automotive powerhouse to the pinnacle of modern motorsport."
+  },
   "cadillac": {
     "constructorId": "cadillac",
     "fullName": "Cadillac Formula 1 Team",
