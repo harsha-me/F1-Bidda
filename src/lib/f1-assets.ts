@@ -66,9 +66,14 @@ export function getHDDriverPhoto(driverIdOrCode?: string, fallbackUrl?: string):
   if (HD_DRIVER_PHOTOS[lowerKey]) return HD_DRIVER_PHOTOS[lowerKey];
   if (HD_DRIVER_PHOTOS[rawKey.toUpperCase()]) return HD_DRIVER_PHOTOS[rawKey.toUpperCase()];
 
-  // Try matching surname or substring segment
+  // Match exact surname or token
   const matchKey = Object.keys(HD_DRIVER_PHOTOS).find(
-    (k) => k.endsWith(lowerKey) || lowerKey.endsWith(k) || lowerKey.includes(k) || k.includes(lowerKey)
+    (k) =>
+      k.toLowerCase() === lowerKey ||
+      k.endsWith(lowerKey) ||
+      lowerKey.endsWith(k) ||
+      (lowerKey.length >= 4 && k.includes(lowerKey)) ||
+      (k.length >= 4 && lowerKey.includes(k.toLowerCase()))
   );
   if (matchKey) return HD_DRIVER_PHOTOS[matchKey];
 
@@ -160,7 +165,12 @@ export function getCircuitImageUrl(circuitId?: string): string {
   if (CIRCUIT_PHOTOS[key]) return CIRCUIT_PHOTOS[key];
 
   const matchKey = Object.keys(CIRCUIT_PHOTOS).find(
-    (k) => k.endsWith(key) || key.endsWith(k) || key.includes(k) || k.includes(key)
+    (k) =>
+      k === key ||
+      k.endsWith(key) ||
+      key.endsWith(k) ||
+      (key.length >= 4 && k.includes(key)) ||
+      (k.length >= 4 && key.includes(k))
   );
   if (matchKey) return CIRCUIT_PHOTOS[matchKey];
 
