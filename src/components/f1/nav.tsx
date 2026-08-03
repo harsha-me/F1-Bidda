@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { F1LogoIcon } from "@/components/f1/f1-logo";
+import { F1LogoIcon, F1LogoFull } from "@/components/f1/f1-logo";
 
 const links = [
   { to: "/season", label: "Season" },
@@ -28,15 +28,7 @@ export function TopNav() {
       <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-8 px-4 sm:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-          <div
-            className="grid h-8 w-8 place-items-center transition-transform duration-200 group-hover:scale-105"
-            style={{
-              background: "linear-gradient(135deg, oklch(0.60 0.245 27), oklch(0.48 0.22 18))",
-              clipPath: "polygon(0 0, 100% 0, 100% 75%, 88% 100%, 0 100%)",
-            }}
-          >
-            <F1LogoIcon className="h-4 w-4 text-white" />
-          </div>
+          <F1LogoFull className="h-7 transition-transform duration-200 group-hover:scale-105" />
           <span
             className="font-display text-base font-black uppercase"
             style={{ letterSpacing: "0.1em" }}

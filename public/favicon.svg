@@ -1,3 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <text y=".9em" font-size="90">🏎</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#E10600"/>
+  <g transform="translate(6, 8) scale(0.72)">
+    <!-- F -->
+    <path d="M0 56L10 0H42L39 10H18L15 22H34L31 32H12L6 56H0Z" fill="#fff"/>
+    <!-- 1 speed stripe -->
+    <path d="M44 56L54 0H68L58 56H44Z" fill="#fff"/>
+    <!-- Speed line -->
+    <path d="M72 0L62 56H67L77 0H72Z" fill="#fff" opacity="0.6"/>
+  </g>
 </svg>
