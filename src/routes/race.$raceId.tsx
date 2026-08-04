@@ -27,9 +27,13 @@ import {
   raceResultsQuery,
   stintsQuery,
   qualifyingResultsQuery,
+  pitStopsQuery,
 } from "@/lib/f1-queries";
 import { ChevronLeft } from "lucide-react";
 import qualiHighlights from "@/data/qualiHighlights.json";
+import { LapTimesChart } from "@/components/f1/lap-times-chart";
+import { PositionChangesChart } from "@/components/f1/position-changes-chart";
+import { TireStrategyChart } from "@/components/f1/tire-strategy-chart";
 
 export const Route = createFileRoute("/race/$raceId")({
   loader: ({ params }) => {
@@ -78,10 +82,13 @@ function RacePage() {
   const stintsQ = useQuery(stintsQuery(raceId));
   const qualifyingQ = useQuery(qualifyingResultsQuery(raceId));
 
+  const pitQ = useQuery(pitStopsQuery(raceId));
+
   const race = raceQ.data;
   const results = useMemo(() => resultsQ.data ?? [], [resultsQ.data]);
   const laps = lapsQ.data ?? [];
   const stints = stintsQ.data ?? [];
+  const pitStops = pitQ.data ?? [];
   const qualifyingResults = useMemo(() => qualifyingQ.data ?? [], [qualifyingQ.data]);
 
   const [mainView, setMainView] = useState<"RACE" | "QUALIFYING">("RACE");
@@ -263,7 +270,7 @@ function RacePage() {
               />
             )}
             {tab === "Lap Times" && (
-              <ChartCard title="Lap Times">
+              <ChartCard title="Lap Times Pace Analysis">
                 {lapsQ.isLoading ? (
                   <Skeleton className="h-[420px] w-full" />
                 ) : lapsQ.isError ? (
@@ -271,41 +278,12 @@ function RacePage() {
                 ) : laps.length === 0 ? (
                   <p className="text-sm text-muted-foreground">No lap data available yet.</p>
                 ) : (
-                  <ResponsiveContainer width="100%" height={420}>
-                    <LineChart data={pivotLaps(laps, "lapTime")}>
-                      <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.06)" />
-                      <XAxis dataKey="lap" stroke="rgba(255,255,255,0.4)" fontSize={11} />
-                      <YAxis
-                        stroke="rgba(255,255,255,0.4)"
-                        fontSize={11}
-                        domain={["auto", "auto"]}
-                        tickFormatter={(v) => v.toFixed(1)}
-                      />
-                      <Tooltip
-                        contentStyle={darkTooltip}
-                        formatter={(v: number) => `${v.toFixed(3)}s`}
-                      />
-                      {activeDrivers
-                        .filter((d) => visible.has(d.code))
-                        .map((d) => (
-                          <Line
-                            key={d.code}
-                            type="monotone"
-                            dataKey={d.code}
-                            stroke={d.teamColor}
-                            dot={false}
-                            strokeWidth={2}
-                            isAnimationActive
-                            animationDuration={800}
-                          />
-                        ))}
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <LapTimesChart laps={laps} activeDrivers={activeDrivers} />
                 )}
               </ChartCard>
             )}
             {tab === "Tire Strategy" && (
-              <ChartCard title="Tire Strategy">
+              <ChartCard title="Tire Strategy Breakdown">
                 {stintsQ.isLoading ? (
                   <Skeleton className="h-40 w-full" />
                 ) : stintsQ.isError ? (
@@ -315,58 +293,18 @@ function RacePage() {
                     Tire compound data isn't available for this race from OpenF1.
                   </p>
                 ) : (
-                  <>
-                    <div className="space-y-3">
-                      {activeDrivers
-                        .filter((d) => visible.has(d.code))
-                        .map((d) => {
-                          const driverStints = stints.filter((s) => s.driver === d.code);
-                          const totalLaps = Math.max(
-                            race?.laps ?? 0,
-                            ...driverStints.map((s) => s.endLap),
-                            1,
-                          );
-                          return (
-                            <div key={d.code} className="flex items-center gap-3">
-                              <div className="w-16 shrink-0">
-                                <DriverChip driver={d} showName={false} />
-                              </div>
-                              <div className="relative flex h-8 flex-1 overflow-hidden rounded-md bg-white/5">
-                                {driverStints.map((s, i) => {
-                                  const width = ((s.endLap - s.startLap + 1) / totalLaps) * 100;
-                                  return (
-                                    <div
-                                      key={i}
-                                      className="group relative flex items-center justify-center border-r border-black/40 text-xs font-bold"
-                                      style={{
-                                        width: `${width}%`,
-                                        backgroundColor: COMPOUND_COLOR[s.compound],
-                                        color: s.compound === "HARD" ? "#000" : "#fff",
-                                      }}
-                                      title={`${s.compound} · L${s.startLap}-${s.endLap}`}
-                                    >
-                                      <CompoundBadge compound={s.compound} />
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          );
-                        })}
-                    </div>
-                    <div className="mt-6 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                      {(["SOFT", "MEDIUM", "HARD", "INTER", "WET"] as const).map((c) => (
-                        <div key={c} className="flex items-center gap-1.5">
-                          <CompoundBadge compound={c} /> {c}
-                        </div>
-                      ))}
-                    </div>
-                  </>
+                  <TireStrategyChart
+                    stints={stints}
+                    activeDrivers={activeDrivers}
+                    laps={laps}
+                    pitStops={pitStops}
+                    totalRaceLaps={race?.laps}
+                  />
                 )}
               </ChartCard>
             )}
             {tab === "Positions" && (
-              <ChartCard title="Position Changes">
+              <ChartCard title="Position Changes Tracking">
                 {lapsQ.isLoading ? (
                   <Skeleton className="h-[420px] w-full" />
                 ) : lapsQ.isError ? (
@@ -374,31 +312,11 @@ function RacePage() {
                 ) : laps.length === 0 ? (
                   <p className="text-sm text-muted-foreground">No lap data yet.</p>
                 ) : (
-                  <ResponsiveContainer width="100%" height={420}>
-                    <LineChart data={pivotLaps(laps, "position")}>
-                      <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.06)" />
-                      <XAxis dataKey="lap" stroke="rgba(255,255,255,0.4)" fontSize={11} />
-                      <YAxis
-                        reversed
-                        domain={[1, Math.max(activeDrivers.length, 20)]}
-                        stroke="rgba(255,255,255,0.4)"
-                        fontSize={11}
-                      />
-                      <Tooltip contentStyle={darkTooltip} formatter={(v: number) => `P${v}`} />
-                      {activeDrivers
-                        .filter((d) => visible.has(d.code))
-                        .map((d) => (
-                          <Line
-                            key={d.code}
-                            type="stepAfter"
-                            dataKey={d.code}
-                            stroke={d.teamColor}
-                            dot={false}
-                            strokeWidth={2}
-                          />
-                        ))}
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <PositionChangesChart
+                    laps={laps}
+                    activeDrivers={activeDrivers}
+                    results={results}
+                  />
                 )}
               </ChartCard>
             )}

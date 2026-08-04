@@ -20,6 +20,7 @@ import {
 } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { COMPOUND_COLOR, CURRENT_SEASON, driverByCodeFrom, type Driver } from "@/lib/f1-data";
+import { ChartTakeaway } from "@/components/f1/chart-takeaway";
 import {
   driverStandingsQuery,
   pitStopsQuery,
@@ -199,6 +200,21 @@ function StrategyPage() {
         />
       ) : (
         <>
+          {/* Headline Takeaway */}
+          <ChartTakeaway
+            headline={
+              <span>
+                <strong>💡 Pit Strategy Insight:</strong> Pitting on{" "}
+                <span className="font-bold text-primary">Lap {pitLap}</span>{" "}
+                {positionGain > 0
+                  ? `gains +${positionGain} positions by taking fresh Hard tires in the undercut window.`
+                  : positionGain < 0
+                    ? `loses ${positionGain} position due to pitting into track traffic on older rubber.`
+                    : `maintains current track position while resetting tire wear.`}
+              </span>
+            }
+          />
+
           {/* Stat cards row */}
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard label="Actual Pit Lap" value={actualPit ?? "—"} suffix={`/ ${race?.laps ?? "?"}`} />
@@ -226,19 +242,38 @@ function StrategyPage() {
               padding: "1.25rem",
             }}
           >
-            <div className="mb-5 flex items-end justify-between gap-4">
+            <div className="mb-5 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
                 <EyebrowRed>Simulated pit lap</EyebrowRed>
                 <div className="mt-1.5 flex items-baseline gap-2">
                   <span className="stat-value" style={{ fontSize: "2rem" }}>
-                    L{pitLap}
+                    Lap {pitLap}
                   </span>
                   <span className="text-sm" style={{ color: "oklch(0.55 0.012 255)" }}>
                     {actualPit ? `(actual: L${actualPit})` : "(no pit data)"}
                   </span>
                 </div>
               </div>
-              {d && <DriverChip driver={d} />}
+
+              {/* Strategy window advice badge */}
+              <div className="flex items-center gap-3">
+                <span
+                  className={`rounded-full px-3 py-1 text-xs font-bold ${
+                    pitLap >= 16 && pitLap <= 24
+                      ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                      : pitLap < 16
+                        ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                        : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+                  }`}
+                >
+                  {pitLap >= 16 && pitLap <= 24
+                    ? "🟢 Optimal Undercut Window (Fresh Tires Beat Rivals)"
+                    : pitLap < 16
+                      ? "🟡 Early Pit (Risks Long Second Stint)"
+                      : "🔴 Late Pit (Suffers Severe Tire Degradation)"}
+                </span>
+                {d && <DriverChip driver={d} />}
+              </div>
             </div>
 
             {/* Styled range */}
@@ -259,10 +294,10 @@ function StrategyPage() {
                 className="w-full"
               />
               <div className="mt-2 flex justify-between font-display text-[10px] font-bold uppercase" style={{ color: "oklch(0.48 0.008 255)", letterSpacing: "0.08em" }}>
-                <span>Lap 5</span>
-                <span>Undercut Window</span>
-                <span>Overcut Window</span>
-                <span>Lap {maxLaps}</span>
+                <span>Lap 5 (Early)</span>
+                <span className="text-emerald-400">Undercut Window (L16–L24)</span>
+                <span className="text-amber-400">Overcut Window (L25–L32)</span>
+                <span>Lap {maxLaps} (End)</span>
               </div>
             </div>
           </div>
@@ -277,20 +312,23 @@ function StrategyPage() {
               padding: "1.25rem",
             }}
           >
-            <div className="mb-5 flex items-end justify-between gap-4">
+            <div className="mb-5 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
-                <EyebrowRed className="mb-2">Tire Degradation Curve</EyebrowRed>
-                <h3 className="font-display font-black uppercase text-xl">Compound Performance</h3>
+                <EyebrowRed className="mb-2">Tire Degradation & Cliff Model</EyebrowRed>
+                <h3 className="font-display font-black uppercase text-xl">Compound Pace vs Tire Age</h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Shows how lap times slow down as rubber wears. Dots mark the <strong>tire cliff</strong> (sudden drop in pace).
+                </p>
               </div>
               <div className="flex gap-4 text-xs">
                 {(["SOFT", "MEDIUM", "HARD"] as const).map((c) => (
                   <div key={c} className="flex items-center gap-1.5">
                     <span
-                      className="h-2 w-5 rounded-sm"
+                      className="h-2.5 w-5 rounded-sm"
                       style={{ backgroundColor: COMPOUND_COLOR[c] }}
                     />
                     <span className="font-display font-semibold uppercase" style={{ letterSpacing: "0.05em", color: "oklch(0.65 0.010 255)" }}>
-                      {c}
+                      {c} (Cliff: L{compoundCurves[c].cliff})
                     </span>
                   </div>
                 ))}
@@ -306,7 +344,7 @@ function StrategyPage() {
                   stroke="oklch(1 0 0 / 30%)"
                   fontSize={11}
                   label={{
-                    value: "Tire Age (laps)",
+                    value: "Tire Age (Number of Laps Run)",
                     position: "insideBottom",
                     offset: -5,
                     fill: "oklch(1 0 0 / 35%)",
@@ -318,9 +356,31 @@ function StrategyPage() {
                   stroke="oklch(1 0 0 / 30%)"
                   fontSize={11}
                   domain={["auto", "auto"]}
-                  tickFormatter={(v) => v.toFixed(1)}
+                  tickFormatter={(v) => `${v.toFixed(1)}s`}
                 />
-                <Tooltip contentStyle={darkTooltip} formatter={(v: number) => `${v.toFixed(3)}s`} />
+                <Tooltip
+                  content={({ active, payload, label }) => {
+                    if (!active || !payload || !payload.length) return null;
+                    return (
+                      <div className="rounded-lg border border-white/10 bg-[#141418]/95 p-3 shadow-xl backdrop-blur-md">
+                        <div className="text-xs font-semibold uppercase text-muted-foreground mb-1">
+                          Tire Age: {label} Laps
+                        </div>
+                        <div className="space-y-1 text-xs">
+                          {payload.map((entry: any) => (
+                            <div key={entry.name} className="flex items-center justify-between gap-4">
+                              <div className="flex items-center gap-1.5">
+                                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.stroke }} />
+                                <span className="font-bold">{entry.name}</span>
+                              </div>
+                              <span className="font-num font-semibold text-primary">{entry.value}s/lap</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }}
+                />
                 {(["SOFT", "MEDIUM", "HARD"] as const).map((c) => (
                   <Line
                     key={c}
