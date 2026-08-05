@@ -143,8 +143,20 @@ function ComparePage() {
 
       {/* Driver selectors — overlapping panel style */}
       <div className="grid gap-3 sm:grid-cols-2">
-        <DriverSelector value={a} onChange={setA} label="Driver A" drivers={drivers} accentColor={dA.teamColor} />
-        <DriverSelector value={b} onChange={setB} label="Driver B" drivers={drivers} accentColor={dB.teamColor} />
+        <DriverSelector
+          value={a}
+          onChange={setA}
+          label="Driver A"
+          drivers={drivers}
+          accentColor={dA.teamColor}
+        />
+        <DriverSelector
+          value={b}
+          onChange={setB}
+          label="Driver B"
+          drivers={drivers}
+          accentColor={dB.teamColor}
+        />
       </div>
 
       {/* Charts row */}
@@ -191,10 +203,7 @@ function ComparePage() {
             overflow: "hidden",
           }}
         >
-          <div
-            className="px-5 py-4"
-            style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}
-          >
+          <div className="px-5 py-4" style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}>
             <EyebrowRed>Season {CURRENT_SEASON}</EyebrowRed>
             <h3 className="mt-1 font-display font-black uppercase text-xl">Side by Side</h3>
           </div>
@@ -215,14 +224,40 @@ function ComparePage() {
 
           {/* Stat rows with progress bars */}
           {[
-            { label: "Position", a: rowA?.position ?? "—", b: rowB?.position ?? "—", lowerBetter: true, max: posN },
-            { label: "Points", a: rowA?.points ?? 0, b: rowB?.points ?? 0, lowerBetter: false, max: maxPoints },
-            { label: "Wins", a: rowA?.wins ?? 0, b: rowB?.wins ?? 0, lowerBetter: false, max: maxWins },
+            {
+              label: "Position",
+              a: rowA?.position ?? "—",
+              b: rowB?.position ?? "—",
+              lowerBetter: true,
+              max: posN,
+            },
+            {
+              label: "Points",
+              a: rowA?.points ?? 0,
+              b: rowB?.points ?? 0,
+              lowerBetter: false,
+              max: maxPoints,
+            },
+            {
+              label: "Wins",
+              a: rowA?.wins ?? 0,
+              b: rowB?.wins ?? 0,
+              lowerBetter: false,
+              max: maxWins,
+            },
           ].map((row) => {
             const na = typeof row.a === "number" ? row.a : Number(row.a);
             const nb = typeof row.b === "number" ? row.b : Number(row.b);
-            const pctA = isNaN(na) ? 0 : row.lowerBetter ? ((row.max - na + 1) / row.max) * 100 : (na / row.max) * 100;
-            const pctB = isNaN(nb) ? 0 : row.lowerBetter ? ((row.max - nb + 1) / row.max) * 100 : (nb / row.max) * 100;
+            const pctA = isNaN(na)
+              ? 0
+              : row.lowerBetter
+                ? ((row.max - na + 1) / row.max) * 100
+                : (na / row.max) * 100;
+            const pctB = isNaN(nb)
+              ? 0
+              : row.lowerBetter
+                ? ((row.max - nb + 1) / row.max) * 100
+                : (nb / row.max) * 100;
             const aBetter = !isNaN(na) && !isNaN(nb) && (row.lowerBetter ? na <= nb : na >= nb);
             const bBetter = !isNaN(na) && !isNaN(nb) && (row.lowerBetter ? nb <= na : nb >= na);
 
@@ -233,7 +268,9 @@ function ComparePage() {
                 style={{ borderBottom: "1px solid oklch(1 0 0 / 5%)" }}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs" style={{ color: "oklch(0.55 0.012 255)" }}>{row.label}</span>
+                  <span className="text-xs" style={{ color: "oklch(0.55 0.012 255)" }}>
+                    {row.label}
+                  </span>
                   <div className="flex gap-4">
                     <span
                       className="font-num text-sm font-bold"
@@ -251,16 +288,30 @@ function ComparePage() {
                 </div>
                 {/* Progress bars */}
                 <div className="space-y-1">
-                  <div className="flex h-1.5 overflow-hidden rounded-full" style={{ background: "oklch(1 0 0 / 5%)" }}>
+                  <div
+                    className="flex h-1.5 overflow-hidden rounded-full"
+                    style={{ background: "oklch(1 0 0 / 5%)" }}
+                  >
                     <div
                       className="rounded-full transition-all duration-500"
-                      style={{ width: `${Math.max(2, pctA)}%`, background: dA.teamColor, opacity: aBetter ? 1 : 0.5 }}
+                      style={{
+                        width: `${Math.max(2, pctA)}%`,
+                        background: dA.teamColor,
+                        opacity: aBetter ? 1 : 0.5,
+                      }}
                     />
                   </div>
-                  <div className="flex h-1.5 overflow-hidden rounded-full" style={{ background: "oklch(1 0 0 / 5%)" }}>
+                  <div
+                    className="flex h-1.5 overflow-hidden rounded-full"
+                    style={{ background: "oklch(1 0 0 / 5%)" }}
+                  >
                     <div
                       className="rounded-full transition-all duration-500"
-                      style={{ width: `${Math.max(2, pctB)}%`, background: dB.teamColor, opacity: bBetter ? 1 : 0.5 }}
+                      style={{
+                        width: `${Math.max(2, pctB)}%`,
+                        background: dB.teamColor,
+                        opacity: bBetter ? 1 : 0.5,
+                      }}
                     />
                   </div>
                 </div>
@@ -290,7 +341,9 @@ function ComparePage() {
         </p>
 
         {!lastCompletedRace ? (
-          <p className="text-sm" style={{ color: "oklch(0.52 0.010 255)" }}>No completed race yet this season.</p>
+          <p className="text-sm" style={{ color: "oklch(0.52 0.010 255)" }}>
+            No completed race yet this season.
+          </p>
         ) : lapsQ.isLoading ? (
           <Skeleton className="h-[280px] w-full" />
         ) : lapsQ.isError ? (

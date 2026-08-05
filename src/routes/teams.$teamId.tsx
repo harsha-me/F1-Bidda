@@ -198,9 +198,7 @@ function TeamDetail() {
           {/* Top row: name + position */}
           <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
             <div>
-              {history?.flag && (
-                <span className="text-3xl mr-3">{history.flag}</span>
-              )}
+              {history?.flag && <span className="text-3xl mr-3">{history.flag}</span>}
               <EyebrowRed>
                 {history?.nationality ?? ""} · {CURRENT_SEASON} Constructor
               </EyebrowRed>
@@ -225,10 +223,7 @@ function TeamDetail() {
 
             {standing && (
               <div className="flex flex-col items-end gap-2 shrink-0">
-                <div
-                  className="font-num text-5xl font-black leading-none"
-                  style={{ color }}
-                >
+                <div className="font-num text-5xl font-black leading-none" style={{ color }}>
                   P{standing.position}
                 </div>
                 <div
@@ -243,35 +238,45 @@ function TeamDetail() {
 
           {/* Stat grid */}
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <StatCard
-              label="Season Points"
-              value={standing?.points ?? "—"}
-              accent="red"
-            />
+            <StatCard label="Season Points" value={standing?.points ?? "—"} accent="red" />
             <StatCard label="Season Wins" value={standing?.wins ?? "—"} accent="amber" />
             <StatCard
               label="Championships"
               value={history?.championships?.length ?? "—"}
               accent="teal"
             />
-            <StatCard
-              label="First Season"
-              value={history?.firstSeason ?? "—"}
-              accent="blue"
-            />
+            <StatCard label="First Season" value={history?.firstSeason ?? "—"} accent="blue" />
           </div>
         </div>
       </div>
 
       {/* ─── INFO GRID ─────────────────────────────────────────────────────── */}
       {history && (
-        <div
-          className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          <InfoTile icon={<Users className="h-4 w-4" />} label="Team Principal" value={history.teamPrincipal} color={color} />
-          <InfoTile icon={<MapPin className="h-4 w-4" />} label="Base / HQ" value={history.base} color={color} />
-          <InfoTile icon={<Zap className="h-4 w-4" />} label="Power Unit" value={history.powerUnit} color={color} />
-          <InfoTile icon={<Calendar className="h-4 w-4" />} label="First F1 Season" value={String(history.firstSeason)} color={color} />
+        <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <InfoTile
+            icon={<Users className="h-4 w-4" />}
+            label="Team Principal"
+            value={history.teamPrincipal}
+            color={color}
+          />
+          <InfoTile
+            icon={<MapPin className="h-4 w-4" />}
+            label="Base / HQ"
+            value={history.base}
+            color={color}
+          />
+          <InfoTile
+            icon={<Zap className="h-4 w-4" />}
+            label="Power Unit"
+            value={history.powerUnit}
+            color={color}
+          />
+          <InfoTile
+            icon={<Calendar className="h-4 w-4" />}
+            label="First F1 Season"
+            value={String(history.firstSeason)}
+            color={color}
+          />
         </div>
       )}
 
@@ -284,10 +289,7 @@ function TeamDetail() {
             <Skeleton className="h-52 w-full" />
           </div>
         ) : teamDrivers.length === 0 ? (
-          <div
-            className="py-8 text-center text-sm"
-            style={{ color: "oklch(0.50 0.010 255)" }}
-          >
+          <div className="py-8 text-center text-sm" style={{ color: "oklch(0.50 0.010 255)" }}>
             No driver data available for this team yet.
           </div>
         ) : (
@@ -375,20 +377,24 @@ function TeamDetail() {
                     <stop offset="100%" stopColor={color} stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  stroke="oklch(1 0 0 / 5%)"
-                  vertical={false}
-                />
+                <CartesianGrid strokeDasharray="3 3" stroke="oklch(1 0 0 / 5%)" vertical={false} />
                 <XAxis
                   dataKey="raceName"
-                  tick={{ fontSize: 9, fill: "oklch(0.48 0.008 255)", fontFamily: "JetBrains Mono" }}
+                  tick={{
+                    fontSize: 9,
+                    fill: "oklch(0.48 0.008 255)",
+                    fontFamily: "JetBrains Mono",
+                  }}
                   tickLine={false}
                   axisLine={false}
                   interval="preserveStartEnd"
                 />
                 <YAxis
-                  tick={{ fontSize: 9, fill: "oklch(0.48 0.008 255)", fontFamily: "JetBrains Mono" }}
+                  tick={{
+                    fontSize: 9,
+                    fill: "oklch(0.48 0.008 255)",
+                    fontFamily: "JetBrains Mono",
+                  }}
                   tickLine={false}
                   axisLine={false}
                 />
@@ -443,10 +449,7 @@ function TeamDetail() {
                 Championships
               </h3>
             </div>
-            <div
-              className="font-num text-4xl font-black"
-              style={{ color }}
-            >
+            <div className="font-num text-4xl font-black" style={{ color }}>
               {history.championships.length}
             </div>
           </div>
@@ -591,11 +594,7 @@ function LiveryShowcase({
         ) : (
           /* Placeholder — team-coloured wordmark + racing stripes */
           <div className="relative flex w-full max-w-3xl flex-col items-center justify-center gap-4 py-6">
-            <div
-              className="flex w-full flex-col gap-1.5"
-              aria-hidden
-              style={{ opacity: 0.55 }}
-            >
+            <div className="flex w-full flex-col gap-1.5" aria-hidden style={{ opacity: 0.55 }}>
               {[1, 0.6, 0.3].map((o, i) => (
                 <div
                   key={i}
@@ -651,10 +650,7 @@ function InfoTile({
         padding: "1rem",
       }}
     >
-      <div
-        className="flex items-center gap-1.5 mb-2"
-        style={{ color: "oklch(0.50 0.010 255)" }}
-      >
+      <div className="flex items-center gap-1.5 mb-2" style={{ color: "oklch(0.50 0.010 255)" }}>
         <span style={{ color }}>{icon}</span>
         <span className="label-eyebrow text-[9px]">{label}</span>
       </div>
@@ -746,10 +742,7 @@ function DriverCard({
       {/* Info */}
       <div className="flex flex-1 flex-col justify-between p-4">
         <div>
-          <div
-            className="label-eyebrow-red text-[9px] mb-1"
-            style={{ color: teamColor }}
-          >
+          <div className="label-eyebrow-red text-[9px] mb-1" style={{ color: teamColor }}>
             P{position} Championship
           </div>
           <div
@@ -758,28 +751,28 @@ function DriverCard({
           >
             {driver.name}
           </div>
-          <div
-            className="mt-0.5 font-num text-xs"
-            style={{ color: "oklch(0.50 0.010 255)" }}
-          >
+          <div className="mt-0.5 font-num text-xs" style={{ color: "oklch(0.50 0.010 255)" }}>
             {driver.code}
           </div>
         </div>
         <div className="mt-4 flex items-center gap-4">
           <div>
-            <div
-              className="font-num font-black text-lg leading-none"
-              style={{ color: teamColor }}
-            >
+            <div className="font-num font-black text-lg leading-none" style={{ color: teamColor }}>
               {points}
             </div>
-            <div className="label-eyebrow text-[9px] mt-0.5" style={{ color: "oklch(0.50 0.010 255)" }}>
+            <div
+              className="label-eyebrow text-[9px] mt-0.5"
+              style={{ color: "oklch(0.50 0.010 255)" }}
+            >
               PTS
             </div>
           </div>
           <div>
             <div className="font-num font-black text-lg leading-none">{wins}</div>
-            <div className="label-eyebrow text-[9px] mt-0.5" style={{ color: "oklch(0.50 0.010 255)" }}>
+            <div
+              className="label-eyebrow text-[9px] mt-0.5"
+              style={{ color: "oklch(0.50 0.010 255)" }}
+            >
               WINS
             </div>
           </div>

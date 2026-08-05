@@ -107,8 +107,7 @@ function Home() {
           className="absolute top-0 left-0 right-0 h-[2px]"
           aria-hidden
           style={{
-            background:
-              "linear-gradient(90deg, oklch(0.60 0.245 27), oklch(0.60 0.245 27 / 0))",
+            background: "linear-gradient(90deg, oklch(0.60 0.245 27), oklch(0.60 0.245 27 / 0))",
           }}
         />
 
@@ -174,8 +173,8 @@ function Home() {
               className="mt-6 max-w-lg text-base leading-relaxed"
               style={{ color: "oklch(0.58 0.012 255)" }}
             >
-              Broadcast-grade strategy, tire degradation and telemetry analytics —
-              engineered for people who read the graph, not the headline.
+              Broadcast-grade strategy, tire degradation and telemetry analytics — engineered for
+              people who read the graph, not the headline.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -242,7 +241,10 @@ function Home() {
             {/* Top accent bar */}
             <div
               className="h-1 w-full shrink-0"
-              style={{ background: "linear-gradient(90deg, oklch(0.60 0.245 27), oklch(0.76 0.14 190 / 0))" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, oklch(0.60 0.245 27), oklch(0.76 0.14 190 / 0))",
+              }}
             />
 
             {/* Circuit map watermark */}
@@ -317,10 +319,7 @@ function Home() {
       </section>
 
       {/* ── FEATURES ─────────────────────────────────────── */}
-      <section
-        className="relative"
-        style={{ borderTop: "1px solid oklch(1 0 0 / 6%)" }}
-      >
+      <section className="relative" style={{ borderTop: "1px solid oklch(1 0 0 / 6%)" }}>
         <div className="mx-auto max-w-[1400px] px-4 py-14 sm:px-8 sm:py-20">
           <div className="mb-10 flex items-end justify-between gap-4">
             <div>
@@ -391,7 +390,10 @@ function Home() {
                   >
                     {f.title}
                   </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed" style={{ color: "oklch(0.58 0.012 255)" }}>
+                  <p
+                    className="mt-1.5 text-sm leading-relaxed"
+                    style={{ color: "oklch(0.58 0.012 255)" }}
+                  >
                     {f.desc}
                   </p>
 
@@ -532,16 +534,25 @@ function Home() {
               >
                 f1<span style={{ color: "oklch(0.60 0.245 27)" }}>Bidda</span>
               </div>
-              <p className="mt-2 max-w-xs text-xs" style={{ color: "oklch(0.50 0.010 255)", lineHeight: 1.6 }}>
-                Broadcast-grade F1 analytics. Data via Jolpica-F1 &amp; OpenF1.
-                Not affiliated with Formula 1.
+              <p
+                className="mt-2 max-w-xs text-xs"
+                style={{ color: "oklch(0.50 0.010 255)", lineHeight: 1.6 }}
+              >
+                Broadcast-grade F1 analytics. Data via Jolpica-F1 &amp; OpenF1. Not affiliated with
+                Formula 1.
               </p>
             </div>
 
             {/* Links */}
             <div className="flex gap-12">
               {[
-                { label: "Data", links: [{ to: "/season", label: "Season" }, { to: "/races", label: "Races" }] },
+                {
+                  label: "Data",
+                  links: [
+                    { to: "/season", label: "Season" },
+                    { to: "/races", label: "Races" },
+                  ],
+                },
                 {
                   label: "Tools",
                   links: [
@@ -578,7 +589,8 @@ function Home() {
               color: "oklch(0.40 0.008 255)",
             }}
           >
-            © {new Date().getFullYear()} f1Bidda · All race data is provided for entertainment purposes only.
+            © {new Date().getFullYear()} f1Bidda · All race data is provided for entertainment
+            purposes only.
           </div>
         </div>
       </footer>

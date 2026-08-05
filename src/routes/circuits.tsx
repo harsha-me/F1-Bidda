@@ -70,14 +70,14 @@ function CircuitsPage() {
           (cd) =>
             cd.name.toLowerCase().includes(q) ||
             cd.whyFamous.toLowerCase().includes(q) ||
-            cd.turns.toLowerCase().includes(q)
+            cd.turns.toLowerCase().includes(q),
         ) ||
-        c.whySpecial.toLowerCase().includes(q)
+        c.whySpecial.toLowerCase().includes(q),
     );
   }, [query]);
 
   const selectedCircuit = selectedId
-    ? ALL_CIRCUITS.find((c) => c.id === selectedId) ?? null
+    ? (ALL_CIRCUITS.find((c) => c.id === selectedId) ?? null)
     : null;
 
   useEffect(() => {
@@ -91,16 +91,13 @@ function CircuitsPage() {
 
   return (
     <main className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
-      <SectionHeader
-        eyebrow="World Championship Venues"
-        title="Formula 1 Circuits"
-      />
+      <SectionHeader eyebrow="World Championship Venues" title="Formula 1 Circuits" />
 
       {/* Description + search row */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-xl text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
-          Track layouts, iconic high-speed corners, telemetry metrics, elevation changes and tactical profiles
-          for every venue on the global calendar.
+          Track layouts, iconic high-speed corners, telemetry metrics, elevation changes and
+          tactical profiles for every venue on the global calendar.
         </p>
 
         {/* Search */}
@@ -213,7 +210,10 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
           >
             {circuit.name}
           </h3>
-          <div className="mt-1 flex items-center gap-1.5 text-xs" style={{ color: "oklch(0.55 0.010 255)" }}>
+          <div
+            className="mt-1 flex items-center gap-1.5 text-xs"
+            style={{ color: "oklch(0.55 0.010 255)" }}
+          >
             <MapPin className="h-3 w-3 shrink-0" />
             <span>{circuit.location}</span>
           </div>
@@ -228,13 +228,19 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
           }}
         >
           <div>
-            <span className="block text-[10px] uppercase tracking-wider" style={{ color: "oklch(0.50 0.010 255)" }}>
+            <span
+              className="block text-[10px] uppercase tracking-wider"
+              style={{ color: "oklch(0.50 0.010 255)" }}
+            >
               Length
             </span>
             <span className="font-bold text-foreground">{circuit.lengthKm} km</span>
           </div>
           <div>
-            <span className="block text-[10px] uppercase tracking-wider" style={{ color: "oklch(0.50 0.010 255)" }}>
+            <span
+              className="block text-[10px] uppercase tracking-wider"
+              style={{ color: "oklch(0.50 0.010 255)" }}
+            >
               First GP
             </span>
             <span className="font-bold text-foreground">{circuit.firstGrandPrix}</span>
@@ -251,7 +257,11 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
           </div>
           <ul className="mt-1.5 space-y-0.5">
             {circuit.fastCorners.slice(0, 2).map((corner, i) => (
-              <li key={i} className="flex items-start gap-1.5 text-xs" style={{ color: "oklch(0.58 0.012 255)" }}>
+              <li
+                key={i}
+                className="flex items-start gap-1.5 text-xs"
+                style={{ color: "oklch(0.58 0.012 255)" }}
+              >
                 <span
                   className="mt-1.5 h-1 w-1 shrink-0 rounded-full"
                   style={{ background: "oklch(0.60 0.245 27)" }}
@@ -280,7 +290,9 @@ function CircuitCard({ circuit, onOpen }: { circuit: CircuitInfo; onOpen: () => 
           style={{ color: "oklch(0.45 0.008 255)", letterSpacing: "0.06em" }}
         >
           <span className="group-hover:text-primary transition-colors">View Track Guide →</span>
-          <span className="font-num font-normal text-[10px]">{circuit.lapRecord.split(" ")[0]}</span>
+          <span className="font-num font-normal text-[10px]">
+            {circuit.lapRecord.split(" ")[0]}
+          </span>
         </div>
       </div>
     </button>
@@ -310,16 +322,14 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
         {/* Top red bar */}
         <div
           className="h-[3px] w-full rounded-t-[0.75rem]"
-          style={{ background: "linear-gradient(90deg, oklch(0.60 0.245 27), oklch(0.60 0.245 27 / 0))" }}
+          style={{
+            background: "linear-gradient(90deg, oklch(0.60 0.245 27), oklch(0.60 0.245 27 / 0))",
+          }}
         />
 
         {/* Hero Circuit Photo Header */}
         <div className="relative h-56 w-full overflow-hidden">
-          <img
-            src={photoUrl}
-            alt={circuit.name}
-            className="h-full w-full object-cover"
-          />
+          <img src={photoUrl} alt={circuit.name} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.155_0.006_255)] via-[oklch(0.155_0.006_255)/60] to-transparent" />
 
           <button
@@ -334,7 +344,9 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
             <div className="flex items-center gap-3">
               <span className="text-4xl leading-none">{circuit.flag}</span>
               <div>
-                <EyebrowRed>{circuit.country} · Debut {circuit.firstGrandPrix}</EyebrowRed>
+                <EyebrowRed>
+                  {circuit.country} · Debut {circuit.firstGrandPrix}
+                </EyebrowRed>
                 <h2
                   className="mt-1 font-display font-black uppercase text-white"
                   style={{ fontSize: "clamp(1.5rem, 4vw, 2.25rem)", lineHeight: 1.05 }}
@@ -413,7 +425,10 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
                         {cd.speed && (
                           <span
                             className="px-2 py-0.5 rounded font-semibold"
-                            style={{ background: "oklch(1 0 0 / 6%)", color: "oklch(0.85 0.15 85)" }}
+                            style={{
+                              background: "oklch(1 0 0 / 6%)",
+                              color: "oklch(0.85 0.15 85)",
+                            }}
                           >
                             ⚡ {cd.speed}
                           </span>
@@ -421,7 +436,10 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
                         {cd.gForce && (
                           <span
                             className="px-2 py-0.5 rounded font-semibold"
-                            style={{ background: "oklch(1 0 0 / 6%)", color: "oklch(0.75 0.15 140)" }}
+                            style={{
+                              background: "oklch(1 0 0 / 6%)",
+                              color: "oklch(0.75 0.15 140)",
+                            }}
                           >
                             🎯 {cd.gForce}
                           </span>
@@ -429,7 +447,10 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
                         {cd.gear && (
                           <span
                             className="px-2 py-0.5 rounded font-semibold"
-                            style={{ background: "oklch(1 0 0 / 6%)", color: "oklch(0.70 0.01 255)" }}
+                            style={{
+                              background: "oklch(1 0 0 / 6%)",
+                              color: "oklch(0.70 0.01 255)",
+                            }}
                           >
                             ⚙️ {cd.gear}
                           </span>
@@ -437,7 +458,10 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
                       </div>
                     </div>
 
-                    <p className="text-xs leading-relaxed" style={{ color: "oklch(0.65 0.01 255)" }}>
+                    <p
+                      className="text-xs leading-relaxed"
+                      style={{ color: "oklch(0.65 0.01 255)" }}
+                    >
                       {cd.whyFamous}
                     </p>
                   </div>
@@ -518,4 +542,3 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
     </div>
   );
 }
-

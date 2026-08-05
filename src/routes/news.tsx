@@ -37,15 +37,15 @@ export type NewsCategory =
 export type RealNewsItem = {
   id: string;
   title: string;
-  excerpt: string;       // 2-3 sentence plain-text excerpt, no invented quotes
+  excerpt: string; // 2-3 sentence plain-text excerpt, no invented quotes
   category: Exclude<NewsCategory, "All">;
-  date: string;          // "YYYY-MM-DD"
-  sourceName: string;    // e.g. "Autosport"
-  sourceUrl: string;     // outlet homepage
-  articleUrl: string;    // direct link to article
+  date: string; // "YYYY-MM-DD"
+  sourceName: string; // e.g. "Autosport"
+  sourceUrl: string; // outlet homepage
+  articleUrl: string; // direct link to article
   imageUrl?: string;
   tags: string[];
-  teamColor?: string;    // accent color if a team is identified
+  teamColor?: string; // accent color if a team is identified
   featured?: boolean;
 };
 
@@ -54,10 +54,14 @@ export type RealNewsItem = {
 // ---------------------------------------------------------------------------
 
 const CATEGORY_KEYWORDS: Record<Exclude<NewsCategory, "All">, RegExp> = {
-  "Driver Quotes": /\b(says|reveals|admits|explains|responds|interview|statement|quote|speaks|reacts|confident|believes|thinks|feels|claims|insists|denies|confirms)\b/i,
-  "Team Radio & Press": /\b(radio|press conference|debrief|team principal|paddock|briefing|media|journalist|post-race|pre-race|toto|horner|vasseur|vowles|stella|szafnauer)\b/i,
-  "Technical Upgrades": /\b(upgrade|update|aero|floor|wing|technical|development|package|cfd|wind tunnel|suspension|diffuser|sidepod|overhaul|spec|b-spec|new part)\b/i,
-  "Stewards & Regulations": /\b(penalty|steward|investigation|regulation|fia|rule|protest|decision|reprimand|grid drop|drive-through|safety car|vsc|disqualif|appeal|review)\b/i,
+  "Driver Quotes":
+    /\b(says|reveals|admits|explains|responds|interview|statement|quote|speaks|reacts|confident|believes|thinks|feels|claims|insists|denies|confirms)\b/i,
+  "Team Radio & Press":
+    /\b(radio|press conference|debrief|team principal|paddock|briefing|media|journalist|post-race|pre-race|toto|horner|vasseur|vowles|stella|szafnauer)\b/i,
+  "Technical Upgrades":
+    /\b(upgrade|update|aero|floor|wing|technical|development|package|cfd|wind tunnel|suspension|diffuser|sidepod|overhaul|spec|b-spec|new part)\b/i,
+  "Stewards & Regulations":
+    /\b(penalty|steward|investigation|regulation|fia|rule|protest|decision|reprimand|grid drop|drive-through|safety car|vsc|disqualif|appeal|review)\b/i,
   "Paddock News": /./, // catch-all — always matches
 };
 
@@ -96,7 +100,14 @@ function classifyCategory(text: string): Exclude<NewsCategory, "All"> {
 }
 
 function cleanHtml(html: string): string {
-  return html.replace(/<[^>]*>?/gm, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#\d+;/g, "").trim();
+  return html
+    .replace(/<[^>]*>?/gm, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#\d+;/g, "")
+    .trim();
 }
 
 function truncateExcerpt(text: string, maxLen = 280): string {
@@ -112,9 +123,9 @@ function truncateExcerpt(text: string, maxLen = 280): string {
 
 type RssSource = {
   name: string;
-  url: string;       // homepage
-  feedUrl: string;   // RSS feed URL (will be proxied via rss2json)
-  color: string;     // brand accent
+  url: string; // homepage
+  feedUrl: string; // RSS feed URL (will be proxied via rss2json)
+  color: string; // brand accent
 };
 
 const RSS_SOURCES: RssSource[] = [
@@ -162,12 +173,14 @@ async function fetchRssSource(source: RssSource): Promise<RealNewsItem[]> {
       const raw = String(item.pubDate || "");
       if (!raw) return new Date().toISOString().split("T")[0];
       const d = new Date(raw);
-      return isNaN(d.getTime()) ? new Date().toISOString().split("T")[0] : d.toISOString().split("T")[0];
+      return isNaN(d.getTime())
+        ? new Date().toISOString().split("T")[0]
+        : d.toISOString().split("T")[0];
     })();
     const imageUrl: string | undefined =
-      (item.enclosure as Record<string, unknown> | undefined)?.link as string | undefined ||
-      item.thumbnail as string | undefined ||
-      item.image as string | undefined ||
+      ((item.enclosure as Record<string, unknown> | undefined)?.link as string | undefined) ||
+      (item.thumbnail as string | undefined) ||
+      (item.image as string | undefined) ||
       undefined;
 
     const combined = `${title} ${excerpt}`;
@@ -178,7 +191,10 @@ async function fetchRssSource(source: RssSource): Promise<RealNewsItem[]> {
     if (team) tags.push(team.team);
     tags.push(source.name);
     // Add up to 2 keyword tags from title
-    const words = title.split(/\s+/).filter(w => w.length > 5).slice(0, 2);
+    const words = title
+      .split(/\s+/)
+      .filter((w) => w.length > 5)
+      .slice(0, 2);
     tags.push(...words);
 
     return {
@@ -240,8 +256,7 @@ export const Route = createFileRoute("/news")({
       { property: "og:title", content: "F1 News Feed · f1Bidda" },
       {
         property: "og:description",
-        content:
-          "Current Formula 1 headlines sourced directly from leading motorsport outlets.",
+        content: "Current Formula 1 headlines sourced directly from leading motorsport outlets.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -306,18 +321,21 @@ function NewsPage() {
           n.title.toLowerCase().includes(q) ||
           n.excerpt.toLowerCase().includes(q) ||
           n.sourceName.toLowerCase().includes(q) ||
-          n.tags.some((t) => t.toLowerCase().includes(q))
+          n.tags.some((t) => t.toLowerCase().includes(q)),
       );
     }
     return result;
   }, [newsItems, query, selectedCategory]);
 
   const featuredNews = useMemo(
-    () => (selectedCategory === "All" && !query ? newsItems.find((n) => n.featured) ?? newsItems[0] : null),
-    [newsItems, selectedCategory, query]
+    () =>
+      selectedCategory === "All" && !query
+        ? (newsItems.find((n) => n.featured) ?? newsItems[0])
+        : null,
+    [newsItems, selectedCategory, query],
   );
 
-  const activeModal = selectedId ? newsItems.find((n) => n.id === selectedId) ?? null : null;
+  const activeModal = selectedId ? (newsItems.find((n) => n.id === selectedId) ?? null) : null;
 
   useEffect(() => {
     if (!activeModal) return;
@@ -351,8 +369,8 @@ function NewsPage() {
       {/* Sub-header: description + live badge */}
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-2xl text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
-          Real-time Formula 1 headlines aggregated from leading motorsport outlets. All articles link
-          directly to their original source — no invented content.
+          Real-time Formula 1 headlines aggregated from leading motorsport outlets. All articles
+          link directly to their original source — no invented content.
         </p>
 
         <div className="flex items-center gap-2 shrink-0">
@@ -365,7 +383,11 @@ function NewsPage() {
           >
             <Rss className="h-3.5 w-3.5 animate-pulse" style={{ color: "oklch(0.60 0.245 27)" }} />
             <span className="font-num text-xs font-bold uppercase tracking-wider text-foreground">
-              {isFetching ? "Fetching…" : newsItems.length > 0 ? `${newsItems.length} Articles · LIVE` : "RSS FEED"}
+              {isFetching
+                ? "Fetching…"
+                : newsItems.length > 0
+                  ? `${newsItems.length} Articles · LIVE`
+                  : "RSS FEED"}
             </span>
           </div>
         </div>
@@ -381,7 +403,10 @@ function NewsPage() {
             color: "oklch(0.55 0.01 255)",
           }}
         >
-          <span className="font-display font-bold uppercase tracking-wide" style={{ color: "oklch(0.60 0.245 27)" }}>
+          <span
+            className="font-display font-bold uppercase tracking-wide"
+            style={{ color: "oklch(0.60 0.245 27)" }}
+          >
             Sources:
           </span>
           {activeOutlets.map((name) => {
@@ -404,7 +429,9 @@ function NewsPage() {
               </a>
             );
           })}
-          <span className="ml-auto text-[10px] font-num opacity-60">Third-party aggregated content · Updated every 15 min</span>
+          <span className="ml-auto text-[10px] font-num opacity-60">
+            Third-party aggregated content · Updated every 15 min
+          </span>
         </div>
       )}
 
@@ -444,7 +471,9 @@ function NewsPage() {
                 </div>
                 <div className="flex items-center gap-3">
                   <SourceBadge item={featuredNews} />
-                  <span className="font-num text-xs text-muted-foreground">{featuredNews.date}</span>
+                  <span className="font-num text-xs text-muted-foreground">
+                    {featuredNews.date}
+                  </span>
                 </div>
               </div>
 
@@ -453,7 +482,10 @@ function NewsPage() {
                   <h2 className="font-display font-black text-xl sm:text-2xl lg:text-3xl uppercase leading-tight text-foreground">
                     {featuredNews.title}
                   </h2>
-                  <p className="text-sm sm:text-base leading-relaxed" style={{ color: "oklch(0.72 0.008 255)" }}>
+                  <p
+                    className="text-sm sm:text-base leading-relaxed"
+                    style={{ color: "oklch(0.72 0.008 255)" }}
+                  >
                     {featuredNews.excerpt}
                   </p>
                   <a
@@ -475,9 +507,11 @@ function NewsPage() {
                   <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l pt-5 lg:pt-0 lg:pl-6 border-white/5">
                     <img
                       src={featuredNews.imageUrl}
-                      alt=""
+                      alt={featuredNews.title}
                       className="w-full h-48 object-cover rounded-lg"
-                      style={{ border: `1px solid ${featuredNews.teamColor || "oklch(1 0 0 / 10%)"}` }}
+                      style={{
+                        border: `1px solid ${featuredNews.teamColor || "oklch(1 0 0 / 10%)"}`,
+                      }}
                     />
                   </div>
                 )}
@@ -545,7 +579,8 @@ function NewsPage() {
 
         {query && (
           <div className="text-xs text-muted-foreground">
-            {filteredNews.length} result{filteredNews.length !== 1 ? "s" : ""} for &ldquo;{query}&rdquo;
+            {filteredNews.length} result{filteredNews.length !== 1 ? "s" : ""} for &ldquo;{query}
+            &rdquo;
           </div>
         )}
       </div>
@@ -623,9 +658,7 @@ function NewsPage() {
       )}
 
       {/* Modal */}
-      {activeModal && (
-        <NewsModal news={activeModal} onClose={() => setSelectedId(null)} />
-      )}
+      {activeModal && <NewsModal news={activeModal} onClose={() => setSelectedId(null)} />}
     </main>
   );
 }
@@ -702,7 +735,7 @@ function NewsCard({ news, onOpen }: { news: RealNewsItem; onOpen: () => void }) 
         <div className="h-40 w-full overflow-hidden bg-black/40 relative shrink-0">
           <img
             src={news.imageUrl}
-            alt=""
+            alt={news.title}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
@@ -801,7 +834,9 @@ function NewsModal({ news, onClose }: { news: RealNewsItem; onClose: () => void 
         {/* Top accent bar */}
         <div
           className="h-[3px] w-full rounded-t-[0.75rem]"
-          style={{ background: `linear-gradient(90deg, ${news.teamColor || "oklch(0.60 0.245 27)"}, transparent)` }}
+          style={{
+            background: `linear-gradient(90deg, ${news.teamColor || "oklch(0.60 0.245 27)"}, transparent)`,
+          }}
         />
 
         <div className="p-6 sm:p-8">
@@ -817,11 +852,7 @@ function NewsModal({ news, onClose }: { news: RealNewsItem; onClose: () => void 
           {/* Article image */}
           {news.imageUrl && (
             <div className="mb-6 overflow-hidden rounded-lg">
-              <img
-                src={news.imageUrl}
-                alt=""
-                className="w-full h-52 object-cover"
-              />
+              <img src={news.imageUrl} alt={news.title} className="w-full h-52 object-cover" />
             </div>
           )}
 
@@ -853,7 +884,8 @@ function NewsModal({ news, onClose }: { news: RealNewsItem; onClose: () => void 
               {news.excerpt}
             </p>
             <p className="mt-3 text-xs text-muted-foreground italic">
-              This is an automatically generated excerpt. Read the full article for complete coverage.
+              This is an automatically generated excerpt. Read the full article for complete
+              coverage.
             </p>
           </div>
 
@@ -903,9 +935,10 @@ function NewsModal({ news, onClose }: { news: RealNewsItem; onClose: () => void 
           >
             <Rss className="h-3.5 w-3.5 shrink-0 mt-0.5" />
             <span>
-              Content sourced from <strong style={{ color: "oklch(0.65 0.01 255)" }}>{news.sourceName}</strong>. This app aggregates
-              third-party RSS feeds and does not produce original reporting. All rights belong to the
-              respective publishers.
+              Content sourced from{" "}
+              <strong style={{ color: "oklch(0.65 0.01 255)" }}>{news.sourceName}</strong>. This app
+              aggregates third-party RSS feeds and does not produce original reporting. All rights
+              belong to the respective publishers.
             </span>
           </div>
 

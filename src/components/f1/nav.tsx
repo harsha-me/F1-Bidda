@@ -15,7 +15,6 @@ const links = [
   { to: "/strategy", label: "Strategy" },
 ] as const;
 
-
 export function TopNav() {
   const [open, setOpen] = useState(false);
   return (

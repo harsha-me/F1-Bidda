@@ -30,22 +30,40 @@ export function GlassCard({
   );
 }
 
-export function PitPanel({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
+export function PitPanel({ children, className }: { children: ReactNode; className?: string }) {
   return <div className={cn("pit-panel", className)}>{children}</div>;
 }
 
-export function Eyebrow({ children, className, style }: { children: ReactNode; className?: string; style?: React.CSSProperties }) {
-  return <div className={cn("label-eyebrow", className)} style={style}>{children}</div>;
+export function Eyebrow({
+  children,
+  className,
+  style,
+}: {
+  children: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div className={cn("label-eyebrow", className)} style={style}>
+      {children}
+    </div>
+  );
 }
 
-export function EyebrowRed({ children, className, style }: { children: ReactNode; className?: string; style?: React.CSSProperties }) {
-  return <div className={cn("label-eyebrow-red", className)} style={style}>{children}</div>;
+export function EyebrowRed({
+  children,
+  className,
+  style,
+}: {
+  children: ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div className={cn("label-eyebrow-red", className)} style={style}>
+      {children}
+    </div>
+  );
 }
 
 export function StatCard({
@@ -193,9 +211,7 @@ export function SectionHeader({
     <div className="mb-7 flex items-end justify-between gap-4">
       <div className="min-w-0">
         {eyebrow && (
-          <div
-            className="mb-2.5 flex items-center gap-2"
-          >
+          <div className="mb-2.5 flex items-center gap-2">
             <span
               className="block h-3 w-0.5 rounded-full"
               style={{ background: "oklch(0.60 0.245 27)" }}

@@ -92,8 +92,12 @@ function RacesPage() {
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
       <SectionHeader eyebrow="Chaos Archive" title="Top 50 Craziest Races" />
-      <p className="-mt-4 mb-6 max-w-xl text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
-        Rain masterclasses, red-flag pileups, last-corner championship swings — the races that made Formula 1.
+      <p
+        className="-mt-4 mb-6 max-w-xl text-sm leading-relaxed"
+        style={{ color: "oklch(0.56 0.012 255)" }}
+      >
+        Rain masterclasses, red-flag pileups, last-corner championship swings — the races that made
+        Formula 1.
       </p>
 
       <FilterBar
@@ -274,7 +278,10 @@ function RaceCard({ race, onOpen }: { race: CrazyRace; onOpen: () => void }) {
       {/* Body */}
       <div className="flex flex-1 flex-col gap-3 p-4">
         <EyebrowRed>{race.circuit}</EyebrowRed>
-        <p className="line-clamp-3 text-sm leading-relaxed" style={{ color: "oklch(0.56 0.012 255)" }}>
+        <p
+          className="line-clamp-3 text-sm leading-relaxed"
+          style={{ color: "oklch(0.56 0.012 255)" }}
+        >
           {race.summary}
         </p>
         <div

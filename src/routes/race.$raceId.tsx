@@ -164,7 +164,10 @@ function RacePage() {
                 {race.circuitId && (
                   <div className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 backdrop-blur-sm transition-all hover:border-white/20">
                     <img
-                      src={getCircuitImageUrl(race.circuitId) || `https://raw.githubusercontent.com/f1db/f1db/main/src/assets/circuits/white-outline/${getF1DBCircuitId(race.circuitId)}.svg`}
+                      src={
+                        getCircuitImageUrl(race.circuitId) ||
+                        `https://raw.githubusercontent.com/f1db/f1db/main/src/assets/circuits/white-outline/${getF1DBCircuitId(race.circuitId)}.svg`
+                      }
                       alt={`${race.circuit} layout`}
                       className="h-full w-full object-contain filter invert brightness-250 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] opacity-90 transition-transform duration-300 hover:scale-105"
                       onError={(e) => {

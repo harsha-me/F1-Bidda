@@ -42,7 +42,8 @@ export const Route = createFileRoute("/teams")({
       { property: "og:title", content: "F1 Teams · f1Bidda" },
       {
         property: "og:description",
-        content: "Constructor standings, driver lineups and championship history for every F1 team.",
+        content:
+          "Constructor standings, driver lineups and championship history for every F1 team.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -313,7 +314,10 @@ function TeamCard({
           </div>
           {/* Wins */}
           <div>
-            <div className="font-num text-2xl font-black" style={{ color: "oklch(0.94 0.003 255)" }}>
+            <div
+              className="font-num text-2xl font-black"
+              style={{ color: "oklch(0.94 0.003 255)" }}
+            >
               {wins}
             </div>
             <div
@@ -387,10 +391,7 @@ function DriverPill({
         >
           {driver.name.split(" ").pop()}
         </div>
-        <div
-          className="font-num text-[9px]"
-          style={{ color: "oklch(0.50 0.010 255)" }}
-        >
+        <div className="font-num text-[9px]" style={{ color: "oklch(0.50 0.010 255)" }}>
           #{driver.number}
         </div>
       </div>

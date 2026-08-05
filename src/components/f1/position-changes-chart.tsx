@@ -46,8 +46,7 @@ export function PositionChangesChart({ laps, activeDrivers, results }: PositionC
       const driverLaps = driverLapsMap.get(d.code) ?? [];
       const gridResult = results?.find((r) => r.driver.code === d.code);
       const startPos = gridResult?.grid || (driverLaps[0]?.pos ?? 0);
-      const finishPos =
-        gridResult?.position || (driverLaps[driverLaps.length - 1]?.pos ?? 0);
+      const finishPos = gridResult?.position || (driverLaps[driverLaps.length - 1]?.pos ?? 0);
       const delta = startPos > 0 && finishPos > 0 ? startPos - finishPos : 0; // positive = gained places
 
       return {
@@ -76,7 +75,8 @@ export function PositionChangesChart({ laps, activeDrivers, results }: PositionC
       const dName = biggestGainer.driver.name.split(" ").pop();
       return (
         <span>
-          <strong>📈 Big Mover:</strong> {dName} ({biggestGainer.driver.code}) made the biggest charge through the field, gaining{" "}
+          <strong>📈 Big Mover:</strong> {dName} ({biggestGainer.driver.code}) made the biggest
+          charge through the field, gaining{" "}
           <span className="font-bold text-emerald-400">+{biggestGainer.delta} places</span> (P
           {biggestGainer.startPos} → P{biggestGainer.finishPos}).
         </span>
@@ -86,7 +86,8 @@ export function PositionChangesChart({ laps, activeDrivers, results }: PositionC
     if (wireToWireLeader) {
       return (
         <span>
-          <strong>🏆 Dominant Drive:</strong> {wireToWireLeader.driver.name} led from pole position to victory without giving up P1.
+          <strong>🏆 Dominant Drive:</strong> {wireToWireLeader.driver.name} led from pole position
+          to victory without giving up P1.
         </span>
       );
     }
@@ -161,11 +162,7 @@ export function PositionChangesChart({ laps, activeDrivers, results }: PositionC
 
                 {/* SVG Mini Step Track for Driver */}
                 <div className="relative h-10 flex-1 overflow-hidden rounded border border-white/5 bg-black/20 px-2 py-1">
-                  <MiniDriverStepSvg
-                    dLaps={dLaps}
-                    maxLaps={maxLaps}
-                    color={driver.teamColor}
-                  />
+                  <MiniDriverStepSvg dLaps={dLaps} maxLaps={maxLaps} color={driver.teamColor} />
                 </div>
               </div>
             );
@@ -180,10 +177,7 @@ export function PositionChangesChart({ laps, activeDrivers, results }: PositionC
             <span>P20 (FIELD)</span>
           </div>
           <ResponsiveContainer width="100%" height={420}>
-            <LineChart
-              data={pivotData}
-              margin={{ top: 15, right: 65, left: 10, bottom: 25 }}
-            >
+            <LineChart data={pivotData} margin={{ top: 15, right: 65, left: 10, bottom: 25 }}>
               <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.06)" />
               <XAxis
                 dataKey="lap"
@@ -252,7 +246,8 @@ function MiniDriverStepSvg({
   // Y range: position 1 -> y=4, position 20 -> y=32 (height=36)
   const width = 600;
   const height = 36;
-  const getY = (pos: number) => Math.min(Math.max(((pos - 1) / 19) * (height - 8) + 4, 4), height - 4);
+  const getY = (pos: number) =>
+    Math.min(Math.max(((pos - 1) / 19) * (height - 8) + 4, 4), height - 4);
   const getX = (lap: number) => (lap / maxLaps) * width;
 
   let pathD = "";
@@ -270,8 +265,22 @@ function MiniDriverStepSvg({
   return (
     <svg viewBox={`0 0 ${width} ${height}`} className="h-full w-full preserve-3d">
       {/* Background grid lines for P1 and P10 */}
-      <line x1="0" y1="4" x2={width} y2="4" stroke="rgba(16, 185, 129, 0.2)" strokeDasharray="3 3" />
-      <line x1="0" y1={height / 2} x2={width} y2={height / 2} stroke="rgba(255,255,255,0.08)" strokeDasharray="3 3" />
+      <line
+        x1="0"
+        y1="4"
+        x2={width}
+        y2="4"
+        stroke="rgba(16, 185, 129, 0.2)"
+        strokeDasharray="3 3"
+      />
+      <line
+        x1="0"
+        y1={height / 2}
+        x2={width}
+        y2={height / 2}
+        stroke="rgba(255,255,255,0.08)"
+        strokeDasharray="3 3"
+      />
 
       {/* Step path */}
       <path d={pathD} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
@@ -308,14 +317,7 @@ function PositionEndLabel(props: any) {
         stroke={color}
         strokeWidth={1}
       />
-      <text
-        x={4}
-        y={1}
-        fill={color}
-        fontSize={10}
-        fontWeight="bold"
-        fontFamily="sans-serif"
-      >
+      <text x={4} y={1} fill={color} fontSize={10} fontWeight="bold" fontFamily="sans-serif">
         {driverCode} P{value}
       </text>
     </g>
@@ -337,10 +339,7 @@ function CustomPositionTooltip({ active, payload, label, activeDrivers }: any) {
           return (
             <div key={entry.dataKey} className="flex items-center justify-between gap-4 text-xs">
               <div className="flex items-center gap-1.5">
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: entry.color }}
-                />
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.color }} />
                 <span className="font-bold">{driver?.name ?? entry.dataKey}</span>
               </div>
               <span className="font-num font-bold text-emerald-400">P{entry.value}</span>

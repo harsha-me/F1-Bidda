@@ -16,7 +16,7 @@ export function formatLapTime(seconds: number): string {
   if (!seconds || seconds <= 0 || !Number.isFinite(seconds)) return "—";
   const mins = Math.floor(seconds / 60);
   const secs = (seconds % 60).toFixed(3);
-  const padSecs = (seconds % 60) < 10 ? `0${secs}` : secs;
+  const padSecs = seconds % 60 < 10 ? `0${secs}` : secs;
   return mins > 0 ? `${mins}:${padSecs}` : `${secs}s`;
 }
 
@@ -83,11 +83,11 @@ export function LapTimesChart({ laps, activeDrivers }: LapTimesChartProps) {
   // Find fastest lap in dataset
   const fastestLap = useMemo(() => {
     let best: { driver: string; lap: number; lapTime: number } | null = null;
-    laps.forEach((l) => {
+    for (const l of laps) {
       if (l.lapTime > 0 && (!best || l.lapTime < best.lapTime)) {
         best = { driver: l.driver, lap: l.lap, lapTime: l.lapTime };
       }
-    });
+    }
     return best;
   }, [laps]);
 
@@ -105,12 +105,8 @@ export function LapTimesChart({ laps, activeDrivers }: LapTimesChartProps) {
     const d1Laps = laps.filter((l) => l.driver === d1Code && l.lapTime > 0 && !l.pit);
     const d2Laps = laps.filter((l) => l.driver === d2Code && l.lapTime > 0 && !l.pit);
 
-    const avg1 = d1Laps.length
-      ? d1Laps.reduce((sum, l) => sum + l.lapTime, 0) / d1Laps.length
-      : 0;
-    const avg2 = d2Laps.length
-      ? d2Laps.reduce((sum, l) => sum + l.lapTime, 0) / d2Laps.length
-      : 0;
+    const avg1 = d1Laps.length ? d1Laps.reduce((sum, l) => sum + l.lapTime, 0) / d1Laps.length : 0;
+    const avg2 = d2Laps.length ? d2Laps.reduce((sum, l) => sum + l.lapTime, 0) / d2Laps.length : 0;
 
     let paceDiffText = "";
     if (avg1 > 0 && avg2 > 0) {
@@ -208,10 +204,7 @@ export function LapTimesChart({ laps, activeDrivers }: LapTimesChartProps) {
                     : "border-white/5 text-muted-foreground opacity-40 hover:opacity-75"
                 }`}
               >
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: d.teamColor }}
-                />
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: d.teamColor }} />
                 {d.code}
               </button>
             );
@@ -222,10 +215,7 @@ export function LapTimesChart({ laps, activeDrivers }: LapTimesChartProps) {
       {/* 3. Recharts Line Chart */}
       <div className="relative pt-2">
         <ResponsiveContainer width="100%" height={400}>
-          <LineChart
-            data={pivotData}
-            margin={{ top: 20, right: 65, left: 10, bottom: 25 }}
-          >
+          <LineChart data={pivotData} margin={{ top: 20, right: 65, left: 10, bottom: 25 }}>
             <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.06)" />
             <XAxis
               dataKey="lap"
@@ -318,14 +308,7 @@ function CustomEndLabel(props: any) {
         stroke={color}
         strokeWidth={1}
       />
-      <text
-        x={4}
-        y={1}
-        fill={color}
-        fontSize={10}
-        fontWeight="bold"
-        fontFamily="sans-serif"
-      >
+      <text x={4} y={1} fill={color} fontSize={10} fontWeight="bold" fontFamily="sans-serif">
         {driverCode}
       </text>
     </g>
@@ -348,10 +331,7 @@ function CustomLapTooltip({ active, payload, label, activeDrivers }: any) {
           return (
             <div key={entry.dataKey} className="flex items-center justify-between gap-4 text-xs">
               <div className="flex items-center gap-1.5">
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: entry.color }}
-                />
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.color }} />
                 <span className="font-bold">{driver?.name ?? entry.dataKey}</span>
               </div>
               <span className="font-num font-semibold text-primary">{timeFormatted}</span>

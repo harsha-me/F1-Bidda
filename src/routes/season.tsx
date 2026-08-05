@@ -110,10 +110,7 @@ function SeasonPage() {
           ))}
         </div>
       ) : racesQ.isError ? (
-        <ErrorNote
-          message="Couldn't load schedule."
-          onRetry={() => racesQ.refetch()}
-        />
+        <ErrorNote message="Couldn't load schedule." onRetry={() => racesQ.refetch()} />
       ) : (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {races.map((r) => {
@@ -155,7 +152,9 @@ function SeasonPage() {
                     <span
                       className="shrink-0 px-2 py-0.5 font-display text-[10px] font-bold uppercase"
                       style={{
-                        background: r.completed ? "oklch(1 0 0 / 4%)" : "oklch(0.60 0.245 27 / 0.12)",
+                        background: r.completed
+                          ? "oklch(1 0 0 / 4%)"
+                          : "oklch(0.60 0.245 27 / 0.12)",
                         color: r.completed ? "oklch(0.50 0.010 255)" : "oklch(0.60 0.245 27)",
                         borderRadius: "0.2rem",
                         letterSpacing: "0.06em",
@@ -175,7 +174,10 @@ function SeasonPage() {
                     <div className="mt-0.5 text-xs" style={{ color: "oklch(0.50 0.010 255)" }}>
                       {r.circuit}
                     </div>
-                    <div className="mt-2 font-num text-xs" style={{ color: "oklch(0.48 0.008 255)" }}>
+                    <div
+                      className="mt-2 font-num text-xs"
+                      style={{ color: "oklch(0.48 0.008 255)" }}
+                    >
                       {new Date(r.date).toLocaleDateString(undefined, {
                         month: "short",
                         day: "numeric",
@@ -218,7 +220,10 @@ function SeasonPage() {
             </div>
           ) : driversQ.isError ? (
             <div className="p-4">
-              <ErrorNote message="Driver standings unavailable." onRetry={() => driversQ.refetch()} />
+              <ErrorNote
+                message="Driver standings unavailable."
+                onRetry={() => driversQ.refetch()}
+              />
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -253,14 +258,22 @@ function SeasonPage() {
                         background: idx % 2 === 0 ? "transparent" : "oklch(1 0 0 / 1.5%)",
                       }}
                     >
-                      <td className="px-4 py-2.5 font-display font-bold text-base" style={{ color: "oklch(0.55 0.012 255)" }}>
+                      <td
+                        className="px-4 py-2.5 font-display font-bold text-base"
+                        style={{ color: "oklch(0.55 0.012 255)" }}
+                      >
                         {row.position}
                       </td>
                       <td className="px-4 py-2.5">
                         <DriverChip driver={row.driver} />
                       </td>
-                      <td className="px-4 py-2.5 text-right font-num font-semibold">{row.points}</td>
-                      <td className="px-4 py-2.5 text-right font-num" style={{ color: "oklch(0.55 0.012 255)" }}>
+                      <td className="px-4 py-2.5 text-right font-num font-semibold">
+                        {row.points}
+                      </td>
+                      <td
+                        className="px-4 py-2.5 text-right font-num"
+                        style={{ color: "oklch(0.55 0.012 255)" }}
+                      >
                         {row.wins}
                       </td>
                       <td className="px-4 py-2.5 text-right">
@@ -301,7 +314,10 @@ function SeasonPage() {
             </div>
           ) : consQ.isError ? (
             <div className="p-4">
-              <ErrorNote message="Constructor standings unavailable." onRetry={() => consQ.refetch()} />
+              <ErrorNote
+                message="Constructor standings unavailable."
+                onRetry={() => consQ.refetch()}
+              />
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -331,7 +347,10 @@ function SeasonPage() {
                         background: idx % 2 === 0 ? "transparent" : "oklch(1 0 0 / 1.5%)",
                       }}
                     >
-                      <td className="px-4 py-2.5 font-display font-bold text-base" style={{ color: "oklch(0.55 0.012 255)" }}>
+                      <td
+                        className="px-4 py-2.5 font-display font-bold text-base"
+                        style={{ color: "oklch(0.55 0.012 255)" }}
+                      >
                         {c.position}
                       </td>
                       <td className="px-4 py-2.5">

@@ -83,10 +83,7 @@ function DriversPage() {
                 className="mb-4 flex items-center gap-3 pb-3"
                 style={{ borderBottom: `2px solid ${color}20` }}
               >
-                <div
-                  className="h-4 w-1 rounded-full shrink-0"
-                  style={{ background: color }}
-                />
+                <div className="h-4 w-1 rounded-full shrink-0" style={{ background: color }} />
                 <span
                   className="font-display font-bold uppercase text-sm"
                   style={{ color, letterSpacing: "0.06em" }}
@@ -172,10 +169,7 @@ function DriverCard({ driver, photo }: { driver: Driver; photo?: string }) {
 
       {/* Info strip */}
       <div className="px-4 py-3">
-        <div
-          className="label-eyebrow-red text-[9px]"
-          style={{ color: driver.teamColor }}
-        >
+        <div className="label-eyebrow-red text-[9px]" style={{ color: driver.teamColor }}>
           {driver.team}
         </div>
         <div

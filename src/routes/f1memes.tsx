@@ -86,7 +86,8 @@ export const Route = createFileRoute("/f1memes")({
       { property: "og:title", content: "OG F1 Memes & Social Screenshots · f1Bidda" },
       {
         property: "og:description",
-        content: "Discover OG social media screenshots, team radio transcripts, non-video Instagram memes, and viral clips from Formula 1 history.",
+        content:
+          "Discover OG social media screenshots, team radio transcripts, non-video Instagram memes, and viral clips from Formula 1 history.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -144,7 +145,9 @@ function getCategoryColor(cat: string) {
 function F1MemesPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
-  const [activeTab, setActiveTab] = useState<"screenshots" | "non-video" | "videos" | "all">("screenshots");
+  const [activeTab, setActiveTab] = useState<"screenshots" | "non-video" | "videos" | "all">(
+    "screenshots",
+  );
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [lightboxMeme, setLightboxMeme] = useState<Meme | null>(null);
   const [sortBy, setSortBy] = useState<"viral" | "year">("viral");
@@ -173,7 +176,7 @@ function F1MemesPage() {
           m.driver.toLowerCase().includes(q) ||
           m.quote.toLowerCase().includes(q) ||
           (m.transcriptLines && m.transcriptLines.some((l) => l.toLowerCase().includes(q))) ||
-          m.tags.some((t) => t.includes(q))
+          m.tags.some((t) => t.includes(q)),
       );
     }
     if (sortBy === "viral") {
@@ -196,7 +199,7 @@ function F1MemesPage() {
           m.title.toLowerCase().includes(q) ||
           m.driver.toLowerCase().includes(q) ||
           m.quote.toLowerCase().includes(q) ||
-          m.tags.some((t) => t.includes(q))
+          m.tags.some((t) => t.includes(q)),
       );
     }
     if (sortBy === "viral") {
@@ -219,7 +222,7 @@ function F1MemesPage() {
           m.title.toLowerCase().includes(q) ||
           m.driver.toLowerCase().includes(q) ||
           m.quote.toLowerCase().includes(q) ||
-          m.tags.some((t) => t.includes(q))
+          m.tags.some((t) => t.includes(q)),
       );
     }
     if (sortBy === "viral") {
@@ -248,7 +251,8 @@ function F1MemesPage() {
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold text-white transition-transform hover:scale-105"
               style={{
-                background: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+                background:
+                  "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
                 boxShadow: "0 4px 15px rgba(220, 39, 67, 0.35)",
               }}
             >
@@ -258,7 +262,10 @@ function F1MemesPage() {
             </a>
             <div className="hidden sm:flex items-center gap-2">
               <Flame className="h-5 w-5" style={{ color: "oklch(0.60 0.245 27)" }} />
-              <span className="font-num text-sm font-semibold" style={{ color: "oklch(0.55 0.012 255)" }}>
+              <span
+                className="font-num text-sm font-semibold"
+                style={{ color: "oklch(0.55 0.012 255)" }}
+              >
                 {MEMES.length} Viral Posts
               </span>
             </div>
@@ -267,8 +274,13 @@ function F1MemesPage() {
       />
 
       {/* ── Subtitle / Intro ── */}
-      <p className="mb-6 max-w-3xl text-sm leading-relaxed" style={{ color: "oklch(0.65 0.012 255)" }}>
-        Collection of authentic social media screenshot memes (like <span className="font-bold text-white">@F1wow</span>), post-race/quali radio transcript cards, non-video Instagram memes, and iconic video moments from Formula 1.
+      <p
+        className="mb-6 max-w-3xl text-sm leading-relaxed"
+        style={{ color: "oklch(0.65 0.012 255)" }}
+      >
+        Collection of authentic social media screenshot memes (like{" "}
+        <span className="font-bold text-white">@F1wow</span>), post-race/quali radio transcript
+        cards, non-video Instagram memes, and iconic video moments from Formula 1.
       </p>
 
       {/* ── View Switcher Navigation Bar ── */}
@@ -292,7 +304,8 @@ function F1MemesPage() {
                   ? "linear-gradient(135deg, #1d9bf0 0%, #0072c6 100%)"
                   : "transparent",
               color: activeTab === "screenshots" ? "#ffffff" : "oklch(0.60 0.012 255)",
-              boxShadow: activeTab === "screenshots" ? "0 4px 20px rgba(29, 155, 240, 0.4)" : "none",
+              boxShadow:
+                activeTab === "screenshots" ? "0 4px 20px rgba(29, 155, 240, 0.4)" : "none",
             }}
           >
             <MessageSquareQuote className="h-4 w-4" />
@@ -428,7 +441,8 @@ function F1MemesPage() {
           <div
             className="mb-8 flex flex-col gap-4 overflow-hidden rounded-2xl p-6 md:flex-row md:items-center md:justify-between"
             style={{
-              background: "linear-gradient(135deg, rgba(29, 155, 240, 0.15) 0%, rgba(15, 23, 42, 0.8) 100%)",
+              background:
+                "linear-gradient(135deg, rgba(29, 155, 240, 0.15) 0%, rgba(15, 23, 42, 0.8) 100%)",
               border: "1px solid rgba(29, 155, 240, 0.3)",
               boxShadow: "0 10px 40px -10px rgba(29, 155, 240, 0.2)",
             }}
@@ -447,7 +461,8 @@ function F1MemesPage() {
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-gray-300 sm:text-sm">
-                  Authentic screenshot-style post cards featuring post-quali/race team radio transcripts, driver reactions, and viral dialogue moments.
+                  Authentic screenshot-style post cards featuring post-quali/race team radio
+                  transcripts, driver reactions, and viral dialogue moments.
                 </p>
               </div>
             </div>
@@ -516,7 +531,8 @@ function F1MemesPage() {
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-gray-300 sm:text-sm">
-                  Image memes, graphic strategy decision trees, and legendary driver quotes styled after posts on{" "}
+                  Image memes, graphic strategy decision trees, and legendary driver quotes styled
+                  after posts on{" "}
                   <a
                     href="https://www.instagram.com/f1memesig/?hl=en"
                     target="_blank"
@@ -587,7 +603,8 @@ function F1MemesPage() {
                   🎬 Viral Video & Radio Clips
                 </h2>
                 <p className="text-xs text-gray-400">
-                  Iconic team radio rants, song anthems, and YouTube video clips from Formula 1 history
+                  Iconic team radio rants, song anthems, and YouTube video clips from Formula 1
+                  history
                 </p>
               </div>
             </div>
@@ -652,7 +669,8 @@ function F1MemesPage() {
           rel="noopener noreferrer"
           className="flex shrink-0 items-center gap-2.5 rounded-xl px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-white transition-transform hover:scale-105"
           style={{
-            background: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+            background:
+              "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
             boxShadow: "0 6px 25px rgba(220, 39, 67, 0.4)",
           }}
         >
@@ -701,7 +719,8 @@ function TweetScreenshotCard({
       className="group relative flex flex-col overflow-hidden rounded-2xl bg-white text-black p-5 transition-all duration-300 hover:shadow-2xl hover:scale-[1.01]"
       style={{
         boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
       }}
     >
       {/* ── Top Header: User profile info ── */}
@@ -734,7 +753,12 @@ function TweetScreenshotCard({
       <div className="mb-4 text-[15px] leading-relaxed text-slate-900 font-normal space-y-1.5">
         {meme.transcriptLines ? (
           meme.transcriptLines.map((line, i) => (
-            <p key={i} className={line.startsWith("📻") || line.startsWith("Post-quali") ? "font-medium" : ""}>
+            <p
+              key={i}
+              className={
+                line.startsWith("📻") || line.startsWith("Post-quali") ? "font-medium" : ""
+              }
+            >
               {line}
             </p>
           ))
@@ -781,7 +805,9 @@ function TweetScreenshotCard({
           className="flex items-center gap-1.5 transition-colors hover:text-red-500"
         >
           <Heart className={`h-4 w-4 ${isLiked ? "fill-red-500 text-red-500" : ""}`} />
-          <span className="font-semibold text-slate-700">{isLiked ? "42.9K" : meme.likesCount || "42.8K"}</span>
+          <span className="font-semibold text-slate-700">
+            {isLiked ? "42.9K" : meme.likesCount || "42.8K"}
+          </span>
         </button>
 
         <button
@@ -844,7 +870,9 @@ function InstagramMemeCard({
   };
 
   const handleShare = () => {
-    navigator.clipboard.writeText(`"${meme.quote}" — ${meme.driver} (${meme.year})\nVia @f1memesig: ${meme.instagramUrl || "https://www.instagram.com/f1memesig/?hl=en"}`);
+    navigator.clipboard.writeText(
+      `"${meme.quote}" — ${meme.driver} (${meme.year})\nVia @f1memesig: ${meme.instagramUrl || "https://www.instagram.com/f1memesig/?hl=en"}`,
+    );
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -890,7 +918,9 @@ function InstagramMemeCard({
                 ✓
               </div>
             </div>
-            <p className="text-[10px] text-gray-400">{meme.race} · {meme.year}</p>
+            <p className="text-[10px] text-gray-400">
+              {meme.race} · {meme.year}
+            </p>
           </div>
         </div>
 
@@ -963,7 +993,9 @@ function InstagramMemeCard({
             onClick={onToggleLike}
             className="flex items-center gap-1.5 text-xs font-semibold text-gray-300 transition-transform active:scale-125 hover:text-red-500"
           >
-            <Heart className={`h-5 w-5 transition-colors ${isLiked ? "fill-red-500 text-red-500" : "text-gray-300"}`} />
+            <Heart
+              className={`h-5 w-5 transition-colors ${isLiked ? "fill-red-500 text-red-500" : "text-gray-300"}`}
+            />
             <span className="font-num text-xs font-bold text-white">{likesDisplay}</span>
           </button>
 
@@ -980,7 +1012,11 @@ function InstagramMemeCard({
             title="Copy meme text"
             className="flex items-center gap-1.5 text-xs font-semibold text-gray-300 transition-colors hover:text-white"
           >
-            {copied ? <Check className="h-5 w-5 text-emerald-400" /> : <Share2 className="h-5 w-5" />}
+            {copied ? (
+              <Check className="h-5 w-5 text-emerald-400" />
+            ) : (
+              <Share2 className="h-5 w-5" />
+            )}
           </button>
         </div>
 
@@ -1071,7 +1107,8 @@ function VideoLinkCard({
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            background: "radial-gradient(circle at 50% 50%, rgba(225,6,0,0.12) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle at 50% 50%, rgba(225,6,0,0.12) 0%, transparent 70%)",
           }}
         />
 
@@ -1094,7 +1131,9 @@ function VideoLinkCard({
           style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)" }}
         >
           <Youtube className="h-3.5 w-3.5 text-red-500" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">Watch Clip on YouTube</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider">
+            Watch Clip on YouTube
+          </span>
           <ExternalLink className="h-3 w-3 opacity-70" />
         </div>
 
@@ -1106,7 +1145,10 @@ function VideoLinkCard({
             border: `1px solid ${catColor}40`,
           }}
         >
-          <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: catColor }}>
+          <span
+            className="text-[10px] font-bold uppercase tracking-wider"
+            style={{ color: catColor }}
+          >
             {meme.category}
           </span>
         </div>
@@ -1245,7 +1287,11 @@ function MemeLightboxModal({
                 onClick={handleCopy}
                 className="flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-white/10"
               >
-                {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+                {copied ? (
+                  <Check className="h-4 w-4 text-emerald-400" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
                 <span>{copied ? "Copied!" : "Copy Text"}</span>
               </button>
             </div>

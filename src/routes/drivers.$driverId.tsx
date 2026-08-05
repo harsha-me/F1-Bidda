@@ -1,7 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, AlertTriangle, Heart, Trophy, MapPin, Calendar, Flag, User } from "lucide-react";
+import {
+  ArrowLeft,
+  AlertTriangle,
+  Heart,
+  Trophy,
+  MapPin,
+  Calendar,
+  Flag,
+  User,
+} from "lucide-react";
 import { EyebrowRed, GlassCard, StatCard } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { driverStandingsQuery, sessionDriversQuery } from "@/lib/f1-queries";
@@ -107,11 +116,15 @@ function DriverDetail() {
             borderRadius: "0.75rem",
           }}
         >
-          <p className="font-display text-2xl font-black uppercase" style={{ color: "oklch(0.55 0.012 255)" }}>
+          <p
+            className="font-display text-2xl font-black uppercase"
+            style={{ color: "oklch(0.55 0.012 255)" }}
+          >
             Driver not found
           </p>
           <p className="mt-2 text-sm" style={{ color: "oklch(0.52 0.010 255)" }}>
-            No data for <span className="font-num text-foreground">"{driverId}"</span> in the {CURRENT_SEASON} standings.
+            No data for <span className="font-num text-foreground">"{driverId}"</span> in the{" "}
+            {CURRENT_SEASON} standings.
           </p>
         </div>
       </div>
@@ -139,7 +152,9 @@ function DriverDetail() {
         {/* Subtle gradient wash */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: `radial-gradient(ellipse 60% 80% at 30% 0%, ${teamColor}18, transparent 70%)` }}
+          style={{
+            background: `radial-gradient(ellipse 60% 80% at 30% 0%, ${teamColor}18, transparent 70%)`,
+          }}
         />
 
         <div className="relative grid grid-cols-1 lg:grid-cols-[320px_1fr]">
@@ -194,7 +209,10 @@ function DriverDetail() {
               </h1>
 
               {/* Meta row */}
-              <div className="mt-4 flex flex-wrap gap-4 text-sm" style={{ color: "oklch(0.56 0.012 255)" }}>
+              <div
+                className="mt-4 flex flex-wrap gap-4 text-sm"
+                style={{ color: "oklch(0.56 0.012 255)" }}
+              >
                 {bio?.flag && bio?.nationality && (
                   <span className="inline-flex items-center gap-1.5">
                     <Flag className="h-3.5 w-3.5" />
@@ -256,16 +274,12 @@ function DriverDetail() {
                 </Link>
               )}
             </div>
-
           </div>
         </div>
       </div>
 
       {/* ─── TABS ──────────────────────────────────────── */}
-      <div
-        className="flex flex-wrap mb-8"
-        style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}
-      >
+      <div className="flex flex-wrap mb-8" style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}>
         {TABS.map((t) => (
           <button
             key={t}
@@ -382,7 +396,9 @@ function DriverDetail() {
                 ))}
               </ul>
             ) : (
-              <p className="text-sm italic" style={{ color: "oklch(0.52 0.010 255)" }}>Milestones coming soon.</p>
+              <p className="text-sm italic" style={{ color: "oklch(0.52 0.010 255)" }}>
+                Milestones coming soon.
+              </p>
             )}
           </div>
         </div>
@@ -412,7 +428,11 @@ function DriverDetail() {
                   {/* Timeline dot */}
                   <span
                     className="absolute -left-[37px] top-1 flex h-5 w-5 items-center justify-center font-num text-[9px] font-black text-black"
-                    style={{ backgroundColor: teamColor, borderRadius: "50%", border: "2px solid oklch(0.145 0.005 255)" }}
+                    style={{
+                      backgroundColor: teamColor,
+                      borderRadius: "50%",
+                      border: "2px solid oklch(0.145 0.005 255)",
+                    }}
                   >
                     {i + 1}
                   </span>

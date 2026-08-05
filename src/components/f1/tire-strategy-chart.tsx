@@ -71,7 +71,8 @@ export function TireStrategyChart({
     if (winnerCode && winnerStints.length > 0) {
       return (
         <span>
-          <strong>🏎️ Race Strategy:</strong> {activeDrivers[0].name.split(" ").pop()} ({winnerCode}) ran a{" "}
+          <strong>🏎️ Race Strategy:</strong> {activeDrivers[0].name.split(" ").pop()} ({winnerCode})
+          ran a{" "}
           <span className="font-bold text-primary">
             {winnerStints.length - 1}-stop strategy ({winnerProgression})
           </span>
@@ -101,9 +102,7 @@ export function TireStrategyChart({
                 className="h-3 w-3 rounded-full border border-black/40"
                 style={{ backgroundColor: COMPOUND_COLOR[c] }}
               />
-              <span className="text-muted-foreground uppercase tracking-wide text-[11px]">
-                {c}
-              </span>
+              <span className="text-muted-foreground uppercase tracking-wide text-[11px]">{c}</span>
             </div>
           ))}
         </div>
@@ -120,7 +119,10 @@ export function TireStrategyChart({
 
           if (!driverStints.length) {
             return (
-              <div key={driver.code} className="flex items-center gap-3 text-xs text-muted-foreground">
+              <div
+                key={driver.code}
+                className="flex items-center gap-3 text-xs text-muted-foreground"
+              >
                 <div className="w-48 shrink-0">
                   <DriverChip driver={driver} />
                 </div>
@@ -153,14 +155,14 @@ export function TireStrategyChart({
                   );
 
                   const avgPaceSecs = stintLapRecords.length
-                    ? stintLapRecords.reduce((sum, l) => sum + l.lapTime, 0) / stintLapRecords.length
+                    ? stintLapRecords.reduce((sum, l) => sum + l.lapTime, 0) /
+                      stintLapRecords.length
                     : 0;
 
                   // Pit stop info at end of stint
                   const endPit = driverPitStops.find((p) => p.lap === stint.endLap);
                   const isHovered =
-                    hoveredStint?.driverCode === driver.code &&
-                    hoveredStint?.stintIndex === idx;
+                    hoveredStint?.driverCode === driver.code && hoveredStint?.stintIndex === idx;
 
                   return (
                     <div

@@ -217,7 +217,11 @@ function StrategyPage() {
 
           {/* Stat cards row */}
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Actual Pit Lap" value={actualPit ?? "—"} suffix={`/ ${race?.laps ?? "?"}`} />
+            <StatCard
+              label="Actual Pit Lap"
+              value={actualPit ?? "—"}
+              suffix={`/ ${race?.laps ?? "?"}`}
+            />
             <StatCard label="Simulated Pit" value={pitLap} accent="teal" />
             <StatCard
               label="Position Δ"
@@ -293,7 +297,10 @@ function StrategyPage() {
                 onChange={(e) => setPitLap(Number(e.target.value))}
                 className="w-full"
               />
-              <div className="mt-2 flex justify-between font-display text-[10px] font-bold uppercase" style={{ color: "oklch(0.48 0.008 255)", letterSpacing: "0.08em" }}>
+              <div
+                className="mt-2 flex justify-between font-display text-[10px] font-bold uppercase"
+                style={{ color: "oklch(0.48 0.008 255)", letterSpacing: "0.08em" }}
+              >
                 <span>Lap 5 (Early)</span>
                 <span className="text-emerald-400">Undercut Window (L16–L24)</span>
                 <span className="text-amber-400">Overcut Window (L25–L32)</span>
@@ -315,9 +322,12 @@ function StrategyPage() {
             <div className="mb-5 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div>
                 <EyebrowRed className="mb-2">Tire Degradation & Cliff Model</EyebrowRed>
-                <h3 className="font-display font-black uppercase text-xl">Compound Pace vs Tire Age</h3>
+                <h3 className="font-display font-black uppercase text-xl">
+                  Compound Pace vs Tire Age
+                </h3>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Shows how lap times slow down as rubber wears. Dots mark the <strong>tire cliff</strong> (sudden drop in pace).
+                  Shows how lap times slow down as rubber wears. Dots mark the{" "}
+                  <strong>tire cliff</strong> (sudden drop in pace).
                 </p>
               </div>
               <div className="flex gap-4 text-xs">
@@ -327,7 +337,10 @@ function StrategyPage() {
                       className="h-2.5 w-5 rounded-sm"
                       style={{ backgroundColor: COMPOUND_COLOR[c] }}
                     />
-                    <span className="font-display font-semibold uppercase" style={{ letterSpacing: "0.05em", color: "oklch(0.65 0.010 255)" }}>
+                    <span
+                      className="font-display font-semibold uppercase"
+                      style={{ letterSpacing: "0.05em", color: "oklch(0.65 0.010 255)" }}
+                    >
                       {c} (Cliff: L{compoundCurves[c].cliff})
                     </span>
                   </div>
@@ -368,12 +381,20 @@ function StrategyPage() {
                         </div>
                         <div className="space-y-1 text-xs">
                           {payload.map((entry: any) => (
-                            <div key={entry.name} className="flex items-center justify-between gap-4">
+                            <div
+                              key={entry.name}
+                              className="flex items-center justify-between gap-4"
+                            >
                               <div className="flex items-center gap-1.5">
-                                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.stroke }} />
+                                <span
+                                  className="h-2 w-2 rounded-full"
+                                  style={{ backgroundColor: entry.stroke }}
+                                />
                                 <span className="font-bold">{entry.name}</span>
                               </div>
-                              <span className="font-num font-semibold text-primary">{entry.value}s/lap</span>
+                              <span className="font-num font-semibold text-primary">
+                                {entry.value}s/lap
+                              </span>
                             </div>
                           ))}
                         </div>

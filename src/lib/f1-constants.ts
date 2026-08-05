@@ -49,8 +49,6 @@ export function teamNameToConstructorId(teamName: string): string {
   return TEAM_NAME_TO_CONSTRUCTOR_ID[teamName] ?? teamName.toLowerCase().replace(/\s+/g, "_");
 }
 
-
-
 export function teamColor(constructorId?: string | null): string {
   if (!constructorId) return TEAM_COLOR_FALLBACK;
   return TEAM_COLORS[constructorId] ?? TEAM_COLOR_FALLBACK;

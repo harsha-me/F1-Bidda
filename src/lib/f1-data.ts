@@ -111,8 +111,8 @@ export interface ConstructorRow {
 export interface ConstructorRacePoints {
   round: number;
   raceName: string;
-  points: number;      // points earned this round
-  cumulative: number;  // running total
+  points: number; // points earned this round
+  cumulative: number; // running total
 }
 
 export interface ResultRow {
@@ -264,7 +264,9 @@ export async function fetchConstructorPointsProgression(
       cumulative += roundPts;
       return {
         round: Number(race.round),
-        raceName: String(race.raceName ?? "").replace(/\s*Grand Prix$/i, " GP").trim(),
+        raceName: String(race.raceName ?? "")
+          .replace(/\s*Grand Prix$/i, " GP")
+          .trim(),
         points: roundPts,
         cumulative,
       };
