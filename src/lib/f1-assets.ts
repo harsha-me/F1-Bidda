@@ -176,3 +176,35 @@ export function getCircuitImageUrl(circuitId?: string): string {
 
   return "https://oversteer48.com/wp-content/uploads/2024/02/Spa-Francorchamps.jpg";
 }
+
+// Official F1 car/livery renders, keyed by constructorId. A team can override
+// (or supply a missing) image by adding a "carImage" field in data/teamHistory.json
+// — no code change required. Callers must handle an empty string / load failure
+// by falling back to a team-coloured placeholder.
+export const TEAM_CAR_IMAGES: Record<string, string> = {
+  mclaren:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/mclaren.png",
+  ferrari:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/ferrari.png",
+  red_bull:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/red-bull-racing.png",
+  mercedes:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/mercedes.png",
+  aston_martin:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/aston-martin.png",
+  alpine:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/alpine.png",
+  williams:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/williams.png",
+  rb: "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/racing-bulls.png",
+  haas: "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/haas.png",
+  sauber:
+    "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Car%20images/2025/kick-sauber.png",
+};
+
+export function getTeamCarImage(constructorId?: string, override?: string): string {
+  if (override) return override;
+  if (!constructorId) return "";
+  const key = constructorId.toLowerCase().trim().replace(/[\s-]+/g, "_");
+  return TEAM_CAR_IMAGES[key] ?? "";
+}

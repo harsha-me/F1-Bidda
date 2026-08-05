@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-r
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Trophy, Users, ChevronRight } from "lucide-react";
-import { SectionHeader, EyebrowRed } from "@/components/f1/primitives";
+import { SectionHeader } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { constructorStandingsQuery, driverStandingsQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON } from "@/lib/f1-data";
@@ -123,6 +123,16 @@ function TeamsPage() {
           message="Constructor standings could not be loaded. Check your connection and try again."
           onRetry={() => consQ.refetch()}
         />
+      )}
+
+      {/* Driver lineups failed independently of standings — cards still render */}
+      {driversQ.isError && !consQ.isError && (
+        <div className="mb-5">
+          <ErrorNote
+            message="Driver lineups could not be loaded. Standings below are still live."
+            onRetry={() => driversQ.refetch()}
+          />
+        </div>
       )}
 
       {/* Grid */}

@@ -10,6 +10,7 @@ import {
   Users,
   ChevronRight,
   TrendingUp,
+  Car,
 } from "lucide-react";
 import {
   Area,
@@ -20,7 +21,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { EyebrowRed, StatCard, SectionHeader } from "@/components/f1/primitives";
+import { EyebrowRed, StatCard } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import {
   constructorStandingsQuery,
@@ -28,7 +29,7 @@ import {
   teamPointsProgressionQuery,
 } from "@/lib/f1-queries";
 import { CURRENT_SEASON } from "@/lib/f1-data";
-import { getHDDriverPhoto } from "@/lib/f1-assets";
+import { getHDDriverPhoto, getTeamCarImage } from "@/lib/f1-assets";
 import teamHistoryRaw from "@/data/teamHistory.json";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -45,6 +46,8 @@ type TeamHistoryEntry = {
   nationality: string;
   flag: string;
   about: string;
+  /** Optional livery/car render override — add per team in teamHistory.json. */
+  carImage?: string;
 };
 
 const TEAM_HISTORY = teamHistoryRaw as Record<string, TeamHistoryEntry>;
@@ -303,6 +306,14 @@ function TeamDetail() {
         )}
       </div>
 
+      {/* ─── LIVERY SHOWCASE ───────────────────────────────────────────────── */}
+      <LiveryShowcase
+        teamId={teamId}
+        displayName={displayName}
+        color={color}
+        carImage={history?.carImage}
+      />
+
       {/* ─── POINTS PROGRESSION CHART ──────────────────────────────────────── */}
       <div
         className="mb-8 overflow-hidden"
@@ -508,6 +519,117 @@ function BackLink() {
   );
 }
 
+/**
+ * Current car render. Falls back to a team-coloured placeholder whenever no
+ * image is mapped for the constructor or the remote render fails to load.
+ */
+function LiveryShowcase({
+  teamId,
+  displayName,
+  color,
+  carImage,
+}: {
+  teamId: string;
+  displayName: string;
+  color: string;
+  carImage?: string;
+}) {
+  const [imgError, setImgError] = useState(false);
+  const src = getTeamCarImage(teamId, carImage);
+  const showImage = !!src && !imgError;
+
+  return (
+    <div
+      className="mb-8 overflow-hidden"
+      style={{
+        background: "oklch(0.155 0.006 255)",
+        border: "1px solid oklch(1 0 0 / 7%)",
+        borderRadius: "0.75rem",
+      }}
+    >
+      <div
+        className="flex items-center justify-between px-5 py-4"
+        style={{ borderBottom: "1px solid oklch(1 0 0 / 7%)" }}
+      >
+        <div>
+          <EyebrowRed>Current Car</EyebrowRed>
+          <h3 className="mt-1.5 font-display font-black uppercase text-xl flex items-center gap-2">
+            <Car className="h-5 w-5" style={{ color }} />
+            Livery
+          </h3>
+        </div>
+        <div
+          className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded font-display text-[10px] font-bold uppercase"
+          style={{
+            background: `${color}18`,
+            border: `1px solid ${color}44`,
+            color,
+            letterSpacing: "0.06em",
+          }}
+        >
+          <span className="h-2 w-2 rounded-full" style={{ background: color }} />
+          Team Colours
+        </div>
+      </div>
+
+      <div
+        className="relative grid place-items-center px-6 py-8 sm:px-10"
+        style={{
+          minHeight: "13rem",
+          background: `radial-gradient(ellipse 70% 90% at 50% 100%, ${color}22, transparent 70%)`,
+        }}
+      >
+        {showImage ? (
+          <img
+            src={src}
+            alt={`${displayName} current car livery`}
+            onError={() => setImgError(true)}
+            loading="lazy"
+            className="w-full max-w-3xl object-contain"
+            style={{ maxHeight: "16rem", filter: `drop-shadow(0 18px 30px ${color}40)` }}
+          />
+        ) : (
+          /* Placeholder — team-coloured wordmark + racing stripes */
+          <div className="relative flex w-full max-w-3xl flex-col items-center justify-center gap-4 py-6">
+            <div
+              className="flex w-full flex-col gap-1.5"
+              aria-hidden
+              style={{ opacity: 0.55 }}
+            >
+              {[1, 0.6, 0.3].map((o, i) => (
+                <div
+                  key={i}
+                  style={{
+                    height: "0.45rem",
+                    borderRadius: "999px",
+                    background: `linear-gradient(90deg, ${color}, ${color}00)`,
+                    opacity: o,
+                  }}
+                />
+              ))}
+            </div>
+            <Car className="h-10 w-10" style={{ color: `${color}cc` }} />
+            <div
+              className="font-display font-black uppercase text-center leading-none"
+              style={{
+                fontSize: "clamp(1.5rem, 5vw, 2.5rem)",
+                color,
+                letterSpacing: "-0.01em",
+                textShadow: `0 0 40px ${color}55`,
+              }}
+            >
+              {displayName}
+            </div>
+            <p className="text-xs text-center" style={{ color: "oklch(0.50 0.010 255)" }}>
+              Car render not available yet — showing team livery colours.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function InfoTile({
   icon,
   label,
@@ -524,6 +646,7 @@ function InfoTile({
       style={{
         background: "oklch(0.155 0.006 255)",
         border: "1px solid oklch(1 0 0 / 7%)",
+        borderTop: `2px solid ${color}66`,
         borderRadius: "0.5rem",
         padding: "1rem",
       }}
@@ -532,7 +655,7 @@ function InfoTile({
         className="flex items-center gap-1.5 mb-2"
         style={{ color: "oklch(0.50 0.010 255)" }}
       >
-        {icon}
+        <span style={{ color }}>{icon}</span>
         <span className="label-eyebrow text-[9px]">{label}</span>
       </div>
       <div
