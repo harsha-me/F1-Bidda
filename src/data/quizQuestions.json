@@ -1,0 +1,139 @@
+[
+  {
+    "id": "track-instinct",
+    "prompt": "Blind, fast corner. Qualifying lap. What's the call?",
+    "options": [
+      {
+        "id": "push",
+        "label": "Push flat out — find the limit",
+        "trait": "aggression",
+        "delta": 2
+      },
+      {
+        "id": "wait",
+        "label": "Ease off a fraction, nail the line",
+        "trait": "strategy",
+        "delta": 2
+      }
+    ]
+  },
+  {
+    "id": "overtake-approach",
+    "prompt": "The move's on into Turn 1. How do you take it?",
+    "options": [
+      {
+        "id": "dive",
+        "label": "Dive in — send it, sort it out after",
+        "trait": "aggression",
+        "delta": 2
+      },
+      {
+        "id": "calculate",
+        "label": "Calculate the exact lap to strike",
+        "trait": "strategy",
+        "delta": 2
+      }
+    ]
+  },
+  {
+    "id": "cornering-style",
+    "prompt": "Your natural driving style through a technical section:",
+    "options": [
+      {
+        "id": "clean",
+        "label": "Precise, clean, metronomic",
+        "trait": "precision",
+        "delta": 2
+      },
+      {
+        "id": "loose",
+        "label": "Loose, aggressive, right on the edge",
+        "trait": "aggression",
+        "delta": 2
+      }
+    ]
+  },
+  {
+    "id": "rain",
+    "prompt": "Radar shows rain rolling in for the session. Your reaction:",
+    "options": [
+      {
+        "id": "thrive",
+        "label": "This is where I make my name",
+        "trait": "riskTolerance",
+        "delta": 2
+      },
+      {
+        "id": "safe",
+        "label": "Bank the points, don't get greedy",
+        "trait": "consistency",
+        "delta": 2
+      }
+    ]
+  },
+  {
+    "id": "manufacturer",
+    "prompt": "Pick a garage to call home.",
+    "options": [
+      { "id": "ferrari", "label": "Ferrari", "teamAffinity": "ferrari" },
+      { "id": "red_bull", "label": "Red Bull", "teamAffinity": "red_bull" },
+      { "id": "mercedes", "label": "Mercedes", "teamAffinity": "mercedes" },
+      { "id": "mclaren", "label": "McLaren", "teamAffinity": "mclaren" },
+      { "id": "aston_martin", "label": "Aston Martin", "teamAffinity": "aston_martin" }
+    ]
+  },
+  {
+    "id": "adversity",
+    "prompt": "The car's just let you down mid-race. What's the reaction on the radio?",
+    "options": [
+      {
+        "id": "fired-up",
+        "label": "Fired up — visibly, audibly angry",
+        "trait": "emotion",
+        "delta": 2
+      },
+      {
+        "id": "ice-cold",
+        "label": "Ice-cold, business as usual",
+        "trait": "composure",
+        "delta": 2
+      }
+    ]
+  },
+  {
+    "id": "highlight",
+    "prompt": "Pick the moment you'd rather be remembered for:",
+    "options": [
+      {
+        "id": "wheel-to-wheel",
+        "label": "A last-lap wheel-to-wheel win",
+        "trait": "aggression",
+        "delta": 2
+      },
+      {
+        "id": "masterclass",
+        "label": "A strategy masterclass from the pit wall",
+        "trait": "strategy",
+        "delta": 2
+      }
+    ]
+  },
+  {
+    "id": "happiness",
+    "prompt": "What actually makes a season feel like a win?",
+    "options": [
+      {
+        "id": "title-fight",
+        "label": "Fighting for the championship, every single year",
+        "trait": "consistency",
+        "delta": 2
+      },
+      {
+        "id": "comeback",
+        "label": "One impossible, against-the-odds comeback",
+        "trait": "riskTolerance",
+        "delta": 2
+      }
+    ]
+  }
+]

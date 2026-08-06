@@ -353,6 +353,11 @@
   animation: heartPulse 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
+/* ─── QUIZ TRACK-LINE FLOW ───────────────────────────────────────── */
+@keyframes trackFlow {
+  to { stroke-dashoffset: -1000; }
+}
+
 @utility insta-gradient-ring {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }

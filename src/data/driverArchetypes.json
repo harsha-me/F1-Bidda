@@ -1,0 +1,332 @@
+{
+  "max_verstappen": {
+    "code": "VER",
+    "name": "Max Verstappen",
+    "constructorId": "red_bull",
+    "number": 3,
+    "traits": {
+      "aggression": 10,
+      "strategy": 6,
+      "precision": 8,
+      "emotion": 6,
+      "composure": 6,
+      "consistency": 8,
+      "riskTolerance": 9
+    }
+  },
+  "norris": {
+    "code": "NOR",
+    "name": "Lando Norris",
+    "constructorId": "mclaren",
+    "number": 1,
+    "traits": {
+      "aggression": 7,
+      "strategy": 6,
+      "precision": 7,
+      "emotion": 8,
+      "composure": 5,
+      "consistency": 6,
+      "riskTolerance": 6
+    }
+  },
+  "leclerc": {
+    "code": "LEC",
+    "name": "Charles Leclerc",
+    "constructorId": "ferrari",
+    "number": 16,
+    "traits": {
+      "aggression": 8,
+      "strategy": 6,
+      "precision": 8,
+      "emotion": 8,
+      "composure": 5,
+      "consistency": 6,
+      "riskTolerance": 7
+    }
+  },
+  "russell": {
+    "code": "RUS",
+    "name": "George Russell",
+    "constructorId": "mercedes",
+    "number": 63,
+    "traits": {
+      "aggression": 5,
+      "strategy": 9,
+      "precision": 8,
+      "emotion": 5,
+      "composure": 7,
+      "consistency": 7,
+      "riskTolerance": 5
+    }
+  },
+  "hamilton": {
+    "code": "HAM",
+    "name": "Lewis Hamilton",
+    "constructorId": "ferrari",
+    "number": 44,
+    "traits": {
+      "aggression": 7,
+      "strategy": 7,
+      "precision": 7,
+      "emotion": 8,
+      "composure": 6,
+      "consistency": 7,
+      "riskTolerance": 8
+    }
+  },
+  "sainz": {
+    "code": "SAI",
+    "name": "Carlos Sainz",
+    "constructorId": "williams",
+    "number": 55,
+    "traits": {
+      "aggression": 5,
+      "strategy": 7,
+      "precision": 8,
+      "emotion": 5,
+      "composure": 7,
+      "consistency": 6,
+      "riskTolerance": 5
+    }
+  },
+  "piastri": {
+    "code": "PIA",
+    "name": "Oscar Piastri",
+    "constructorId": "mclaren",
+    "number": 81,
+    "traits": {
+      "aggression": 5,
+      "strategy": 6,
+      "precision": 8,
+      "emotion": 3,
+      "composure": 9,
+      "consistency": 8,
+      "riskTolerance": 4
+    }
+  },
+  "alonso": {
+    "code": "ALO",
+    "name": "Fernando Alonso",
+    "constructorId": "aston_martin",
+    "number": 14,
+    "traits": {
+      "aggression": 6,
+      "strategy": 10,
+      "precision": 7,
+      "emotion": 5,
+      "composure": 9,
+      "consistency": 7,
+      "riskTolerance": 6
+    }
+  },
+  "antonelli": {
+    "code": "ANT",
+    "name": "Andrea Kimi Antonelli",
+    "constructorId": "mercedes",
+    "number": 12,
+    "traits": {
+      "aggression": 7,
+      "strategy": 5,
+      "precision": 6,
+      "emotion": 6,
+      "composure": 5,
+      "consistency": 5,
+      "riskTolerance": 7
+    }
+  },
+  "hadjar": {
+    "code": "HAD",
+    "name": "Isack Hadjar",
+    "constructorId": "red_bull",
+    "number": 6,
+    "traits": {
+      "aggression": 7,
+      "strategy": 5,
+      "precision": 5,
+      "emotion": 7,
+      "composure": 4,
+      "consistency": 5,
+      "riskTolerance": 6
+    }
+  },
+  "lawson": {
+    "code": "LAW",
+    "name": "Liam Lawson",
+    "constructorId": "rb",
+    "number": 30,
+    "traits": {
+      "aggression": 7,
+      "strategy": 5,
+      "precision": 5,
+      "emotion": 6,
+      "composure": 5,
+      "consistency": 4,
+      "riskTolerance": 6
+    }
+  },
+  "arvid_lindblad": {
+    "code": "LIN",
+    "name": "Arvid Lindblad",
+    "constructorId": "rb",
+    "number": 41,
+    "traits": {
+      "aggression": 8,
+      "strategy": 3,
+      "precision": 5,
+      "emotion": 6,
+      "composure": 3,
+      "consistency": 4,
+      "riskTolerance": 8
+    }
+  },
+  "gasly": {
+    "code": "GAS",
+    "name": "Pierre Gasly",
+    "constructorId": "alpine",
+    "number": 10,
+    "traits": {
+      "aggression": 5,
+      "strategy": 6,
+      "precision": 6,
+      "emotion": 5,
+      "composure": 7,
+      "consistency": 7,
+      "riskTolerance": 5
+    }
+  },
+  "colapinto": {
+    "code": "COL",
+    "name": "Franco Colapinto",
+    "constructorId": "alpine",
+    "number": 43,
+    "traits": {
+      "aggression": 7,
+      "strategy": 4,
+      "precision": 5,
+      "emotion": 6,
+      "composure": 4,
+      "consistency": 4,
+      "riskTolerance": 7
+    }
+  },
+  "bearman": {
+    "code": "BEA",
+    "name": "Oliver Bearman",
+    "constructorId": "haas",
+    "number": 87,
+    "traits": {
+      "aggression": 5,
+      "strategy": 5,
+      "precision": 7,
+      "emotion": 5,
+      "composure": 6,
+      "consistency": 6,
+      "riskTolerance": 5
+    }
+  },
+  "bortoleto": {
+    "code": "BOR",
+    "name": "Gabriel Bortoleto",
+    "constructorId": "audi",
+    "number": 5,
+    "traits": {
+      "aggression": 5,
+      "strategy": 7,
+      "precision": 6,
+      "emotion": 5,
+      "composure": 6,
+      "consistency": 5,
+      "riskTolerance": 5
+    }
+  },
+  "albon": {
+    "code": "ALB",
+    "name": "Alexander Albon",
+    "constructorId": "williams",
+    "number": 23,
+    "traits": {
+      "aggression": 3,
+      "strategy": 6,
+      "precision": 6,
+      "emotion": 3,
+      "composure": 8,
+      "consistency": 10,
+      "riskTolerance": 3
+    }
+  },
+  "ocon": {
+    "code": "OCO",
+    "name": "Esteban Ocon",
+    "constructorId": "haas",
+    "number": 31,
+    "traits": {
+      "aggression": 6,
+      "strategy": 5,
+      "precision": 5,
+      "emotion": 6,
+      "composure": 4,
+      "consistency": 5,
+      "riskTolerance": 5
+    }
+  },
+  "hulkenberg": {
+    "code": "HUL",
+    "name": "Nico Hülkenberg",
+    "constructorId": "audi",
+    "number": 27,
+    "traits": {
+      "aggression": 5,
+      "strategy": 7,
+      "precision": 7,
+      "emotion": 4,
+      "composure": 7,
+      "consistency": 8,
+      "riskTolerance": 5
+    }
+  },
+  "stroll": {
+    "code": "STR",
+    "name": "Lance Stroll",
+    "constructorId": "aston_martin",
+    "number": 18,
+    "traits": {
+      "aggression": 5,
+      "strategy": 5,
+      "precision": 5,
+      "emotion": 5,
+      "composure": 5,
+      "consistency": 5,
+      "riskTolerance": 4
+    }
+  },
+  "bottas": {
+    "code": "BOT",
+    "name": "Valtteri Bottas",
+    "constructorId": "cadillac",
+    "number": 77,
+    "traits": {
+      "aggression": 4,
+      "strategy": 6,
+      "precision": 9,
+      "emotion": 3,
+      "composure": 8,
+      "consistency": 7,
+      "riskTolerance": 4
+    }
+  },
+  "perez": {
+    "code": "PER",
+    "name": "Sergio Pérez",
+    "constructorId": "cadillac",
+    "number": 11,
+    "traits": {
+      "aggression": 6,
+      "strategy": 5,
+      "precision": 5,
+      "emotion": 6,
+      "composure": 4,
+      "consistency": 4,
+      "riskTolerance": 7
+    }
+  }
+}
