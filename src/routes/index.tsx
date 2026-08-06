@@ -26,12 +26,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "An 8-question personality quiz that matches you to the current F1 grid — from Verstappen's aggression to Alonso's strategy — based on how you'd actually drive.",
+          "A 10-question personality quiz that matches you to the F1 grid and its legends — from Verstappen's aggression to Lauda's cold calculation — based on how you'd actually drive.",
       },
       { property: "og:title", content: "Find Your F1 Driver — f1Bidda" },
       {
         property: "og:description",
-        content: "Answer 8 questions on race craft, risk and temperament to find your F1 match.",
+        content: "Answer 10 questions on race craft, risk and temperament to find your F1 match.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

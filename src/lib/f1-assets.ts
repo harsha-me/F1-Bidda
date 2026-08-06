@@ -78,6 +78,20 @@ export const HD_DRIVER_PHOTOS: Record<string, string> = {
     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Daniel_Ricciardo_January_2024.jpg/960px-Daniel_Ricciardo_January_2024.jpg",
   ricciardo:
     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Daniel_Ricciardo_January_2024.jpg/960px-Daniel_Ricciardo_January_2024.jpg",
+  sebastian_vettel:
+    "https://upload.wikimedia.org/wikipedia/commons/5/58/Sebastian_Vettel-Ferrari_2015_%284%29.JPG",
+  vettel:
+    "https://upload.wikimedia.org/wikipedia/commons/5/58/Sebastian_Vettel-Ferrari_2015_%284%29.JPG",
+  kimi_raikkonen:
+    "https://upload.wikimedia.org/wikipedia/commons/e/e9/Kimi_R%C3%A4ikk%C3%B6nen_portrait.jpg",
+  raikkonen:
+    "https://upload.wikimedia.org/wikipedia/commons/e/e9/Kimi_R%C3%A4ikk%C3%B6nen_portrait.jpg",
+  nigel_mansell: "https://upload.wikimedia.org/wikipedia/commons/d/d1/Nigel_Mansell_2007.jpg",
+  mansell: "https://upload.wikimedia.org/wikipedia/commons/d/d1/Nigel_Mansell_2007.jpg",
+  niki_lauda:
+    "https://upload.wikimedia.org/wikipedia/commons/0/0b/Niki_Lauda_2017_%2838713242481%29_%28cropped%29.jpg",
+  lauda:
+    "https://upload.wikimedia.org/wikipedia/commons/0/0b/Niki_Lauda_2017_%2838713242481%29_%28cropped%29.jpg",
 
   // Acronym/Code mappings
   VER: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png",
@@ -104,6 +118,10 @@ export const HD_DRIVER_PHOTOS: Record<string, string> = {
   HAD: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png",
   LAW: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png",
   LIN: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Arvid_Lindblad_at_the_Red_Bull_Fan_Zone_%E2%80%93_Crown_Riverwalk%2C_Melbourne_%28028A7869%29.jpg/960px-Arvid_Lindblad_at_the_Red_Bull_Fan_Zone_%E2%80%93_Crown_Riverwalk%2C_Melbourne_%28028A7869%29.jpg",
+  VET: "https://upload.wikimedia.org/wikipedia/commons/5/58/Sebastian_Vettel-Ferrari_2015_%284%29.JPG",
+  RAI: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Kimi_R%C3%A4ikk%C3%B6nen_portrait.jpg",
+  MAN: "https://upload.wikimedia.org/wikipedia/commons/d/d1/Nigel_Mansell_2007.jpg",
+  LAU: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Niki_Lauda_2017_%2838713242481%29_%28cropped%29.jpg",
 };
 
 export function getHDDriverPhoto(driverIdOrCode?: string, fallbackUrl?: string): string {

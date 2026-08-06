@@ -226,5 +226,81 @@
       "consistency": 6,
       "riskTolerance": 10
     }
+  },
+  "sebastian_vettel": {
+    "code": "VET",
+    "name": "Sebastian Vettel",
+    "constructorId": "red_bull",
+    "number": 5,
+    "era": "legend",
+    "tagline": "Baby Schumi",
+    "signature": ["precision", "consistency", "strategy"],
+    "verdict": "You'd rather win it in qualifying than fight for it on lap one. Build the perfect lap, build the perfect car around it, then do it again next winter.",
+    "traits": {
+      "aggression": 6,
+      "strategy": 8,
+      "precision": 10,
+      "emotion": 6,
+      "composure": 7,
+      "consistency": 9,
+      "riskTolerance": 5
+    }
+  },
+  "kimi_raikkonen": {
+    "code": "RAI",
+    "name": "Kimi Räikkönen",
+    "constructorId": "ferrari",
+    "number": 7,
+    "era": "legend",
+    "tagline": "The Iceman",
+    "signature": ["composure", "precision", "riskTolerance"],
+    "verdict": "Nothing gets a reaction out of you — not the radio, not the media, not the car trying to kill you. You just drive, exactly as fast as you feel like it.",
+    "traits": {
+      "aggression": 6,
+      "strategy": 3,
+      "precision": 9,
+      "emotion": 1,
+      "composure": 10,
+      "consistency": 7,
+      "riskTolerance": 7
+    }
+  },
+  "nigel_mansell": {
+    "code": "MAN",
+    "name": "Nigel Mansell",
+    "constructorId": "williams",
+    "number": 5,
+    "era": "legend",
+    "tagline": "Il Leone",
+    "signature": ["aggression", "riskTolerance", "emotion"],
+    "verdict": "Every lap is personal. You'll out-brake the field, wear your grievances on your sleeve, and take the fight to the last corner of the last lap, every single time.",
+    "traits": {
+      "aggression": 9,
+      "strategy": 3,
+      "precision": 6,
+      "emotion": 9,
+      "composure": 4,
+      "consistency": 6,
+      "riskTolerance": 9
+    }
+  },
+  "niki_lauda": {
+    "code": "LAU",
+    "name": "Niki Lauda",
+    "constructorId": "ferrari",
+    "number": 1,
+    "era": "legend",
+    "tagline": "The Rat",
+    "signature": ["consistency", "strategy", "precision"],
+    "verdict": "You calculate the risk before you take it, and when the number doesn't add up, you're the one driver willing to say so out loud and pull into the pits.",
+    "traits": {
+      "aggression": 5,
+      "strategy": 9,
+      "precision": 8,
+      "emotion": 1,
+      "composure": 8,
+      "consistency": 10,
+      "riskTolerance": 2
+    }
   }
 }
