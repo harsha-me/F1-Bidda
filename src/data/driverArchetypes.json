@@ -1,107 +1,59 @@
 {
-  "max_verstappen": {
-    "code": "VER",
-    "name": "Max Verstappen",
-    "constructorId": "red_bull",
-    "number": 3,
-    "traits": {
-      "aggression": 10,
-      "strategy": 6,
-      "precision": 8,
-      "emotion": 6,
-      "composure": 6,
-      "consistency": 8,
-      "riskTolerance": 9
-    }
-  },
-  "norris": {
-    "code": "NOR",
-    "name": "Lando Norris",
-    "constructorId": "mclaren",
+  "michael_schumacher": {
+    "code": "MSC",
+    "name": "Michael Schumacher",
+    "constructorId": "ferrari",
     "number": 1,
+    "era": "legend",
+    "tagline": "The Red Baron",
+    "signature": ["consistency", "aggression", "strategy"],
+    "verdict": "You don't just want to win — you want to build the whole team around how you win. Relentless, prepared, and utterly unwilling to give an inch.",
     "traits": {
-      "aggression": 7,
-      "strategy": 6,
-      "precision": 7,
-      "emotion": 8,
-      "composure": 5,
-      "consistency": 6,
-      "riskTolerance": 6
-    }
-  },
-  "leclerc": {
-    "code": "LEC",
-    "name": "Charles Leclerc",
-    "constructorId": "ferrari",
-    "number": 16,
-    "traits": {
-      "aggression": 8,
-      "strategy": 6,
-      "precision": 8,
-      "emotion": 8,
-      "composure": 5,
-      "consistency": 6,
-      "riskTolerance": 7
-    }
-  },
-  "russell": {
-    "code": "RUS",
-    "name": "George Russell",
-    "constructorId": "mercedes",
-    "number": 63,
-    "traits": {
-      "aggression": 5,
+      "aggression": 9,
       "strategy": 9,
-      "precision": 8,
-      "emotion": 5,
-      "composure": 7,
-      "consistency": 7,
-      "riskTolerance": 5
-    }
-  },
-  "hamilton": {
-    "code": "HAM",
-    "name": "Lewis Hamilton",
-    "constructorId": "ferrari",
-    "number": 44,
-    "traits": {
-      "aggression": 7,
-      "strategy": 7,
-      "precision": 7,
-      "emotion": 8,
-      "composure": 6,
-      "consistency": 7,
+      "precision": 9,
+      "emotion": 6,
+      "composure": 8,
+      "consistency": 10,
       "riskTolerance": 8
     }
   },
-  "sainz": {
-    "code": "SAI",
-    "name": "Carlos Sainz",
-    "constructorId": "williams",
-    "number": 55,
+  "ayrton_senna": {
+    "code": "SEN",
+    "name": "Ayrton Senna",
+    "constructorId": "mclaren",
+    "number": 12,
+    "era": "legend",
+    "tagline": "Magic",
+    "signature": ["emotion", "riskTolerance", "aggression"],
+    "verdict": "You drive on pure instinct and conviction. When you're in the zone nobody can touch you — and you'd rather crash than concede the corner.",
     "traits": {
-      "aggression": 5,
-      "strategy": 7,
-      "precision": 8,
-      "emotion": 5,
-      "composure": 7,
-      "consistency": 6,
-      "riskTolerance": 5
+      "aggression": 10,
+      "strategy": 5,
+      "precision": 9,
+      "emotion": 10,
+      "composure": 5,
+      "consistency": 7,
+      "riskTolerance": 10
     }
   },
-  "piastri": {
-    "code": "PIA",
-    "name": "Oscar Piastri",
+  "alain_prost": {
+    "code": "PRO",
+    "name": "Alain Prost",
     "constructorId": "mclaren",
-    "number": 81,
+    "number": 1,
+    "era": "legend",
+    "tagline": "The Professor",
+    "signature": ["strategy", "composure", "precision"],
+    "verdict": "You win races by thinking, not thrashing. Why take a risk at lap 3 when you can simply be the last one standing at lap 60?",
     "traits": {
-      "aggression": 5,
-      "strategy": 6,
-      "precision": 8,
+      "aggression": 3,
+      "strategy": 10,
+      "precision": 9,
       "emotion": 3,
-      "composure": 9,
-      "consistency": 8,
-      "riskTolerance": 4
+      "composure": 10,
+      "consistency": 9,
+      "riskTolerance": 2
     }
   },
   "alonso": {
@@ -109,224 +61,170 @@
     "name": "Fernando Alonso",
     "constructorId": "aston_martin",
     "number": 14,
+    "era": "current",
+    "tagline": "El Plan",
+    "signature": ["strategy", "composure", "consistency"],
+    "verdict": "You extract more from a bad situation than anyone should be able to. Patient, cunning, and always three moves ahead of the pit wall.",
     "traits": {
-      "aggression": 6,
+      "aggression": 7,
       "strategy": 10,
-      "precision": 7,
-      "emotion": 5,
+      "precision": 8,
+      "emotion": 6,
       "composure": 9,
-      "consistency": 7,
+      "consistency": 8,
       "riskTolerance": 6
     }
   },
-  "antonelli": {
-    "code": "ANT",
-    "name": "Andrea Kimi Antonelli",
-    "constructorId": "mercedes",
-    "number": 12,
-    "traits": {
-      "aggression": 7,
-      "strategy": 5,
-      "precision": 6,
-      "emotion": 6,
-      "composure": 5,
-      "consistency": 5,
-      "riskTolerance": 7
-    }
-  },
-  "hadjar": {
-    "code": "HAD",
-    "name": "Isack Hadjar",
+  "max_verstappen": {
+    "code": "VER",
+    "name": "Max Verstappen",
     "constructorId": "red_bull",
-    "number": 6,
+    "number": 3,
+    "era": "current",
+    "tagline": "Super Max",
+    "signature": ["aggression", "riskTolerance", "consistency"],
+    "verdict": "Uncompromising. You go for the gap whether or not it's still there, and you back yourself to make it work every single time.",
     "traits": {
-      "aggression": 7,
-      "strategy": 5,
-      "precision": 5,
-      "emotion": 7,
-      "composure": 4,
-      "consistency": 5,
-      "riskTolerance": 6
-    }
-  },
-  "lawson": {
-    "code": "LAW",
-    "name": "Liam Lawson",
-    "constructorId": "rb",
-    "number": 30,
-    "traits": {
-      "aggression": 7,
-      "strategy": 5,
-      "precision": 5,
+      "aggression": 10,
+      "strategy": 7,
+      "precision": 9,
       "emotion": 6,
-      "composure": 5,
-      "consistency": 4,
-      "riskTolerance": 6
+      "composure": 7,
+      "consistency": 9,
+      "riskTolerance": 9
     }
   },
-  "arvid_lindblad": {
-    "code": "LIN",
-    "name": "Arvid Lindblad",
-    "constructorId": "rb",
-    "number": 41,
+  "hamilton": {
+    "code": "HAM",
+    "name": "Lewis Hamilton",
+    "constructorId": "ferrari",
+    "number": 44,
+    "era": "current",
+    "tagline": "Hammer Time",
+    "signature": ["emotion", "riskTolerance", "consistency"],
+    "verdict": "You race on feel and you thrive when it gets messy. Chaos, rain, a safety car — that's when you find a lap nobody else had.",
     "traits": {
       "aggression": 8,
-      "strategy": 3,
-      "precision": 5,
-      "emotion": 6,
-      "composure": 3,
-      "consistency": 4,
+      "strategy": 8,
+      "precision": 8,
+      "emotion": 9,
+      "composure": 7,
+      "consistency": 9,
       "riskTolerance": 8
     }
   },
-  "gasly": {
-    "code": "GAS",
-    "name": "Pierre Gasly",
-    "constructorId": "alpine",
-    "number": 10,
+  "leclerc": {
+    "code": "LEC",
+    "name": "Charles Leclerc",
+    "constructorId": "ferrari",
+    "number": 16,
+    "era": "current",
+    "tagline": "Il Predestinato",
+    "signature": ["emotion", "aggression", "precision"],
+    "verdict": "Blistering on a single lap and completely open about how much it hurts when it goes wrong. Heart permanently on the sleeve.",
     "traits": {
-      "aggression": 5,
-      "strategy": 6,
-      "precision": 6,
-      "emotion": 5,
-      "composure": 7,
-      "consistency": 7,
-      "riskTolerance": 5
-    }
-  },
-  "colapinto": {
-    "code": "COL",
-    "name": "Franco Colapinto",
-    "constructorId": "alpine",
-    "number": 43,
-    "traits": {
-      "aggression": 7,
-      "strategy": 4,
-      "precision": 5,
-      "emotion": 6,
+      "aggression": 8,
+      "strategy": 5,
+      "precision": 8,
+      "emotion": 9,
       "composure": 4,
-      "consistency": 4,
+      "consistency": 6,
       "riskTolerance": 7
     }
   },
-  "bearman": {
-    "code": "BEA",
-    "name": "Oliver Bearman",
-    "constructorId": "haas",
-    "number": 87,
+  "norris": {
+    "code": "NOR",
+    "name": "Lando Norris",
+    "constructorId": "mclaren",
+    "number": 1,
+    "era": "current",
+    "tagline": "Last Lap Lando",
+    "signature": ["emotion", "precision", "aggression"],
+    "verdict": "Seriously quick and your own harshest critic. You feel every mistake twice — once in the car, once on the radio afterwards.",
     "traits": {
-      "aggression": 5,
-      "strategy": 5,
-      "precision": 7,
-      "emotion": 5,
-      "composure": 6,
-      "consistency": 6,
-      "riskTolerance": 5
-    }
-  },
-  "bortoleto": {
-    "code": "BOR",
-    "name": "Gabriel Bortoleto",
-    "constructorId": "audi",
-    "number": 5,
-    "traits": {
-      "aggression": 5,
-      "strategy": 7,
-      "precision": 6,
-      "emotion": 5,
-      "composure": 6,
-      "consistency": 5,
-      "riskTolerance": 5
-    }
-  },
-  "albon": {
-    "code": "ALB",
-    "name": "Alexander Albon",
-    "constructorId": "williams",
-    "number": 23,
-    "traits": {
-      "aggression": 3,
+      "aggression": 7,
       "strategy": 6,
-      "precision": 6,
-      "emotion": 3,
-      "composure": 8,
-      "consistency": 10,
-      "riskTolerance": 3
+      "precision": 8,
+      "emotion": 10,
+      "composure": 5,
+      "consistency": 7,
+      "riskTolerance": 6
     }
   },
-  "ocon": {
-    "code": "OCO",
-    "name": "Esteban Ocon",
-    "constructorId": "haas",
-    "number": 31,
+  "piastri": {
+    "code": "PIA",
+    "name": "Oscar Piastri",
+    "constructorId": "mclaren",
+    "number": 81,
+    "era": "current",
+    "tagline": "The Iceman 2.0",
+    "signature": ["composure", "precision", "consistency"],
+    "verdict": "Ice in the veins. No drama, no theatrics, no wasted energy — just a clinical job done to the tenth, every single weekend.",
     "traits": {
       "aggression": 6,
-      "strategy": 5,
-      "precision": 5,
-      "emotion": 6,
-      "composure": 4,
-      "consistency": 5,
-      "riskTolerance": 5
-    }
-  },
-  "hulkenberg": {
-    "code": "HUL",
-    "name": "Nico Hülkenberg",
-    "constructorId": "audi",
-    "number": 27,
-    "traits": {
-      "aggression": 5,
       "strategy": 7,
-      "precision": 7,
-      "emotion": 4,
-      "composure": 7,
+      "precision": 9,
+      "emotion": 2,
+      "composure": 10,
       "consistency": 8,
       "riskTolerance": 5
     }
   },
-  "stroll": {
-    "code": "STR",
-    "name": "Lance Stroll",
-    "constructorId": "aston_martin",
-    "number": 18,
-    "traits": {
-      "aggression": 5,
-      "strategy": 5,
-      "precision": 5,
-      "emotion": 5,
-      "composure": 5,
-      "consistency": 5,
-      "riskTolerance": 4
-    }
-  },
-  "bottas": {
-    "code": "BOT",
-    "name": "Valtteri Bottas",
-    "constructorId": "cadillac",
-    "number": 77,
-    "traits": {
-      "aggression": 4,
-      "strategy": 6,
-      "precision": 9,
-      "emotion": 3,
-      "composure": 8,
-      "consistency": 7,
-      "riskTolerance": 4
-    }
-  },
-  "perez": {
-    "code": "PER",
-    "name": "Sergio Pérez",
-    "constructorId": "cadillac",
-    "number": 11,
+  "russell": {
+    "code": "RUS",
+    "name": "George Russell",
+    "constructorId": "mercedes",
+    "number": 63,
+    "era": "current",
+    "tagline": "Mr Saturday",
+    "signature": ["strategy", "precision", "composure"],
+    "verdict": "Cerebral and calculating. You read the race like a chess board and you're already arguing the strategy before the engineer finishes talking.",
     "traits": {
       "aggression": 6,
-      "strategy": 5,
-      "precision": 5,
-      "emotion": 6,
-      "composure": 4,
-      "consistency": 4,
-      "riskTolerance": 7
+      "strategy": 9,
+      "precision": 10,
+      "emotion": 5,
+      "composure": 8,
+      "consistency": 8,
+      "riskTolerance": 4
+    }
+  },
+  "nico_rosberg": {
+    "code": "ROS",
+    "name": "Nico Rosberg",
+    "constructorId": "mercedes",
+    "number": 6,
+    "era": "legend",
+    "tagline": "Britney",
+    "signature": ["strategy", "emotion", "consistency"],
+    "verdict": "You out-prepare people. Where others rely on raw talent, you win on data, detail and sheer refusal to be out-worked.",
+    "traits": {
+      "aggression": 6,
+      "strategy": 10,
+      "precision": 8,
+      "emotion": 8,
+      "composure": 6,
+      "consistency": 8,
+      "riskTolerance": 5
+    }
+  },
+  "daniel_ricciardo": {
+    "code": "RIC",
+    "name": "Daniel Ricciardo",
+    "constructorId": "red_bull",
+    "number": 3,
+    "era": "legend",
+    "tagline": "The Honey Badger",
+    "signature": ["riskTolerance", "aggression", "emotion"],
+    "verdict": "You brake later than anyone thinks is survivable, pull off the lunge from a mile back, then laugh about it on the podium.",
+    "traits": {
+      "aggression": 9,
+      "strategy": 6,
+      "precision": 7,
+      "emotion": 7,
+      "composure": 7,
+      "consistency": 6,
+      "riskTolerance": 10
     }
   }
 }

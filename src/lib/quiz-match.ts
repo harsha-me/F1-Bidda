@@ -19,6 +19,13 @@ export interface DriverArchetype {
   name: string;
   constructorId: string;
   number: number;
+  /** "legend" drivers are retired; "current" are on the present grid. */
+  era: "legend" | "current";
+  tagline: string;
+  /** The 3 traits that most define this driver — used by the signature term. */
+  signature: Trait[];
+  /** One-line character read shown on the reveal screen. */
+  verdict: string;
   traits: TraitScores;
 }
 
@@ -36,12 +43,29 @@ export interface QuizQuestion {
   options: QuizOption[];
 }
 
+/** Component breakdown of a single driver's composite score, for display + debugging. */
+export interface ScoreBreakdown {
+  /** Pearson correlation of trait shape, in [-1, 1]. */
+  shape: number;
+  /** Closeness of absolute intensity, in [0, 1]. */
+  magnitude: number;
+  /** Overlap between the user's leading traits and the driver's signature, in [0, 1]. */
+  signature: number;
+  /** Team-affinity bonus actually applied (0 when it didn't match). */
+  teamBonus: number;
+  /** Final weighted composite. */
+  total: number;
+}
+
 export interface MatchResult {
   driverId: string;
   driver: DriverArchetype;
   normalizedUser: TraitScores;
-  /** Pearson correlation with the matched driver, in [-1, 1]. Higher is closer. */
-  similarity: number;
+  /** Composite match score, normalized to 0–100 for display. */
+  matchPercent: number;
+  breakdown: ScoreBreakdown;
+  /** Runners-up, best first, for the "close calls" strip on the reveal. */
+  runnersUp: { driverId: string; driver: DriverArchetype; matchPercent: number }[];
   topTraits: Trait[];
 }
 
@@ -77,9 +101,23 @@ export const TRAIT_COLOR: Record<Trait, string> = {
   consistency: "oklch(0.70 0.15 165)",
 };
 
-// Small nudge on the [-1, 1] correlation scale — enough to settle a genuine
-// near-tie, never enough to override a clear trait-shape match.
-const TEAM_AFFINITY_BONUS = 0.08;
+/**
+ * Composite scoring weights. Shape leads because it is the most reliable
+ * signal (see `correlation` below), but on its own it ignores intensity —
+ * a mildly strategic user and a fanatically strategic one correlate
+ * identically. Magnitude and signature restore that lost information.
+ */
+const WEIGHTS = {
+  shape: 0.5,
+  magnitude: 0.2,
+  signature: 0.3,
+} as const;
+
+/** Applied post-composite, so it can settle a near-tie but never flip a clear win. */
+const TEAM_AFFINITY_BONUS = 0.04;
+
+/** Widest possible per-trait gap, used to normalize the magnitude term. */
+const TRAIT_RANGE = 10;
 
 export function emptyTraitScores(): TraitScores {
   return TRAITS.reduce((acc, t) => {
@@ -150,6 +188,58 @@ function correlation(a: TraitScores, b: TraitScores): number {
   return num / Math.sqrt(denA * denB);
 }
 
+/**
+ * Coverage-weighted magnitude closeness, in [0, 1].
+ *
+ * Complements `correlation`: shape says "you both lean strategic", magnitude
+ * says "and you lean that way just as hard". Traits are weighted by how many
+ * questions actually probe them, so a trait the quiz asks about four times
+ * counts for more than one it touches once.
+ */
+function magnitudeCloseness(user: TraitScores, driver: TraitScores, weights: TraitScores): number {
+  let weighted = 0;
+  let totalWeight = 0;
+  for (const t of TRAITS) {
+    const gap = Math.abs(user[t] - driver[t]) / TRAIT_RANGE;
+    weighted += weights[t] * gap;
+    totalWeight += weights[t];
+  }
+  return totalWeight > 0 ? 1 - weighted / totalWeight : 0;
+}
+
+/**
+ * How much of the user's trait "mass" sits on this driver's signature traits,
+ * in [0, 1].
+ *
+ * Value-weighted rather than rank-weighted, which matters because several
+ * traits routinely tie at the top — a rank-based version silently resolved
+ * those ties in TRAITS declaration order, handing the win to whichever
+ * signature happened to sort earliest.
+ *
+ * This is what makes a result feel *earned*: max out aggression and risk and
+ * you should get Senna or Ricciardo, not whoever sits nearest in raw vector
+ * space.
+ */
+function signatureOverlap(user: TraitScores, signature: Trait[]): number {
+  if (signature.length === 0) return 0;
+
+  const onSignature = signature.reduce((s, t) => s + user[t], 0);
+  // Ceiling: the same number of the user's own strongest traits.
+  const best = [...TRAITS]
+    .sort((a, b) => user[b] - user[a])
+    .slice(0, signature.length)
+    .reduce((s, t) => s + user[t], 0);
+
+  return best > 0 ? Math.min(1, onSignature / best) : 0;
+}
+
+/** Per-trait weights proportional to how many questions probe each trait. */
+function coverageWeights(max: TraitScores): TraitScores {
+  const weights = emptyTraitScores();
+  for (const t of TRAITS) weights[t] = max[t];
+  return weights;
+}
+
 export function matchDriver(
   rawScores: TraitScores,
   teamAffinity: string | null,
@@ -158,24 +248,54 @@ export function matchDriver(
 ): MatchResult {
   const max = maxTraitTotals(questions);
   const normalizedUser = normalizeTraitScores(rawScores, max);
+  const weights = coverageWeights(max);
 
-  let best: MatchResult | null = null;
-  for (const [driverId, driver] of Object.entries(drivers)) {
-    let similarity = correlation(normalizedUser, driver.traits);
-    if (teamAffinity && driver.constructorId === teamAffinity) {
-      similarity += TEAM_AFFINITY_BONUS;
-    }
-    if (!best || similarity > best.similarity) {
-      best = { driverId, driver, normalizedUser, similarity, topTraits: [] };
-    }
-  }
-
-  // drivers is always non-empty (static grid data), so best is set.
-  const result = best as MatchResult;
-  result.topTraits = [...TRAITS]
+  const topTraits = [...TRAITS]
     .filter((t) => normalizedUser[t] > 0)
     .sort((a, b) => normalizedUser[b] - normalizedUser[a])
     .slice(0, 3);
 
-  return result;
+  const scored = Object.entries(drivers).map(([driverId, driver]) => {
+    const shape = correlation(normalizedUser, driver.traits);
+    const magnitude = magnitudeCloseness(normalizedUser, driver.traits, weights);
+    const signature = signatureOverlap(normalizedUser, driver.signature);
+    const teamBonus =
+      teamAffinity && driver.constructorId === teamAffinity ? TEAM_AFFINITY_BONUS : 0;
+
+    // Shape spans [-1, 1]; rescale to [0, 1] so every term shares one scale
+    // and the weights mean what they look like they mean.
+    const total =
+      WEIGHTS.shape * ((shape + 1) / 2) +
+      WEIGHTS.magnitude * magnitude +
+      WEIGHTS.signature * signature +
+      teamBonus;
+
+    return {
+      driverId,
+      driver,
+      breakdown: { shape, magnitude, signature, teamBonus, total } satisfies ScoreBreakdown,
+    };
+  });
+
+  scored.sort((a, b) => b.breakdown.total - a.breakdown.total);
+  const [winner, ...rest] = scored;
+
+  // Spread the raw composite (which clusters in a narrow band) across a
+  // friendlier display range so a strong match reads as a strong match.
+  const toPercent = (total: number) =>
+    Math.max(0, Math.min(100, Math.round((total - 0.45) * (100 / 0.5))));
+
+  return {
+    driverId: winner.driverId,
+    driver: winner.driver,
+    normalizedUser,
+    matchPercent: toPercent(winner.breakdown.total),
+    breakdown: winner.breakdown,
+    runnersUp: rest.slice(0, 3).map((r) => ({
+      driverId: r.driverId,
+      driver: r.driver,
+      matchPercent: toPercent(r.breakdown.total),
+    })),
+    topTraits,
+  };
 }

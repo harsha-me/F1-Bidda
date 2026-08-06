@@ -16,7 +16,9 @@ import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { driverStandingsQuery, sessionDriversQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON } from "@/lib/f1-data";
 import driverBios from "@/data/driverBios.json";
+import legendDrivers from "@/data/legendDrivers.json";
 import { getHDDriverPhoto } from "@/lib/f1-assets";
+import { LegendProfile, type LegendDriver } from "@/components/f1/legend-profile";
 
 type Controversy = { title: string; description: string };
 
@@ -34,6 +36,7 @@ type Bio = {
 };
 
 const BIOS = driverBios as Record<string, Bio>;
+const LEGENDS = legendDrivers as Record<string, LegendDriver>;
 
 const TABS = ["Overview", "Road to F1", "Controversies"] as const;
 type Tab = (typeof TABS)[number];
@@ -79,6 +82,11 @@ function DriverDetail() {
     const entry = Object.entries(BIOS).find(([k]) => k.split("_").pop() === driverId);
     return entry?.[1] ?? null;
   })();
+
+  // Retired drivers never appear in live standings, so they render from the
+  // static legend dataset and skip the loading/error states entirely.
+  const legend = LEGENDS[driverId] ?? null;
+  if (legend) return <LegendProfile legend={legend} />;
 
   if (standingsQ.isLoading) {
     return (

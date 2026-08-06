@@ -135,5 +135,41 @@
         "delta": 2
       }
     ]
+  },
+  {
+    "id": "difficult-car",
+    "prompt": "They've handed you a car that genuinely doesn't want to be driven.",
+    "options": [
+      {
+        "id": "adapt",
+        "label": "Rebuild my technique around it, corner by corner",
+        "trait": "precision",
+        "delta": 2
+      },
+      {
+        "id": "manhandle",
+        "label": "Wrestle it by the scruff and hang on",
+        "trait": "riskTolerance",
+        "delta": 2
+      }
+    ]
+  },
+  {
+    "id": "debrief",
+    "prompt": "Debrief after a race you should have won.",
+    "options": [
+      {
+        "id": "analyse",
+        "label": "Straight to the data — where exactly did it go?",
+        "trait": "composure",
+        "delta": 2
+      },
+      {
+        "id": "vent",
+        "label": "Say what I actually think, then move on",
+        "trait": "emotion",
+        "delta": 2
+      }
+    ]
   }
 ]

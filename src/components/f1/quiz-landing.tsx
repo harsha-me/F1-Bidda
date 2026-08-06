@@ -24,7 +24,7 @@ export function QuizLanding({ onStart }: { onStart: () => void }) {
             className="font-num text-[11px] font-semibold"
             style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.1em" }}
           >
-            22 DRIVERS · 8 QUESTIONS
+            12 LEGENDS &amp; STARS · 10 QUESTIONS
           </span>
         </div>
 
@@ -56,9 +56,9 @@ export function QuizLanding({ onStart }: { onStart: () => void }) {
             animationFillMode: "both",
           }}
         >
-          Eight calls only you can make — on the brakes, in the rain, on the radio when it all goes
-          wrong. Answer honestly and we'll match you to the driver on the current grid who races
-          like you do.
+          Ten calls only you can make — on the brakes, in the rain, on the radio when it all goes
+          wrong. Answer honestly and we'll match you against twelve of the greatest to ever drive,
+          from Senna and Prost to Verstappen and Piastri.
         </p>
 
         <button

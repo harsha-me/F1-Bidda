@@ -1,11 +1,17 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Trophy } from "lucide-react";
 import { EyebrowRed, SectionHeader } from "@/components/f1/primitives";
 import { Skeleton, ErrorNote } from "@/components/f1/skeleton";
 import { driverStandingsQuery, sessionDriversQuery } from "@/lib/f1-queries";
 import { CURRENT_SEASON, type Driver } from "@/lib/f1-data";
 import { getHDDriverPhoto } from "@/lib/f1-assets";
+import { teamColor as teamColorFor } from "@/lib/f1-constants";
+import legendDrivers from "@/data/legendDrivers.json";
+import type { LegendDriver } from "@/components/f1/legend-profile";
+
+const LEGENDS = legendDrivers as Record<string, LegendDriver>;
 
 export const Route = createFileRoute("/drivers")({
   head: () => ({
@@ -105,7 +111,112 @@ function DriversPage() {
           ))}
         </div>
       )}
+
+      {/* ─── LEGENDS ──────────────────────────────────────────────────── */}
+      <div className="mt-16">
+        <SectionHeader eyebrow="Hall of Fame" title="Legends of the Sport" />
+        <p className="-mt-4 mb-6 max-w-xl text-sm" style={{ color: "oklch(0.56 0.012 255)" }}>
+          Retired greats, kept here for the record — and for the driver-match quiz on the home page.
+        </p>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {Object.entries(LEGENDS).map(([id, legend]) => (
+            <LegendCard key={id} id={id} legend={legend} />
+          ))}
+        </div>
+      </div>
     </div>
+  );
+}
+
+function LegendCard({ id, legend }: { id: string; legend: LegendDriver }) {
+  const [imgError, setImgError] = useState(false);
+  const color = teamColorFor(legend.constructorId);
+
+  return (
+    <Link
+      to="/drivers/$driverId"
+      params={{ driverId: id }}
+      className="group relative flex flex-col overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
+      style={{
+        background: "oklch(0.155 0.006 255)",
+        border: "1px solid oklch(1 0 0 / 7%)",
+        borderRadius: "0.5rem",
+        borderLeft: `3px solid ${color}`,
+      }}
+    >
+      <div
+        className="relative overflow-hidden"
+        style={{
+          aspectRatio: "4/5",
+          background: `linear-gradient(160deg, ${color}40 0%, oklch(0.12 0.004 255) 70%)`,
+        }}
+      >
+        {!imgError ? (
+          <img
+            src={legend.photo}
+            alt={legend.name}
+            loading="lazy"
+            onError={() => setImgError(true)}
+            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center">
+            <span
+              className="font-display font-black"
+              style={{ fontSize: "3.5rem", color: "oklch(1 0 0 / 0.5)", lineHeight: 1 }}
+            >
+              {legend.code}
+            </span>
+          </div>
+        )}
+
+        {legend.championships > 0 && (
+          <div
+            className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 font-num text-[10px] font-bold px-1.5 py-0.5"
+            style={{
+              background: "oklch(0.12 0.004 255 / 0.85)",
+              border: "1px solid oklch(0.80 0.18 75 / 0.4)",
+              color: "oklch(0.80 0.18 75)",
+              borderRadius: "0.25rem",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <Trophy className="h-2.5 w-2.5" />
+            {legend.championships}×
+          </div>
+        )}
+
+        <div
+          className="absolute top-2.5 right-2.5 font-num text-xs font-bold px-2 py-0.5"
+          style={{
+            background: "oklch(0.12 0.004 255 / 0.85)",
+            border: "1px solid oklch(1 0 0 / 12%)",
+            borderRadius: "0.25rem",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          #{legend.number}
+        </div>
+      </div>
+
+      <div className="px-4 py-3">
+        <div className="label-eyebrow-red text-[9px]" style={{ color }}>
+          {legend.teamName} · {legend.firstSeason}–{legend.lastSeason}
+        </div>
+        <div
+          className="mt-1 font-display font-bold uppercase leading-tight"
+          style={{ fontSize: "0.95rem", letterSpacing: "0.03em" }}
+        >
+          {legend.name}
+        </div>
+        <div
+          className="mt-2 font-display text-[10px] font-bold uppercase opacity-0 transition-opacity group-hover:opacity-100"
+          style={{ color: "oklch(0.60 0.245 27)", letterSpacing: "0.08em" }}
+        >
+          View Profile →
+        </div>
+      </div>
+    </Link>
   );
 }
 

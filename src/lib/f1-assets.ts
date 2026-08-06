@@ -58,6 +58,27 @@ export const HD_DRIVER_PHOTOS: Record<string, string> = {
   arvid_lindblad:
     "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Arvid_Lindblad_at_the_Red_Bull_Fan_Zone_%E2%80%93_Crown_Riverwalk%2C_Melbourne_%28028A7869%29.jpg/960px-Arvid_Lindblad_at_the_Red_Bull_Fan_Zone_%E2%80%93_Crown_Riverwalk%2C_Melbourne_%28028A7869%29.jpg",
 
+  // Legends of the sport (retired) — sourced from Wikimedia Commons.
+  michael_schumacher:
+    "https://upload.wikimedia.org/wikipedia/commons/c/c2/Michael_Schumacher%2C_September_2005.jpg",
+  schumacher:
+    "https://upload.wikimedia.org/wikipedia/commons/c/c2/Michael_Schumacher%2C_September_2005.jpg",
+  ayrton_senna:
+    "https://upload.wikimedia.org/wikipedia/commons/9/9f/Ayrton_Senna_Pesawat_RC_Cropped.jpg",
+  senna: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Ayrton_Senna_Pesawat_RC_Cropped.jpg",
+  alain_prost:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Festival_automobile_international_2015_-_Photocall_-_065_%28cropped3%29.jpg/960px-Festival_automobile_international_2015_-_Photocall_-_065_%28cropped3%29.jpg",
+  prost:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Festival_automobile_international_2015_-_Photocall_-_065_%28cropped3%29.jpg/960px-Festival_automobile_international_2015_-_Photocall_-_065_%28cropped3%29.jpg",
+  nico_rosberg:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Nico_Rosberg_2016.jpg/960px-Nico_Rosberg_2016.jpg",
+  rosberg:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Nico_Rosberg_2016.jpg/960px-Nico_Rosberg_2016.jpg",
+  daniel_ricciardo:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Daniel_Ricciardo_January_2024.jpg/960px-Daniel_Ricciardo_January_2024.jpg",
+  ricciardo:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Daniel_Ricciardo_January_2024.jpg/960px-Daniel_Ricciardo_January_2024.jpg",
+
   // Acronym/Code mappings
   VER: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png",
   NOR: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png",

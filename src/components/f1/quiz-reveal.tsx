@@ -19,7 +19,7 @@ export function QuizReveal({
   teamAffinity: string | null;
   onRetake: () => void;
 }) {
-  const { driverId, driver, normalizedUser, topTraits } = result;
+  const { driverId, driver, normalizedUser, topTraits, matchPercent, runnersUp } = result;
   const [imgError, setImgError] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -29,7 +29,7 @@ export function QuizReveal({
   const matchedFavoriteTeam = teamAffinity && teamAffinity === driver.constructorId;
 
   async function handleShare() {
-    const text = `I'm built like ${driver.name} 🏎️ — I found my F1 driver match on f1Bidda. Take the quiz:`;
+    const text = `I'm a ${matchPercent}% match for ${driver.name} 🏎️ — I found my F1 driver on f1Bidda. Take the quiz:`;
     const url = typeof window !== "undefined" ? window.location.origin : "";
     try {
       if (typeof navigator !== "undefined" && navigator.share) {
@@ -68,7 +68,7 @@ export function QuizReveal({
               className="font-num text-[11px] font-semibold"
               style={{ color, letterSpacing: "0.1em" }}
             >
-              YOUR MATCH
+              {matchPercent}% MATCH
             </span>
           </div>
 
@@ -133,11 +133,32 @@ export function QuizReveal({
             className="mt-2 font-display text-sm font-semibold uppercase"
             style={{ color: "oklch(0.55 0.012 255)", letterSpacing: "0.04em" }}
           >
-            {teamName}
+            “{driver.tagline}” · {teamName}
+            {driver.era === "legend" && (
+              <span
+                className="ml-2 inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold"
+                style={{
+                  background: "oklch(0.80 0.18 75 / 0.15)",
+                  border: "1px solid oklch(0.80 0.18 75 / 0.4)",
+                  color: "oklch(0.80 0.18 75)",
+                  borderRadius: "0.2rem",
+                }}
+              >
+                Legend
+              </span>
+            )}
+          </p>
+
+          {/* Character read */}
+          <p
+            className="mx-auto mt-5 max-w-xl text-base leading-relaxed animate-in fade-in duration-700"
+            style={{ color: "oklch(0.78 0.008 255)" }}
+          >
+            {driver.verdict}
           </p>
 
           {matchedFavoriteTeam && (
-            <p className="mt-2 text-xs" style={{ color: "oklch(0.50 0.010 255)" }}>
+            <p className="mt-3 text-xs" style={{ color: "oklch(0.50 0.010 255)" }}>
               Bonus: this also happens to be your favorite garage.
             </p>
           )}
@@ -235,6 +256,42 @@ export function QuizReveal({
             </span>
           </div>
         </div>
+
+        {/* Close calls */}
+        {runnersUp.length > 0 && (
+          <div className="mx-auto mt-8 max-w-lg">
+            <div className="mb-3 label-eyebrow text-center">Also close</div>
+            <div className="flex flex-wrap justify-center gap-2">
+              {runnersUp.map((r) => {
+                const rColor = teamColor(r.driver.constructorId);
+                return (
+                  <Link
+                    key={r.driverId}
+                    to="/drivers/$driverId"
+                    params={{ driverId: r.driverId }}
+                    className="inline-flex items-center gap-2 px-3 py-2 transition-all hover:brightness-125"
+                    style={{
+                      background: "oklch(0.155 0.006 255)",
+                      border: "1px solid oklch(1 0 0 / 8%)",
+                      borderLeft: `2px solid ${rColor}`,
+                      borderRadius: "0.375rem",
+                    }}
+                  >
+                    <span
+                      className="font-display text-xs font-bold uppercase"
+                      style={{ color: "oklch(0.85 0.005 255)" }}
+                    >
+                      {r.driver.name}
+                    </span>
+                    <span className="font-num text-[11px] font-bold" style={{ color: rColor }}>
+                      {r.matchPercent}%
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Actions */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
