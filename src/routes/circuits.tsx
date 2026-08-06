@@ -120,7 +120,8 @@ function CircuitsPage() {
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 transition-opacity hover:opacity-70"
+              aria-label="Clear search"
+              className="absolute inset-y-0 right-0 flex items-center px-3 transition-opacity hover:opacity-70"
               style={{ color: "oklch(0.50 0.010 255)" }}
             >
               <X className="h-3.5 w-3.5" />
@@ -363,7 +364,7 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
 
         <div className="p-6 sm:p-8 pt-4">
           {/* Quick stats */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {[
               { label: "Track Length", value: `${circuit.lengthKm} km` },
               { label: "Turns", value: circuit.turns },
@@ -371,7 +372,7 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
             ].map((s) => (
               <div
                 key={s.label}
-                className="flex flex-col gap-1 p-3 text-center"
+                className="flex flex-col gap-1 p-2 text-center sm:p-3"
                 style={{
                   background: "oklch(0.135 0.005 255)",
                   border: "1px solid oklch(1 0 0 / 6%)",
@@ -379,7 +380,9 @@ function CircuitModal({ circuit, onClose }: { circuit: CircuitInfo; onClose: () 
                 }}
               >
                 <span className="label-eyebrow">{s.label}</span>
-                <span className="font-num text-base font-bold text-foreground">{s.value}</span>
+                <span className="font-num text-sm font-bold text-foreground sm:text-base">
+                  {s.value}
+                </span>
               </div>
             ))}
           </div>

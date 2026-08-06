@@ -407,7 +407,7 @@ function SortHead({
     <th className={`px-4 py-3 ${align === "right" ? "text-right" : ""}`}>
       <button
         onClick={onClick}
-        className="inline-flex items-center gap-1 font-semibold uppercase tracking-widest transition-colors hover:text-foreground"
+        className="-mx-4 -my-3 inline-flex items-center gap-1 px-4 py-3 font-semibold uppercase tracking-widest transition-colors hover:text-foreground"
       >
         {children} <ArrowUpDown className="h-2.5 w-2.5 opacity-60" />
       </button>

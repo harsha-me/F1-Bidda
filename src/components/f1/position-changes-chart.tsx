@@ -101,27 +101,29 @@ export function PositionChangesChart({ laps, activeDrivers, results }: PositionC
       <ChartTakeaway headline={takeawayHeadline} />
 
       {/* View Switcher Controls */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 p-1">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-1 overflow-x-auto rounded-lg border border-white/10 bg-white/5 p-1">
           <button
             onClick={() => setViewMode("rows")}
-            className={`rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
+            className={`shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
               viewMode === "rows"
                 ? "bg-primary text-white"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Driver Step Tracks (Row View)
+            <span className="sm:hidden">Row View</span>
+            <span className="hidden sm:inline">Driver Step Tracks (Row View)</span>
           </button>
           <button
             onClick={() => setViewMode("chart")}
-            className={`rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
+            className={`shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
               viewMode === "chart"
                 ? "bg-primary text-white"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Combined Racetrack View
+            <span className="sm:hidden">Track View</span>
+            <span className="hidden sm:inline">Combined Racetrack View</span>
           </button>
         </div>
 

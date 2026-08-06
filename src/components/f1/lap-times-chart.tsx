@@ -157,36 +157,39 @@ export function LapTimesChart({ laps, activeDrivers }: LapTimesChartProps) {
       {/* 2. Controls & Driver Isolator */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         {/* Preset mode toggles */}
-        <div className="flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 p-1">
+        <div className="flex items-center gap-1 overflow-x-auto rounded-lg border border-white/10 bg-white/5 p-1">
           <button
             onClick={() => handlePreset("top2")}
-            className={`rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider transition ${
+            className={`shrink-0 rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider transition ${
               presetMode === "top2"
                 ? "bg-primary text-white"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Top 2 Battle
+            <span className="sm:hidden">Top 2</span>
+            <span className="hidden sm:inline">Top 2 Battle</span>
           </button>
           <button
             onClick={() => handlePreset("top4")}
-            className={`rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider transition ${
+            className={`shrink-0 rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider transition ${
               presetMode === "top4"
                 ? "bg-primary text-white"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Top 4 Battle
+            <span className="sm:hidden">Top 4</span>
+            <span className="hidden sm:inline">Top 4 Battle</span>
           </button>
           <button
             onClick={() => handlePreset("all")}
-            className={`rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider transition ${
+            className={`shrink-0 rounded-md px-3 py-1 text-xs font-semibold uppercase tracking-wider transition ${
               presetMode === "all"
                 ? "bg-primary text-white"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            All Drivers ({activeDrivers.length})
+            <span className="sm:hidden">All ({activeDrivers.length})</span>
+            <span className="hidden sm:inline">All Drivers ({activeDrivers.length})</span>
           </button>
         </div>
 

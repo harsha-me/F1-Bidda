@@ -107,7 +107,7 @@ export function TireStrategyChart({
           ))}
         </div>
         <div className="text-muted-foreground text-[11px]">
-          ⛽ Pit stops marked on stint dividers · Hover stint bar for average pace
+          ⛽ Pit stops marked on stint dividers · Tap or hover a stint bar for average pace
         </div>
       </div>
 
@@ -171,6 +171,15 @@ export function TireStrategyChart({
                         setHoveredStint({ driverCode: driver.code, stintIndex: idx })
                       }
                       onMouseLeave={() => setHoveredStint(null)}
+                      onClick={() =>
+                        setHoveredStint((prev) =>
+                          prev?.driverCode === driver.code && prev?.stintIndex === idx
+                            ? null
+                            : { driverCode: driver.code, stintIndex: idx },
+                        )
+                      }
+                      role="button"
+                      tabIndex={0}
                       className="group relative flex items-center justify-between border-r border-black/40 px-2 transition-all hover:brightness-110 cursor-pointer"
                       style={{
                         width: `${widthPercent}%`,

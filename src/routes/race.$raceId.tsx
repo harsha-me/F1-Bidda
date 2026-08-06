@@ -198,7 +198,7 @@ function RacePage() {
         <div className="flex gap-1 rounded-lg border border-white/10 bg-white/5 p-1">
           <button
             onClick={() => setMainView("RACE")}
-            className={`rounded-md px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-widest transition-colors ${
+            className={`rounded-md px-4 py-2.5 font-display text-xs font-semibold uppercase tracking-widest transition-colors ${
               mainView === "RACE"
                 ? "bg-primary text-white"
                 : "text-muted-foreground hover:text-foreground"
@@ -208,7 +208,7 @@ function RacePage() {
           </button>
           <button
             onClick={() => setMainView("QUALIFYING")}
-            className={`rounded-md px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-widest transition-colors ${
+            className={`rounded-md px-4 py-2.5 font-display text-xs font-semibold uppercase tracking-widest transition-colors ${
               mainView === "QUALIFYING"
                 ? "bg-primary text-white"
                 : "text-muted-foreground hover:text-foreground"

@@ -402,7 +402,8 @@ function F1MemesPage() {
           {search && (
             <button
               onClick={() => setSearch("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-0.5 transition-colors hover:bg-white/10"
+              aria-label="Clear search"
+              className="absolute inset-y-0 right-0 flex items-center px-3 transition-colors hover:text-foreground"
             >
               <X className="h-4 w-4" style={{ color: "oklch(0.45 0.012 255)" }} />
             </button>
